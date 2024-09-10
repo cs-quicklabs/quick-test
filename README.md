@@ -1,139 +1,77 @@
-# Getting Started
+# 
 
-## Setting up local environment for Frontend
+<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
-You might need to setup an local environment file for developement. Please
-create `.env.development` file and set variables with corresponding values
+✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
 
-```properties
-REACT_APP_API_URL="http://localhost:3001/v1"
-REACT_APP_VERSION="1.0.0"
-```
-### Setting using yarn
+[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
 
-If you don't have `yarn` installed, do
+## Finish your remote caching setup
 
-```bash
-$ npm install --global yarn
-```
-Install all dependencies
+[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/ND9UxsSWtC)
 
-```bash
-$ yarn install
+
+## Run tasks
+
+To run tasks with Nx use:
+
+```sh
+npx nx <target> <project-name>
 ```
 
-Run the development server:
+For example:
 
-```bash
-$ yarn run dev
+```sh
+npx nx build myproject
 ```
 
-### Setting using bun
+These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
 
-If you don't have `bun` installed, do
+[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-```bash
-$ npm install --global bun
-```
-Install all dependencies
+## Add new projects
 
-```bash
-$ bun install
-```
+While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
 
-Run the development server:
-
-```bash
-$ bun run dev
+To install a new plugin you can use the `nx add` command. Here's an example of adding the React plugin:
+```sh
+npx nx add @nx/react
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the
-result.
+Use the plugin's generator to create new projects. For example, to create a new React app or library:
 
-<hr>
+```sh
+# Genenerate an app
+npx nx g @nx/react:app demo
 
-## Create & verify an account on your local machine
-
-### Pre-requisite :
-
-- Make sure you have access of both front-end and backend codebase
-- Install dependencies using `yarn install`
-- Start both the frontend and backend using `yarn start`
-
-### Steps :
-
-1. Signup with a valid email id.
-2. You should recieve a verification email.
-3. Once you open the link to verify, you will be redirected to
-   `https://dev.testbox.build-release.com/verify?token=***`
-4. Replace the domain with `localhost:3000` so it resembles
-   `localhost:3000/verify?token=***`
-5. Hit <kbd>Enter</kbd> and your account should be verified.
-
-<hr>
-
-## Run End-to-End tests on your local machine
-
-### Setup :
-
-Create a `cypress.env.json` file in project root and replace each key with
-correct value.
-
-```json
-{
-  "api_baseUrl": "http://localhost:3001/v1",
-  "email": "id@domain.com",
-  "pwd": "password",
-  "newPwd": "newPassword",
-  "hideXHR": false,
-  "jiraOrgAddress": "https://<orgName>.atlassian.net/",
-  "jiraUserEmail": "id@domain.com", // Email Id registered with JIRA
-  "jiraApiTokenOne": "<apiToken_1>",
-  "jiraApiTokenTwo": "<apiToken_2>"
-}
+# Generate a library
+npx nx g @nx/react:lib some-lib
 ```
 
-- `newPwd` is for only testing purpose, account password will always be `pwd`.
+You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
 
-- `api_baseUrl` is set to default.
-
-  > Update only if you have changed the backend server port.
-
-- `jiraApiToken` can be created from here
-  https://id.atlassian.com/manage-profile/security/api-tokens
-  > More info about managing Jira tokens here:
-  > https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/
-- Optional: Set `hideXHR` to `true`, hides XHR logs in Cypress **Command Log**.
-
-### Run scripts :
-
-```bash
-# To run the tests in headless mode, (hides the browser)
-$ yarn test-run
-
-# To run the tests in browser
-$ yarn test-open
-```
-
-### Release build on staging :
-
-- checkout to staging branch
-- make sure staging branch has the latest changes
-- install dependencies again if there is newely added by run `yarn` in terminal
-- run the project on your localhost `yarn start` and make sure everything is
-  working fine
-- commit your code with latest changes `git add .` and then
-  `git commit -m "your latest changes title here "`
-- push your code on staging `git push origin staging`
-- after code pushed on staging the auto deployment will start work and changes
-  will go on stating.
+[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
 
+[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-### Contribution Guidelines
-  Please make sure to follow the contribution guidelines before making a pull request. Quality contributions are what make the open-source community an amazing place to learn, inspire, and create.
-  Find the full list of guidelines in the CONTRIBUTING.md file.
+## Install Nx Console
 
-### License
-  This repository is licensed under the MIT License.
-  Let's start contributing and make the open-source community a better place for everyone!
+Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+
+[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+## Useful links
+
+Learn more:
+
+- [Learn more about this workspace setup](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
+- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+And join the Nx community:
+- [Discord](https://go.nx.dev/community)
+- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
+- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
+- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)

@@ -1,23 +1,22 @@
 {
-  "name": "quick-test",
-  "private": true,
+  "name": "@-/source",
+  "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "frontend:dev": "cd apps/frontend && yarn dev",
+    "frontend:release": "cd apps/frontend && yarn run release",
+    "backend:dev": "cd apps/backend && yarn start",
+    "backend:start:prod": "cd apps/backend && yarn start:prod",
+    "backend:build": "cd apps/backend && yarn build",
+    "backend:build-upgrade": "cd apps/backend && yarn cache clean && yarn upgrade",
+    "lint": "nx eslint:lint"
   },
+  "private": true,
+  "dependencies": {},
   "devDependencies": {
-    "prettier": "^3.2.5",
-    "turbo": "^2.0.14",
-    "typescript": "^5.4.5"
+    "@nx/js": "19.7.0",
+    "@nx/workspace": "19.7.0",
+    "nx": "19.7.0"
   },
-  "engines": {
-    "node": ">=18"
-  },
-  "packageManager": "yarn@1.22.22",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+  "nx": {}
 }
