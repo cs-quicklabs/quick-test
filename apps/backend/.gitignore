@@ -11,3 +11,8 @@ launch.json
 coverage
 .cache
 newrelic_agent.log
+
+
+
+.nx/cache
+.nx/workspace-data
