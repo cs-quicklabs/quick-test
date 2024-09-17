@@ -85,7 +85,7 @@
   },
   "devDependencies": {
     "@nestjs/testing": "10.3.0",
-    "@swc/cli": "^0.4.1-nightly.20240914",
+    "@swc/cli": "^0.3.14",
     "@swc/core": "^1.7.26",
     "@types/bcrypt": "5.0.2",
     "@types/compression": "1.7.5",

@@ -1171,10 +1171,10 @@
   resolved "https://registry.npmjs.org/@sqltools/formatter/-/formatter-1.2.5.tgz"
   integrity sha512-Uy0+khmZqUrUGm5dmMqVlnvufZRSK0FbYzVgp0UMstm+F5+W2/jnEEQyc9vo1ZR/E5ZI/B1WjjoTqBqwJL6Krw==
 
-"@swc/cli@^0.1.62 || ^0.3.0", "@swc/cli@^0.4.1-nightly.20240914":
-  version "0.4.1-nightly.20240914"
-  resolved "https://registry.npmjs.org/@swc/cli/-/cli-0.4.1-nightly.20240914.tgz"
-  integrity sha512-mpsF0+pq40uu9nZnhkzaA0gdivORTZnJNUFfuUGEzC1DgEEgmKDgisRWpBgA3p7xQPCpYlhkH5cTbsOkqar2Mg==
+"@swc/cli@^0.1.62 || ^0.3.0", "@swc/cli@^0.3.14":
+  version "0.3.14"
+  resolved "https://registry.npmjs.org/@swc/cli/-/cli-0.3.14.tgz"
+  integrity sha512-0vGqD6FSW67PaZUZABkA+ADKsX7OUY/PwNEz1SbQdCvVk/e4Z36Gwh7mFVBQH9RIsMonTyhV1RHkwkGnEfR3zQ==
   dependencies:
     "@mole-inc/bin-wrapper" "^8.0.1"
     "@swc/counter" "^0.1.3"
