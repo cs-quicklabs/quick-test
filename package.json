@@ -12,7 +12,6 @@
     "lint": "nx eslint:lint"
   },
   "private": true,
-  "dependencies": {},
   "devDependencies": {
     "@nx/js": "19.7.0",
     "@nx/workspace": "19.7.0",
