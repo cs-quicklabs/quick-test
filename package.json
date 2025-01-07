@@ -6,9 +6,9 @@
     "dev": "nx run-many -t dev",
     "build": "nx run-many -t build",
     "release": "nx run-many -t release start:prod",
-    "backend:build:prod": "nx build quick-test-backend",
-    "backend:start:prod": "nx start:prod quick-test-backend",
-    "frontend:build:prod": "nx build quick-test-frontend",
+    "backend:build:prod": "nx run quick-test-backend:build",
+    "backend:start:prod": "nx run quick-test-backend:start:prod",
+    "frontend:build:prod": "nx run quick-test-frontend:build",
     "frontend:start:prod": "nx run quick-test-frontend:release"
   },
   "private": true,
@@ -17,11 +17,12 @@
   },
   "devDependencies": {
     "@nrwl/cli": "^15.9.3",
+    "@nrwl/workspace": "^19.8.4",
     "@nx/js": "20.3.0",
     "@swc-node/register": "~1.9.1",
     "@swc/core": "~1.5.7",
     "@swc/helpers": "~0.5.11",
-    "nx": "20.3.0",
+    "nx": "^20.3.0",
     "prettier": "^2.6.2",
     "tslib": "^2.3.0",
     "typescript": "~5.6.2"
