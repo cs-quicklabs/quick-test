@@ -143,16 +143,16 @@ export class PdfService {
         return key;
     }
 
-    async generatePdf(pdfName, htmlContent) {
+    async generatePdf(pdfName: string, htmlContent: string) {
         writeFileSync(`${pdfName}.html`, htmlContent);
         const page = await this.getPage();
         const html = readFileSync(`${pdfName}.html`, "utf-8");
         await page.setContent(html, { waitUntil: "domcontentloaded" });
-        await page.emulateMediaType("screen");
         const pdf = await page.pdf({
             margin: { top: "30px", right: "30px", bottom: "30px", left: "30px" },
             printBackground: true,
             format: "A4",
+            preferCSSPageSize: true, // Ensures CSS page size is honored
         });
         return pdf;
     }

@@ -203,6 +203,11 @@ export class UtilsService {
     });
   }
 
+  public static getFileLocation(bucket: string, endpoint: string, key: string) {
+    if (bucket && endpoint && key) return `https://${bucket}.${endpoint}/${key}`
+    else return null;
+  }
+
 }
 
 

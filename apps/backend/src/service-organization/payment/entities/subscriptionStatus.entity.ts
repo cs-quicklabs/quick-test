@@ -1,4 +1,3 @@
-import { uuid } from "aws-sdk/clients/customerprofiles";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { AbstractEntity } from "../../../common/abstract.entity";
 import { SubscriptionStatusDto } from "../dto/SubscriptionStatusDto";
@@ -8,7 +7,7 @@ import { SubscriptionStatusDto } from "../dto/SubscriptionStatusDto";
 })
 export class SubscriptionStatusEntity extends AbstractEntity<SubscriptionStatusDto> {
   @PrimaryGeneratedColumn("uuid")
-  id: uuid;
+  id: string;
 
   @Column()
   customerId: string;
