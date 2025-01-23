@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, JSX } from "react";
 import { Dialog, Transition, TransitionChild } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import Button from "../Button/index";

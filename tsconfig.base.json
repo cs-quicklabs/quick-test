@@ -13,7 +13,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {},
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -7,9 +7,7 @@ import {
   TrashIcon,
   CheckCircleIcon,
 } from "@heroicons/react/24/solid";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-
+import { Tooltip } from "react-tooltip";
 import Badge from "../../Badge";
 
 import axiosService from "../../Utils/axios";
@@ -184,11 +182,11 @@ export default function Table({
                       <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-500">
                         {value.status === "COMPLETED"
                           ? `Done on ${dayjs(value.endDate).format(
-                              DateFormat.MEDIUM
-                            )}`
+                            DateFormat.MEDIUM
+                          )}`
                           : `Due on ${dayjs(value.endDate).format(
-                              DateFormat.MEDIUM
-                            )}`}
+                            DateFormat.MEDIUM
+                          )}`}
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-500">
@@ -216,66 +214,69 @@ export default function Table({
                           <AccessControl
                             permission={MilestonePermissions.UPDATE_MILESTONE}
                           >
-                            <Tippy content={t("Edit")}>
-                              <PencilSquareIcon
-                                onClick={() => editMilestone(value.id)}
-                                className="text-indigo-500 h-4 w-4 cursor-pointer mr-3"
-                              />
-                            </Tippy>
+                            <PencilSquareIcon
+                              data-tooltip-id="table-tooltip-id"
+                              data-tooltip-content={t("Edit")}
+                              onClick={() => editMilestone(value.id)}
+                              className="text-indigo-500 h-4 w-4 cursor-pointer mr-3"
+                            />
                           </AccessControl>
                           {isMilestoneDeleteable ? (
-                            <Tippy content={t("Delete")}>
-                              <button onClick={() => openDeleteModal(value)}>
-                                <TrashIcon className="text-red-400 h-4 w-4 mr-3 cursor-pointer" />
-                              </button>
-                            </Tippy>
+                            <button
+                              data-tooltip-id="table-tooltip-id"
+                              data-tooltip-content={t("Delete")}
+                              onClick={() => openDeleteModal(value)}
+                            >
+                              <TrashIcon className="text-red-400 h-4 w-4 mr-3 cursor-pointer" />
+                            </button>
                           ) : (
-                            <Tippy content={NO_PERMISSION_TOOLTIP_MESSAGE}>
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  e.preventDefault();
-                                }}
-                              >
-                                <TrashIcon className="text-red-400 h-4 w-4 mr-3 cursor-not-allowed" />
-                              </button>
-                            </Tippy>
+                            <button
+                              data-tooltip-id="table-tooltip-id"
+                              data-tooltip-content={NO_PERMISSION_TOOLTIP_MESSAGE}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                              }}
+                            >
+                              <TrashIcon className="text-red-400 h-4 w-4 mr-3 cursor-not-allowed" />
+                            </button>
                           )}
                           {value.status === "OPEN" ? (
-                            <Tippy content={t("Mark as Complete")}>
-                              <div>
-                                <AccessControl
-                                  permission={
-                                    MilestonePermissions.UPDATE_MILESTONE_STATUS
-                                  }
-                                >
-                                  <CheckCircleOutline
-                                    onClick={() => {
-                                      setShowConfirmModal({
-                                        message: (
-                                          <>
-                                            {t("Are you sure you want to mark")}{" "}
-                                            <span className="font-medium text-indigo-500">
-                                              {`"${value.name}"`}
-                                            </span>{" "}
-                                            {t("as complete?")}
-                                          </>
-                                        ),
-                                        id: value.id,
-                                        open: true,
-                                      });
-                                    }}
-                                    className="text-indigo-600 h-4 w-4 cursor-pointer mr-1"
-                                  />
-                                </AccessControl>
-                              </div>
-                            </Tippy>
+                            <div
+                              data-tooltip-id="table-tooltip-id"
+                              data-tooltip-content={t("Mark as Complete")}
+                            >
+                              <AccessControl
+                                permission={
+                                  MilestonePermissions.UPDATE_MILESTONE_STATUS
+                                }
+                              >
+                                <CheckCircleOutline
+                                  onClick={() => {
+                                    setShowConfirmModal({
+                                      message: (
+                                        <>
+                                          {t("Are you sure you want to mark")}{" "}
+                                          <span className="font-medium text-indigo-500">
+                                            {`"${value.name}"`}
+                                          </span>{" "}
+                                          {t("as complete?")}
+                                        </>
+                                      ),
+                                      id: value.id,
+                                      open: true,
+                                    });
+                                  }}
+                                  className="text-indigo-600 h-4 w-4 cursor-pointer mr-1"
+                                />
+                              </AccessControl>
+                            </div>
                           ) : (
-                            <Tippy content={t("Completed")}>
-                              <div>
-                                <CheckCircleIcon className="text-green-500 h-5 w-5 mr-1" />
-                              </div>
-                            </Tippy>
+                            <div
+                              data-tooltip-id="table-tooltip-id"
+                              data-tooltip-content={t("Completed")}>
+                              <CheckCircleIcon className="text-green-500 h-5 w-5 mr-1" />
+                            </div>
                           )}
                         </div>
                       </td>
@@ -284,6 +285,7 @@ export default function Table({
                 </tbody>
               </table>
             </div>
+            <Tooltip id="table-tooltip-id" />
           </div>
         </div>
       </div>

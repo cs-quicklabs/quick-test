@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import AccessControl from "../AccessControl";
 import { MilestonePermissions } from "../Utils/constants/roles-permission";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getMilestoneDataDetails } from "../../services/milestoneServices";
 
 export default function TestRunList() {
@@ -37,7 +37,10 @@ export default function TestRunList() {
     isLoading,
     refetch,
     error,
-  } = useQuery(["milestone-data", pid], () => getMilestoneDataDetails({ pid }));
+  } = useQuery({
+    queryKey: ["milestone-data", pid], // Using an array for queryKey
+    queryFn: () => getMilestoneDataDetails({ pid }),
+  });
 
   if (error instanceof Error) {
     const errorMessage =

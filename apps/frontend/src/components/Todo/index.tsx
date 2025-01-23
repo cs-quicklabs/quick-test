@@ -2,9 +2,7 @@ import { Fragment, useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import Chart from "./Chart";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-
+import { Tooltip } from "react-tooltip";
 import {
   appRoutes,
   projectRoutes,
@@ -114,53 +112,45 @@ const Todo = () => {
     const width3 = (untested / total) * 100 + "%";
     const width4 = (blocked / total) * 100 + "%";
     const span1 = (
-      <Tippy
-        content={`${width1.toString().split(/[.,%]+/)[0]}% ${t(
+      <span
+        data-tooltip-id="todo-index-tooltip-id"
+        data-tooltip-content={`${width1.toString().split(/[.,%]+/)[0]}% ${t(
           "passed"
         )} (${passed}/${total} ${t("tests")})`}
-      >
-        <span
-          className="inline-block h-4 cursor-pointer mt-1"
-          style={{ width: width1, backgroundColor: "#3cb850" }}
-        ></span>
-      </Tippy>
+        className="inline-block h-4 cursor-pointer mt-1"
+        style={{ width: width1, backgroundColor: "#3cb850" }}
+      ></span>
     );
     const span2 = (
-      <Tippy
-        content={`${width2.toString().split(/[.,%]+/)[0]}% ${t(
+      <span
+        data-tooltip-id="todo-index-tooltip-id"
+        data-tooltip-content={`${width2.toString().split(/[.,%]+/)[0]}% ${t(
           "failed"
         )} (${failed}/${total} ${t("tests")})`}
-        placement="bottom"
-      >
-        <span
-          className="inline-block h-4 cursor-pointer mt-1"
-          style={{ width: width2, backgroundColor: "#e40046" }}
-        ></span>
-      </Tippy>
+        data-tooltip-place="bottom"
+        className="inline-block h-4 cursor-pointer mt-1"
+        style={{ width: width2, backgroundColor: "#e40046" }}
+      ></span>
     );
     const span3 = (
-      <Tippy
-        content={`${width3.toString().split(/[.,%]+/)[0]}% ${t(
+      <span
+        data-tooltip-id="todo-index-tooltip-id"
+        data-tooltip-content={`${width3.toString().split(/[.,%]+/)[0]}% ${t(
           "untested"
         )} (${untested}/${total} ${t("tests")})`}
-      >
-        <span
-          className="inline-block h-4 cursor-pointer mt-1"
-          style={{ width: width3, backgroundColor: "#979797" }}
-        ></span>
-      </Tippy>
+        className="inline-block h-4 cursor-pointer mt-1"
+        style={{ width: width3, backgroundColor: "#979797" }}
+      ></span>
     );
     const span4 = (
-      <Tippy
-        content={`${width4.toString().split(/[.,%]+/)[0]}% ${t(
+      <span
+        data-tooltip-id="todo-index-tooltip-id"
+        data-tooltip-content={`${width4.toString().split(/[.,%]+/)[0]}% ${t(
           "untested"
         )} (${blocked}/${total} ${t("tests")})`}
-      >
-        <span
-          className="inline-block h-4 cursor-pointer mt-1"
-          style={{ width: width3, backgroundColor: "#979797" }}
-        ></span>
-      </Tippy>
+        className="inline-block h-4 cursor-pointer mt-1"
+        style={{ width: width3, backgroundColor: "#979797" }}
+      ></span>
     );
     return (
       <span className="w-20 inline-block mx-4">
@@ -168,6 +158,7 @@ const Todo = () => {
         {span3}
         {span2}
         {span4}
+        <Tooltip id="todo-index-tooltip-id" />
       </span>
     );
   };

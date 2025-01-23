@@ -9,7 +9,7 @@ import { DateFormat } from "../Utils/constants/date-format";
 import { appRoutes, projectRoutes } from "../Utils/constants/page-routes";
 
 import i18next from "i18next";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getProjectsDetails } from "../../services/headerServices";
 import { getSingleMilestoneDataDetails } from "../../services/milestoneServices";
 import BreadCrumb from "../BreadCrumb/BreadCrumb";
@@ -42,16 +42,12 @@ export default function ViewMilestone() {
     []
   );
 
-  const { data: projectDetail } = useQuery(["projects-data", pid], () =>
-    getProjectsDetails({ pid })
-  );
+  const { data: projectDetail } = useQuery({ queryKey: ["projects-data", pid], queryFn: () => getProjectsDetails({ pid }) });
   const {
     data: milestoneDetail,
     isLoading,
     error,
-  } = useQuery(["single-milestone-data", id], () =>
-    getSingleMilestoneDataDetails({ id })
-  );
+  } = useQuery({ queryKey: ["single-milestone-data", id], queryFn: () => getSingleMilestoneDataDetails({ id }) });
 
   if (error instanceof Error) {
     const errorMessage =

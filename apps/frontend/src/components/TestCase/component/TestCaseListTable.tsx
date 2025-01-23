@@ -15,7 +15,7 @@ import {
   testCaseRoutes,
 } from "../../Utils/constants/page-routes";
 import { useTranslation } from "react-i18next";
-import Tippy from "@tippyjs/react";
+import { Tooltip } from "react-tooltip";
 import ShowPriorityTextIcon from "./ShowPriorityTextIcon";
 import { SerialisedTestCaseType } from "../../../types/testCaseTypes";
 
@@ -180,10 +180,11 @@ export default function TestCaseListTable({
                 <div className="flex justify-center">
                   {showDragIcon && (
                     <Link to={"#"} title="Drag" className="drag mr-2">
-                      <Tippy content="Drag">
-                        <EllipsisVerticalIcon className="text-gray-900 mx-auto h-4 w-4 cursor-move dragIcon" />
-                      </Tippy>
-
+                      <EllipsisVerticalIcon
+                        data-tooltip-id="testcase-list-table-tooltip-id"
+                        data-tooltip-content={t("Drag")}
+                        className="text-gray-900 mx-auto h-4 w-4 cursor-move dragIcon"
+                      />
                       <PlusIcon className="text-indigo-600 h-4 w-4 cursor-move plusIcon hidden" />
                     </Link>
                   )}
@@ -197,9 +198,9 @@ export default function TestCaseListTable({
                         orderTestCases.map((val) =>
                           val.id === test.id
                             ? {
-                                ...val,
-                                checked: e.target.checked,
-                              }
+                              ...val,
+                              checked: e.target.checked,
+                            }
                             : { ...val }
                         )
                       )
@@ -237,32 +238,33 @@ export default function TestCaseListTable({
                 className=" px-2 py-2 whitespace-nowrap text-center text-xs font-normal"
               >
                 <div className="flex justify-center">
-                  <Tippy content="Edit">
-                    <PencilSquareIcon
-                      data-cy={dataAttr + i + "-edit"}
-                      onClick={(e: any) => {
-                        e.stopPropagation();
-                        editTestCase(test.id);
-                      }}
-                      className="text-indigo-500 h-4 w-4 cursor-pointer mr-2"
-                    />
-                  </Tippy>
-                  <Tippy content="Delete">
-                    <TrashIcon
-                      data-cy={dataAttr + i + "-delete"}
-                      onClick={(e: any) => {
-                        e.stopPropagation();
-                        openDeleteModal(test);
-                      }}
-                      className="text-red-400 h-4 w-4 cursor-pointer"
-                    />
-                  </Tippy>
+                  <PencilSquareIcon
+                    data-tooltip-id="testcase-list-table-tooltip-id"
+                    data-tooltip-content={t("Edit")}
+                    data-cy={dataAttr + i + "-edit"}
+                    onClick={(e: any) => {
+                      e.stopPropagation();
+                      editTestCase(test.id);
+                    }}
+                    className="text-indigo-500 h-4 w-4 cursor-pointer mr-2"
+                  />
+                  <TrashIcon
+                    data-tooltip-id="testcase-list-table-tooltip-id"
+                    data-tooltip-content={t("Delete")}
+                    data-cy={dataAttr + i + "-delete"}
+                    onClick={(e: any) => {
+                      e.stopPropagation();
+                      openDeleteModal(test);
+                    }}
+                    className="text-red-400 h-4 w-4 cursor-pointer"
+                  />
                 </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <Tooltip id="testcase-list-table-tooltip-id" />
     </ReactDragListView>
   );
 }

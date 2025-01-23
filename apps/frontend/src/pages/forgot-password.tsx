@@ -12,7 +12,6 @@ import { validateRequiredEmail } from "../components/Utils/validators";
 import { useNavigate } from "react-router-dom";
 import { appRoutes } from "../components/Utils/constants/page-routes";
 import { ToastMessage } from "../components/Utils/constants/misc";
-import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import bugplotLogo from "../assets/images/bugplot-logo.svg";
 
@@ -63,22 +62,21 @@ const Forgotpassword = () => {
 
   return (
     <>
-      <Helmet>
-        <meta
-          name="description"
-          content="Don't remember the password. Do not worry, we got you covered. We'll email you a link to reset your password"
-        />
-        <meta
-          name="keywords"
-          content="Quick Test, Test Cases, Test Runs, ToDo, Test Case Reports, Jira, Dashboard, Forgot Password, Login, Projects"
-        />
-        <link
-          rel="canonical"
-          href={`${process.env.REACT_APP_DOMAIN_LINK}/forgot-password`}
-        />
-      </Helmet>
+      <meta
+        name="description"
+        content="Don't remember the password. Do not worry, we got you covered. We'll email you a link to reset your password"
+      />
+      <meta
+        name="keywords"
+        content="Quick Test, Test Cases, Test Runs, ToDo, Test Case Reports, Jira, Dashboard, Forgot Password, Login, Projects"
+      />
+      <link
+        rel="canonical"
+        href={`${process.env.REACT_APP_DOMAIN_LINK}/forgot-password`}
+      />
 
-      {showModal && <PopUP {...popUpProps} />}
+      {showModal && <PopUP {...popUpProps} />
+      }
       <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <span onMouseDown={() => navigate("/")} className="cursor-pointer">

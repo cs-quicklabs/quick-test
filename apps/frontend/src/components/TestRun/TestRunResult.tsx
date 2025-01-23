@@ -8,7 +8,7 @@ import Table from "./component/TestResultTable";
 
 import TestCaseDetail from "./TestCaseDetail";
 import i18next from "i18next";
-import { useInfiniteQuery } from "react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { getTestRunResults } from "../../services/testRunServices";
 
 export default function TestRunResult({
@@ -37,20 +37,20 @@ export default function TestRunResult({
     refetch,
     error,
     isFetchingNextPage,
-  } = useInfiniteQuery(
-    ["testrun-data", pid],
-    ({ pageParam }) =>
+  } = useInfiniteQuery({
+    queryKey: ["testrun-data", pid],
+    queryFn: ({ pageParam }) =>
       getTestRunResults({
         pid,
         pageNum: pageParam ?? 1,
       }),
-    {
-      getNextPageParam: (lastPage) =>
-        lastPage.prevOffSet > lastPage.data.meta.pageCount
-          ? undefined
-          : lastPage.prevOffSet,
-    }
-  );
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) =>
+      lastPage.prevOffSet > lastPage.data.meta.pageCount
+        ? undefined
+        : lastPage.prevOffSet
+
+  });
 
   const testRunResults = data?.pages.reduce((acc, page) => {
     return [...acc, ...page.data.data];

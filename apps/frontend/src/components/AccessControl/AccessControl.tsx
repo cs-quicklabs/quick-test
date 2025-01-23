@@ -1,8 +1,7 @@
 import { ReactNode, useMemo } from "react";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
 import React from "react";
 import { NO_PERMISSION_TOOLTIP_MESSAGE } from "../Utils/constants/misc";
+import { Tooltip } from "react-tooltip";
 
 interface AccessControlProps {
   permission: string | string[];
@@ -41,27 +40,27 @@ const AccessControl = (props: AccessControlProps) => {
   else
     return (
       <>
-        <Tippy
-          content={NO_PERMISSION_TOOLTIP_MESSAGE}
-          zIndex={9999}
-          hideOnClick={false}
-          trigger="mouseenter"
+        <span
+          data-tooltip-id="no-permission-tooltip"
+          data-tooltip-content={NO_PERMISSION_TOOLTIP_MESSAGE}
+          data-tooltip-place="top"
+          data-tooltip-trigger="mouseenter"
+          data-tooltip-hideonclick="false"
         >
-          <span>
-            {/* Reference: https://blog.logrocket.com/using-react-cloneelement-function/ */}
-            {React.Children.map(children, (child) => {
-              return React.cloneElement(child, {
-                "aria-disabled": true,
-                className: "cursor-not-allowed",
-                disabled: true,
-                onClick: (e: React.MouseEvent<HTMLElement>) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                },
-              });
-            })}
-          </span>
-        </Tippy>
+          {/* Reference: https://blog.logrocket.com/using-react-cloneelement-function/ */}
+          {React.Children.map(children, (child) => {
+            return React.cloneElement(child, {
+              "aria-disabled": true,
+              className: "cursor-not-allowed",
+              disabled: true,
+              onClick: (e: React.MouseEvent<HTMLElement>) => {
+                e.stopPropagation();
+                e.preventDefault();
+              },
+            });
+          })}
+        </span>
+        <Tooltip id="no-permission-tooltip" style={{ zIndex: 9999 }} />
       </>
     );
 };

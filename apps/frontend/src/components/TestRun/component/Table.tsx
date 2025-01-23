@@ -6,8 +6,6 @@ import Badge from "../../Badge";
 import DeleteConfirmationModal from "../../Common/DeleteModal";
 import { showError, showSuccess } from "../../Toaster/ToasterFun";
 import axiosService from "../../Utils/axios";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
 import {
   appRoutes,
   projectRoutes,
@@ -16,7 +14,7 @@ import {
 import dayjs from "dayjs";
 import { DateFormat } from "../../Utils/constants/date-format";
 import Loader from "../../Loader/Loader";
-
+import { Tooltip } from "react-tooltip";
 interface Props {
   RowData: (string | number)[];
   editTestRun: (id: string) => void | any;
@@ -100,9 +98,8 @@ export default function Table(props: Props) {
               {props?.projectName}&nbsp;{t("Project Test Run Report")}
             </div>
             <div
-              className={` border-b border-gray-200 ${
-                props.RowData?.length < 1 && "hidden"
-              } `}
+              className={` border-b border-gray-200 ${props.RowData?.length < 1 && "hidden"
+                } `}
             >
               <table className="min-w-full ">
                 <tbody className="bg-white divide-y divide-gray-200">
@@ -187,20 +184,25 @@ export default function Table(props: Props) {
                         </td>
                         <td>
                           <div className="flex justify-end text-center items-center gap-2 text-xs">
-                            <Tippy content={t("Edit")}>
-                              <PencilSquareIcon
-                                data-cy={"test-run-" + i + "-edit"}
-                                onClick={() => props.editTestRun(value.id)}
-                                className="text-indigo-500 h-4 w-4 cursor-pointer"
-                              />
-                            </Tippy>
-                            <Tippy content={t("Delete")}>
+                            <PencilSquareIcon
+                              data-tooltip-id="test-run-table-tooltip-id"
+                              data-tooltip-content={t("Edit")}
+                              data-cy={"test-run-" + i + "-edit"}
+                              onClick={() => props.editTestRun(value.id)}
+                              className="text-indigo-500 h-4 w-4 cursor-pointer"
+                            />
+                            <div
+                              data-tooltip-id="test-run-table-tooltip-id"
+                              data-tooltip-content={t("Delete")}
+                            >
                               <TrashIcon
+                                data-tooltip-id="test-run-table-tooltip-id"
+                                data-tooltip-content={t("Delete")}
                                 data-cy={"test-run-" + i + "-delete"}
                                 onClick={() => openDeleteModal(value)}
                                 className="text-red-400 h-4 w-4 cursor-pointer"
                               />
-                            </Tippy>
+                            </div>
                           </div>
                         </td>
                       </tr>
@@ -210,6 +212,7 @@ export default function Table(props: Props) {
               <div className="flex items-center justify-center">
                 {props.isFetchingNextPage && <Loader />}
               </div>
+              <Tooltip id="test-run-table-tooltip-id" />
             </div>
           </div>
         </div>

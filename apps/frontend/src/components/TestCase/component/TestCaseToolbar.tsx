@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   DocumentArrowDownIcon,
   PencilIcon,
@@ -10,8 +10,7 @@ import {
 } from "@heroicons/react/24/solid";
 
 import dayjs from "dayjs";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
+import { Tooltip } from "react-tooltip";
 import { CSVLink } from "react-csv";
 import Button from "../../Button";
 import CancelButton from "../../Button/cancelButton";
@@ -40,7 +39,6 @@ const TestCaseToolbar = ({
     label: t("Section"),
     key: "section",
   };
-
   // For csv file header
   const csvHeaders = [
     { label: t("ID"), key: "testcaseId" },
@@ -357,12 +355,7 @@ const TestCaseToolbar = ({
       filterState.created_on?.to &&
       filterState.created_on?.from
     ) {
-      newArray.push(
-        t("Created On: ") +
-          dateConverter(filterState.created_on.from) +
-          " - " +
-          dateConverter(filterState.created_on.to)
-      );
+      newArray.push(`${t("Created On: ")}${dateConverter(filterState.created_on.from)}-${dateConverter(filterState.created_on.to)}`);
     }
     if (filterState.updated_by.length !== 0) {
       newArray.push(t("Updated By: ") + t(filterState.updated_by.join(", ")));
@@ -378,12 +371,7 @@ const TestCaseToolbar = ({
       filterState.updated_on?.to &&
       filterState.updated_on?.from
     ) {
-      newArray.push(
-        t("Updated On: ") +
-          dateConverter(filterState.updated_on.from) +
-          " - " +
-          dateConverter(filterState.updated_on.to)
-      );
+      newArray.push(`${t("Updated On: ")}${dateConverter(filterState.updated_on.from)}-${dateConverter(filterState.updated_on.to)}`);
     }
     if (filterState.priority.length !== 0) {
       newArray.push(t("Priority: ") + t(filterState.priority.join(", ")));
@@ -695,11 +683,10 @@ const TestCaseToolbar = ({
             >
               {t("Sort:")}&nbsp;
               <span
-                className={`${
-                  sortValue.label !== "Section"
-                    ? "bg-yellow-100 px-1 hover:bg-yellow-200"
-                    : "border-b border-black border-dotted"
-                } `}
+                className={`${sortValue.label !== "Section"
+                  ? "bg-yellow-100 px-1 hover:bg-yellow-200"
+                  : "border-b border-black border-dotted"
+                  } `}
               >
                 <Trans>{sortValue.label}</Trans>
               </span>
@@ -707,9 +694,8 @@ const TestCaseToolbar = ({
                 <div className="flex flex-col bg-white z-10 border rounded py-1 text-sm absolute top-6 shadow-md cursor-pointer w-32">
                   {sortOptions.map((option) => (
                     <div
-                      className={`px-2 py-1 hover:bg-blue-500 hover:text-white ${
-                        option.key === "section" ? "border-t-2" : ""
-                      }`}
+                      className={`px-2 py-1 hover:bg-blue-500 hover:text-white ${option.key === "section" ? "border-t-2" : ""
+                        }`}
                       key={option.key}
                       onMouseDown={() => selectedSortValue(option)}
                     >
@@ -721,18 +707,16 @@ const TestCaseToolbar = ({
             </div>
 
             {sortValue.key !== "section" && (
-              <Tippy
-                delay={[750, 0]}
-                content="Reset grouping to sections"
-                placement="bottom-start"
+              <div
+                data-tooltip-id="testcase-toolbar-tooltip-id"
+                data-tooltip-content={"Reset grouping to sections"}
+                data-tooltip-delay-show={750}
+                data-tooltip-place="bottom-start"
+                onClick={() => selectedSortValue(initialSortValue)}
+                className="cursor-pointer self-center"
               >
-                <div
-                  onClick={() => selectedSortValue(initialSortValue)}
-                  className="cursor-pointer self-center"
-                >
-                  <XMarkIcon className="h-4 w-4 text-red-500 hover:text-red-600" />
-                </div>
-              </Tippy>
+                <XMarkIcon className="h-4 w-4 text-red-500 hover:text-red-600" />
+              </div>
             )}
 
             <div
@@ -758,11 +742,10 @@ const TestCaseToolbar = ({
             >
               {t("Filter:")}&nbsp;
               <span
-                className={`${
-                  filterValue !== "None"
-                    ? "bg-yellow-100 px-1 hover:bg-yellow-200"
-                    : "border-b border-black border-dotted"
-                } `}
+                className={`${filterValue !== "None"
+                  ? "bg-yellow-100 px-1 hover:bg-yellow-200"
+                  : "border-b border-black border-dotted"
+                  } `}
               >
                 <Trans>{filterValue}</Trans>
               </span>
@@ -836,66 +819,69 @@ const TestCaseToolbar = ({
           </div>
         </div>
         <div className="flex flex-row items-center">
-          <Tippy content={t("Export test cases to csv")}>
-            <div>
-              <CSVLink
-                onClick={() => {
-                  if (csvData?.length > 0) return true;
-                  showError(
-                    t(
-                      "Please select test cases or individual section to export test cases."
-                    )
-                  );
-                  return false;
-                }}
-                filename={t(`${projectName}_testCases.csv`)}
-                data={newCSVData}
-                headers={csvHeaders}
-              >
-                <DocumentArrowDownIcon
-                  className={`h-4 w-4 cursor-pointer ${
-                    ColorEnable ? "text-indigo-600" : "text-gray-400"
+          <div
+            data-tooltip-id="testcase-toolbar-tooltip-id"
+            data-tooltip-content={t("Export test cases to csv")}
+          >
+            <CSVLink
+              onClick={() => {
+                if (csvData?.length > 0) return true;
+                showError(
+                  t(
+                    "Please select test cases or individual section to export test cases."
+                  )
+                );
+                return false;
+              }}
+              filename={t(`${projectName}_testCases.csv`)}
+              data={newCSVData}
+              headers={csvHeaders}
+            >
+              <DocumentArrowDownIcon
+                className={`h-4 w-4 cursor-pointer ${ColorEnable ? "text-indigo-600" : "text-gray-400"
                   }`}
-                />
-              </CSVLink>
-            </div>
-          </Tippy>
-
-          <Tippy content={t("Export test cases to pdf")}>
-            <div className="mx-3">
-              <PrinterIcon
-                className={`h-4 w-4  cursor-pointer ${
-                  ColorEnable ? "text-indigo-600" : "text-gray-400"
-                }`}
-                onClick={handlePrinterClick}
               />
-            </div>
-          </Tippy>
+            </CSVLink>
+          </div>
 
-          <Tippy content={t("Edit multiple test cases")}>
-            <div className="">
-              <PencilIcon
-                className={`h-4 w-4  cursor-pointer ${
-                  ColorEnable ? "text-indigo-600" : "text-gray-400"
+          <div
+            data-tooltip-id="testcase-toolbar-tooltip-id"
+            data-tooltip-content={t("Export test cases to pdf")}
+            className="mx-3"
+          >
+            <PrinterIcon
+              className={`h-4 w-4  cursor-pointer ${ColorEnable ? "text-indigo-600" : "text-gray-400"
                 }`}
-                onClick={HandleEditClick}
-              />
-            </div>
-          </Tippy>
+              onClick={handlePrinterClick}
+            />
+          </div>
 
-          <Tippy content={t("Delete multiple test cases")}>
-            <div className="mx-2">
-              <TrashIcon
-                data-cy={"delete-multiple-test-case"}
-                className={`h-4 w-4 cursor-pointer ${
-                  ColorEnable ? "text-indigo-600" : "text-gray-400"
+          <div
+            data-tooltip-id="testcase-toolbar-tooltip-id"
+            data-tooltip-content={t("Edit multiple test cases")}
+            className=""
+          >
+            <PencilIcon
+              className={`h-4 w-4  cursor-pointer ${ColorEnable ? "text-indigo-600" : "text-gray-400"
                 }`}
-                onClick={HandleDeleteClick}
-              />
-            </div>
-          </Tippy>
+              onClick={HandleEditClick}
+            />
+          </div>
+
+          <div
+            data-tooltip-id="testcase-toolbar-tooltip-id"
+            data-tooltip-content={t("Delete multiple test cases")}
+            className="mx-2">
+            <TrashIcon
+              data-cy={"delete-multiple-test-case"}
+              className={`h-4 w-4 cursor-pointer ${ColorEnable ? "text-indigo-600" : "text-gray-400"
+                }`}
+              onClick={HandleDeleteClick}
+            />
+          </div>
         </div>
-      </div>
+        <Tooltip id="testcase-toolbar-tooltip-id" />
+      </div >
     </>
   );
 };

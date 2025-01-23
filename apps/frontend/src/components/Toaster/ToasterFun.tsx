@@ -32,7 +32,7 @@ export const showAlert = (
 ) => {
   if (message) {
     toast(
-      (t) => (
+      (t: any) => (
         <ToastAction
           message={message}
           actionLabel={actionLabel}

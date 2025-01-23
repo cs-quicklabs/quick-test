@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import BreadCrumb from "../BreadCrumb/BreadCrumb";
 import { getProjectsDetails } from "../../services/headerServices";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Dashboard() {
   const { t } = useTranslation(["common"]);
@@ -47,13 +47,12 @@ export default function Dashboard() {
               ? "In Progress"
               : response.data.data.status.toLowerCase(),
 
-          description: `${t("Created by")} ${
-            response.data.data.user.firstName +
+          description: `${t("Created by")} ${response.data.data.user.firstName +
             " " +
             response.data.data.user.lastName
-          } ${t("on")} ${dayjs(new Date(response.data.data.createdAt)).format(
-            DateFormat.LONG
-          )}`,
+            } ${t("on")} ${dayjs(new Date(response.data.data.createdAt)).format(
+              DateFormat.LONG
+            )}`,
         });
       } else {
         setuserData({
@@ -81,9 +80,10 @@ export default function Dashboard() {
     }
   }, [navigate, params.id, params.pid, t]);
 
-  const { data: projectDetail } = useQuery(["projects-data", pid], () =>
-    getProjectsDetails({ pid })
-  );
+  const { data: projectDetail } = useQuery({
+    queryKey: ["projects-data", pid], queryFn: () =>
+      getProjectsDetails({ pid })
+  });
 
   useEffect(() => {
     if (params?.pid) {

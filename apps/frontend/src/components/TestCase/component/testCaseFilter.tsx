@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
 import { Trans, useTranslation } from "react-i18next";
 
-const FilterComponent = ({
+const FilterComponent = React.memo(({
   option,
   row,
   filterState,
@@ -37,7 +37,6 @@ const FilterComponent = ({
   const priority = ["Critical", "High", "Medium", "Low"];
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-
     if (name === "created_on" && value === "Custom") {
       setIsCustomCreated(true);
       setCreatedCustomDate({ to: "", from: "" });
@@ -92,18 +91,6 @@ const FilterComponent = ({
     });
     return enabled;
   };
-  useEffect(() => {
-    if (option.value === "updated_on" && filterMenu === true) {
-      setFilterState({ ...filterState, updated_on: ["Today"] });
-    } else if (option.value === "updated_on" && filterMenu === false) {
-      setFilterState({ ...filterState, updated_on: [] });
-    }
-    if (option.value === "created_on" && filterMenu === true) {
-      setFilterState({ ...filterState, created_on: ["Today"] });
-    } else if (option.value === "created_on" && filterMenu === false) {
-      setFilterState({ ...filterState, created_on: [] });
-    }
-  }, [filterMenu, filterState, option.value, setFilterState]);
   return (
     <>
       <div
@@ -117,11 +104,10 @@ const FilterComponent = ({
         className="flex flex-row items-center"
       >
         <div
-          className={`px-2 py-1 hover:underline ${
-            renderDisabled() !== option.value && renderDisabled() !== ""
-              ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50 text-gray-300"
-              : ""
-          }`}
+          className={`px-2 py-1 hover:underline ${renderDisabled() !== option.value && renderDisabled() !== ""
+            ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50 text-gray-300"
+            : ""
+            }`}
           key={option.value}
         >
           {option.label}
@@ -304,5 +290,5 @@ const FilterComponent = ({
       )}
     </>
   );
-};
+});
 export default FilterComponent;

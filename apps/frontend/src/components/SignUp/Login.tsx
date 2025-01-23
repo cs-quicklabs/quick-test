@@ -1,14 +1,12 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
-
 import { appRoutes } from "../Utils/constants/page-routes";
 import axiosService from "../Utils/axios";
 import Button from "../Button";
-import { FormikInput, FormikCheckbox } from "../Common/FormikInput";
+import { FormikCheckbox, RenderFormikInputs } from "../Common/FormikInput";
 import { showError, showSuccess } from "../Toaster/ToasterFun";
 import {
   SubscriptionStatus,
@@ -19,11 +17,13 @@ import { useFormSubmitWithLoading } from "../Utils/hooks/useFormSubmitWithLoadin
 import { AppContext } from "../Context/mainContext";
 import { useTranslation } from "react-i18next";
 import bugplotLogo from "../../assets/images/bugplot-logo.svg";
+import { ILoginResponse, ISignInInputFieldProps, SignInInitialValues } from "../Utils/interfaces/userObject";
 
 const SignIn = () => {
   const { i18n, t } = useTranslation(["common"]);
   const navigate = useNavigate();
   const { dispatch } = useContext(AppContext);
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       showSuccess(ToastMessage.ALREADY_LOGGED_IN);
@@ -43,11 +43,6 @@ const SignIn = () => {
       .required(t(ValidatorMessage.PASS_REQ))
       .min(8, t(ValidatorMessage.PASS_MIN_LENGTH)),
   });
-  const initialValues = {
-    email: "",
-    password: "",
-    remember_me: false,
-  };
 
   async function doLogin(loginDetail: any) {
     const { remember_me = false } = loginDetail;
@@ -55,26 +50,10 @@ const SignIn = () => {
     try {
       const userData = await axiosService.post("/auth/login", loginDetail);
       const { user, token, permissions } = userData.data.data;
-      localStorage.setItem("allowedPermissions", JSON.stringify(permissions));
-      localStorage.setItem("role", user.role.roleType);
-      localStorage.setItem("roleId", user.role.id);
-      localStorage.setItem("i18nextLng", user.language);
-      localStorage.setItem("firstLogin", JSON.stringify(true));
-      i18n.changeLanguage(user.language);
-
-      if (remember_me === true) {
-        localStorage.setItem("token", token.accessToken);
-      } else {
-        localStorage.setItem("token", token.accessToken);
-      }
-      dispatch({ type: "UPDATE_LOGIN_STATE", data: true });
-      dispatch({ type: "UPDATE_PROFILE_DATA", data: user });
-
-      if (user.subscriptionStatus === SubscriptionStatus.CANCELLED) {
-        navigate(appRoutes.NOT_SUBSCRIBED, { replace: true });
-      } else {
-        navigate(appRoutes.DASHBOARD, { replace: true });
-      }
+      setUserDataInLocalStorage(user, permissions);
+      remember_me && localStorage.setItem("token", token.accessToken);
+      dispatchUserData(user);
+      navigationAfterLoginSuccess(user);
     } catch (error) {
       if (error.response?.status === 400) {
         showError(error.response?.data?.message);
@@ -84,13 +63,30 @@ const SignIn = () => {
     }
   }
 
-  const submitForm = async (values: typeof initialValues) => {
-    const newValue: {
-      email: string;
-      password: string;
-      remember_me?: boolean;
-    } = { ...values };
-    await doLogin(newValue);
+  function dispatchUserData(userData: ILoginResponse) {
+    dispatch({ type: "UPDATE_LOGIN_STATE", data: true });
+    dispatch({ type: "UPDATE_PROFILE_DATA", data: userData });
+  }
+
+  function navigationAfterLoginSuccess(userData: ILoginResponse) {
+    if (userData.subscriptionStatus === SubscriptionStatus.CANCELLED) {
+      navigate(appRoutes.NOT_SUBSCRIBED, { replace: true });
+    } else {
+      navigate(appRoutes.DASHBOARD, { replace: true });
+    }
+  }
+
+  function setUserDataInLocalStorage(userData: ILoginResponse, permissions: String[]) {
+    localStorage.setItem("allowedPermissions", JSON.stringify(permissions));
+    localStorage.setItem("role", userData.role.roleType);
+    localStorage.setItem("roleId", userData.role.id);
+    localStorage.setItem("i18nextLng", userData.language);
+    localStorage.setItem("firstLogin", JSON.stringify(true));
+    i18n.changeLanguage(userData.language);
+  }
+
+  const submitForm = async (values: ISignInInputFieldProps) => {
+    await doLogin(values);
   };
 
   const { onSubmitHandler, loading } = useFormSubmitWithLoading(submitForm);
@@ -117,27 +113,19 @@ const SignIn = () => {
         <div className="mt-8 ml-3 mr-3 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <Formik
-              initialValues={initialValues}
+              initialValues={SignInInitialValues}
               validationSchema={signInSchema}
               onSubmit={onSubmitHandler}
             >
               {() => {
                 return (
                   <Form className="space-y-6" noValidate autoComplete="off">
-                    <div>
-                      <FormikInput
-                        type="email"
-                        name="email"
-                        label={t("Email Address")}
-                      />
-                    </div>
-                    <div>
-                      <FormikInput
-                        type="password"
-                        name="password"
-                        label={t("Password")}
-                      />
-                    </div>
+
+                    {RenderFormikInputs([
+                      { type: "email", name: "email", label: t("Email Address") },
+                      { type: "password", name: "password", label: t("Password") }
+                    ])}
+
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
                         <FormikCheckbox

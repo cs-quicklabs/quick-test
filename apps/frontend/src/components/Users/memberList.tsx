@@ -2,12 +2,10 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { PencilSquareIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-
+import { Tooltip } from "react-tooltip";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
-import { useInfiniteQuery } from "react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { getUserProfileDetails } from "../../services/profileServices";
 import Button from "../Button";
 import Loader from "../Loader/Loader";
@@ -48,19 +46,19 @@ const MemberList = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery(
-    ["users-data"],
-    ({ pageParam }) =>
+  } = useInfiniteQuery({
+    queryKey: ["users-data"],
+    queryFn: ({ pageParam }) =>
       getUserProfileDetails({
         pageNum: pageParam ?? 1,
       }),
-    {
-      getNextPageParam: (lastPage) =>
-        lastPage?.prevOffSet > lastPage.data.meta.pageCount
-          ? undefined
-          : lastPage?.prevOffSet,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      return lastPage?.prevOffSet > lastPage.data.meta.pageCount
+        ? undefined
+        : lastPage?.prevOffSet;
     }
-  );
+  });
 
   const userData = data?.pages.reduce((acc, page) => {
     return [...acc, ...page.data.data];
@@ -229,64 +227,64 @@ const MemberList = () => {
                       {user.roleId === RoleId.OWNER
                         ? t("Owner")
                         : user.roleId === RoleId.ADMIN
-                        ? t("Admin")
-                        : t("Member")}
+                          ? t("Admin")
+                          : t("Member")}
                     </td>
 
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-center">
-                      <Tippy content={t("Resend Password Link")}>
-                        <span>
-                          <AccessControl
-                            permission={
-                              UserManagementPermissions.RESET_PASSWORD_LINK
-                            }
-                          >
-                            <EnvelopeIcon
-                              className="text-indigo-600 h-4 w-4 cursor-pointer mr-3"
-                              onClick={() => resendPassword(user.email)}
-                            />
-                          </AccessControl>
-                        </span>
-                      </Tippy>
-                      <Tippy content={t("Edit Member")}>
-                        <span data-cy={`edit-user-${index}`}>
-                          <AccessControl
-                            permission={UserManagementPermissions.UPDATE_MEMBER}
-                            upperRoleEditPermission={
-                              user.roleId >= userRoleId &&
-                              userRoleId !== RoleId.MEMBER
-                            }
-                          >
-                            <PencilSquareIcon
-                              onClick={() => {
-                                navigate(
-                                  `${appRoutes.SETTINGS}/${settingsRoutes.USERS}/${user.id}/${usersRoutes.EDIT}`
-                                );
-                              }}
-                              className="text-indigo-500 h-4 w-4 cursor-pointer mr-3"
-                            />
-                          </AccessControl>
-                        </span>
-                      </Tippy>
-                      <Tippy content={t("Archive Member")}>
-                        <span
-                          data-cy={`archive-user-${index}`}
-                          onClick={() => openModal(user)}
+                      <span
+                        data-tooltip-id="member-list-tooltip-id"
+                        data-tooltip-content={t("Resend Password Link")}>
+                        <AccessControl
+                          permission={
+                            UserManagementPermissions.RESET_PASSWORD_LINK
+                          }
                         >
-                          <AccessControl
-                            permission={ArchivePermissions.ARCHIVE_USER}
-                            upperRoleEditPermission={
-                              user.roleId >= userRoleId &&
-                              userRoleId !== RoleId.MEMBER
-                            }
-                          >
-                            <ArchiveBoxIcon
-                              className="text-indigo-600 h-4 w-4 cursor-pointer mr-3"
-                              aria-hidden="true"
-                            />
-                          </AccessControl>
-                        </span>
-                      </Tippy>
+                          <EnvelopeIcon
+                            className="text-indigo-600 h-4 w-4 cursor-pointer mr-3"
+                            onClick={() => resendPassword(user.email)}
+                          />
+                        </AccessControl>
+                      </span>
+                      <span data-cy={`edit-user-${index}`}
+                        data-tooltip-id="member-list-tooltip-id"
+                        data-tooltip-content={t("Edit Member")}>
+                        <AccessControl
+                          permission={UserManagementPermissions.UPDATE_MEMBER}
+                          upperRoleEditPermission={
+                            user.roleId >= userRoleId &&
+                            userRoleId !== RoleId.MEMBER
+                          }
+                        >
+                          <PencilSquareIcon
+                            onClick={() => {
+                              navigate(
+                                `${appRoutes.SETTINGS}/${settingsRoutes.USERS}/${user.id}/${usersRoutes.EDIT}`
+                              );
+                            }}
+                            className="text-indigo-500 h-4 w-4 cursor-pointer mr-3"
+                          />
+                        </AccessControl>
+                      </span>
+                      <span
+                        data-tooltip-id="member-list-tooltip-id"
+                        data-tooltip-content={t("Archive Member")}
+                        data-cy={`archive-user-${index}`}
+                        onClick={() => openModal(user)}
+                      >
+                        <AccessControl
+                          permission={ArchivePermissions.ARCHIVE_USER}
+                          upperRoleEditPermission={
+                            user.roleId >= userRoleId &&
+                            userRoleId !== RoleId.MEMBER
+                          }
+                        >
+                          <ArchiveBoxIcon
+                            className="text-indigo-600 h-4 w-4 cursor-pointer mr-3"
+                            aria-hidden="true"
+                          />
+                        </AccessControl>
+                      </span>
                     </td>
                   </tr>
                 ))}
@@ -307,16 +305,19 @@ const MemberList = () => {
             </table>
           )}
         </div>
+        <Tooltip id="member-list-tooltip-id" />
       </div>
-      {showModal && (
-        <ConfirmModal
-          message={modalMsg}
-          open={showModal}
-          handleConfirm={moveToArchive}
-          handleCancel={() => setShowModal(false)}
-        />
-      )}
-    </main>
+      {
+        showModal && (
+          <ConfirmModal
+            message={modalMsg}
+            open={showModal}
+            handleConfirm={moveToArchive}
+            handleCancel={() => setShowModal(false)}
+          />
+        )
+      }
+    </main >
   );
 };
 

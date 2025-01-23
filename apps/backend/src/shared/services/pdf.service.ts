@@ -1,4 +1,4 @@
-import { unlink, writeFileSync, readFileSync } from "fs";
+import { unlink } from "fs";
 import { Injectable } from "@nestjs/common";
 import { AwsS3Service } from "./aws-s3.service";
 import { AppConfigService } from "./app.config.service";
@@ -7,7 +7,7 @@ import { TestSuiteEntity } from "../../service-organization/test-suite/test-suit
 import { TestCaseResultStatus } from "../../common/enums/test-case-result-status";
 import { TestSuiteStatus } from "../../common/enums/test-suite-status";
 import { UtilsService } from "../../_helpers/utils.service";
-import { chromium } from 'playwright';
+import * as htmlToPdf from 'html-pdf';
 
 @Injectable()
 export class PdfService {
@@ -15,23 +15,6 @@ export class PdfService {
         private readonly awsS3Service: AwsS3Service,
         private readonly appConfigService: AppConfigService,
     ) { }
-    private browser
-    async init() {
-        this.browser = await chromium.launch();
-    }
-
-    async getPage() {
-        if (!this.browser) {
-            await this.init();
-        }
-        return await this.browser.newPage();
-    }
-
-    async close() {
-        if (this.browser) {
-            await this.browser.close();
-        }
-    }
 
     /**
      * Internal method to generate test cases pdf
@@ -131,7 +114,7 @@ export class PdfService {
         
         </html>
         `;
-        const buffer = await this.generatePdf(pdfName, content);
+        const buffer = await this.generatePdf(content);
         let key;
         const file = UtilsService.createUploadableFile(
             pdfName,
@@ -143,18 +126,14 @@ export class PdfService {
         return key;
     }
 
-    async generatePdf(pdfName: string, htmlContent: string) {
-        writeFileSync(`${pdfName}.html`, htmlContent);
-        const page = await this.getPage();
-        const html = readFileSync(`${pdfName}.html`, "utf-8");
-        await page.setContent(html, { waitUntil: "domcontentloaded" });
-        const pdf = await page.pdf({
-            margin: { top: "30px", right: "30px", bottom: "30px", left: "30px" },
-            printBackground: true,
-            format: "A4",
-            preferCSSPageSize: true, // Ensures CSS page size is honored
+    async generatePdf(content: string): Promise<Buffer> {
+        return new Promise((resolve, reject) => {
+            const options = { format: 'A4', border: { top: "30px", right: "30px", bottom: "30px", left: "30px" } };
+            htmlToPdf.create(content, options).toBuffer((err, buffer) => {
+                if (err) reject(err);
+                else resolve(buffer);
+            });
         });
-        return pdf;
     }
 
     /**
@@ -294,7 +273,7 @@ export class PdfService {
         
         </html>
         `;
-        const buffer = await this.generatePdf(pdfName, content);
+        const buffer = await this.generatePdf(content);
         let key;
         const file = UtilsService.createUploadableFile(
             pdfName,
@@ -534,7 +513,7 @@ export class PdfService {
                             </html>
         `;
 
-        const buffer = await this.generatePdf(pdfName, content);
+        const buffer = await this.generatePdf(content);
         let key;
         const file = UtilsService.createUploadableFile(
             pdfName,

@@ -5,7 +5,6 @@ import {
   settingsRoutes,
 } from "../../../components/Utils/constants/page-routes";
 import Integration from "../../../components/Integrations";
-import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import StripeCheckout from "../../../components/Payment/StripeCheckout";
 import BillingAddress from "../../../components/Settings/Billing/BillingAddress";
@@ -79,20 +78,18 @@ const Members = () => {
 
   return (
     <>
-      <Helmet>
-        <meta
-          name="description"
-          content="This are the settings of Quick Test, here you can add, edit single/multiple users also Jira integrations are done here only."
-        />
-        <meta
-          name="keywords"
-          content="Quick Test, Test Cases, Test Runs, ToDo, Test Case Reports, Jira, Users, Edit Users, Integration Jira, Settings, Projects"
-        />
-        <link
-          rel="canonical"
-          href={`${process.env.REACT_APP_DOMAIN_LINK}/users/edit/:id`}
-        />
-      </Helmet>
+      <meta
+        name="description"
+        content="This are the settings of Quick Test, here you can add, edit single/multiple users also Jira integrations are done here only."
+      />
+      <meta
+        name="keywords"
+        content="Quick Test, Test Cases, Test Runs, ToDo, Test Case Reports, Jira, Users, Edit Users, Integration Jira, Settings, Projects"
+      />
+      <link
+        rel="canonical"
+        href={`${process.env.REACT_APP_DOMAIN_LINK}/users/edit/:id`}
+      />
 
       <div className="pb-10 lg:py-12 px-2 sm:px-7 2xl:px-52">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-5">
@@ -103,19 +100,17 @@ const Members = () => {
                   <button
                     key={i}
                     onClick={() => navigate(val.link)}
-                    className={`group rounded-md px-3 py-2 flex items-center text-sm font-medium cursor-pointer w-full h-10 ${
-                      location?.pathname === val.link
-                        ? "bg-gray-50 text-indigo-600"
-                        : "bg-white hover:bg-gray-50 hover:text-indigo-600"
-                    }`}
+                    className={`group rounded-md px-3 py-2 flex items-center text-sm font-medium cursor-pointer w-full h-10 ${location?.pathname === val.link
+                      ? "bg-gray-50 text-indigo-600"
+                      : "bg-white hover:bg-gray-50 hover:text-indigo-600"
+                      }`}
                     aria-current="page"
                   >
                     <svg
-                      className={`text-gray-400 group-hover:text-indigo-600 flex-shrink-0 -ml-1 mr-3 h-6 w-6 ${
-                        location?.pathname === val.link
-                          ? "text-indigo-600"
-                          : "hover:text-indigo-600"
-                      }`}
+                      className={`text-gray-400 group-hover:text-indigo-600 flex-shrink-0 -ml-1 mr-3 h-6 w-6 ${location?.pathname === val.link
+                        ? "text-indigo-600"
+                        : "hover:text-indigo-600"
+                        }`}
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"

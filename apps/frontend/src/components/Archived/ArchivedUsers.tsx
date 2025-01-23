@@ -3,11 +3,11 @@ import {
   ArrowPathIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
-import Tippy from "@tippyjs/react";
+import { Tooltip } from "react-tooltip";
 import dayjs from "dayjs";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getArchiveMembers } from "../../services/archiveUsers";
 import AccessControl from "../AccessControl";
 import ConfirmModal from "../Common/ConfirmModal";
@@ -31,7 +31,10 @@ const ArchivedUsers = () => {
     isLoading,
     error,
     refetch,
-  } = useQuery("archiveMembers", getArchiveMembers);
+  } = useQuery({
+    queryKey: ["archiveMembers"], // This is your query key
+    queryFn: getArchiveMembers,  // This is the function to fetch data
+  });
 
   const openConfirmationModal = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -149,14 +152,15 @@ const ArchivedUsers = () => {
                           <AccessControl
                             permission={ArchivePermissions.REACTIVATE_USER}
                           >
-                            <Tippy content={t("Restore Users")}>
-                              <span>
-                                <ArrowPathIcon
-                                  className="h-4 w-4 text-indigo-600 group-hover:text-indigo-800"
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </Tippy>
+                            <span
+                              data-tooltip-id="archived-users-tooltip-id"
+                              data-tooltip-content={t("Restore Users")}
+                            >
+                              <ArrowPathIcon
+                                className="h-4 w-4 text-indigo-600 group-hover:text-indigo-800"
+                                aria-hidden="true"
+                              />
+                            </span>
                           </AccessControl>
                         </button>
                         <button
@@ -168,14 +172,15 @@ const ArchivedUsers = () => {
                           <AccessControl
                             permission={ArchivePermissions.DELETE_USER}
                           >
-                            <Tippy content={t("Permanently Delete Users")}>
-                              <span>
-                                <TrashIcon
-                                  className="h-4 w-4 text-red-400 group-hover:text-indigo-800"
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </Tippy>
+                            <span
+                              data-tooltip-id="archived-users-tooltip-id"
+                              data-tooltip-content={t("Permanently Delete Users")}
+                            >
+                              <TrashIcon
+                                className="h-4 w-4 text-red-400 group-hover:text-indigo-800"
+                                aria-hidden="true"
+                              />
+                            </span>
                           </AccessControl>
                         </button>
                       </td>
@@ -199,6 +204,7 @@ const ArchivedUsers = () => {
           )}
           {/* <Pagination setPageNum={setPageNum} paginationData={paginationData} /> */}
         </div>
+        <Tooltip id="archived-users-tooltip-id" />
       </div>
       {showModal && ifRestore ? (
         <ConfirmModal

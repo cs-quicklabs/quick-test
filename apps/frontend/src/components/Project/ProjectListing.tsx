@@ -14,7 +14,7 @@ import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import Modal from "./Modal";
 
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getProjects } from "../../services/projectPageServices";
 
 export default function Example() {
@@ -40,7 +40,7 @@ export default function Example() {
     []
   );
 
-  const { data, isLoading, error } = useQuery("all-projects", getProjects);
+  const { data, isLoading, error } = useQuery({ queryKey: ["all-projects"], queryFn: getProjects });
 
   if (error instanceof Error) {
     const errorMessage =
@@ -242,8 +242,8 @@ export default function Example() {
                   {data?.data?.data.map((ele: any) => {
                     const activeEle = ele.testsuites.length
                       ? ele.testsuites.filter(
-                          (item: any) => item.status !== "COMPLETED"
-                        )
+                        (item: any) => item.status !== "COMPLETED"
+                      )
                       : [];
                     if (!activeEle.length) return null;
                     return (

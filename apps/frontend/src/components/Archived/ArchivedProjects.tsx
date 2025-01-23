@@ -1,7 +1,6 @@
-import Tippy from "@tippyjs/react";
+import { Tooltip } from "react-tooltip";
 import React, { useCallback, useState } from "react";
-import { useQuery } from "react-query";
-import "tippy.js/dist/tippy.css";
+import { useQuery } from "@tanstack/react-query";
 import { getArchiveProjects } from "../../services/archivePageServices";
 import AccessControl from "../AccessControl";
 import Loader from "../Loader/Loader";
@@ -35,7 +34,10 @@ const ArchivedProjects = () => {
     error,
     refetch,
     isLoading,
-  } = useQuery("archiveProjects", getArchiveProjects);
+  } = useQuery({
+    queryKey: ["archiveProjects"], // This is your query key
+    queryFn: getArchiveProjects,  // This is the function to fetch data
+  });
 
   if (error instanceof Error) {
     const errorMessage =
@@ -154,14 +156,15 @@ const ArchivedProjects = () => {
                         <AccessControl
                           permission={ArchivePermissions.RESTORE_PROJECT}
                         >
-                          <Tippy content={t("Restore Project")}>
-                            <span>
-                              <ArrowPathIcon
-                                className="h-4 w-4 text-indigo-600 group-hover:text-indigo-800"
-                                aria-hidden="true"
-                              />
-                            </span>
-                          </Tippy>
+                          <span
+                            data-tooltip-id="archived-projects-tooltip-id"
+                            data-tooltip-content={t("Restore Project")}
+                          >
+                            <ArrowPathIcon
+                              className="h-4 w-4 text-indigo-600 group-hover:text-indigo-800"
+                              aria-hidden="true"
+                            />
+                          </span>
                         </AccessControl>
                       </button>
                       <button
@@ -172,14 +175,15 @@ const ArchivedProjects = () => {
                         <AccessControl
                           permission={ProjectPermissions.DELETE_PROJECT}
                         >
-                          <Tippy content={t("Permanently Delete Project")}>
-                            <span>
-                              <TrashIcon
-                                className="h-4 w-4 text-red-400 group-hover:text-indigo-800"
-                                aria-hidden="true"
-                              />
-                            </span>
-                          </Tippy>
+                          <span
+                            data-tooltip-id="archived-projects-tooltip-id"
+                            data-tooltip-content={t("Permanently Delete Project")}
+                          >
+                            <TrashIcon
+                              className="h-4 w-4 text-red-400 group-hover:text-indigo-800"
+                              aria-hidden="true"
+                            />
+                          </span>
                         </AccessControl>
                       </button>
                     </td>
@@ -201,25 +205,28 @@ const ArchivedProjects = () => {
             </table>
           )}
         </div>
+        <Tooltip id="archived-projects-tooltip-id" />
       </div>
-      {showModal && ifRestore ? (
-        <ConfirmModal
-          open={showModal}
-          message={modalMsg}
-          handleConfirm={restoreProject}
-          handleCancel={() => setShowModal(false)}
-        />
-      ) : (
-        showModal && (
-          <DeleteConfirmationModal
-            msg={modalMsg}
+      {
+        showModal && ifRestore ? (
+          <ConfirmModal
             open={showModal}
-            toggleModal={setShowModal}
-            delete={deleteProject}
+            message={modalMsg}
+            handleConfirm={restoreProject}
+            handleCancel={() => setShowModal(false)}
           />
+        ) : (
+          showModal && (
+            <DeleteConfirmationModal
+              msg={modalMsg}
+              open={showModal}
+              toggleModal={setShowModal}
+              delete={deleteProject}
+            />
+          )
         )
-      )}
-    </main>
+      }
+    </main >
   );
 };
 

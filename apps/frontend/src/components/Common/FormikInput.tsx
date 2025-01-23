@@ -12,6 +12,7 @@ import InputTextAreaMarkdown from "./InputTextAreaMarkdown";
 
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { useTranslation } from "react-i18next";
+import { InputFieldProps } from "../Utils/interfaces/userObject";
 
 interface IProps {
   name: string;
@@ -296,3 +297,16 @@ export const FormikInputDateField = ({
     </>
   );
 };
+
+export const RenderFormikInputs = (fields: Array<InputFieldProps>) => {
+  return fields.map((field) => (
+    <div key={field.name}>
+      <FormikInput
+        type={field.type}
+        name={field.name}
+        label={field.label}
+        {...(field.validation ? { validation: field.validation } : {})}
+      />
+    </div>
+  ));
+}

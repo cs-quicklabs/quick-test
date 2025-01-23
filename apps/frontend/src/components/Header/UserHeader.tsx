@@ -159,11 +159,10 @@ export default function UserHeader() {
                   <Link
                     to={`${appRoutes.DASHBOARD}`}
                     // className="bg-gray-900 text-white px-6 py-2 rounded-md text-sm font-medium cursor-pointer"
-                    className={`rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white ${
-                      selectedButton === "Dashboard"
-                        ? "bg-gray-900 text-white"
-                        : "bg-transparent text-gray-300"
-                    }`}
+                    className={`rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white ${selectedButton === "Dashboard"
+                      ? "bg-gray-900 text-white"
+                      : "bg-transparent text-gray-300"
+                      }`}
                     aria-current="page"
                     data-cy="dashboard"
                     onClick={() => handleButtonClick("Dashboard")}
@@ -173,11 +172,10 @@ export default function UserHeader() {
                   <Link
                     to={`${appRoutes.PROJECTS}`}
                     // className="hover:bg-slate-700 text-white px-6 py-2 rounded-md text-sm font-medium cursor-pointer"
-                    className={`rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white ${
-                      selectedButton === "Projects"
-                        ? "bg-gray-900 text-white"
-                        : "bg-inherit text-gray-300"
-                    }`}
+                    className={`rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white ${selectedButton === "Projects"
+                      ? "bg-gray-900 text-white"
+                      : "bg-inherit text-gray-300"
+                      }`}
                     // className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                     aria-current="page"
                     data-cy="dashboard"
@@ -188,7 +186,7 @@ export default function UserHeader() {
                 </div>
               </div>
               <div className="m-auto hidden sm:mr-0 grow sm:grow-0 sm:block">
-                <SearchBox />
+                <SearchBox inputFieldId={'search-for-desktop-id'} />
               </div>
             </div>
             <div className="inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto ml-2 lg:ml-4 sm:pr-0">
@@ -287,7 +285,7 @@ export default function UserHeader() {
           className="mx-8 sm:hidden sm:mr-0 flex grow mb-3 mt-2"
           id="mobile-menu"
         >
-          <SearchBox />
+          <SearchBox inputFieldId={'search-for-mobile-id'} />
           <div className="pt-2 pb-3">
             {/* <a
               onClick={goToDashboard}

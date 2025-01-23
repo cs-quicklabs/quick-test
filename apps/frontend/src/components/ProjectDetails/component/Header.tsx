@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
-import "tippy.js/dist/tippy.css";
 import { useTranslation } from "react-i18next";
 import Badge from "../../Badge";
 import { DateFormat } from "../../Utils/constants/date-format";
 import AccessControl from "../../AccessControl";
-import { useState } from "react";
+import { JSX, useState } from "react";
 import { ProjectPermissions } from "../../Utils/constants/roles-permission";
 import Button from "../../Button";
 interface PropsData {

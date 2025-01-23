@@ -5,7 +5,7 @@ import Header from "./component/Header";
 import NavTab from "./component/NavTab";
 
 import { useTranslation } from "react-i18next";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import MilestonesPage from "../../pages/projects/[pid]/milestones/MilestonesPage";
 import OverviewPage from "../../pages/projects/[pid]/overview";
 import TestCasePage from "../../pages/projects/[pid]/testcases/edit-testcase/[id]/TestCases";
@@ -22,9 +22,7 @@ export default function Dashboard() {
   const params = useParams();
   const pid = params.pid;
 
-  const { data: projectDetail } = useQuery(["projects-data", pid], () =>
-    getProjectsDetails({ pid })
-  );
+  const { data: projectDetail } = useQuery({ queryKey: ["projects-data", pid], queryFn: () => getProjectsDetails({ pid }) });
 
   const NavProps = [
     {

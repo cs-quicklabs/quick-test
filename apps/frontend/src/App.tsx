@@ -2,8 +2,8 @@ import "./styles/global.css";
 import { BrowserRouter } from "react-router-dom";
 import MainContext from "./components/Context/mainContext";
 import AppRoutes from "./routes/AppRoutes";
-import { QueryClientProvider, QueryClient } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -21,7 +21,7 @@ const App = () => {
           </BrowserRouter>
           <Toaster position="top-center" />
         </MainContext>
-        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+        <ReactQueryDevtools initialIsOpen={false} position="bottom" />
       </Provider>
     </QueryClientProvider>
     // </Element />

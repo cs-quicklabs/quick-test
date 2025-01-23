@@ -18,8 +18,8 @@ import {
 } from "../../../../components/Toaster/ToasterFun";
 import { ToastMessage } from "../../../../components/Utils/constants/misc";
 import Loader from "../../../../components/Loader/Loader";
-import { useQuery } from "react-query";
-import Tippy from "@tippyjs/react";
+import { useQuery } from "@tanstack/react-query";
+import { Tooltip } from "react-tooltip";
 
 export default function ProjectMembers(props: any) {
   const [open, setOpen] = useState(false);
@@ -33,19 +33,11 @@ export default function ProjectMembers(props: any) {
     data: members,
     refetch,
     error,
-  } = useQuery(
-    ["project-members"],
-    () => getAssignedProjectMembers(props?.pid),
-    {
-      enabled: false,
-      onSuccess: () => {
-        setLoading(false);
-      },
-      onSettled: () => {
-        setLoading(false);
-      },
-    }
-  );
+  } = useQuery({
+    queryKey: ["project-members"],
+    queryFn: () => getAssignedProjectMembers(props?.pid),
+    enabled: false, // Disable the query on mount
+  });
 
   const fetchData = useCallback(() => {
     setLoading(true);
@@ -107,8 +99,8 @@ export default function ProjectMembers(props: any) {
                   <table className="min-w-full divide-y divide-gray-300 px-2 2xl:pl-48">
                     <tbody className="divide-y divide-gray-200">
                       {members &&
-                      members !== undefined &&
-                      members.length > 0 ? (
+                        members !== undefined &&
+                        members.length > 0 ? (
                         members.map((member: any) => (
                           <tr key={member["fullName"]}>
                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
@@ -118,22 +110,27 @@ export default function ProjectMembers(props: any) {
                               {member["email"]}
                             </td>
                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                              <div className="text-indigo-600 hover:text-indigo-900 cursor-pointer">
-                                <Tippy content="Delete">
-                                  <TrashIcon
-                                    onClick={() => getConfirmation(member)}
-                                    className="w-4 h-8 text-red-400"
-                                  />
-                                </Tippy>
-                              </div>
+                              {/* <div className="text-indigo-600 hover:text-indigo-900 cursor-pointer"> */}
+                              <TrashIcon
+                                data-tooltip-id="delete-id"
+                                data-tooltip-content="Delete"
+                                onClick={() => getConfirmation(member)}
+                                className="w-4 h-8 text-red-400"
+                              />
+                              {/* </div> */}
                             </td>
                           </tr>
                         ))
                       ) : (
-                        <div className="text-center p-10">No Member Found</div>
+                        <tr >
+                          <td className="text-center p-10">
+                            No Member Found
+                          </td>
+                        </tr>
                       )}
                     </tbody>
                   </table>
+                  <Tooltip id="delete-id" />
                 </div>
               </div>
             </section>

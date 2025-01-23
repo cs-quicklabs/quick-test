@@ -26,7 +26,7 @@ const debounce = (fn: any, wait: number) => {
   };
 };
 
-const SearchBox = () => {
+const SearchBox = ({ inputFieldId }: { inputFieldId: string }) => {
   const { t } = useTranslation(["common"]);
   const [inputValue, setInputValue] = useState("");
   const [showDropDown, setShowDropDown] = useState(false);
@@ -104,6 +104,7 @@ const SearchBox = () => {
             className="pl-10 pr-3 py-1 rounded-md text-sm text-gray-500 font-medium sm:w-72  h-9 grow sm:grow-0 sm:justify-self-end relative bg-gray-700 focus:border-white focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-white sm:text-sm"
             ref={searchWidthRef}
             type="search"
+            id={inputFieldId}
             placeholder={t("Search...")}
             value={inputValue}
             onChange={inputOnChange}
@@ -117,9 +118,8 @@ const SearchBox = () => {
       {showDropDown && (
         <div
           style={{ width: `${searchWidth}px` }}
-          className={`absolute top-24 sm:top-11 rounded-md shadow-md border border-gray-300 overflow-x-hidden w-72 bg-white z-10 ${
-            getAllSearchCount() > 8 ? "h-64 overflow-y-auto" : "h-auto"
-          } `}
+          className={`absolute top-24 sm:top-11 rounded-md shadow-md border border-gray-300 overflow-x-hidden w-72 bg-white z-10 ${getAllSearchCount() > 8 ? "h-64 overflow-y-auto" : "h-auto"
+            } `}
         >
           {Object.keys(searchResult).length === 0 ? (
             <div className="px-2 py-1 text-sm">{t("No matches")}</div>
