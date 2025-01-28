@@ -1,5 +1,4 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-//import * as dotenv from "dotenv";
 import { MailerService } from "@nestjs-modules/mailer";
 import { UserEntity } from "../../service-users/user/user.entity";
 import { Subjects } from "../../common/constants/subject";

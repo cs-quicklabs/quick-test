@@ -1,14 +1,11 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
-
 import { AbstractDto } from "../../../common/dto/AbstractDto";
-
 import { TestCaseEntity } from "../test-case.entity";
 import { ProjectDto } from "../../project/dto/ProjectDto";
 import { SectionDto } from "../section/dto/SectionDto";
 import { ExecutionPriority } from "../../../common/enums/execution-priority";
 import { UserDto } from "../../../service-users/user/dto/UserDto";
 import { DefectEntity } from "../../defect/defect.entity";
-import { ExceptionResponseFilter } from "src/common/filters/exception-response.filter";
 
 export class TestCaseDetailsDto extends AbstractDto {
   @ApiPropertyOptional()

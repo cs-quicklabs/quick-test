@@ -15,8 +15,6 @@ import * as bodyParser from "body-parser";
 import { AppModule } from "./app.module";
 import { HttpExceptionFilter } from "./filters/bad-request.filter";
 import { QueryFailedFilter } from "./filters/query-failed.filter";
-//import { ConfigService } from "./shared/services/config.service";
-//import { SharedModule } from "./shared/shared.module";
 import { NewrelicInterceptor } from "./common/interceptors/newrelic.interceptor";
 import { setupSwagger } from "./viveo-swagger";
 
@@ -67,8 +65,6 @@ async function bootstrap() {
       },
     }),
   );
-
-  //const configService = app.select(SharedModule).get(ConfigService);
 
   setupSwagger(app);
 
