@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 
 import dayjs from "dayjs";
@@ -21,26 +20,6 @@ export default function ViewMilestone() {
   const params = useParams();
   const pid = params.pid;
   const id = params.id;
-
-  const description = useMemo(
-    () => (
-      <>
-        <div className="flex items-center">
-          {/* <span className="text-xs">
-            <span className="font-medium pr-2">{t("Start Date:")}</span>
-            {dayjs(RowData.startDate).format(DateFormat.LONG)}
-          </span> */}
-          {/* <span className="text-xs mx-2">
-            <span className="font-medium px-2 border-l-2 border-gray-500">
-              {t("End Date:")}
-            </span>
-            {dayjs(RowData.endDate).format(DateFormat.LONG)}
-          </span> */}
-        </div>
-      </>
-    ),
-    []
-  );
 
   const { data: projectDetail } = useQuery({ queryKey: ["projects-data", pid], queryFn: () => getProjectsDetails({ pid }) });
   const {
@@ -87,7 +66,7 @@ export default function ViewMilestone() {
       <div className="bg-gray-50 border-b border-gray-200">
         <Header
           title={milestoneDetail?.name}
-          description={description}
+          description={""}
           redirectToBack={`${appRoutes.PROJECTS}/${params?.pid}/${projectRoutes.MILESTONES}`}
           text={milestoneDetail?.description}
         />

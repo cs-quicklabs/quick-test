@@ -1,19 +1,4 @@
 services:
-  frontend:
-    container_name: quick-test-frontend
-    build:
-      context: ./
-      dockerfile: ./apps/frontend/Dockerfile
-    ports:
-      - 3000:3000
-    env_file:
-      - path: ./apps/frontend/.env
-    depends_on:
-      - backend
-    networks:
-      - quick-test
-    restart: on-failure
-
   backend:
     container_name: quick-test-backend
     build:

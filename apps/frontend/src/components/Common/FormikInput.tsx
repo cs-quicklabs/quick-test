@@ -118,7 +118,7 @@ export const FormikTextArea = ({
         {showLabel && (
           <label
             htmlFor={props.name}
-            className="flex-1 text-sm font-medium text-gray-700 space-x-3 flex items-center flex justify-between items-center"
+            className="flex-1 text-sm font-medium text-gray-700 space-x-3 flex items-center justify-between"
           >
             <span>{props.label}</span>
             {markdownPreview ? (

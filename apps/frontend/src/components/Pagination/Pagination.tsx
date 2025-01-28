@@ -22,7 +22,7 @@ export default function Pagination(data: Props) {
         (data.paginationData.take - 1),
       to:
         data.paginationData.page * data.paginationData.take >
-        data.paginationData.itemCount
+          data.paginationData.itemCount
           ? data.paginationData.itemCount
           : data.paginationData.page * data.paginationData.take,
     }),
@@ -63,11 +63,10 @@ export default function Pagination(data: Props) {
                 ? null
                 : data.setPageNum(data.paginationData.page - 1);
             }}
-            className={` cursor-pointer relative inline-flex items-center px-2.5 py-1.5 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ${
-              (data.paginationData.page === 1 ||
+            className={` cursor-pointer relative inline-flex items-center px-2.5 py-1.5 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ${(data.paginationData.page === 1 ||
                 data.paginationData.page === 0) &&
               "hidden"
-            }`}
+              }`}
           >
             {t("Previous")}
           </div>
@@ -78,10 +77,9 @@ export default function Pagination(data: Props) {
                 ? null
                 : data.setPageNum(data.paginationData.page + 1);
             }}
-            className={` cursor-pointer ml-3 relative inline-flex items-center px-2.5 py-1.5 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ${
-              data.paginationData.page === data.paginationData.pageCount &&
+            className={` cursor-pointer ml-3 relative inline-flex items-center px-2.5 py-1.5 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ${data.paginationData.page === data.paginationData.pageCount &&
               "hidden"
-            }`}
+              }`}
           >
             {t("Next")}
           </div>

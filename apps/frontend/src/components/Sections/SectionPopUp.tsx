@@ -191,8 +191,8 @@ export default function Example({ ...props }: Iprops) {
                             className={
                               props?.editValue?.id && !dirty
                                 ? t(
-                                    "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                                  )
+                                  "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
+                                )
                                 : ""
                             }
                             disabled={

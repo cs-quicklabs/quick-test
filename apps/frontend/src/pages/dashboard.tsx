@@ -2,7 +2,6 @@ import UserDashboard from "../components/Home/UserDashboard";
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader/Loader";
 
-
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -31,8 +30,8 @@ const Dashboard = () => {
           <div className=" flex justify-center items-center content-center m-56" >
             <Loader />
           </div >
-        ) : null}
-
+        ) : null
+      }
       {
         isLoggedIn ? (
           <div className="flex flex-col grow">

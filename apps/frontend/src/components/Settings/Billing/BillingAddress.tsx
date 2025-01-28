@@ -92,10 +92,10 @@ export default function BillingAddress() {
           response.roleId === RoleId.SUPERADMIN
             ? RoleName.SUPERADMIN
             : response.roleId === RoleId.OWNER
-            ? RoleName.OWNER
-            : response.roleId === RoleId.ADMIN
-            ? RoleName.ADMIN
-            : RoleName.MEMBER,
+              ? RoleName.OWNER
+              : response.roleId === RoleId.ADMIN
+                ? RoleName.ADMIN
+                : RoleName.MEMBER,
       });
       setShowLoader(false);
     } catch (err: any) {
@@ -126,8 +126,6 @@ export default function BillingAddress() {
       Object.assign(billingAddress, { address2: value.address2 });
 
     try {
-      // localStorage.setItem("i18nextLng", value.language);
-      // i18n.changeLanguage(value.language);
       const response = await axiosService.put(
         `/users/${value.id}`,
         billingAddress
@@ -259,12 +257,11 @@ export default function BillingAddress() {
                       onMouseDown={() => setValidation(true)}
                       loading={apiLoading === true ? "true" : undefined}
                       type="submit"
-                      className={`sm:order-1 ${
-                        !dirty || !isValid
+                      className={`sm:order-1 ${!dirty || !isValid
                           ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
                           : ""
-                      }`}
-                      // disabled={!(dirty && isValid)}
+                        }`}
+                    // disabled={!(dirty && isValid)}
                     >
                       {t("Update")}
                     </Button>

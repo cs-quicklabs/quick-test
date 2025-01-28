@@ -2,17 +2,10 @@ import { Fragment, useState } from "react";
 import { Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useTranslation } from "react-i18next";
-// import { useNavigate } from "react-router-dom";
 
 export default function ToastAction(props: any) {
   const { t } = useTranslation(["common"]);
   const [show, setShow] = useState(true);
-
-  // const navigate = useNavigate();
-
-  const redirectToPath = () => {
-    // return navigate(`${props?.actionPath}`);
-  };
 
   return (
     <>
@@ -30,7 +23,6 @@ export default function ToastAction(props: any) {
           <div className="flex flex-col gap-1 justify-start">
             <p className="text-sm font-medium text-white">{props?.message}</p>
             <span
-              onClick={redirectToPath}
               className="bg-transparent rounded-md text-sm font-bold italic text-indigo-600 hover:text-indigo-500 focus:outline-none"
             >
               {props?.actionLabel}

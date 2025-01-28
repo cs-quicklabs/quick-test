@@ -16,8 +16,8 @@ export default function BreadCrumb({ pages }: BreadCrumbProps) {
       aria-label="Breadcrumb"
     >
       <ol className="flex items-center space-x-4">
-        {pages.map((page) => (
-          <li key={page.name}>
+        {pages.map((page, index) => (
+          <li key={index}>
             <div className="flex items-center">
               <svg
                 className={`${page.dividerStyle}`}
@@ -29,7 +29,6 @@ export default function BreadCrumb({ pages }: BreadCrumbProps) {
               </svg>
               <Link
                 to={page.href}
-                // className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
                 className={`ml-4 text-sm font-medium text-gray-500 ${page.style}`}
                 aria-current={page.current ? "page" : undefined}
               >

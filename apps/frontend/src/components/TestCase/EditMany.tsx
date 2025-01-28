@@ -96,7 +96,7 @@ const EditManyTestCase = () => {
           val === "expectedResults"
             ? { ...value, expectedResults: values[val] }
             : // @ts-ignore
-              { ...value, [val]: values[val] };
+            { ...value, [val]: values[val] };
       }
     }
 
@@ -130,12 +130,6 @@ const EditManyTestCase = () => {
   const returnToPage = () => {
     navigate(`${appRoutes.PROJECTS}/${params.pid}/${projectRoutes.TESTCASES}`);
   };
-
-  // const viewTestCase = (id: string) => {
-  //   navigate(
-  //     `${appRoutes.PROJECTS}/${params.pid}/${projectRoutes.TESTCASE}/${id}`
-  //   );
-  // };
 
   return showLoader ? (
     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8">

@@ -191,15 +191,6 @@ const AddUser = () => {
 
   return (
     <>
-      {/* <div className="w-full flex items-center justify-end -ml-8 sm:-ml-24">
-        <BackButton
-          onMouseDown={() => navigate(-1)}
-          type="button"
-          className="-mr-1 mt-5"
-        >
-          {t("Back")}
-        </BackButton>
-      </div> */}
       <div className="flex items-center justify-center px-6 mt-8 sm:mt-10 sm:mx-4 md:mx-20 lg:mx-4  xl:mx-24  ">
         <div className=" w-full sm:w-2/3 md:w-2/3 lg:w-2/4 xl:w-1/3 ">
           <Formik
@@ -263,16 +254,16 @@ const AddUser = () => {
                     (userRoleId === RoleId.OWNER ||
                       userRoleId === RoleId.SUPERADMIN)) ||
                     !params?.id) && (
-                    <div>
-                      <FormikSelect
-                        name="roleId"
-                        label={t("Role")}
-                        validation={validation}
-                        sendIdAsValue={true}
-                        optionsForSelect={roleList}
-                      />
-                    </div>
-                  )}
+                      <div>
+                        <FormikSelect
+                          name="roleId"
+                          label={t("Role")}
+                          validation={validation}
+                          sendIdAsValue={true}
+                          optionsForSelect={roleList}
+                        />
+                      </div>
+                    )}
                   <div className="flex justify-end gap-4">
                     <button
                       onMouseUp={() => navigate(-1)}
@@ -286,11 +277,10 @@ const AddUser = () => {
                       onMouseDown={() => setValidation(true)}
                       loading={apiloading}
                       type="submit"
-                      className={`sm:order-1  ${
-                        params?.id && !dirty
+                      className={`sm:order-1  ${params?.id && !dirty
                           ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
                           : ""
-                      }`}
+                        }`}
                       disabled={params?.id && !dirty ? true : false}
                     >
                       {t("Confirm")}

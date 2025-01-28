@@ -4,7 +4,6 @@ import EditMilestone from "../../../../components/Milestones/AddEditMilestone";
 const UpdateMilestone = () => {
   return (
     <>
-
       <meta
         name="description"
         content="Edit Milestones page for Quick Test. You can edit your existing test cases here, add or remove description etc."
@@ -17,8 +16,6 @@ const UpdateMilestone = () => {
         rel="canonical"
         href={`${process.env.REACT_APP_DOMAIN_LINK}/projects/:pid/milestones/:id/edit-milestone`}
       />
-
-
       <EditMilestone editMilestone={true} />
     </>
   );

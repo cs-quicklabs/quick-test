@@ -46,7 +46,6 @@ export function PrivateRoute({ children, permission }: PrivateRouteProps) {
   const getSubscriptionStatus = useCallback(() => {
     try {
       const resp = state.userDetails;
-      // const resp = await axiosService.get("/auth/me");
       setIsSubscribed(resp.subscriptionStatus);
     } catch (err) {
       // console.error(err?.message)
@@ -81,10 +80,6 @@ export function PrivateRoute({ children, permission }: PrivateRouteProps) {
       return;
     }
   });
-
-  // useEffect(() => {
-  //   updateUserData();
-  // }, [updateUserData]);
 
   useEffect(() => {
     checkPathname();

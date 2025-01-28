@@ -1,6 +1,5 @@
 import VerifyEmail from "../components/VerifyEmail/VerifyEmail";
 
-
 const Verify = () => {
   return (
     <>

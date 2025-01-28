@@ -113,31 +113,6 @@ export default function UserDashboard() {
         <Loader withoverlay={true} />
       </div>
     );
-    // } else if (
-    //   isSubscribed === SubscriptionStatus.FREE_TRIAL &&
-    //   isFirstLogin &&
-    //   ifOwner
-    // ) {
-    //   return (
-    //     <>
-    //       <FreeTrialPopup
-    //         daysLeft={daysLeft}
-    //         paymentDuration={paymentDuration}
-    //         currency={currency}
-    //         amount={amount}
-    //         apiLoading={apiLoading}
-    //       />
-    //       <ProjectHeading
-    //         title={t("Projects")}
-    //         redirectToPage={{
-    //           url: appRoutes.CREATE_PROJECT,
-    //           text: i18next.t("New Project"),
-    //         }}
-    //         dataAttr="new-project"
-    //       />
-    //       <ProjectListing />
-    //     </>
-    //   );
   } else {
     return (
       <>

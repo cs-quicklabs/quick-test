@@ -4,7 +4,6 @@ import TestView from "../../../../../../components/TestCase/TestView";
 export default function Comp() {
   return (
     <>
-
       <meta
         name="description"
         content="View already defined test cases for Quick Test."
@@ -17,8 +16,6 @@ export default function Comp() {
         rel="canonical"
         href={`${process.env.REACT_APP_DOMAIN_LINK}/projects/:pid/testcases/:id/testcase`}
       />
-
-
       <TestView />
     </>
   );

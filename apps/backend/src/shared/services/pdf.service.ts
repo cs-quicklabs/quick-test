@@ -385,70 +385,54 @@ export class PdfService {
         }
 
         const content = `
-                            <!DOCTYPE html>
-                            <html>
-                            
-                            <head>
-                                <title>Test Case PDF</title>
-                                <link rel="preconnect" href="https://fonts.googleapis.com">
-                                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                                <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-                                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-                                    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-                                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                                    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-                                    crossorigin="anonymous"></script>
-                                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-                                    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                                    crossorigin="anonymous"></script>
-                                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-                                    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                                    crossorigin="anonymous"></script>
-                                <style>
-                                    * {
-                                        font-family: 'Roboto', sans-serif;
-                                    }
-                            
-                                    html,
-                                    body {
-                                        margin: auto;
-                                    }
-                            
-                                    .name {
-                                        font-size: 25px;
-                                        margin: 0px;
-                                    }
-                            
-                                    .sectionName {
-                                        font-size: 16px;
-                                        margin: 0px 0px 5px 0;
-                                    }
-                                    .sectionNameOther {
-                                        font-size: 18px;
-                                        margin: 0px 0px 5px 0;
-                                    }
-                            
-                                    .idWidth {
-                                        width: 50px;
-                                    }
-                            
-                                    .title {
-                                        width: 350px;
-                                    }
-                            
-                                    .status {
-                                        width: 100px;
-                                    }
-                            
-                                    table thead tr td {
-                                        font-size: 14px;
-                                        font-weight: 700;
-                                    }
-                            
-                                    table tbody tr td {
-                                        font-size: 14px;
-                                    }
-                            
+            <!DOCTYPE html>
+            <html>
+                <head>
+                    <title>Test Case PDF</title>
+                    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+                    <style>
+                        * {
+                            font-family: 'Roboto', sans-serif;
+                        }
+
+                        body {
+                            margin: 0;
+                            padding: 0;
+                        }
+
+                        .name {
+                            font-size: 25px;
+                            margin: 0px;
+                        }
+
+                        .sectionNameOther {
+                            font-size: 18px;
+                            margin: 10px 0;
+                        }
+
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            page-break-inside: avoid;
+                            margin-bottom: 40px;
+                        }
+
+                        td, th {
+                            word-wrap: break-word;
+                            border: 1px solid #ddd;
+                            padding: 8px;
+                        }
+
+                        .table-responsive {
+                            margin-bottom: 40px;
+                        }
+
+                        .page-break {
+                            page-break-before: always;
+                            page-break-after: always;
+                            page-break-inside: avoid;
+                        }
+
                                     .pending {
                                         color: #3498db;
                                     }
@@ -476,17 +460,15 @@ export class PdfService {
                                     .blocked {
                                         color: #000000;
                                     }
-                                </style>
+                    </style>
                             </head>
-                            
                             <body>
                                 <div>
                                     <h1 class="name">${testSuite.name}</h1>
                                     <hr />
                                     <div class="table-responsive">
-                                        <h3 class="sectionName">Created On: ${month[testSuite.createdAt.getMonth()]
-            } ${testSuite.createdAt.getDate()}, ${testSuite.createdAt.getFullYear()}</h3>
-                                        <h3 class="sectionName">Status: <span class=${statusClassName}>${statusTestRun}</span></h3>
+                                        <h3 class="sectionNameOther">Created On: ${month[testSuite.createdAt.getMonth()]} ${testSuite.createdAt.getDate()}, ${testSuite.createdAt.getFullYear()}</h3>
+                                        <h3 class="sectionNameOther">Status: <span class=${statusClassName}>${statusTestRun}</span></h3>
                                         <table class="table table table-bordered table-striped table-sm">
                                             <thead>
                                                 <tr>
@@ -509,9 +491,8 @@ export class PdfService {
                                     </div>
                                 </div>
                             </body>
-                            
-                            </html>
-        `;
+            </html>
+    `;
 
         const buffer = await this.generatePdf(content);
         let key;
@@ -524,310 +505,4 @@ export class PdfService {
         unlink(`${pdfName}.html`, () => { });
         return key;
     }
-
-    /**
-     * Internal method to generate invoice pdf and
-     * pass it to aws s3 service to store
-     */
-    // async generatePaidInvoicePdf(
-    //     invoice: InvoiceEntity,
-    //     paymentMethod,
-    //     currentLoggedInUser: UserEntity
-    // ): Promise<string> {
-    //     const { pdfConfig } = this.configService;
-    //     const pdfCommonConfig = pdfConfig?.common;
-    //     const pdfPaymentSuccessInvoiceConfig = pdfConfig?.paymentSuccessInvoice;
-    //     const pdfName = `${invoice.id}.pdf`;
-    //     const writableStream = createWriteStream(pdfName);
-    //     const margins = {
-    //         left: pdfCommonConfig.marginLeft,
-    //         right: pdfCommonConfig.marginRight,
-    //         top: pdfCommonConfig.marginTop,
-    //         bottom: pdfCommonConfig.marginBottom
-    //     }
-    //     const pdf = new PDF({
-    //         bufferPages: true,
-    //         margins
-    //     });
-    //     const pageHeight = Math.floor(pdf.page.height);
-    //     const pageWidth = Math.floor(pdf.page.width);
-    //     const textHeight = Math.floor(pageHeight / pdfPaymentSuccessInvoiceConfig.textHeight);
-    //     const borderHeight = pageHeight - margins.top - margins.bottom;
-    //     const borderWidth = pageWidth - margins.left - margins.right;
-    //     const titleHeight = margins.top + pdfPaymentSuccessInvoiceConfig.titleHeight;
-    //     const titleLeftMargin = margins.left + pdfPaymentSuccessInvoiceConfig.titleLeftMargin;
-    //     const titleStart = margins.top + pdfPaymentSuccessInvoiceConfig.titleStart;
-    //     const invoiceHeight = titleHeight + pdfPaymentSuccessInvoiceConfig.invoiceHeight;
-    //     const invoiceStart = titleHeight + pdfPaymentSuccessInvoiceConfig.invoiceStart;
-    //     const billingAddressHeight = invoiceHeight + pdfPaymentSuccessInvoiceConfig.billingAddressHeight;
-    //     const billingAddressStart = invoiceHeight + pdfPaymentSuccessInvoiceConfig.billingAddressStart;
-    //     const purchaseDetailsHeight = billingAddressHeight + pdfPaymentSuccessInvoiceConfig.invoiceHeight;
-    //     const purchaseDetailsStart = billingAddressHeight + pdfPaymentSuccessInvoiceConfig.invoiceStart;
-    //     const purchaseDetailsLeftMargin = margins.left + pdfPaymentSuccessInvoiceConfig.purchaseDetailsLeftMargin;
-    //     const headingsHeight = purchaseDetailsHeight + pdfPaymentSuccessInvoiceConfig.headingsHeight;
-    //     const headingsStart = purchaseDetailsHeight + pdfPaymentSuccessInvoiceConfig.headingsStart;
-    //     const quantityLeftMargin = margins.left + pdfPaymentSuccessInvoiceConfig.quantityLeftMargin;
-    //     const quantityWdith = pdfPaymentSuccessInvoiceConfig.quantityWdith;
-    //     const descriptionStart = quantityLeftMargin + quantityWdith;
-    //     const descriptionWidth = pdfPaymentSuccessInvoiceConfig.descriptionWidth;
-    //     const amountStart =  descriptionStart + descriptionWidth;
-    //     const detailsHeight = headingsHeight + pdfPaymentSuccessInvoiceConfig.detailsHeight;
-    //     const detailsStart = headingsHeight + pdfPaymentSuccessInvoiceConfig.detailsStart;
-    //     const taxHeight = detailsHeight + pdfPaymentSuccessInvoiceConfig.taxHeight;
-    //     const taxStart = detailsHeight + pdfPaymentSuccessInvoiceConfig.taxStart;
-    //     const totalHeight = taxHeight + pdfPaymentSuccessInvoiceConfig.totalHeight;
-    //     const totalStart = taxHeight + pdfPaymentSuccessInvoiceConfig.totalStart;
-    //     const policyHeight = totalHeight + pdfPaymentSuccessInvoiceConfig.policyHeight;
-    //     const policyStart = totalHeight + pdfPaymentSuccessInvoiceConfig.policyStart;
-    //     const endStart = policyHeight + pdfPaymentSuccessInvoiceConfig.endStart;
-    //     const endLeftMargin = margins.left + pdfPaymentSuccessInvoiceConfig.endLeftMargin;
-    //     const contactLink = pdfCommonConfig.contactLink;
-    //     const policyLine1 = pdfPaymentSuccessInvoiceConfig.policyLine1;
-    //     const policyLine2 = pdfPaymentSuccessInvoiceConfig.policyLine2;
-    //     const policyLine3 = pdfPaymentSuccessInvoiceConfig.policyLine3;
-    //     const policyLine4 = pdfPaymentSuccessInvoiceConfig.policyLine4;
-    //     const policyLine5 = pdfPaymentSuccessInvoiceConfig.policyLine5;
-    //     const policyLine6 = pdfPaymentSuccessInvoiceConfig.policyLine6;
-    //     const cardLast4digits = paymentMethod?.last4;
-    //     const lineWidth = pdfPaymentSuccessInvoiceConfig.lineWidth;
-    //     const policyLine1Start = margins.left + pdfPaymentSuccessInvoiceConfig.policyLine1Start;
-    //     const policyLine2Start = margins.left + pdfPaymentSuccessInvoiceConfig.policyLine2Start;
-    //     const policyLine3Start = margins.left + pdfPaymentSuccessInvoiceConfig.policyLine3Start;
-    //     const policyLine4Start = margins.left + pdfPaymentSuccessInvoiceConfig.policyLine4Start;
-    //     const policyLine5Start = margins.left + pdfPaymentSuccessInvoiceConfig.policyLine5Start;
-    //     const policyLine6Start = margins.left + pdfPaymentSuccessInvoiceConfig.policyLine6Start;
-    //     const { city, address1, address2, state, postalCode, country } = currentLoggedInUser;
-    //     const addressCheck1 = address1 && address2 && city && state && postalCode && country;
-    //     const addressCheck2 = address1 && city && state && postalCode && country;
-    //     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-    //     pdf.pipe(writableStream);
-    //     pdf.rect(margins.left, margins.top, borderWidth, borderHeight)
-    //         .stroke(`#${pdfPaymentSuccessInvoiceConfig.fillColor4}`);
-
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize1)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor2}`)
-    //         .text("TestBox", titleLeftMargin, titleStart);
-
-    //     pdf.lineWidth(lineWidth)
-    //         .moveTo(margins.left, titleHeight)
-    //         .lineTo(margins.left + borderWidth, titleHeight)
-    //         .fillAndStroke(`#${pdfPaymentSuccessInvoiceConfig.fillColor4}`);
-
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize2)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor3}`)
-    //         .text("Invoice/Receipt", titleLeftMargin, invoiceStart)
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //         .text(`Invoice ID: `, titleLeftMargin, invoiceStart + 20)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor3}`)
-    //         .text(` ${invoice.id}`, titleLeftMargin + 50, invoiceStart + 20);
-
-    //     pdf.lineWidth(lineWidth)
-    //         .moveTo(margins.left, invoiceHeight)
-    //         .lineTo(margins.left + borderWidth, invoiceHeight)
-    //         .fillAndStroke(`#${pdfPaymentSuccessInvoiceConfig.fillColor4}`);
-
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //         .text(`Billed from:`, titleLeftMargin, billingAddressStart)
-    //         .text(`TestBox, Inc.`, titleLeftMargin, billingAddressStart + 20)
-    //         .text(`${pdfCommonConfig.testBoxAddressLine1}`, titleLeftMargin, billingAddressStart + 35)
-    //         .text(`${pdfCommonConfig.testBoxAddressLine2}`, titleLeftMargin, billingAddressStart + 50)
-    //         .text(`${pdfCommonConfig.testBoxAddressCity}, ${pdfCommonConfig.testBoxAddressState} ${pdfCommonConfig.testBoxAddressPostalCode}`, titleLeftMargin, billingAddressStart + 65)
-    //         .text(`${pdfCommonConfig.testBoxAddressCountry}`, titleLeftMargin, billingAddressStart + 80);
-
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //         .text(`Billed to:`, titleLeftMargin + Math.floor(borderWidth / 2), billingAddressStart)
-    //         .text(`${currentLoggedInUser.firstName}`, titleLeftMargin + Math.floor(borderWidth / 2), billingAddressStart + 20);
-
-    //     let y = billingAddressStart + 35;
-    //     if (addressCheck1) {
-    //         pdf.font('Times-Roman')
-    //             .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //             .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //             .text(`${address1}`, titleLeftMargin + Math.floor(borderWidth / 2), y, {
-    //                 height: textHeight,
-    //                 ellipsis: true
-    //             })
-    //             .text(`${address2}`, titleLeftMargin + Math.floor(borderWidth / 2), y + 15, {
-    //                 height: textHeight,
-    //                 ellipsis: true
-    //             })
-    //             .text(`${city}, ${state} ${postalCode}`, titleLeftMargin + Math.floor(borderWidth / 2), y + 30, {
-    //                 height: textHeight,
-    //                 ellipsis: true
-    //             })
-    //             .text(`${country}`, titleLeftMargin + Math.floor(borderWidth / 2), y + 45, {
-    //                 height: textHeight,
-    //                 ellipsis: true
-    //             });
-    //         y += 65;
-    //     } else if (addressCheck2) {
-    //         pdf.font('Times-Roman')
-    //             .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //             .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //             .text(`${address1}`, titleLeftMargin + Math.floor(borderWidth / 2), y, {
-    //                 height: textHeight,
-    //                 ellipsis: true
-    //             })
-    //             .text(`${city}, ${state} ${postalCode}`, titleLeftMargin + Math.floor(borderWidth / 2), y + 15, {
-    //                 height: textHeight,
-    //                 ellipsis: true
-    //             })
-    //             .text(`${country}`, titleLeftMargin + Math.floor(borderWidth / 2), y + 30, {
-    //                 height: textHeight,
-    //                 ellipsis: true
-    //             });
-    //         y += 50;
-    //     }
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //         .text(`Email ID: ${currentLoggedInUser.email}`, titleLeftMargin + Math.floor(borderWidth / 2), y + 10, {
-    //             height: textHeight,
-    //             ellipsis: true
-    //         });
-
-    //     pdf.lineWidth(lineWidth)
-    //         .moveTo(margins.left + Math.floor(borderWidth / 2), invoiceHeight)
-    //         .lineTo(margins.left + Math.floor(borderWidth / 2), billingAddressHeight)
-    //         .fillAndStroke(`#${pdfPaymentSuccessInvoiceConfig.fillColor4}`);
-
-    //     pdf.lineWidth(lineWidth)
-    //         .moveTo(margins.left, billingAddressHeight)
-    //         .lineTo(margins.left + borderWidth, billingAddressHeight)
-    //         .fillAndStroke(`#${pdfPaymentSuccessInvoiceConfig.fillColor4}`);
-
-    //     pdf.lineWidth(lineWidth)
-    //         .moveTo(margins.left + Math.floor(borderWidth / 3), billingAddressHeight)
-    //         .lineTo(margins.left + Math.floor(borderWidth / 3), purchaseDetailsHeight)
-    //         .fillAndStroke(`#${pdfPaymentSuccessInvoiceConfig.fillColor4}`);
-
-    //     pdf.lineWidth(lineWidth)
-    //         .moveTo(margins.left + Math.floor(borderWidth / 3) + Math.floor(borderWidth / 3), billingAddressHeight)
-    //         .lineTo(margins.left + Math.floor(borderWidth / 3) + Math.floor(borderWidth / 3), purchaseDetailsHeight)
-    //         .fillAndStroke(`#${pdfPaymentSuccessInvoiceConfig.fillColor4}`);
-
-    //     pdf.lineWidth(lineWidth)
-    //         .moveTo(margins.left, purchaseDetailsHeight)
-    //         .lineTo(margins.left + borderWidth, purchaseDetailsHeight)
-    //         .fillAndStroke(`#${pdfPaymentSuccessInvoiceConfig.fillColor4}`);
-
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //         .text(`Purchase Date`, purchaseDetailsLeftMargin, purchaseDetailsStart)
-    //         .text(`${month[invoice.periodStart.getMonth()]} ${invoice.periodStart.getDate()}, ${invoice.periodStart.getFullYear()}`, purchaseDetailsLeftMargin, purchaseDetailsStart + 15);
-
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //         .text(`Payment Method`, Math.floor(borderWidth / 3) + purchaseDetailsLeftMargin, purchaseDetailsStart)
-    //         .text(`Card ending with ${cardLast4digits ? cardLast4digits : "-"}`, Math.floor(borderWidth / 3) + purchaseDetailsLeftMargin - 10, purchaseDetailsStart + 15);
-
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //         .text(`Payment Status`, Math.floor(borderWidth / 3) + Math.floor(borderWidth / 3) + purchaseDetailsLeftMargin, purchaseDetailsStart)
-    //         .text(`${invoice.status === InvoiceStatus.paid ? "Paid": "Failed"}`, Math.floor(borderWidth / 3) + Math.floor(borderWidth / 3) + purchaseDetailsLeftMargin + 20, purchaseDetailsStart + 15);
-
-    //     pdf.lineWidth(lineWidth)
-    //         .moveTo(margins.left, headingsHeight)
-    //         .lineTo(margins.left + borderWidth, headingsHeight)
-    //         .fillAndStroke(`#${pdfPaymentSuccessInvoiceConfig.fillColor4}`);
-
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor3}`)
-    //         .text(`Qty`, quantityLeftMargin, headingsStart)
-    //         .text(`Description`, descriptionStart, headingsStart)
-    //         .text(`Amount`, amountStart, headingsStart);
-
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //         .text(`1`, quantityLeftMargin, detailsStart);
-
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //         .text(`${UtilsService.upperCase(invoice.currency)} $${invoice.amount/100}`, amountStart, detailsStart);
-
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //         .text(`TestBox 30-days Subscription, Standard License`, descriptionStart, detailsStart)
-    //         .text(`${invoice.amount === 0 ? "Free Trial" : "Active Paid Plan"}`, descriptionStart, detailsStart + 25)
-    //         .text(`Date of signup: ${month[currentLoggedInUser.createdAt.getMonth()]} ${currentLoggedInUser.createdAt.getDate()}, ${currentLoggedInUser.createdAt.getFullYear()}`, descriptionStart, detailsStart + 40)
-    //         .text(`Date of next payment: ${month[invoice.periodEnd.getMonth()]} ${invoice.periodEnd.getDate()}, ${invoice.periodEnd.getFullYear()}`, descriptionStart, detailsStart + 55)
-    //         .text(`Period: ${Math.ceil((invoice.periodEnd.getTime() - invoice.periodStart.getTime()) / 86400000)}`, descriptionStart, detailsStart + 70)
-    //         .text(`Payment amount(including tax): ${UtilsService.upperCase(invoice.currency)} $${invoice.amount/100}`, descriptionStart, detailsStart + 85);
-
-    //     pdf.lineWidth(lineWidth)
-    //         .moveTo(margins.left, detailsHeight)
-    //         .lineTo(margins.left + borderWidth, detailsHeight)
-    //         .fillAndStroke(`#${pdfPaymentSuccessInvoiceConfig.fillColor4}`);
-
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //         .text(`18% Tax:`, descriptionStart, taxStart)
-    //         .text(`${UtilsService.upperCase(invoice.currency)} $${0}`, amountStart, taxStart);
-
-    //     pdf.lineWidth(lineWidth)
-    //         .moveTo(margins.left, taxHeight)
-    //         .lineTo(margins.left + borderWidth, taxHeight)
-    //         .fillAndStroke(`#${pdfPaymentSuccessInvoiceConfig.fillColor4}`);
-
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor3}`)
-    //         .text(`TOTAL`, descriptionStart, totalStart)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //         .text(`${UtilsService.upperCase(invoice.currency)} $${invoice.amount/100}`, amountStart, totalStart);
-
-    //     pdf.lineWidth(lineWidth)
-    //         .moveTo(margins.left, totalHeight)
-    //         .lineTo(margins.left + borderWidth, totalHeight)
-    //         .fillAndStroke(`#${pdfPaymentSuccessInvoiceConfig.fillColor4}`);
-
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //         .text(`${policyLine1}`, policyLine1Start, policyStart)
-    //         .text(`${policyLine2}`, policyLine2Start, policyStart + 15)
-    //         .text(`${policyLine3}`, policyLine3Start, policyStart + 30)
-    //         .text(`${policyLine4}`, policyLine4Start, policyStart + 45)
-    //         .text(`${policyLine5}`, policyLine5Start, policyStart + 75)
-    //         .text(`${policyLine6}`, policyLine6Start, policyStart + 90);
-
-    //     pdf.lineWidth(lineWidth)
-    //         .moveTo(margins.left, policyHeight)
-    //         .lineTo(margins.left + borderWidth, policyHeight)
-    //         .fillAndStroke(`#${pdfPaymentSuccessInvoiceConfig.fillColor4}`);
-
-    //     pdf.font('Times-Roman')
-    //         .fontSize(pdfPaymentSuccessInvoiceConfig.fontSize3)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor1}`)
-    //         .text(`Thank you for your business!`, endLeftMargin, endStart)
-    //         .fillColor(`#${pdfPaymentSuccessInvoiceConfig.fillColor2}`)
-    //         .text("Click here to contact us.", endLeftMargin + 10, endStart + 15, {
-    //             link: contactLink,
-    //             underline: true
-    //         });
-
-    //     pdf.end();
-    //     let key;
-    //     const readableStream = createReadStream(pdfName);
-    //     const file = UtilsService.createUploadableFile(pdfName, pdfCommonConfig, readableStream)
-    //     key = await this.awsS3Service.uploadPdf(file);
-    //     unlink(pdfName, () => {});
-    //     return key;
-    // }
 }

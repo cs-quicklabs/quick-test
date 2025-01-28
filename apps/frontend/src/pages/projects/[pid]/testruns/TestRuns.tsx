@@ -4,7 +4,6 @@ import TestRunList from "../../../../components/TestRun/TestRunList";
 export default function TestRunPage(props: any) {
   return (
     <>
-
       <meta
         name="description"
         content="Here on this page you can keep track of all the Test Runs that are pending or completed. Additionally you can create new test runs here."
@@ -17,8 +16,6 @@ export default function TestRunPage(props: any) {
         rel="canonical"
         href={`${process.env.REACT_APP_DOMAIN_LINK}/projects/:pid/testruns`}
       />
-
-
       <TestRunList projectName={props.projectDetail?.name} />
     </>
   );

@@ -16,6 +16,12 @@ Docker
 Docker Compose (v2.30.3-desktop.1 or later)
 NX CLI (optional for local development):
 
+## Links
+
+- Swagger: [http://localhost:3001/testbox-documentation](http://localhost:3001/testbox-documentation)
+- Adminer (client for DB): [http://localhost:8080](http://localhost:8080)
+- Maildev: [http://localhost:1080](http://localhost:1080)
+
 ## Setup
 
 Install all the dependencies needed for the project.

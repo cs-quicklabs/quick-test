@@ -4,7 +4,6 @@ import EditTestCase from "../../../../../../components/TestCase/EditTestCase";
 export default function Comp() {
   return (
     <>
-
       <meta
         name="description"
         content="Edit Test Cases for Quick Test. You can edit your existing test cases here, assign sections, change priorities, changing conditions and result etc."
@@ -17,8 +16,6 @@ export default function Comp() {
         rel="canonical"
         href={`${process.env.REACT_APP_DOMAIN_LINK}/projects/:pid/testcases/:id/edit-testcase`}
       />
-
-
       <EditTestCase />
     </>
   );

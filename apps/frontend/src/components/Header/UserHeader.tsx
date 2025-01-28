@@ -34,10 +34,6 @@ export default function UserHeader() {
     }
   }, [state.userDetails]);
 
-  // useEffect(() => {
-  //   setIsPictueUpdated(false)
-  // },[])
-
   const toggleSetting = () => {
     setShowUserSetting(!showUserSetting);
   };
@@ -47,15 +43,6 @@ export default function UserHeader() {
     sessionStorage.clear();
     dispatch({ type: "UPDATE_LOGIN_STATE", data: false });
   };
-
-  // const goToDashboard = () => {
-  //   navigate(appRoutes.DASHBOARD);
-  // };
-
-  // const goToProfile = () => {
-  //   toggleSetting();
-  //   navigate(appRoutes.PROFILE_UPDATE);
-  // };
 
   const handleClick = (e: any) => {
     if (e.target?.id !== "OpenProfile") setShowUserSetting(false);
@@ -88,23 +75,6 @@ export default function UserHeader() {
                 aria-expanded="false"
               >
                 <span className="sr-only">{t("Open main menu")}</span>
-
-                {/* <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg> */}
-
                 <svg
                   className="hidden h-6 w-6"
                   xmlns="http://www.w3.org/2000/svg"
@@ -158,7 +128,6 @@ export default function UserHeader() {
                 <div className="flex space-x-4 mr-4 sm:mr-0">
                   <Link
                     to={`${appRoutes.DASHBOARD}`}
-                    // className="bg-gray-900 text-white px-6 py-2 rounded-md text-sm font-medium cursor-pointer"
                     className={`rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white ${selectedButton === "Dashboard"
                       ? "bg-gray-900 text-white"
                       : "bg-transparent text-gray-300"
@@ -171,12 +140,10 @@ export default function UserHeader() {
                   </Link>
                   <Link
                     to={`${appRoutes.PROJECTS}`}
-                    // className="hover:bg-slate-700 text-white px-6 py-2 rounded-md text-sm font-medium cursor-pointer"
                     className={`rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white ${selectedButton === "Projects"
                       ? "bg-gray-900 text-white"
                       : "bg-inherit text-gray-300"
                       }`}
-                    // className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                     aria-current="page"
                     data-cy="dashboard"
                     onClick={() => handleButtonClick("Projects")}
@@ -219,7 +186,6 @@ export default function UserHeader() {
                   <div
                     className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu"
-                    // aria-orientation="vertical"
                     aria-labelledby="user-menu"
                   >
                     <div className="px-3 py-3">
@@ -234,7 +200,6 @@ export default function UserHeader() {
                       <Link
                         className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50"
                         data-cy="settings"
-                        // role="menuitem"
                         to={`${appRoutes.SETTINGS}/${settingsRoutes.USERS}`}
                       >
                         {t("Account Settings")}
@@ -243,7 +208,6 @@ export default function UserHeader() {
                         onClick={toggleSetting}
                         className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50"
                         data-cy="profile"
-                        // role="menuitem"
                         to={`${appRoutes.PROFILE_UPDATE}`}
                       >
                         {t("My Profile")}
@@ -257,7 +221,6 @@ export default function UserHeader() {
                         <Link
                           className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50"
                           data-cy="archived"
-                          // role="menuitem"
                           to={`${appRoutes.ARCHIVED}/${archivedRoutes.PROJECTS}`}
                         >
                           {t("Archive")}
@@ -269,7 +232,6 @@ export default function UserHeader() {
                         onClick={logout}
                         className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50"
                         data-cy="sign-out"
-                        // role="menuitem"
                         to={`${appRoutes.SIGNIN_PAGE}`}
                       >
                         {t("Sign out")}
@@ -286,16 +248,6 @@ export default function UserHeader() {
           id="mobile-menu"
         >
           <SearchBox inputFieldId={'search-for-mobile-id'} />
-          <div className="pt-2 pb-3">
-            {/* <a
-              onClick={goToDashboard}
-              className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer text-center"
-              aria-current="page"
-              href="# "
-            >
-              {t("Dashboard")}
-            </a> */}
-          </div>
         </div>
       </nav>
     </>

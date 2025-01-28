@@ -5,22 +5,23 @@ interface Iprops {
   disabled?: boolean;
   validation?: boolean;
   type?: string;
+  name?: string
 }
 
 const InputField: FC<Iprops> = ({ ...props }: Iprops) => {
-  const { touched, error, disabled, validation, type, ...rest } = { ...props };
+  const { name, touched, error, disabled, validation, type, ...rest } = { ...props };
   return (
     <>
       <input
-        className={` appearance-none block w-full px-3 py-1 sm:py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none  focus:border-indigo-500 sm:text-sm${
-          (error && touched) || (validation && error)
-            ? " border-red-300 pr-10"
-            : " border-gray-300"
-        } ${disabled ? "bg-gray-100" : ""}`}
+        id={name}
+        className={` appearance-none block w-full px-3 py-1 sm:py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none  focus:border-indigo-500 sm:text-sm${(error && touched) || (validation && error)
+          ? " border-red-300 pr-10"
+          : " border-gray-300"
+          } ${disabled ? "bg-gray-100" : ""}`}
         {...rest}
         type={type}
         disabled={disabled}
-        autoComplete={type === "password" ? "new-password" : ""}
+        autoComplete={type === "password" ? "new-password" : "on"}
       />
       {((error && touched) || (validation && error)) && (
         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">

@@ -15,7 +15,6 @@ const UserEdit = () => {
         rel="canonical"
         href={`${process.env.REACT_APP_DOMAIN_LINK}/settings/users/:id/edit`}
       />
-
       <AddUser />
     </div>
   );

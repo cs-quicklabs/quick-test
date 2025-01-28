@@ -11,7 +11,6 @@ import {
 import axiosService from "../Utils/axios";
 import { ToastMessage } from "../Utils/constants/misc";
 import Loader from "../Loader/Loader";
-// import Pagination from "../Pagination/Pagination";
 import { showError } from "../Toaster/ToasterFun";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
@@ -23,7 +22,6 @@ const Todo = () => {
 
   const [testRunList, setTestRunList] = useState([]);
   const [showLoader, setShowLoader] = useState(true);
-  // const [PageNum, setPageNum] = useState(1);
   const [dataForChart, setDataForChart] = useState<{
     labels: any[];
     datasets: any[];
@@ -31,12 +29,6 @@ const Todo = () => {
     labels: [],
     datasets: [],
   });
-  // const [paginationData, setPaginationData] = useState({
-  //   itemCount: 0,
-  //   page: 0,
-  //   pageCount: 0,
-  //   take: 0,
-  // });
 
   const getData = useCallback(async () => {
     try {
@@ -237,7 +229,6 @@ const Todo = () => {
               {t("No test runs added yet.")}
             </div>
           )}
-          {/* <Pagination setPageNum={setPageNum} paginationData={paginationData} /> */}
         </div>
       </div>
     </Fragment>

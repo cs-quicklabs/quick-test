@@ -6,9 +6,11 @@ interface Iprops {
   validation?: boolean;
   optionsForSelect?: any[];
   sendIdAsValue?: boolean;
+  name?: string
 }
 const InputSelect: FC<Iprops> = ({ ...props }: Iprops) => {
   const {
+    name,
     touched,
     error,
     disabled,
@@ -19,7 +21,7 @@ const InputSelect: FC<Iprops> = ({ ...props }: Iprops) => {
   } = {
     ...props,
   };
-
+  console.log('name', name)
   return (
     <select
       className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none  focus:border-indigo-500 sm:text-sm pr-10 ${(error && touched) || (validation && error)
@@ -28,7 +30,8 @@ const InputSelect: FC<Iprops> = ({ ...props }: Iprops) => {
         } ${disabled ? "bg-gray-100" : ""}`}
       {...rest}
       disabled={disabled}
-      id="prioritySelect"
+      id={name}
+      autoComplete={name}
     >
       <option value='' disabled>Select</option>
       {optionsForSelect?.map((options) => {

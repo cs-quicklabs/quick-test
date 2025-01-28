@@ -217,6 +217,7 @@ const AddMultiUser = () => {
               </label>
               <div className="mt-1 relative">
                 <textarea
+                  id='Users*'
                   data-cy="textarea-multiple-user"
                   onChange={textAreahandler}
                   className="w-full border-2 border-gray-200 text-sm p-3"

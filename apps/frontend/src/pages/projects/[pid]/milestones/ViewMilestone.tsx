@@ -4,7 +4,6 @@ import ViewMilestone from "../../../../components/Milestones/ViewMilestone";
 export default function Comp() {
   return (
     <>
-
       <meta
         name="description"
         content="View already defined Milestone. You can view Milestones and testruns associated with them."
@@ -17,8 +16,6 @@ export default function Comp() {
         rel="canonical"
         href={`${process.env.REACT_APP_DOMAIN_LINK}/projects/:pid/milestones/:id/milestone`}
       />
-
-
       <ViewMilestone />
     </>
   );

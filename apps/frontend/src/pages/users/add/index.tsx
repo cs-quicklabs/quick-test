@@ -15,7 +15,6 @@ const UserAdd = () => {
         rel="canonical"
         href={`${process.env.REACT_APP_DOMAIN_LINK}/settings/users/add`}
       />
-
       <AddUser />
     </div >
   );

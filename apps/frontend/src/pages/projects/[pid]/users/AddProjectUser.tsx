@@ -4,6 +4,10 @@ import {
   Transition,
   Listbox,
   TransitionChild,
+  ListboxButton,
+  ListboxOptions,
+  DialogPanel,
+  ListboxOption,
 } from "@headlessui/react";
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import {
@@ -91,7 +95,7 @@ export default function AddProjectUser(props: any) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+              <DialogPanel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                 <div>
                   <div className="mx-auto flex text-xl font-bold mt-5 w-full ">
                     {props?.project?.name}
@@ -104,7 +108,7 @@ export default function AddProjectUser(props: any) {
                   <div>
                     <Listbox value={selected} onChange={setSelected} multiple>
                       <div className="relative mt-1">
-                        <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                        <ListboxButton className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                           <span className="block truncate">
                             {selected && selected.length > 0
                               ? selected
@@ -121,20 +125,20 @@ export default function AddProjectUser(props: any) {
                               aria-hidden="true"
                             />
                           </span>
-                        </Listbox.Button>
+                        </ListboxButton>
                         <Transition
                           as={Fragment}
                           leave="transition ease-in duration-100"
                           leaveFrom="opacity-100"
                           leaveTo="opacity-0"
                         >
-                          <Listbox.Options className="mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                          <ListboxOptions className="mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
                             {members &&
                               members.map((member: any, memberIdx: Key) => (
-                                <Listbox.Option
+                                <ListboxOption
                                   key={memberIdx}
-                                  className={({ active }) =>
-                                    `relative cursor-default select-none py-2 pl-10 pr-4 ${active
+                                  className={({ focus }) =>
+                                    `relative cursor-default select-none py-2 pl-10 pr-4 ${focus
                                       ? "bg-amber-100 text-amber-900"
                                       : "text-gray-900"
                                     }`
@@ -160,9 +164,9 @@ export default function AddProjectUser(props: any) {
                                       </span>
                                     </>
                                   )}
-                                </Listbox.Option>
+                                </ListboxOption>
                               ))}
-                          </Listbox.Options>
+                          </ListboxOptions>
                         </Transition>
                       </div>
                     </Listbox>
@@ -185,7 +189,7 @@ export default function AddProjectUser(props: any) {
                     </button>
                   </div>
                 </div>
-              </Dialog.Panel>
+              </DialogPanel>
             </TransitionChild>
           </div>
         </div>

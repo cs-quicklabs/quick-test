@@ -4,7 +4,6 @@ import EditTestRun from "../../../../components/TestRun/EditTestRun";
 export default function Comp() {
   return (
     <>
-
       <meta
         name="description"
         content="Edit already existing testruns for Quick Test. Assign them to different person, add milestones, description etc."
@@ -17,8 +16,6 @@ export default function Comp() {
         rel="canonical"
         href={`${process.env.REACT_APP_DOMAIN_LINK}/projects/:pid/testruns/:id/edit-testrun`}
       />
-
-
       <EditTestRun />
     </>
   );

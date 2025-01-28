@@ -39,23 +39,6 @@ export default function Table({ RowData, endDate }: PropsType) {
           <div className="inline-block min-w-full py-3 align-middle sm:px-6 lg:px-8">
             <div className="overflow-hidden mr-2">
               <table className="min-w-full divide-y divide-gray-300">
-                {/* <thead className="bg-gray-50 border-b border-t">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="px-6 py-2 text-left text-sm font-normal text-gray-900 uppercase tracking-wider w-8/12"
-                    >
-                      {t("Name")}
-                    </th>
-                    <th
-                      scope="col"
-                      className="xl:pr-16 pr-9 py-2 text-center text-sm font-normal text-gray-900 uppercase tracking-wider w-2/12"
-                    >
-                      {t("Progress")}
-                    </th>
-                  </tr>
-                </thead> */}
-
                 <tbody className="bg-white divide-y divide-gray-200">
                   {RowData?.map((value, i) => (
                     <tr key={i} className={`rounded`}>
@@ -77,80 +60,6 @@ export default function Table({ RowData, endDate }: PropsType) {
                           </p>
                         </Link>
                       </td>
-
-                      {/* <td className="px-6 py-4 whitespace-nowrap text-center text-xs font-medium mx-4">
-                        <div className="w-full h-full flex items-center">
-                          <div className=" w-32 sm:w-48 h-4 inline-block">
-                            {(() => {
-                              const { untested, passed, failed, total } =
-                                value.testReport;
-
-                              const passedPercentage = (passed / total) * 100;
-
-                              const untestedPercentage =
-                                (untested / total) * 100;
-
-                              const failedPercentage = (failed / total) * 100;
-
-                              return (
-                                <>
-                                  <Tippy
-                                    content={`${Math.round(
-                                      passedPercentage
-                                    )}% Passed (${passed}/${total} tests)`}
-                                  >
-                                    <div
-                                      className="inline-block h-full "
-                                      style={{
-                                        width: `${passedPercentage}%`,
-                                        backgroundColor: "#3cb850",
-                                      }}
-                                    ></div>
-                                  </Tippy>
-
-                                  <Tippy
-                                    content={`${Math.round(
-                                      untestedPercentage
-                                    )}% Untested (${untested}/${total} tests)`}
-                                  >
-                                    <div
-                                      className="inline-block h-full "
-                                      style={{
-                                        width: `${untestedPercentage}%`,
-                                        backgroundColor: "#979797",
-                                      }}
-                                    ></div>
-                                  </Tippy>
-
-                                  <Tippy
-                                    content={`${Math.round(
-                                      failedPercentage
-                                    )}% Failed (${failed}/${total} tests)`}
-                                  >
-                                    <div
-                                      className="inline-block h-full "
-                                      style={{
-                                        width: `${failedPercentage}%`,
-                                        backgroundColor: "#e40046",
-                                      }}
-                                    ></div>
-                                  </Tippy>
-                                </>
-                              );
-                            })()}
-                          </div>
-
-                          <div className="ml-3 content-center h-4 inline-flex items-center font-medium text-gray-700 text-sm">
-                            {Math.round(
-                              (value.testReport.passed /
-                                value.testReport.total) *
-                                100
-                            )}
-                            %
-                          </div>
-                        </div>
-                      </td> */}
-
                       <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-500">
                         <div className="flex justify-end text-center items-center gap-2 text-xs">
                           {(value.testReport.passed / value.testReport.total) *

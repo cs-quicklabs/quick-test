@@ -15,7 +15,6 @@ const UserAddMultiple = () => {
         rel="canonical"
         href={`${process.env.REACT_APP_DOMAIN_LINK}/settings/users/add-multiple`}
       />
-
       <AddMultiUser />
     </div>
   );

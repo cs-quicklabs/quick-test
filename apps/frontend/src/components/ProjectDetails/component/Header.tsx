@@ -78,24 +78,7 @@ export default function TestCaseHeading({
   } else {
     newCSVData = [];
   }
-  // const addPrefix = () => {
-  //   switch (params.subURL) {
-  //     case "testruns":
-  //       return "Test Runs: ";
-  //     case "test-results":
-  //       return "Test Runs: ";
-  //     case "overview":
-  //       return "Overview: ";
-  //     case "todo":
-  //       return "Todos: ";
-  //     case "testcases":
-  //       return "Test Cases: ";
-  //     case "milestones":
-  //       return "Milestones: ";
-  //     default:
-  //       return "";
-  //   }
-  // };
+
   return (
     <>
       <div className="py-4 mx-8 sm:flex sm:items-start sm:justify-between bg-gray-50 2xl:mx-52">
@@ -174,32 +157,6 @@ export default function TestCaseHeading({
               )}
             </div>
           )}
-
-          {/* {redirectToBack && (
-            <BackButton
-              data-cy="back-button"
-              onMouseDown={() => {
-                navigate(redirectToBack);
-              }}
-              type="button"
-              className="ml-2 inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none"
-            >
-              {t("Back")}
-            </BackButton>
-          )}
-
-          {backtoList && (
-            <BackButton
-              onMouseDown={() => {
-                seTestCaseNum(0);
-                setPrinterIcon(true);
-              }}
-              type="button"
-              className=" ml-3 mt-1 py-1.5 px-2.5 text-xs inline-flex items-center border border-transparent rounded-md shadow-sm  font-medium focus:outline-none "
-            >
-              {t("Back")}
-            </BackButton>
-          )} */}
         </div>
       </div>
     </>

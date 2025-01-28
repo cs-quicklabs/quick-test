@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import Badge from "../../Badge";
-import MenuButton from "./MenuButton";
+import DropDownMenuButton from "./DropDownMenuButton";
 import PopUp from "./PopUp";
 import axiosService from "../../Utils/axios";
 import { useNavigate, useParams } from "react-router-dom";
@@ -134,12 +134,12 @@ export default function Table({
   };
 
   const onClickNavigate = () => {
-    seTestCaseNum(selectedTestCase?.index!) 
+    seTestCaseNum(selectedTestCase?.index!)
   }
 
   return (
     <>
-    {/* Side Panel logic to open individual test case */}
+      {/* Side Panel logic to open individual test case */}
       <SidePanel
         isOpen={Boolean(selectedTestCase)}
         setIsOpen={setSelectedTestCase}
@@ -156,19 +156,17 @@ export default function Table({
       <div className="border-t">
         <div className="grid grid-cols-3 min-h-screen">
           <div
-            className={`col-span-2 border-r border-gray-200 min-w-full ${
-              RowData?.length < 1 && "hidden"
-            }`}
+            className={`col-span-2 border-r border-gray-200 min-w-full ${RowData?.length < 1 && "hidden"
+              }`}
           >
             <div className="col-span-2 min-w-full">
               <table
-                className={`min-w-full divide-y divide-gray-200 ${
-                  RowData?.length === 1
-                    ? "mb-24"
-                    : RowData?.length === 0
+                className={`min-w-full divide-y divide-gray-200 ${RowData?.length === 1
+                  ? "mb-24"
+                  : RowData?.length === 0
                     ? ""
                     : ""
-                }`}
+                  }`}
               >
                 <thead className="bg-gray-50 border-b  border-gray-200">
                   <tr>
@@ -231,7 +229,7 @@ export default function Table({
                                 priority: value?.testCaseExecutionPriority,
                                 id: value?.id,
                                 createdBy: value?.createdBy,
-                                index: i+1,
+                                index: i + 1,
                               }
                               setSelectedTestCase(newObj)
                             }}
@@ -263,7 +261,7 @@ export default function Table({
                           )}
                         </td>
                         <td className="pr-6">
-                          <MenuButton
+                          <DropDownMenuButton
                             value={value}
                             index={i}
                             setStatusData={setStatusData}

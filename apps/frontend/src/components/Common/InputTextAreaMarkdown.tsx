@@ -95,6 +95,7 @@ const InputField: FC<Iprops> = ({ ...props }: Iprops) => {
       ) : (
         <div className="flex flex-col gap-2">
           <TextareaAutosize
+            id={name}
             value={value}
             disabled={loading}
             maxRows={4}
@@ -102,11 +103,10 @@ const InputField: FC<Iprops> = ({ ...props }: Iprops) => {
             className={`resize-y  w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none  focus:border-indigo-500 sm:text-sm 
             ${fileOverElement ? "ring-2 ring-indigo-500" : "ring-0"} 
             ${manageHeight ? "min-h-48" : "min-h-48"}
-            ${
-              (error && touched) || (validation && error)
+            ${(error && touched) || (validation && error)
                 ? "border-red-300"
                 : "border-gray-300"
-            }`}
+              }`}
             {...rest}
             onDrop={(e) => {
               onDrop(e);

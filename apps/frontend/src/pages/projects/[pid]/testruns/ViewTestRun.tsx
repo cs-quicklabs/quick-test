@@ -4,7 +4,6 @@ import Dashboard from "../../../../components/TestRun/ViewDashboard";
 export default function Comp() {
   return (
     <>
-
       <meta
         name="description"
         content="Here You can view a specific Test Run and Test Cases associated with them."
@@ -17,8 +16,6 @@ export default function Comp() {
         rel="canonical"
         href={`${process.env.REACT_APP_DOMAIN_LINK}/projects/:pid/testruns/:id/test-results`}
       />
-
-
       <Dashboard />
     </>
   );

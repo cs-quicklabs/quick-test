@@ -1,6 +1,5 @@
 import ResetPasswordForm from "../components/ResetPassword/ResetPassword";
 
-
 export default function ResetPassword() {
   return (
     <>

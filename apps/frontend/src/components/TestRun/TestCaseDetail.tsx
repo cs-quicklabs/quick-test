@@ -9,7 +9,7 @@ import { ToastMessage } from "../Utils/constants/misc";
 import Loader from "../Loader/Loader";
 import { showError } from "../Toaster/ToasterFun";
 
-import MenuButton from "./component/MenuButton";
+import DropDownMenuButton from "./component/DropDownMenuButton";
 import Pagination from "./component/Pagination";
 import PopUp from "./component/PopUp";
 import PreviewMarkdown from "../Common/PreviewMarkdown";
@@ -136,7 +136,7 @@ const TestCaseDetail = ({ page, submitStatus, refetch }: any) => {
   useEffect(() => {
     getTestRunResult();
   }, [PageNum, getTestRunResult]);
-  
+
   return (
     <>
       <PopUp
@@ -166,18 +166,17 @@ const TestCaseDetail = ({ page, submitStatus, refetch }: any) => {
               <div className="w-24">
                 <div className={`inline-flex justify-between rounded-md  `}>
                   <Badge
-                    className={`mr-2 capitalize flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium ${
-                      data?.status === "PASSED"
-                        ? "bg-green-100 text-green-800"
-                        : data?.status === "FAILED"
+                    className={`mr-2 capitalize flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium ${data?.status === "PASSED"
+                      ? "bg-green-100 text-green-800"
+                      : data?.status === "FAILED"
                         ? "bg-red-100 text-red-800"
                         : "bg-gray-200 text-gray-00"
-                    }`}
+                      }`}
                   >
                     <Trans>{data?.status.toLowerCase()}</Trans>
                   </Badge>
 
-                  <MenuButton
+                  <DropDownMenuButton
                     value={data}
                     setStatusData={setStatusData}
                     statusData={statusData}

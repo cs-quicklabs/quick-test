@@ -12,7 +12,6 @@ export const getRole = async () => {
   const role = localStorage.getItem("role");
   if (!role) {
     try {
-      // const response = await axiosService.get("/auth/me");
       const response = JSON.parse(localStorage.getItem("role") || "");
       return response === RoleType.OWNER;
     } catch (error) {

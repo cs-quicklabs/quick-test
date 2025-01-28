@@ -15,7 +15,6 @@ export default function MilestonesPage() {
         rel="canonical"
         href={`${process.env.REACT_APP_DOMAIN_LINK}/projects/:pid/milestones`}
       />
-
       <PageMilestone />
     </>
   );

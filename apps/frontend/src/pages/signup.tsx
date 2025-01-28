@@ -1,6 +1,5 @@
 import Register from "../components/SignUp/SignUp";
 
-
 export default function SignUp() {
   return (
     <>
