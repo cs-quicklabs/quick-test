@@ -1,16 +1,16 @@
 import { Injectable } from "@nestjs/common";
-import { InjectConnection, InjectRepository } from "@nestjs/typeorm";
-import { Connection, EntitySubscriberInterface, Repository } from "typeorm";
+import { InjectDataSource, InjectRepository } from "@nestjs/typeorm";
+import { DataSource, EntitySubscriberInterface, Repository } from "typeorm";
 import { UserEntity } from "./user.entity";
 
 @Injectable()
 export class UserSubscriber implements EntitySubscriberInterface {
   constructor(
-    @InjectConnection() readonly connection: Connection,
+    @InjectDataSource() readonly connection: DataSource,
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
   ) {
-    connection.subscribers.push(this);
+    this.connection.subscribers.push(this);
   }
 
   /**
@@ -25,10 +25,10 @@ export class UserSubscriber implements EntitySubscriberInterface {
    */
   async afterLoad(user: UserEntity) {
     let fullName: string;
-    if (user.archivedBy) {
+    if (user.archived_by) {
       const queryBuilder = this.userRepository.createQueryBuilder("user");
       const archivedByUser = await queryBuilder
-        .where("user.id = :id", { id: user.archivedBy })
+        .where("user.id = :id", { id: user.archived_by })
         .getOne();
       user.archivedByUser = archivedByUser;
     }

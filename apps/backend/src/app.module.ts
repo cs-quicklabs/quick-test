@@ -9,7 +9,6 @@ import {
 } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { I18nModule, HeaderResolver } from "nestjs-i18n";
-//import * as dotenv from 'dotenv';
 import { MailerModule } from "@nestjs-modules/mailer";
 import { HandlebarsAdapter } from "@nestjs-modules/mailer/dist/adapters/handlebars.adapter";
 import { ScheduleModule } from "@nestjs/schedule";
@@ -21,7 +20,6 @@ import {
 } from "./middlewares";
 import { AuthModule } from "./service-auth/auth/auth.module";
 import { UserModule } from "./service-users/user/user.module";
-//import { ConfigService } from "./shared/services/config.service";
 import { SharedModule } from "./shared/shared.module";
 import { ProjectModule } from "./service-organization/project/project.module";
 import { TestCaseModule } from "./service-organization/test-case/test-case.module";
@@ -135,11 +133,6 @@ import stripeConfig from "./config/stripe.config";
       imports: [ConfigModule],
       inject: [ConfigService],
     }),
-
-    // PuppeteerModule.forRoot({
-    //   isGlobal: true,
-    //   timeout: 60000,
-    // }),
 
     ScheduleModule.forRoot(),
     AuthModule,

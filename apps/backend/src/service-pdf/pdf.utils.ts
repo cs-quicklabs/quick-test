@@ -21,7 +21,7 @@ export const getContentFromHtml = (testSuite: TestSuiteEntity, testCaseResultsOb
     for (const sectionName in testCaseResultsObject) {
         const testCaseResults = testCaseResultsObject[sectionName];
         text += `<h3 class="sectionNameOther">${sectionCount}. ${sectionName}</h3>
-                        <table class="table table table-bordered table-striped table-sm">
+                        <table class="table table-bordered table-striped table-sm">
                         <thead>
                             <tr>
                                 <td scope="col" class="idWidth"><b>ID</b></td>
@@ -144,7 +144,7 @@ export const getContentFromHtml = (testSuite: TestSuiteEntity, testCaseResultsOb
                                     <div class="table-responsive">
                                         <h3 class="sectionNameOther">Created On: ${month[testSuite.createdAt.getMonth()]} ${testSuite.createdAt.getDate()}, ${testSuite.createdAt.getFullYear()}</h3>
                                         <h3 class="sectionNameOther">Status: <span class=${statusClassName}>${statusTestRun}</span></h3>
-                                        <table class="table table table-bordered table-striped table-sm">
+                                        <table class="table table-bordered table-striped table-sm">
                                             <thead>
                                                 <tr>
                                                     <td scope="col" class="text-center"><b>Passed</b></td>

@@ -4,7 +4,6 @@ import { AwsS3Service } from "../shared/services/aws-s3.service";
 import { AppConfigService } from "../shared/services/app.config.service";
 import { ProjectEntity } from "../service-organization/project/project.entity";
 import { TestSuiteEntity } from "../service-organization/test-suite/test-suite.entity";
-import { TestCaseResultStatus } from "../common/enums/test-case-result-status";
 import { TestSuiteStatus } from "../common/enums/test-suite-status";
 import { UtilsService } from "../_helpers/utils.service";
 import * as htmlToPdf from 'html-pdf';
@@ -33,7 +32,7 @@ export class PdfService {
         for (const sectionName in testCasesObject) {
             const testCases = testCasesObject[sectionName];
             text += `<h3 class="sectionName">${sectionCount}. ${sectionName}</h3>`;
-            text += `<table class="table table table-bordered table-striped table-sm">
+            text += `<table class="table table-bordered table-striped table-sm">
                         <thead>
                             <tr>
                                 <td class="idWidth" scope="col">ID</td>
@@ -179,7 +178,7 @@ export class PdfService {
                 default:
                     className = "pending";
             }
-            text += `<table class="table table table-bordered table-striped table-sm">
+            text += `<table class="table table-bordered table-striped table-sm">
                         <thead>
                             <tr>
                                 <td scope="col" class="idWidth">Passed</td>

@@ -23,7 +23,6 @@ import { UsersPageDto as MembersPageDto } from "../../service-users/user/dto/Use
 import { UpdateOrganizationMemberDto } from "./dto/UpdateOrganizationMemberDto";
 import { AuthService } from "../../service-auth/auth/auth.service";
 import { AddMultipleMembersOrganizationDto } from "./dto/AddMultipleMembersOrganizationDto";
-import { OrganizationListDto } from "./dto/OrganizationListDto";
 import { ProjectFavoriteDetailDto } from "../project/dto/ProjectFavoriteDetailDto";
 import { ProjectListPageOptionsDto } from "../project/dto/ProjectListPageOptionDto";
 import { MilestoneService } from "../milestone/milestone.service";

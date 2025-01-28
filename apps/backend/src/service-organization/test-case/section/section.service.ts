@@ -62,8 +62,6 @@ export class SectionService {
       .select(["section.id", "section.name", "section.createdAt"])
       .where("section.project_id = :projectId", { projectId })
       .orderBy("section.createdAt", pageOptionsDto.order)
-      //.skip(pageOptionsDto.skip)
-      //.take(pageOptionsDto.take)
       .getManyAndCount();
 
     const pageMetaDto = new PageMetaDto({
