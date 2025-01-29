@@ -197,7 +197,6 @@ const EditTestRun = () => {
                       name="assignTo"
                       optionsForSelect={options}
                       valueOfLabel={data.nameOfAssignee}
-                      isOptional={false}
                     />
                   </div>
                   <div>
