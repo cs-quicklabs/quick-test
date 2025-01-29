@@ -228,7 +228,7 @@ const AddTestRun = () => {
                     optionsForSelect={options}
                     validation={validation}
                     dataAttr="assignee"
-                    isOptional
+                    isOptional={false}
                   />
                 </div>
                 <div>
