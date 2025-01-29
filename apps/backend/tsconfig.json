@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "../../dist/apps/backend",
     "module": "commonjs",
-    "types": ["node"],
+    "types": ["jest", "node"],
     "declaration": true,
     "removeComments": true,
     "experimentalDecorators": true,

@@ -90,7 +90,7 @@ const Todo = () => {
 
   useEffect(() => {
     if (params?.pid) getData();
-  }, [getData, params?.pid]);
+  }, [params?.pid]);
 
   const renderGraph = (
     passed: number,

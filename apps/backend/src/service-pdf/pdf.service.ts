@@ -1,13 +1,13 @@
 import { unlink } from "fs";
 import { Injectable } from "@nestjs/common";
-import { AwsS3Service } from "./aws-s3.service";
-import { AppConfigService } from "./app.config.service";
-import { ProjectEntity } from "../../service-organization/project/project.entity";
-import { TestSuiteEntity } from "../../service-organization/test-suite/test-suite.entity";
-import { TestCaseResultStatus } from "../../common/enums/test-case-result-status";
-import { TestSuiteStatus } from "../../common/enums/test-suite-status";
-import { UtilsService } from "../../_helpers/utils.service";
+import { AwsS3Service } from "../shared/services/aws-s3.service";
+import { AppConfigService } from "../shared/services/app.config.service";
+import { ProjectEntity } from "../service-organization/project/project.entity";
+import { TestSuiteEntity } from "../service-organization/test-suite/test-suite.entity";
+import { TestSuiteStatus } from "../common/enums/test-suite-status";
+import { UtilsService } from "../_helpers/utils.service";
 import * as htmlToPdf from 'html-pdf';
+import { getContentFromHtml } from "./pdf.utils";
 
 @Injectable()
 export class PdfService {
@@ -32,7 +32,7 @@ export class PdfService {
         for (const sectionName in testCasesObject) {
             const testCases = testCasesObject[sectionName];
             text += `<h3 class="sectionName">${sectionCount}. ${sectionName}</h3>`;
-            text += `<table class="table table table-bordered table-striped table-sm">
+            text += `<table class="table table-bordered table-striped table-sm">
                         <thead>
                             <tr>
                                 <td class="idWidth" scope="col">ID</td>
@@ -178,7 +178,7 @@ export class PdfService {
                 default:
                     className = "pending";
             }
-            text += `<table class="table table table-bordered table-striped table-sm">
+            text += `<table class="table table-bordered table-striped table-sm">
                         <thead>
                             <tr>
                                 <td scope="col" class="idWidth">Passed</td>
@@ -274,13 +274,8 @@ export class PdfService {
         </html>
         `;
         const buffer = await this.generatePdf(content);
-        let key;
-        const file = UtilsService.createUploadableFile(
-            pdfName,
-            pdfCommonConfig,
-            buffer,
-        );
-        key = await this.awsS3Service.uploadPdf(file);
+        const file = UtilsService.createUploadableFile(pdfName,pdfCommonConfig,buffer,);
+        const key = await this.awsS3Service.uploadPdf(file);
         unlink(`${pdfName}.html`, () => { });
         return key;
     }
@@ -289,219 +284,16 @@ export class PdfService {
      * Internal method to generate test suite result pdf
      * and forward it to aws service to store in s3
      */
-    async generateTestSuiteResultPdf(
-        project: ProjectEntity,
-        testSuite: TestSuiteEntity,
-        testCaseResultsObject,
-    ) {
+    async generateTestSuiteResultPdf(project: ProjectEntity, testSuite: TestSuiteEntity, testCaseResultsObject) {
         const { pdfConfig } = this.appConfigService;
         const pdfCommonConfig = pdfConfig?.common;
         const pdfTestSuiteResultConfig = pdfConfig?.testSuiteResult;
         const projectName = project.name.replace(/\s/g, "_");
         const pdfName = `${projectName}_`.concat(pdfTestSuiteResultConfig.fileName);
-        const month = [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-        ];
-        const statusTestRun =
-            testSuite.status === TestSuiteStatus.INPROGRESS
-                ? `${testSuite.status.charAt(0) +
-                testSuite.status.charAt(1).toLowerCase()
-                } ${testSuite.status.charAt(2)}${testSuite.status
-                    .substring(3, testSuite.status.length)
-                    .toLowerCase()}`
-                : testSuite.status.charAt(0) +
-                testSuite.status.substring(1, testSuite.status.length).toLowerCase();
-        let statusClassName = "pending";
-        switch (testSuite.status) {
-            case TestSuiteStatus.INPROGRESS:
-                statusClassName = "inProgress";
-                break;
-            case TestSuiteStatus.PENDING:
-                statusClassName = "pending";
-                break;
-            case TestSuiteStatus.COMPLETED:
-                statusClassName = "completed";
-                break;
-            default:
-                statusClassName = "pending";
-        }
-        const { passed, failed, untested, blocked, total } = testSuite.testreport;
-        const passedResultPercentage = Math.ceil((passed * 100) / total);
-        const failedResultPercentage = Math.ceil((failed * 100) / total);
-        const blocekdResultPercentage = Math.ceil((blocked * 100) / total);
-        const untestedResultPercentage = Math.ceil((untested * 100) / total);
-        let sectionCount = 1;
-        let text = "";
-        for (const sectionName in testCaseResultsObject) {
-            const testCaseResults = testCaseResultsObject[sectionName];
-            text += `<h3 class="sectionNameOther">${sectionCount}. ${sectionName}</h3>
-                    <table class="table table table-bordered table-striped table-sm">
-                    <thead>
-                        <tr>
-                            <td scope="col" class="idWidth">ID</td>
-                            <td scope="col" class="title">Title</td>
-                            <td scope="col" class="status">Status</td>
-                        </tr>
-                    </thead>
-                    <tbody>`;
-            for (let i = 0; i < testCaseResults.length; i++) {
-                let className = "";
-                switch (testCaseResults[i].status) {
-                    case TestCaseResultStatus.PASSED:
-                        className = "passed";
-                        break;
-                    case TestCaseResultStatus.FAILED:
-                        className = "failed";
-                        break;
-                    case TestCaseResultStatus.BLOCKED:
-                        className = "blocked";
-                        break;
-                    case TestCaseResultStatus.UNTESTED:
-                        className = "untested";
-                        break;
-                    default:
-                        className = "untested";
-                        break;
-                }
-                text += `<tr>
-                            <td class="idWidth">${testCaseResults[i].testCaseId}</td>
-                            <td class="title">${testCaseResults[i].testCaseTitle}</td>
-                            <td class="status ${className}">${testCaseResults[i].status}</td>
-                        </tr>`;
-            }
-            text += `</tbody></table>`;
-            sectionCount += 1;
-        }
-
-        const content = `
-            <!DOCTYPE html>
-            <html>
-                <head>
-                    <title>Test Case PDF</title>
-                    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-                    <style>
-                        * {
-                            font-family: 'Roboto', sans-serif;
-                        }
-
-                        body {
-                            margin: 0;
-                            padding: 0;
-                        }
-
-                        .name {
-                            font-size: 25px;
-                            margin: 0px;
-                        }
-
-                        .sectionNameOther {
-                            font-size: 18px;
-                            margin: 10px 0;
-                        }
-
-                        table {
-                            width: 100%;
-                            border-collapse: collapse;
-                            page-break-inside: avoid;
-                            margin-bottom: 40px;
-                        }
-
-                        td, th {
-                            word-wrap: break-word;
-                            border: 1px solid #ddd;
-                            padding: 8px;
-                        }
-
-                        .table-responsive {
-                            margin-bottom: 40px;
-                        }
-
-                        .page-break {
-                            page-break-before: always;
-                            page-break-after: always;
-                            page-break-inside: avoid;
-                        }
-
-                                    .pending {
-                                        color: #3498db;
-                                    }
-                            
-                                    .inProgress {
-                                        color: #f1c40f;
-                                    }
-                            
-                                    .completed {
-                                        color: #07bc0c;
-                                    }
-                            
-                                    .untested {
-                                        color: #3498db;
-                                    }
-                            
-                                    .passed {
-                                        color: #07bc0c;
-                                    }
-                            
-                                    .failed {
-                                        color: #e74c3c;
-                                    }
-
-                                    .blocked {
-                                        color: #000000;
-                                    }
-                    </style>
-                            </head>
-                            <body>
-                                <div>
-                                    <h1 class="name">${testSuite.name}</h1>
-                                    <hr />
-                                    <div class="table-responsive">
-                                        <h3 class="sectionNameOther">Created On: ${month[testSuite.createdAt.getMonth()]} ${testSuite.createdAt.getDate()}, ${testSuite.createdAt.getFullYear()}</h3>
-                                        <h3 class="sectionNameOther">Status: <span class=${statusClassName}>${statusTestRun}</span></h3>
-                                        <table class="table table table-bordered table-striped table-sm">
-                                            <thead>
-                                                <tr>
-                                                    <td scope="col" class="text-center">Passed</td>
-                                                    <td scope="col" class="text-center">Failed</td>
-                                                    <td scope="col" class="text-center">Untested</td>
-                                                    <td scope="col" class="text-center">Blocked</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-center">${passedResultPercentage}% (${passed}/${total})</td>
-                                                    <td class="text-center">${failedResultPercentage}% (${failed}/${total})</td>
-                                                    <td class="text-center">${untestedResultPercentage}% (${untested}/${total})</td>
-                                                    <td class="text-center">${blocekdResultPercentage}% (${blocked}/${total})</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        ${text}
-                                    </div>
-                                </div>
-                            </body>
-            </html>
-    `;
-
+        const content = getContentFromHtml(testSuite, testCaseResultsObject);
         const buffer = await this.generatePdf(content);
-        let key;
-        const file = UtilsService.createUploadableFile(
-            pdfName,
-            pdfCommonConfig,
-            buffer,
-        );
-        key = await this.awsS3Service.uploadPdf(file);
+        const file = UtilsService.createUploadableFile(pdfName, pdfCommonConfig, buffer);
+        const key = await this.awsS3Service.uploadPdf(file);
         unlink(`${pdfName}.html`, () => { });
         return key;
     }

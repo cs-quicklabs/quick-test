@@ -4,7 +4,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AwsS3Service } from "./services/aws-s3.service";
-import { PdfService } from "./services/pdf.service";
+import { PdfService } from "../service-pdf/pdf.service";
 import { AppConfigService } from "./services/app.config.service";
 import { GeneratorService } from "./services/generator.service";
 import { ValidatorService } from "./services/validator.service";
@@ -36,10 +36,6 @@ const controllers = [ContactFormController];
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService<AllConfigType>) => ({
         secretOrPrivateKey: configService.get("app.jwtKey", { infer: true }),
-        // if you want to use token with expiration date
-        // signOptions: {
-        //     expiresIn: configService.getNumber('JWT_EXPIRATION_TIME'),
-        // },
       }),
       inject: [ConfigService],
     }),

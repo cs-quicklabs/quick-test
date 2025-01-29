@@ -35,7 +35,7 @@ import { Order } from "../../common/enums/order";
 import { TestSuiteDetailDto } from "./dto/TestSuiteDetailDto";
 import { CreateFilteredTestSuiteDto } from "./dto/CreateFilteredTestSuiteDto";
 import { ProjectEntity } from "../project/project.entity";
-import { PdfService } from "../../shared/services/pdf.service";
+import { PdfService } from "../../service-pdf/pdf.service";
 import { AwsS3Service } from "../../shared/services/aws-s3.service";
 import { TestCaseResultEntity } from "./test-case-result/test-case-result.entity";
 import { AppConfigService } from "../../shared/services/app.config.service";

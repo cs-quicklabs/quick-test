@@ -1,17 +1,12 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-//import * as dotenv from "dotenv";
 import { MailerService } from "@nestjs-modules/mailer";
 import { UserEntity } from "../../service-users/user/user.entity";
-import { ALLOWED_LANGUAGES } from "../../common/constants/lang";
 import { Subjects } from "../../common/constants/subject";
 import { FreeTrial } from "../../common/enums/days-enum";
 import { ConfigService } from "@nestjs/config";
 import { AllConfigType } from "../../config/config.type";
-import { writeFileSync, readFileSync, existsSync, mkdirSync, readdirSync, unlinkSync } from 'fs';
-import { UtilsService } from "src/_helpers/utils.service";
-import { join } from 'path';
-import * as Handlebars from 'handlebars';
-const path = require('path');
+import { EmailUtils } from "./email.util";
+
 
 @Injectable()
 export class EmailService {
@@ -46,40 +41,6 @@ export class EmailService {
     return true;
   }
 
-  sendCalenderEmail(
-    sendto: string,
-    subject: string,
-    template: string,
-    context: Record<string, unknown>,
-    calendarObj?: Record<string, unknown>,
-  ): any {
-    const mailOptions = {
-      to: sendto,
-      from: this.configService.getOrThrow("email.defaultEmail", {
-        infer: true,
-      }),
-      subject,
-      template,
-      context,
-      alternatives: null,
-    };
-    if (calendarObj) {
-      const alternatives = {
-        contentType: "application/ics",
-        content: Buffer.from(calendarObj.toString()),
-      };
-      mailOptions.alternatives = alternatives;
-    }
-    this.mailerService
-      .sendMail(mailOptions)
-      .then(() => { })
-      .catch(() => { });
-    return true;
-  }
-
-  getUserLanguage = (lang) =>
-    ALLOWED_LANGUAGES.includes(lang) ? lang : ALLOWED_LANGUAGES[0];
-
   /**
    * Internal generic method to call send email
    * @param email
@@ -95,40 +56,9 @@ export class EmailService {
     context: Record<string, unknown>,
   ): Promise<boolean> {
     if (!email || !template) return false;
-    if (process.env.NODE_ENV === 'development') this.saveAndOpenEmail(subject, context, template);
+    if (process.env.NODE_ENV === 'development') EmailUtils.saveAndOpenEmailLocally(subject, context, template);
     else this.sendEmail(email, [], [], subject, template, context);
     return true;
-  }
-
-  /**
-   * Internal method to save and open email locally
-   * @param subject
-   * @param context
-   */
-  private async saveAndOpenEmail(subject: string, context: Record<string, any>, template: string) {
-    try {
-      const dirPath = './local-emails';
-      const filePath = `${dirPath}/${subject.replace(/\s/g, "")}.html`;
-      const templateText = readFileSync(path.resolve(path.resolve(__dirname, '../../'), template), 'utf8');
-      const compiledTemplate = Handlebars.compile(templateText);
-      const renderedHtml = compiledTemplate(context);
-      this.clearFolder(dirPath);
-      writeFileSync(filePath, renderedHtml);
-      UtilsService.openInBrowser(filePath);
-    } catch (error) {
-      console.error('Error saving or opening email locally:', error.message);
-    }
-  }
-
-  private clearFolder(dirPath: string) {
-    if (existsSync(dirPath)) {
-      const files = readdirSync(dirPath); // Get all files in the directory
-      for (const file of files) {
-        unlinkSync(join(dirPath, file)); // Delete each file
-      }
-    } else {
-      mkdirSync(dirPath, { recursive: true }); // Create the directory if it doesn't exist
-    }
   }
 
   /**
@@ -143,7 +73,7 @@ export class EmailService {
     lang: string,
   ): Promise<boolean> {
     if (!user) throw new BadRequestException("translations.ACTION_FAILED");
-    const userLanguage = this.getUserLanguage(lang);
+    const userLanguage = EmailUtils.getUserLanguage(lang);
     const { email } = user;
     const subject = Subjects[userLanguage].WELCOME_MAIL;
     const template = `./email-templates/${userLanguage}/body/welcome-email.${userLanguage}.hbs`;
@@ -171,7 +101,7 @@ export class EmailService {
     lang: string,
   ): Promise<boolean> {
     if (!member) throw new BadRequestException("translations.ACTION_FAILED");
-    const userLanguage = this.getUserLanguage(lang);
+    const userLanguage = EmailUtils.getUserLanguage(lang);
     const { email } = member;
     const subject = Subjects[userLanguage].WELCOME_MAIL;
     const template = `./email-templates/${userLanguage}/body/welcome-email-reset-password.${userLanguage}.hbs`;
@@ -197,7 +127,7 @@ export class EmailService {
     lang: string,
   ): Promise<boolean> {
     if (!email) throw new BadRequestException("translations.ACTION_FAILED");
-    const userLanguage = this.getUserLanguage(lang);
+    const userLanguage = EmailUtils.getUserLanguage(lang);
     const subject = Subjects[userLanguage].ACKNOWLEDGE_MAIL;
     const template = `./email-templates/${userLanguage}/body/contact-form-acknowledgement.${userLanguage}.hbs`;
     const context = {
@@ -220,7 +150,7 @@ export class EmailService {
     lang: string,
   ): Promise<boolean> {
     if (!user) throw new BadRequestException("translations.ACTION_FAILED");
-    let userLanguage = this.getUserLanguage(lang);
+    let userLanguage = EmailUtils.getUserLanguage(lang);
     userLanguage = user.language;
     const { email } = user;
     const subject = Subjects[userLanguage].RESET_PASSWORD;
@@ -245,7 +175,7 @@ export class EmailService {
     lang: string,
   ): Promise<boolean> {
     if (!user) throw new BadRequestException("translations.ACTION_FAILED");
-    const userLanguage = this.getUserLanguage(lang);
+    const userLanguage = EmailUtils.getUserLanguage(lang);
     const { email } = user;
     const subject = Subjects[userLanguage].VERIFY_EMAIL;
     const template = `./email-templates/${userLanguage}/body/verify-email.${userLanguage}.hbs`;
@@ -270,7 +200,7 @@ export class EmailService {
   ): Promise<boolean> {
     if (!user?.email)
       throw new BadRequestException("translations.ACTION_FAILED");
-    const userLanguage = this.getUserLanguage(lang);
+    const userLanguage = EmailUtils.getUserLanguage(lang);
     const { email } = user;
     const subject = Subjects[userLanguage].FREETRIAL_START;
     const template = `./email-templates/${userLanguage}/body/free-trial-start.${userLanguage}.hbs`;

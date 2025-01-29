@@ -127,7 +127,7 @@ export default function TestCaseListTable({
                 {showDragIcon && <div className="h-4 w-4 mb-2 mr-2"></div>}
 
                 <input
-                  id="test-case-header-id"
+                  id={sectionId}
                   className={`h-4 w-4 checkbox1 text-indigo-600  border-gray-300 rounded focus:outline-none focus:ring-0 focus:ring-transparent focus:ring-offset-0`}
                   type="checkbox"
                   defaultChecked={checked}
@@ -190,7 +190,7 @@ export default function TestCaseListTable({
                     </Link>
                   )}
                   <input
-                    id={`${i}`}
+                    id={`${i}-${sectionId}`}
                     data-cy={dataAttr + i + "-check"}
                     className={`h-4 w-4 text-indigo-600 focus:outline-none border-gray-300 rounded focus:ring-0 focus:ring-transparent focus:ring-offset-0`}
                     type="checkbox"

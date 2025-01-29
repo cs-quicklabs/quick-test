@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import SearchBox from "../Search/SearchBox";
 import {
   appRoutes,
@@ -16,7 +16,8 @@ import { ArchivePermissions } from "../Utils/constants/roles-permission";
 export default function UserHeader() {
   const { t } = useTranslation(["common"]);
   const [showUserSetting, setShowUserSetting] = useState(false);
-  const [selectedButton, setSelectedButton] = useState("Dashboard");
+  const location = useLocation();
+  const [selectedButton, setSelectedButton] = useState(location.pathname === '/dashboard' ? 'Dashboard' : 'Projects');
   const [imageURL, setImageURL] = useState<string>("");
   const { state, dispatch } = useContext(AppContext);
 
@@ -145,7 +146,7 @@ export default function UserHeader() {
                       : "bg-inherit text-gray-300"
                       }`}
                     aria-current="page"
-                    data-cy="dashboard"
+                    data-cy="projects"
                     onClick={() => handleButtonClick("Projects")}
                   >
                     {t("Projects")}

@@ -26,7 +26,7 @@ import { TestCasesPageDto } from "./dto/TestCasesPageDto";
 import { TestCasesPageOptionsDto } from "./dto/TestCasesPageOptionsDto";
 import { TestCaseFilterDto } from "./dto/TestCaseFilterDto";
 import { Order } from "../../common/enums/order";
-import { PdfService } from "../../shared/services/pdf.service";
+import { PdfService } from "../../service-pdf/pdf.service";
 import { ProjectEntity } from "../project/project.entity";
 import { SectionEntity } from "./section/section.entity";
 import { DefectEntity } from "../defect/defect.entity";
