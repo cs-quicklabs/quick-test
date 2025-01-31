@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Dialog, Transition, TransitionChild } from "@headlessui/react";
+import { Dialog, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
@@ -47,12 +47,12 @@ export default function ProjectArchivedModal() {
                     />
                   </div>
                   <div className="mt-3 text-center sm:mt-5">
-                    <Dialog.Title
+                    <DialogTitle
                       as="h3"
                       className="text-lg font-medium leading-6 text-gray-900"
                     >
                       Project does not exist
-                    </Dialog.Title>
+                    </DialogTitle>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
                         Project you are looking for does not exist, it may be

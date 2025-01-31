@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useEffect, useRef, useState } from "react";
-import { Dialog, Transition, TransitionChild } from "@headlessui/react";
+import { Dialog, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 import Button from "../../Button";
 import CancelButton from "../../Button/cancelButton";
 import { Formik, Form } from "formik";
@@ -147,14 +147,14 @@ export default function JiraModal(props: any) {
               <div className="bg-white px-4 pt-1 sm:pt-5 pb-4 sm:p-6 sm:pb-4 space-y-6">
                 <div ref={headerRef} className="sm:flex sm:items-start">
                   <div className="mt-3 text-center sm:mt-0 sm:text-left">
-                    <Dialog.Title
+                    <DialogTitle
                       as="div"
                       className="text-lg leading-6 font-medium text-gray-900"
                     >
                       {pluginConfig.isIntegrated
                         ? t("Re-configure JIRA Integration")
                         : t("Configure JIRA Integration")}
-                    </Dialog.Title>
+                    </DialogTitle>
                   </div>
                 </div>
 

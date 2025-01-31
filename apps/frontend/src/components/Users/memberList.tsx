@@ -281,7 +281,6 @@ const MemberList = () => {
                         >
                           <ArchiveBoxIcon
                             className="text-indigo-600 h-4 w-4 cursor-pointer mr-3"
-                            aria-hidden="true"
                           />
                         </AccessControl>
                       </span>

@@ -1,4 +1,4 @@
-import { Dialog, Transition, TransitionChild } from "@headlessui/react";
+import { Dialog, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 import { useCallback } from "react";
 import { Fragment, useState, useEffect } from "react";
 import SectionTable from "./ModalSectionTable";
@@ -125,12 +125,12 @@ const SelectionModal = ({
             <div className="inline-block h-[90%] w-full max-w-screen w-[94%] p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-md">
               <div className="h-full flex flex-col gap-1 sm:gap-4">
                 <div>
-                  <Dialog.Title
+                  <DialogTitle
                     as="div"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
                     {t("Select sections")}
-                  </Dialog.Title>
+                  </DialogTitle>
                   <p className="text-sm text-gray-900 mb-4">
                     {t("Please select sections to include in test run")}
                   </p>
