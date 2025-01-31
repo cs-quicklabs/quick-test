@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Dialog, Transition, TransitionChild } from "@headlessui/react";
+import { Dialog, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 import { CheckIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -16,7 +16,7 @@ export default function PaymentModal(props: any) {
 
   return (
     <Transition show={open} as={Fragment}>
-      <Dialog className="relative z-10" onClose={() => {}}>
+      <Dialog className="relative z-10" onClose={() => { }}>
         <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"
@@ -59,12 +59,12 @@ export default function PaymentModal(props: any) {
                     )}
                   </div>
                   <div className="mt-3 text-center sm:mt-5">
-                    <Dialog.Title
+                    <DialogTitle
                       as="h3"
                       className="text-lg leading-6 font-medium text-gray-900"
                     >
                       {t(props.status)}
-                    </Dialog.Title>
+                    </DialogTitle>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
                         {t(props.message)}

@@ -100,8 +100,8 @@ const ArchivedUsers = () => {
   return (
     <main className="pb-12 lg:col-span-9">
       <div className="overflow-x-auto">
-        <div className="flex flex-col px-2 lg:px-0 space-y-6">
-          <div className=" pb-2 sm:pb-6 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
+        <div className="flex flex-col px-2 lg:px-0 space-y-4">
+          <div className=" pb-2 sm:pb-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
             <h3 className="text-lg leading-6 font-medium text-gray-900">
               {t("Archived Users")}
             </h3>
@@ -120,14 +120,13 @@ const ArchivedUsers = () => {
                       className="flex justify-between py-2 sm:py-3 whitespace-nowrap font-normal text-gray-600"
                     >
                       <td className="flex flex-col gap-2">
-                        <div className="font-medium tracking-wide text-md">
+                        <div className="text-sm font-medium text-gray-900 tracking-wide">
                           {user.firstName}
                         </div>
-                        <div className="flex text-sm items-center gap-2">
+                        <div className="flex text-xs items-center gap-2 text-gray-500 font-normal">
                           <div>
                             <ArchiveBoxIcon
                               className="h-4 w-4 text-gray-400 group-hover:text-gray-500"
-                              aria-hidden="true"
                             />
                           </div>
                           <div>
@@ -158,7 +157,6 @@ const ArchivedUsers = () => {
                             >
                               <ArrowPathIcon
                                 className="h-4 w-4 text-indigo-600 group-hover:text-indigo-800"
-                                aria-hidden="true"
                               />
                             </span>
                           </AccessControl>
@@ -178,7 +176,6 @@ const ArchivedUsers = () => {
                             >
                               <TrashIcon
                                 className="h-4 w-4 text-red-400 group-hover:text-indigo-800"
-                                aria-hidden="true"
                               />
                             </span>
                           </AccessControl>
