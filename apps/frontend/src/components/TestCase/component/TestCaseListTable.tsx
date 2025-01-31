@@ -249,6 +249,7 @@ export default function TestCaseListTable({
                       editTestCase(test.id);
                     }}
                     className="text-indigo-500 h-4 w-4 cursor-pointer mr-2"
+                    aria-hidden="true"
                   />
                   <TrashIcon
                     data-tooltip-id="testcase-list-table-tooltip-id"

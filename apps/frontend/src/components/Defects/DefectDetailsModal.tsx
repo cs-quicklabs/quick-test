@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Popover, Transition } from "@headlessui/react";
+import { Popover, PopoverButton, PopoverPanel, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import Loader from "../Loader/Loader";
 import axiosService from "../Utils/axios";
@@ -41,7 +41,7 @@ export default function DefectDetailsModal({ pluginKey }: any) {
     <Popover className="relative">
       {({ open }) => (
         <>
-          <Popover.Button
+          <PopoverButton
             as="button"
             onMouseDown={() => {
               setShowPopup(() => {
@@ -65,7 +65,7 @@ export default function DefectDetailsModal({ pluginKey }: any) {
               )}
               aria-hidden="true"
             />
-          </Popover.Button>
+          </PopoverButton>
 
           {showPopup && (
             <Transition
@@ -77,7 +77,7 @@ export default function DefectDetailsModal({ pluginKey }: any) {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel
+              <PopoverPanel
                 static
                 className="absolute z-10 md:inset-auto md:right-1/4 lg:right-1/3 transform sm:mt-3 md:px-2 w-screen max-w-xs sm:max-w-md sm:px-0"
               >
@@ -108,7 +108,7 @@ export default function DefectDetailsModal({ pluginKey }: any) {
                           </span>
                         </div>
                         {defectData?.issueType.name === IssueType.SUBTASK &&
-                        defectData?.parent ? (
+                          defectData?.parent ? (
                           <div>
                             <span className="block text-sm font-medium text-gray-700">
                               {t("Parent")}
@@ -152,7 +152,7 @@ export default function DefectDetailsModal({ pluginKey }: any) {
                             {t("Sprint")}
                           </span>
                           {defectData?.sprint &&
-                          defectData?.sprint?.length !== 0 ? (
+                            defectData?.sprint?.length !== 0 ? (
                             <span className="block text-sm text-gray-500">
                               {defectData?.sprint?.map(
                                 (item: any) => item.name
@@ -182,7 +182,7 @@ export default function DefectDetailsModal({ pluginKey }: any) {
                     </div>
                   )}
                 </div>
-              </Popover.Panel>
+              </PopoverPanel>
             </Transition>
           )}
         </>

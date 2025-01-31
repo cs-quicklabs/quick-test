@@ -58,10 +58,6 @@ const TestForm = ({
 }: TestFormProps) => {
   const { t } = useTranslation(["common"]);
   const params = useParams();
-
-  console.log("optionsForSelect", optionsForSelect);
-  
-
   const { onSubmitHandler, loading } = useFormSubmitWithLoading(onSubmit);
   const [validation, setValidation] = useState(false);
   return (
@@ -105,9 +101,9 @@ const TestForm = ({
                       optionsForSelect={
                         EditMany && optionsForSelect
                           ? [
-                              { name: t("Not selected"), id: "" },
-                              ...optionsForSelect,
-                            ]
+                            { name: t("Not selected"), id: "" },
+                            ...optionsForSelect,
+                          ]
                           : optionsForSelect
                       }
                     />
@@ -123,18 +119,18 @@ const TestForm = ({
                       optionsForSelect={
                         EditMany
                           ? [
-                              { name: t("Not selected"), id: "" },
-                              { name: t("Low"), id: "LOW" },
-                              { name: t("Medium"), id: "MEDIUM" },
-                              { name: t("High"), id: "HIGH" },
-                              { name: t("Critical"), id: "CRITICAL" },
-                            ]
+                            { name: t("Not selected"), id: "" },
+                            { name: t("Low"), id: "LOW" },
+                            { name: t("Medium"), id: "MEDIUM" },
+                            { name: t("High"), id: "HIGH" },
+                            { name: t("Critical"), id: "CRITICAL" },
+                          ]
                           : [
-                              { name: t("Low"), id: "LOW" },
-                              { name: t("Medium"), id: "MEDIUM" },
-                              { name: t("High"), id: "HIGH" },
-                              { name: t("Critical"), id: "CRITICAL" },
-                            ]
+                            { name: t("Low"), id: "LOW" },
+                            { name: t("Medium"), id: "MEDIUM" },
+                            { name: t("High"), id: "HIGH" },
+                            { name: t("Critical"), id: "CRITICAL" },
+                          ]
                       }
                     />
                   </div>
@@ -185,8 +181,8 @@ const TestForm = ({
                       EditMany
                         ? t("Edit Test Cases")
                         : params.id
-                        ? t("Edit Test Case")
-                        : t("Add & Next")
+                          ? t("Edit Test Case")
+                          : t("Add & Next")
                     }
                   />
                 ) : (
@@ -210,8 +206,8 @@ const TestForm = ({
                         EditMany
                           ? t("Edit Test Cases")
                           : params.id
-                          ? t("Edit Test Case")
-                          : t("Add Test Case")
+                            ? t("Edit Test Case")
+                            : t("Add Test Case")
                       }
                     />
                     <FormSubmitPanel
@@ -234,8 +230,8 @@ const TestForm = ({
                         EditMany
                           ? t("Edit Test Cases")
                           : params.id
-                          ? t("Edit Test Case")
-                          : t("Add & Next")
+                            ? t("Edit Test Case")
+                            : t("Add & Next")
                       }
                     />
                   </div>

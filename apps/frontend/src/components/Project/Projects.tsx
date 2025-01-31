@@ -62,13 +62,7 @@ export default function Projects() {
   const [numberOfDays, setNumberOfDays] = useState(
     daysFromQuery ? parseInt(daysFromQuery) : NoOfDaysForGraph.DEFAULT
   );
-
   const queryClient = useQueryClient();
-
-  // const colorArr = useMemo(
-  //   () => ["#184BB8", "#5584E9", "#A3BCF3", "#DDE7FB"],
-  //   []
-  // );
 
   const openModal = (e: React.MouseEvent<HTMLSpanElement>, project: any) => {
     setSelectedId(project?.id);

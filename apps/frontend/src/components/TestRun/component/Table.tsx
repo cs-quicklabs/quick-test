@@ -190,6 +190,7 @@ export default function Table(props: Props) {
                               data-cy={"test-run-" + i + "-edit"}
                               onClick={() => props.editTestRun(value.id)}
                               className="text-indigo-500 h-4 w-4 cursor-pointer"
+                              aria-hidden="true"
                             />
                             <div
                               data-tooltip-id="test-run-table-tooltip-id"

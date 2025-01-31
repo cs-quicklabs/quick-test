@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Fragment, useEffect, useState, useLayoutEffect } from "react";
-import { Dialog, Transition, TransitionChild } from "@headlessui/react";
+import { Dialog, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 import { Formik, Form } from "formik";
 import CancelButton from "../Button/cancelButton";
 import Button from "../Button";
@@ -269,12 +269,12 @@ export default function AddReferenceModal({
             <div className="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full sm:p-6 space-y-6">
               <div className="sm:flex sm:items-start">
                 <div className="mt-3 text-center sm:mt-0 sm:text-left">
-                  <Dialog.Title
+                  <DialogTitle
                     as="div"
                     className="text-lg leading-6 font-medium text-gray-900"
                   >
                     {t("Add Reference to JIRA")}
-                  </Dialog.Title>
+                  </DialogTitle>
                 </div>
               </div>
               <div className="w-full">

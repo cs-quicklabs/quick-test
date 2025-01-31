@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Fragment, useRef } from "react";
-import { Dialog, Transition, TransitionChild } from "@headlessui/react";
+import { Dialog, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import { Currency, freeTrial } from "../../Utils/constants/misc";
@@ -69,12 +69,12 @@ export default function FreeTrialPopup({
                     <CheckIcon className="text-green-600" aria-hidden="true" />
                   </div>
                   <div className="mt-3 text-center sm:mt-5">
-                    <Dialog.Title
+                    <DialogTitle
                       as="h3"
                       className="text-lg leading-6 font-medium text-gray-900"
                     >
                       {t("Free Trial Period")}
-                    </Dialog.Title>
+                    </DialogTitle>
                     <div className="mt-2 text-sm text-gray-700">
                       <span>
                         {t("Welcome to Quick Test, there is a")}{" "}

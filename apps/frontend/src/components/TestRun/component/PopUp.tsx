@@ -1,12 +1,9 @@
 import { Fragment } from "react";
-
 import { Dialog, Transition, TransitionChild } from "@headlessui/react";
 import { Formik, Form } from "formik";
-
 import { FormikCheckbox, FormikTextArea } from "../../Common/FormikInput";
 import Button from "../../Button";
 import CancelButton from "../../Button/cancelButton";
-
 import UploadImage from "./UploadImage";
 import { useTranslation } from "react-i18next";
 
@@ -123,11 +120,10 @@ export default function PopUp({
                             <Button
                               id="submit-inside-popup"
                               type="submit"
-                              className={`ml-3 w-12${
-                                !(dirty && isValid)
+                              className={`ml-3 w-12${!(dirty && isValid)
                                   ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
                                   : ""
-                              }`}
+                                }`}
                               disabled={!(dirty && isValid)}
                             >
                               {t("Add")}
