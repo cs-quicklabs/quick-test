@@ -69,7 +69,7 @@ export class OrganizationService {
     public readonly validatorService: ValidatorService,
     public readonly awsS3Service: AwsS3Service,
     public readonly moduleRef: ModuleRef,
-  ) {}
+  ) { }
 
   onModuleInit(): void {
     this.userCreateService = this.moduleRef.get(UserCreateService, {
@@ -200,7 +200,7 @@ export class OrganizationService {
     organizationRegisterDto: CreateOrganizationDto,
   ): Promise<OrganizationEntity> {
     const newOrganization: CreateOrganizationDto = organizationRegisterDto;
-    newOrganization.name = UtilsService.sentenceCase(
+    newOrganization.name = UtilsService.properCase(
       organizationRegisterDto.name,
     );
     const organization = this.organizationRepository.create(newOrganization);
