@@ -24,11 +24,7 @@ const options = {
   plugins: {
     legend: {
       position: "top" as const,
-    },
-    title: {
-      display: true,
-      text: "Column Chart",
-    },
+    }
   },
   maintainAspectRatio: false,
 };
