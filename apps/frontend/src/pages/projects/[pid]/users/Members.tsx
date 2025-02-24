@@ -111,12 +111,15 @@ export default function ProjectMembers(props: any) {
                             </td>
                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                               {/* <div className="text-indigo-600 hover:text-indigo-900 cursor-pointer"> */}
-                              <TrashIcon
+                              <button
                                 data-tooltip-id="delete-id"
                                 data-tooltip-content="Delete"
                                 onClick={() => getConfirmation(member)}
-                                className="w-4 h-8 text-red-400"
-                              />
+                              >
+                                <TrashIcon
+                                  className="w-4 h-8 text-red-400"
+                                />
+                              </button>
                               {/* </div> */}
                             </td>
                           </tr>

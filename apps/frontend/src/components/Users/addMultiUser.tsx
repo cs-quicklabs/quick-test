@@ -135,7 +135,7 @@ const AddMultiUser = () => {
       <div className=" mx-8 pb-10">
         <div className="flex w-full justify-between mt-4 items-center">
           <div>
-            <label className="block text-lg font-medium text-gray-900">
+            <label htmlFor="Users*" className="block text-lg font-medium text-gray-900">
               {t("Add New Users")}
             </label>
             <p className="block text-sm font-normal text-gray-500">
