@@ -296,7 +296,7 @@
   "Testrun": "اختبار المدى",
   "Search": "يبحث",
   "Search...": "يبحث...",
-  "No matches": "لا تطابقات",
+  "No match found": "کوئی میچ نہیں ملا",
   "Add New Section": "أضف قسمًا جديدًا",
   "Create a new section to group your test cases": "قم بإنشاء قسم جديد لتجميع حالات الاختبار الخاصة بك",
   "Add Section": "إضافة القسم",
