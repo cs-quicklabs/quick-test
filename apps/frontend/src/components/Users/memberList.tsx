@@ -240,10 +240,11 @@ const MemberList = () => {
                             UserManagementPermissions.RESET_PASSWORD_LINK
                           }
                         >
-                          <EnvelopeIcon
-                            className="text-indigo-600 h-4 w-4 cursor-pointer mr-3"
-                            onClick={() => resendPassword(user.email)}
-                          />
+                          <button onClick={() => resendPassword(user.email)}>
+                            <EnvelopeIcon
+                              className="text-indigo-600 h-4 w-4 cursor-pointer mr-3"
+                            />
+                          </button>
                         </AccessControl>
                       </span>
                       <span data-cy={`edit-user-${index}`}
@@ -256,14 +257,17 @@ const MemberList = () => {
                             userRoleId !== RoleId.MEMBER
                           }
                         >
-                          <PencilSquareIcon
+                          <button
                             onClick={() => {
                               navigate(
                                 `${appRoutes.SETTINGS}/${settingsRoutes.USERS}/${user.id}/${usersRoutes.EDIT}`
                               );
                             }}
-                            className="text-indigo-500 h-4 w-4 cursor-pointer mr-3"
-                          />
+                          >
+                            <PencilSquareIcon
+                              className="text-indigo-500 h-4 w-4 cursor-pointer mr-3"
+                            />
+                          </button>
                         </AccessControl>
                       </span>
                       <span

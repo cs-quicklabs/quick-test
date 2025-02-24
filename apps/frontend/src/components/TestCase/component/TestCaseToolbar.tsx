@@ -848,35 +848,35 @@ const TestCaseToolbar = ({
             data-tooltip-id="testcase-toolbar-tooltip-id"
             data-tooltip-content={t("Export test cases to pdf")}
             className="mx-3"
+            onClick={handlePrinterClick}
           >
             <PrinterIcon
               className={`h-4 w-4  cursor-pointer ${ColorEnable ? "text-indigo-600" : "text-gray-400"
                 }`}
-              onClick={handlePrinterClick}
             />
           </div>
 
           <div
             data-tooltip-id="testcase-toolbar-tooltip-id"
             data-tooltip-content={t("Edit multiple test cases")}
-            className=""
+            onClick={HandleEditClick}
           >
             <PencilIcon
               className={`h-4 w-4  cursor-pointer ${ColorEnable ? "text-indigo-600" : "text-gray-400"
                 }`}
-              onClick={HandleEditClick}
             />
           </div>
 
           <div
             data-tooltip-id="testcase-toolbar-tooltip-id"
             data-tooltip-content={t("Delete multiple test cases")}
-            className="mx-2">
+            data-cy={"delete-multiple-test-case"}
+            className="mx-2"
+            onClick={HandleDeleteClick}
+          >
             <TrashIcon
-              data-cy={"delete-multiple-test-case"}
               className={`h-4 w-4 cursor-pointer ${ColorEnable ? "text-indigo-600" : "text-gray-400"
                 }`}
-              onClick={HandleDeleteClick}
             />
           </div>
         </div>

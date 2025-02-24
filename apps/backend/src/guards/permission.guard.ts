@@ -3,7 +3,7 @@ import { Reflector } from "@nestjs/core";
 
 @Injectable()
 export class PermissionsGuard implements CanActivate {
-  constructor(private readonly reflector: Reflector) {}
+  constructor(private readonly reflector: Reflector) { }
 
   canActivate(context: ExecutionContext): boolean {
     const routePermissions = this.reflector.get<string[]>(

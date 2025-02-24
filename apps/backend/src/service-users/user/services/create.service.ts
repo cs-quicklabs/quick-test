@@ -16,7 +16,6 @@ import { ProjecMemberEntity } from "../../../service-organization/project/member
 
 import { OrganizationService } from "../../../service-organization/organization/organization.service";
 import { OrganizationEntity } from "../../../service-organization/organization/organization.entity";
-import { CreateOrganizationDto } from "../../../service-organization/organization/dto/CreateOrganizationDto";
 import { ForgottenPasswordEntity } from "../forgotten-password-reqs.entity";
 import { VerificationDto } from "../dto/VerificationDto";
 import { UtilsService } from "../../../_helpers/utils.service";
@@ -58,7 +57,7 @@ export class UserCreateService {
     public readonly forgottenPasswordRepository: Repository<ForgottenPasswordEntity>,
     @InjectRepository(EmailVerifyTokenEntity)
     private readonly emailVerifyTokenRepository: Repository<EmailVerifyTokenEntity>,
-  ) {}
+  ) { }
 
   onModuleInit(): void {
     this.authService = this.moduleRef.get(AuthService, {
@@ -100,18 +99,17 @@ export class UserCreateService {
     if (!organizationName)
       throw new BadRequestException("translations.ORGANIZATION_NAME_REQUIRED");
     this.setUserRegisterDtoFields(userRegisterDto);
-    const checkUser = await this.userRepository
-      .createQueryBuilder("user")
-      .where("user.email = :email", { email: userRegisterDto.email })
-      .getOne();
+    const checkUser = await this.userRepository.exists({ where: { email: userRegisterDto.email } });
     if (checkUser) throw new ConflictException("translations.DUPLICATE_EMAIL");
-    const user = this.userRepository.create(userRegisterDto);
-    const organization = await this.createOrganization({
-      name: organizationName,
-    });
-    user.organization = organization;
-    user.role = await this.roleService.findByRoleType(RoleType.ORGADMIN);
-    user.title = UserTitle.OWNER;
+    const organization = await this.organizationService.createOrganization({ name: organizationName });
+    const role = await this.roleService.findByRoleType(RoleType.ORGADMIN);
+    console.log('role', role)
+    const user = this.userRepository.create({
+      ...userRegisterDto,
+      organization: organization,
+      role: role,
+      title: UserTitle.OWNER
+    })
     const usersData = await this.userRepository.save(user);
     await this.authService.sendWelcomeNewUserEmail(user, lang);
     //await this.authService.sendFreeTrialStartMail(user,lang)
@@ -142,18 +140,6 @@ export class UserCreateService {
     if (userRegisterDto.city) {
       userRegisterDto.city = UtilsService.properCase(userRegisterDto.city);
     }
-  }
-
-  async createOrganization(
-    createOrganizationDto: CreateOrganizationDto,
-  ): Promise<OrganizationEntity> {
-    createOrganizationDto.name = UtilsService.properCase(
-      createOrganizationDto.name,
-    );
-    const organization = await this.organizationService.createOrganization(
-      createOrganizationDto,
-    );
-    return organization;
   }
 
   async createVerificationToken(email: string): Promise<VerificationDto> {
@@ -314,10 +300,7 @@ export class UserCreateService {
           where: { projectId, userId },
         });
         if (record) continue;
-        const member = new ProjecMemberEntity();
-        member.projectId = projectId;
-        member.userId = userId;
-        member.organizationId = organizationId;
+        const member = new ProjecMemberEntity({ projectId, userId, organizationId });
         await this.projectMemberRepository.save(member);
       }
     } catch (err) {

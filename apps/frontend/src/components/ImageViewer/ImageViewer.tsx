@@ -45,18 +45,15 @@ export default function ImageViewer({ source, alt, open, setOpen }: PropTypes) {
 
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div className="absolute top-5 right-6 cursor-pointer flex gap-8">
-            <button className="h-8 w-8">
+            <button className="h-8 w-8" onClick={downloadHandler}>
               <ArrowDownTrayIcon
                 className="text-neutral-700 "
                 aria-hidden="true"
-                onClick={downloadHandler}
               />
             </button>
-            <button ref={cancelButtonRef} className="h-8 w-8">
+            <button ref={cancelButtonRef} className="h-8 w-8" onClick={() => setOpen(false)}>
               <XMarkIcon
                 className="text-neutral-700"
-                aria-hidden="true"
-                onClick={() => setOpen(false)}
               />
             </button>
           </div>
@@ -84,16 +81,18 @@ export default function ImageViewer({ source, alt, open, setOpen }: PropTypes) {
                     </div>
                   </TransitionChild>
                   <div className="flex justify-center items-center h-20 w-28 gap-10 cursor-pointer z-100">
-                    <MagnifyingGlassPlusIcon
-                      className="text-neutral-700"
-                      aria-hidden="true"
-                      onClick={() => zoomIn()}
-                    />
-                    <MagnifyingGlassMinusIcon
-                      className="text-neutral-700"
-                      aria-hidden="true"
-                      onClick={() => zoomOut()}
-                    />
+                    <button onClick={() => zoomIn()}>
+                      <MagnifyingGlassPlusIcon
+                        className="text-neutral-700"
+                        aria-hidden="true"
+                      />
+                    </button>
+                    <button onClick={() => zoomOut()}>
+                      <MagnifyingGlassMinusIcon
+                        className="text-neutral-700"
+                        aria-hidden="true"
+                      />
+                    </button>
                   </div>
                 </>
               )}

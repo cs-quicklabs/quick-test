@@ -51,7 +51,11 @@ const SignIn = () => {
       const userData = await axiosService.post("/auth/login", loginDetail);
       const { user, token, permissions } = userData.data.data;
       setUserDataInLocalStorage(user, permissions);
-      remember_me && localStorage.setItem("token", token.accessToken);
+      if (remember_me) {
+        localStorage.setItem('token', token.accessToken);  // Persistent storage
+      } else {
+        sessionStorage.setItem('token', token.accessToken); // Temporary storage
+      }
       dispatchUserData(user);
       navigationAfterLoginSuccess(user);
     } catch (error) {

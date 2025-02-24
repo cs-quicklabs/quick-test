@@ -240,7 +240,7 @@ export default function TestCaseListTable({
                 className=" px-2 py-2 whitespace-nowrap text-center text-xs font-normal"
               >
                 <div className="flex justify-center">
-                  <PencilSquareIcon
+                  <button
                     data-tooltip-id="testcase-list-table-tooltip-id"
                     data-tooltip-content={t("Edit")}
                     data-cy={dataAttr + i + "-edit"}
@@ -248,10 +248,13 @@ export default function TestCaseListTable({
                       e.stopPropagation();
                       editTestCase(test.id);
                     }}
-                    className="text-indigo-500 h-4 w-4 cursor-pointer mr-2"
-                    aria-hidden="true"
-                  />
-                  <TrashIcon
+                  >
+                    <PencilSquareIcon
+                      className="text-indigo-500 h-4 w-4 cursor-pointer mr-2"
+                      aria-hidden="true"
+                    />
+                  </button>
+                  <button
                     data-tooltip-id="testcase-list-table-tooltip-id"
                     data-tooltip-content={t("Delete")}
                     data-cy={dataAttr + i + "-delete"}
@@ -259,8 +262,11 @@ export default function TestCaseListTable({
                       e.stopPropagation();
                       openDeleteModal(test);
                     }}
-                    className="text-red-400 h-4 w-4 cursor-pointer"
-                  />
+                  >
+                    <TrashIcon
+                      className="text-red-400 h-4 w-4 cursor-pointer"
+                    />
+                  </button>
                 </div>
               </td>
             </tr>

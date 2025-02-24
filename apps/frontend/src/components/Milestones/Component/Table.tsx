@@ -214,12 +214,14 @@ export default function Table({
                           <AccessControl
                             permission={MilestonePermissions.UPDATE_MILESTONE}
                           >
-                            <PencilSquareIcon
+                            <button
                               data-tooltip-id="table-tooltip-id"
                               data-tooltip-content={t("Edit")}
-                              onClick={() => editMilestone(value.id)}
-                              className="text-indigo-500 h-4 w-4 cursor-pointer mr-3"
-                            />
+                              onClick={() => editMilestone(value.id)}>
+                              <PencilSquareIcon
+                                className="text-indigo-500 h-4 w-4 cursor-pointer mr-3"
+                              />
+                            </button>
                           </AccessControl>
                           {isMilestoneDeleteable ? (
                             <button
@@ -245,6 +247,21 @@ export default function Table({
                             <div
                               data-tooltip-id="table-tooltip-id"
                               data-tooltip-content={t("Mark as Complete")}
+                              onClick={() => {
+                                setShowConfirmModal({
+                                  message: (
+                                    <>
+                                      {t("Are you sure you want to mark")}{" "}
+                                      <span className="font-medium text-indigo-500">
+                                        {`"${value.name}"`}
+                                      </span>{" "}
+                                      {t("as complete?")}
+                                    </>
+                                  ),
+                                  id: value.id,
+                                  open: true,
+                                });
+                              }}
                             >
                               <AccessControl
                                 permission={
@@ -252,21 +269,6 @@ export default function Table({
                                 }
                               >
                                 <CheckCircleOutline
-                                  onClick={() => {
-                                    setShowConfirmModal({
-                                      message: (
-                                        <>
-                                          {t("Are you sure you want to mark")}{" "}
-                                          <span className="font-medium text-indigo-500">
-                                            {`"${value.name}"`}
-                                          </span>{" "}
-                                          {t("as complete?")}
-                                        </>
-                                      ),
-                                      id: value.id,
-                                      open: true,
-                                    });
-                                  }}
                                   className="text-indigo-600 h-4 w-4 cursor-pointer mr-1"
                                 />
                               </AccessControl>

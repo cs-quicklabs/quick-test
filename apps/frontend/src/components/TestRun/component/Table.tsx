@@ -184,25 +184,32 @@ export default function Table(props: Props) {
                         </td>
                         <td>
                           <div className="flex justify-end text-center items-center gap-2 text-xs">
-                            <PencilSquareIcon
+                            <button
                               data-tooltip-id="test-run-table-tooltip-id"
                               data-tooltip-content={t("Edit")}
                               data-cy={"test-run-" + i + "-edit"}
                               onClick={() => props.editTestRun(value.id)}
-                              className="text-indigo-500 h-4 w-4 cursor-pointer"
-                              aria-hidden="true"
-                            />
+                            >
+                              <PencilSquareIcon
+                                className="text-indigo-500 h-4 w-4 cursor-pointer"
+                                aria-hidden="true"
+                              />
+                            </button>
+
                             <div
                               data-tooltip-id="test-run-table-tooltip-id"
                               data-tooltip-content={t("Delete")}
                             >
-                              <TrashIcon
+                              <button
                                 data-tooltip-id="test-run-table-tooltip-id"
                                 data-tooltip-content={t("Delete")}
                                 data-cy={"test-run-" + i + "-delete"}
                                 onClick={() => openDeleteModal(value)}
-                                className="text-red-400 h-4 w-4 cursor-pointer"
-                              />
+                              >
+                                <TrashIcon
+                                  className="text-red-400 h-4 w-4 cursor-pointer"
+                                />
+                              </button>
                             </div>
                           </div>
                         </td>
