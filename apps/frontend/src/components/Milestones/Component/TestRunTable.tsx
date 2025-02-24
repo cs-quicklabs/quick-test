@@ -87,7 +87,7 @@ export default function Table({ RowData, endDate }: PropsType) {
         </div>
       </div>
       {RowData?.length === 0 && (
-        <div className="flex justify-center items-center content-center text-gray-500 text-xs font-normal">
+        <div className="flex mt-10 justify-center items-center content-center text-gray-500 text-sm font-normal">
           {t("No active test runs in this milestone.")}
         </div>
       )}

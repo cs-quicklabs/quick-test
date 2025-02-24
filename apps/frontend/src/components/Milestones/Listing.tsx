@@ -71,7 +71,7 @@ export default function TestRunList() {
                           editMilestone={editMilestone}
                         />
                       ) : (
-                        <div className="flex justify-center items-center content-center my-2 text-gray-500 text-xs font-normal">
+                        <div className="flex mt-10 justify-center items-center content-center text-gray-500 text-sm font-normal">
                           {t("No open milestone yet.")}
                         </div>
                       )}

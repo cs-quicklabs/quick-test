@@ -296,7 +296,7 @@
   "Testrun": "Prueba de funcionamiento",
   "Search": "Búsqueda",
   "Search...": "Búsqueda...",
-  "No matches": "No hay coincidencias",
+  "No match found": "no se encontró ninguna coincidencia.",
   "Add New Section": "Agregar nueva sección",
   "Create a new section to group your test cases": "Cree una nueva sección para agrupar sus casos de prueba",
   "Add Section": "Agregar sección",

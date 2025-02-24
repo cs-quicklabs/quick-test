@@ -154,7 +154,7 @@ export default function UserHeader() {
                 </div>
               </div>
               <div className="m-auto hidden sm:mr-0 grow sm:grow-0 sm:block">
-                <SearchBox inputFieldId={'search-for-desktop-id'} />
+                <SearchBox inputFieldId={'search-for-desktop-id'} placeholderText="Search projects, milestones and test runs" />
               </div>
             </div>
             <div className="inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto ml-2 lg:ml-4 sm:pr-0">
@@ -248,7 +248,7 @@ export default function UserHeader() {
           className="mx-8 sm:hidden sm:mr-0 flex grow mb-3 mt-2"
           id="mobile-menu"
         >
-          <SearchBox inputFieldId={'search-for-mobile-id'} />
+          <SearchBox inputFieldId={'search-for-mobile-id'} placeholderText="Search projects, milestones and test runs" />
         </div>
       </nav>
     </>

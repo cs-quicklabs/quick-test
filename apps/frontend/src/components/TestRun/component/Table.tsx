@@ -226,7 +226,7 @@ export default function Table(props: Props) {
         </div>
       </div>
       {props.RowData?.length === 0 && (
-        <div className="flex justify-center items-center content-center text-gray-500 text-xs font-normal my-2">
+        <div className="flex mt-10 justify-center items-center content-center text-gray-500 text-sm font-normal">
           {t("No test run added yet.")}
         </div>
       )}

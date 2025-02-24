@@ -442,22 +442,11 @@ export class OrganizationService {
     const query = UtilsService.lowerCase(searchOptionsDto.query);
     const res: any = {};
 
-    // if (query.length < 3) {
-    //     const id = Number.parseInt(query, 10);
-    //     const testCasesById = await this.testCaseService.searchTestCases(null, id, currentLoggedInUser);
-    //     if (testCasesById.length) res.testCases = testCasesById;
-    //     return this.filterExactSearchResults(res, query);
-    // }
-
     const projects = await this.projectReadService.searchProjects(
       query,
       currentLoggedInUser?.organization?.id,
     );
     if (projects.length) res.projects = projects;
-
-    // const id = Number.parseInt(query, 10);
-    // const testCases = await this.testCaseService.searchTestCases(query, id, currentLoggedInUser);
-    // if (testCases.length) res.testCases = testCases;
 
     const testSuites = await this.testSuiteService.searchTestSuites(
       query,
