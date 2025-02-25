@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import axiosService from "../Utils/axios";
 import SearchResult from "./components/SearchResult";
+import { showError } from "../Toaster/ToasterFun";
 interface ISearchResultProps {
   milestones: [];
   testCases: [];
@@ -68,7 +69,7 @@ const SearchBox = ({ inputFieldId, placeholderText }: { inputFieldId: string, pl
             );
             setSearchResult(response?.data?.data);
           } catch (err) {
-            // console.log(err?.response?.data?.message);
+            showError(err?.response?.data?.message)
           }
         }
       }, 300),

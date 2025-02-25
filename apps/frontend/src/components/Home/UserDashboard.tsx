@@ -12,6 +12,7 @@ import { freeTrial, SubscriptionStatus } from "../Utils/constants/misc";
 import dayjs from "dayjs";
 import { RoleType } from "../Utils/constants/roles-permission";
 import { AppContext } from "../Context/mainContext";
+import { showError } from "../Toaster/ToasterFun";
 
 export default function UserDashboard() {
   const { t } = useTranslation(["common"]);
@@ -28,10 +29,8 @@ export default function UserDashboard() {
 
   const fetchPluginConfig = async () => {
     try {
-      const response = await axiosService.get("/plugins/config");
-      if (response.data.data === undefined)
-        localStorage.setItem("isJiraIntegrated", "");
-      localStorage.setItem("isJiraIntegrated", response.data.data.isIntegrated);
+      const { data } = await axiosService.get("/plugins/config");
+      localStorage.setItem("isJiraIntegrated", data?.data?.isIntegrated ?? '');
     } catch (error) {
       localStorage.setItem("isJiraIntegrated", "");
     }
@@ -52,7 +51,8 @@ export default function UserDashboard() {
         setLoading(false);
       }
     } catch (error) {
-      // console.log(error);
+      setLoading(false);
+      showError(error?.message);
     }
   }, [state.userDetails]);
 
@@ -61,38 +61,28 @@ export default function UserDashboard() {
       setLoading(true);
       setApiLoading(true);
       const resp = await axiosService.get("payments/price", {});
-      if (resp.data.data) {
-        setCurrency(resp.data.data.price.currency);
-        setPaymentDuration(resp.data.data.price.recurring.interval);
-        const tempAmount = resp.data.data.price.unit_amount;
-        const newAmount = String(tempAmount).split("", 2).join("");
-        setAmount(newAmount);
+      const price = resp?.data?.data?.price;
+      if (price) {
+        setCurrency(price?.currency);
+        setPaymentDuration(price?.recurring.interval);
+        setAmount(String(price?.unit_amount).split("", 2).join(""));
         setApiLoading(false);
         setLoading(false);
       }
     } catch (err) {
-      // console.error(err?.message);
+      setApiLoading(false);
+      setLoading(false);
+      showError(err?.message);
     }
   }, []);
 
   useEffect(() => {
-    let subStatus;
-    if (localStorage.getItem("firstLogin")) {
-      subStatus = JSON.parse(localStorage.getItem("firstLogin") || "");
-    }
-    if (subStatus) {
-      setIsFirstLogin(true);
+    let firstLogin = JSON.parse(localStorage.getItem("firstLogin") || "false");
+    if (firstLogin) {
       localStorage.setItem("firstLogin", JSON.stringify(false));
-    } else {
-      setIsFirstLogin(false);
     }
-
-    const checkRole = localStorage.getItem("role");
-    if (checkRole === RoleType.OWNER) {
-      setIfOwner(true);
-    } else {
-      setIfOwner(false);
-    }
+    setIsFirstLogin(firstLogin);
+    setIfOwner(localStorage.getItem("role") === RoleType.OWNER);
   }, []);
 
   useEffect(() => {
@@ -129,16 +119,14 @@ export default function UserDashboard() {
               />
             </>
           )}
-        <div className="bg-gray-50">
-          <ProjectHeading
-            title={t("Dashboard")}
-            redirectToPage={{
-              url: appRoutes.CREATE_PROJECT,
-              text: i18next.t("New Project"),
-            }}
-            dataAttr="new-project"
-          />
-        </div>
+        <ProjectHeading
+          title={t("Dashboard")}
+          redirectToPage={{
+            url: appRoutes.CREATE_PROJECT,
+            text: i18next.t("New Project"),
+          }}
+          dataAttr="new-project"
+        />
         <ProjectListing />
       </>
     );

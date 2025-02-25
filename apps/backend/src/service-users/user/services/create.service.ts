@@ -103,7 +103,6 @@ export class UserCreateService {
     if (checkUser) throw new ConflictException("translations.DUPLICATE_EMAIL");
     const organization = await this.organizationService.createOrganization({ name: organizationName });
     const role = await this.roleService.findByRoleType(RoleType.ORGADMIN);
-    console.log('role', role)
     const user = this.userRepository.create({
       ...userRegisterDto,
       organization: organization,

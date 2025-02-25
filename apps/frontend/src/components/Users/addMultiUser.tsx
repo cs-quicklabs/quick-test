@@ -42,7 +42,6 @@ const AddMultiUser = () => {
         let tempArray: any[] = [];
         respArray.map((obj: any) => (tempArray = [...tempArray, obj.roleType]));
         let capitalizeArray: any[] = [];
-        // let newValue:string;
         capitalizeArray = tempArray.map(
           (ele: string) =>
             ele &&
@@ -53,7 +52,7 @@ const AddMultiUser = () => {
         setRoleList(capitalizeArray);
       }
     } catch (err) {
-      // console.log(err?.message);
+      showError(err?.message)
     }
   }, []);
 
