@@ -5,7 +5,6 @@ import ReactDragListView from "react-drag-listview/lib";
 import {
   PencilSquareIcon,
   TrashIcon,
-  PlusIcon,
   EllipsisVerticalIcon,
 } from "@heroicons/react/24/solid";
 import axiosService from "../../Utils/axios";
@@ -175,23 +174,21 @@ export default function TestCaseListTable({
           data-cy={dataAttr + "body"}
           className="bg-white divide-y divide-gray-200"
         >
-          {orderTestCases?.map((test: SerialisedTestCaseType, i) => (
-            <tr key={i} data-cy={dataAttr + i} className="bg-white rounded">
+          {orderTestCases?.map((test: SerialisedTestCaseType, index) => (
+            <tr key={index} data-cy={dataAttr + index} className="bg-white rounded">
               <td className="py-2 whitespace-nowrap text-xs font-normal pr-2">
                 <div className="flex justify-center">
                   {showDragIcon && (
-                    <Link to={"#"} title="Drag" className="drag mr-2">
+                    <Link to={"#"} title="Drag" data-tooltip-id="testcase-list-table-tooltip-id"
+                      data-tooltip-content={t("Drag")} className="drag mr-2">
                       <EllipsisVerticalIcon
-                        data-tooltip-id="testcase-list-table-tooltip-id"
-                        data-tooltip-content={t("Drag")}
                         className="text-gray-900 mx-auto h-4 w-4 cursor-move dragIcon"
                       />
-                      <PlusIcon className="text-indigo-600 h-4 w-4 cursor-move plusIcon hidden" />
                     </Link>
                   )}
                   <input
-                    id={`${i}-${sectionId}`}
-                    data-cy={dataAttr + i + "-check"}
+                    id={`${index}-${sectionId}`}
+                    data-cy={dataAttr + index + "-check"}
                     className={`h-4 w-4 text-indigo-600 focus:outline-none border-gray-300 rounded focus:ring-0 focus:ring-transparent focus:ring-offset-0`}
                     type="checkbox"
                     checked={!!test.checked}
@@ -215,7 +212,7 @@ export default function TestCaseListTable({
                   className="hover:cursor-pointer hover:underline"
                   onClick={() => titleClickHandler(test)}
                 >
-                  {test.serialNumber}
+                  {index + 1}
                 </span>
               </td>
               <td className="px-2 py-2 whitespace-nowrap text-xs">
@@ -243,7 +240,7 @@ export default function TestCaseListTable({
                   <button
                     data-tooltip-id="testcase-list-table-tooltip-id"
                     data-tooltip-content={t("Edit")}
-                    data-cy={dataAttr + i + "-edit"}
+                    data-cy={dataAttr + index + "-edit"}
                     onClick={(e: any) => {
                       e.stopPropagation();
                       editTestCase(test.id);
@@ -257,7 +254,7 @@ export default function TestCaseListTable({
                   <button
                     data-tooltip-id="testcase-list-table-tooltip-id"
                     data-tooltip-content={t("Delete")}
-                    data-cy={dataAttr + i + "-delete"}
+                    data-cy={dataAttr + index + "-delete"}
                     onClick={(e: any) => {
                       e.stopPropagation();
                       openDeleteModal(test);

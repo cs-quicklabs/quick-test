@@ -28,7 +28,7 @@ export class UserReadService {
     public readonly validatorService: ValidatorService,
     public readonly awsS3Service: AwsS3Service,
     public readonly moduleRef: ModuleRef,
-  ) {}
+  ) { }
 
   onModuleInit(): void {
     this.authService = this.moduleRef.get(AuthService, {
@@ -249,7 +249,6 @@ export class UserReadService {
         )
         .getMany();
     } catch (err) {
-      console.log("err", err);
       return err;
     }
   }

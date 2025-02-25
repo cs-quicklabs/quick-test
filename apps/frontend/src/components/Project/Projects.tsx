@@ -128,7 +128,7 @@ export default function Projects() {
       toggleModal(false);
       queryClient.invalidateQueries({ queryKey: ["all-projects"] });
     } catch (err) {
-      // console.log(err.messsage)
+      showError(err?.message)
     }
   }, [selectedId, queryClient]);
 

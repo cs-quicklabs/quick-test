@@ -301,7 +301,6 @@ const TestCaseToolbar = ({
         }
 
         default:
-          // console.log(sortValue.label);
           break;
       }
     };

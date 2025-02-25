@@ -76,7 +76,7 @@ const ArchivedUsers = () => {
       setShowModal(false);
       refetch();
     } catch (err) {
-      // console.log(err.message)
+      showError(err?.messsage)
     }
   }, [refetch, selectedId]);
 
@@ -87,7 +87,7 @@ const ArchivedUsers = () => {
       setShowModal(false);
       refetch();
     } catch (err) {
-      // console.log(err.messsage)
+      showError(err?.messsage)
     }
   }, [refetch, selectedId]);
 

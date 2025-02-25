@@ -9,6 +9,7 @@ import Button from "../../Button";
 import SectionList from "./ModalSectionList";
 import { useFormikContext } from "formik";
 import { useTranslation } from "react-i18next";
+import { showError } from "../../Toaster/ToasterFun";
 
 const SelectionModal = ({
   showModal,
@@ -47,7 +48,7 @@ const SelectionModal = ({
         setRowData(newRowData);
       } else setRowData(data);
     } catch (err) {
-      // console.log(err);
+      showError(err?.message)
     }
   }, [params.pid, t]);
 

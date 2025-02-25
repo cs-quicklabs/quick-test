@@ -85,7 +85,7 @@ const ArchivedProjects = () => {
       showSuccess(resp.data.message);
       refetch();
     } catch (err) {
-      // console.log(err.message)
+      showError(err?.messsage)
     }
   }, [refetch, selectedId]);
 
@@ -99,7 +99,7 @@ const ArchivedProjects = () => {
       setShowModal(false);
       refetch();
     } catch (err) {
-      // console.log(err.messsage)
+      showError(err?.messsage)
     }
   }, [refetch, selectedId]);
 
@@ -190,7 +190,7 @@ const ArchivedProjects = () => {
                   </tr>
                 ))}
               </tbody>
-              {archiveProjects?.data?.length === 0 && (
+              {archiveProjects?.data?.data?.length === 0 && (
                 <tfoot>
                   <tr>
                     <td

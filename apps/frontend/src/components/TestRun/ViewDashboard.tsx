@@ -36,8 +36,6 @@ export default function Dashboard() {
         `/projects/${params.pid}/test-suite-detail/${params.id}`
       );
       setTotalUserData(response.data.data);
-
-      // console.log("Response", response);
       if (response.data.data.user) {
         setuserData({
           title: response.data.data.name,

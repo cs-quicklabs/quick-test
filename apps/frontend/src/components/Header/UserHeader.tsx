@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import bugplotLogo from "../../assets/images/bugplot-logo.svg";
 import AccessControl from "../AccessControl";
 import { ArchivePermissions } from "../Utils/constants/roles-permission";
+import { showError } from "../Toaster/ToasterFun";
 
 export default function UserHeader() {
   const { t } = useTranslation(["common"]);
@@ -30,8 +31,8 @@ export default function UserHeader() {
     try {
       const response = state.userDetails;
       setImageURL(response.profileImage);
-    } catch (error) {
-      // console.log("Failed fetching profile picture")
+    } catch (_) {
+      showError("Failed to fetch profile picture")
     }
   }, [state.userDetails]);
 
