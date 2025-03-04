@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import axiosService from "../Utils/axios";
 import SearchResult from "./components/SearchResult";
+import { showError } from "../Toaster/ToasterFun";
 interface ISearchResultProps {
   milestones: [];
   testCases: [];
@@ -26,7 +27,7 @@ const debounce = (fn: any, wait: number) => {
   };
 };
 
-const SearchBox = ({ inputFieldId }: { inputFieldId: string }) => {
+const SearchBox = ({ inputFieldId, placeholderText }: { inputFieldId: string, placeholderText: string }) => {
   const { t } = useTranslation(["common"]);
   const [inputValue, setInputValue] = useState("");
   const [showDropDown, setShowDropDown] = useState(false);
@@ -68,10 +69,10 @@ const SearchBox = ({ inputFieldId }: { inputFieldId: string }) => {
             );
             setSearchResult(response?.data?.data);
           } catch (err) {
-            // console.log(err?.response?.data?.message);
+            showError(err?.response?.data?.message)
           }
         }
-      }, 1500),
+      }, 300),
     []
   );
 
@@ -84,7 +85,7 @@ const SearchBox = ({ inputFieldId }: { inputFieldId: string }) => {
 
   return (
     <>
-      <div className="w-full max-w-lg lg:max-w-xs">
+      <div className="w-full max-w-xl">
         <div className="relative">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 z-10">
             <svg
@@ -101,11 +102,11 @@ const SearchBox = ({ inputFieldId }: { inputFieldId: string }) => {
             </svg>
           </div>
           <input
-            className="pl-10 pr-3 py-1 rounded-md text-sm text-gray-500 font-medium sm:w-72  h-9 grow sm:grow-0 sm:justify-self-end relative bg-gray-700 focus:border-white focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-white sm:text-sm"
+            className="pl-10 pr-3 py-1 h-9 rounded-md text-sm font-medium text-gray-500 bg-gray-700 sm:w-96 grow sm:grow-0 sm:justify-self-end relative focus:border-white focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-white"
             ref={searchWidthRef}
             type="search"
             id={inputFieldId}
-            placeholder={t("Search...")}
+            placeholder={t(placeholderText)}
             value={inputValue}
             onChange={inputOnChange}
             onFocus={inputOnFocus}
@@ -118,11 +119,11 @@ const SearchBox = ({ inputFieldId }: { inputFieldId: string }) => {
       {showDropDown && (
         <div
           style={{ width: `${searchWidth}px` }}
-          className={`absolute top-24 sm:top-11 rounded-md shadow-md border border-gray-300 overflow-x-hidden w-72 bg-white z-10 ${getAllSearchCount() > 8 ? "h-64 overflow-y-auto" : "h-auto"
+          className={`absolute top-24 sm:top-11 rounded-md shadow-md border border-gray-300 overflow-x-hidden w-96 bg-white z-10 ${getAllSearchCount() > 8 ? "h-64 overflow-y-auto" : "h-auto"
             } `}
         >
           {Object.keys(searchResult).length === 0 ? (
-            <div className="px-2 py-1 text-sm">{t("No matches")}</div>
+            <div className="px-2 py-1 text-sm">{t("No match found")}</div>
           ) : (
             <SearchResult
               matchedData={searchResult}

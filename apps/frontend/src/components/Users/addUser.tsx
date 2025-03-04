@@ -139,8 +139,10 @@ const AddUser = () => {
         );
         setRoleList(tempArray);
       }
-    } catch (err) {
-      // err.message && console.log(err?.message);
+
+    } catch (error) {
+      setLoading(false);
+      showError(error?.message)
     } finally {
       setLoading(false);
     }
@@ -278,8 +280,8 @@ const AddUser = () => {
                       loading={apiloading}
                       type="submit"
                       className={`sm:order-1  ${params?.id && !dirty
-                          ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                          : ""
+                        ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
+                        : ""
                         }`}
                       disabled={params?.id && !dirty ? true : false}
                     >

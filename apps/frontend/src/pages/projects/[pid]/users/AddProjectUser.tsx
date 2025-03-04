@@ -157,9 +157,11 @@ export default function AddProjectUser(props: any) {
                                       </span>
                                       <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                                         <input
+                                          id={member.id}
                                           type="checkbox"
                                           className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                           checked={selected}
+                                          readOnly
                                         />
                                       </span>
                                     </>

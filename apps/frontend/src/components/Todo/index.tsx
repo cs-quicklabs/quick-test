@@ -90,7 +90,7 @@ const Todo = () => {
 
   useEffect(() => {
     if (params?.pid) getData();
-  }, [params?.pid]);
+  }, [params?.pid, getData]);
 
   const renderGraph = (
     passed: number,
@@ -225,7 +225,7 @@ const Todo = () => {
             </tbody>
           </table>
           {testRunList.length === 0 && (
-            <div className="flex mt-4 justify-center items-center content-center text-gray-500 text-xs font-normal">
+            <div className="flex mt-10 justify-center items-center content-center text-gray-500 text-sm font-normal">
               {t("No test runs added yet.")}
             </div>
           )}

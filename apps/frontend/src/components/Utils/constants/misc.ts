@@ -20,8 +20,8 @@ export const enum ToastMessage {
   ADD_CARD_SUCESS = "Card has been added successfully",
   PRIMARY_CARD_UPDATE = "Primary card updated",
   REMOVE_CARD_SUCCESS = "Card has been removed successfully",
-  MEMBER_ADDED= "Member added successfully",
-  MEMBER_DELETED= "Member deleted successfully",
+  MEMBER_ADDED = "Member added successfully",
+  MEMBER_DELETED = "Member deleted successfully",
 }
 
 export const ValidatorMessage = {
@@ -35,7 +35,7 @@ export const ValidatorMessage = {
   FIRST_NAME_SPACE_NOT_VALID: "First Name cannot accept space",
   FIRST_NAME_REQ: "First Name is required",
   FIRST_NAME_LENGTH: "First Name must be between 1 to 32 characters.",
-  FIRST_NAME_MIN_LENGTH:"First Name should be minimum 3 characters",
+  FIRST_NAME_MIN_LENGTH: "First Name should be minimum 3 characters",
   LAST_NAME_NOT_VALID: "Last name cannot accept spaces, numbers and special characters",
   LAST_NAME_SPACE_NOT_VALID: "Last Name cannot accept space",
   LAST_NAME_REQ: "Last Name is required",

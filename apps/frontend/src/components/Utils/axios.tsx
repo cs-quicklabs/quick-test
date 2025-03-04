@@ -14,7 +14,7 @@ instance.interceptors.request.use(
     // @ts-ignore
     config.headers["Accept-Language"] =
       localStorage.getItem("i18nextLng") || "en-US";
-    const accessToken = localStorage.getItem("token");
+    const accessToken = sessionStorage.getItem("token") || localStorage.getItem("token");
     if (accessToken) {
       // https://stackoverflow.com/questions/69524573/why-config-headers-in-interceptor-is-possibly-undefined
       config.headers = config.headers || {};

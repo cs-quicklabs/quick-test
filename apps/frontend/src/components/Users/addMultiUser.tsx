@@ -42,7 +42,6 @@ const AddMultiUser = () => {
         let tempArray: any[] = [];
         respArray.map((obj: any) => (tempArray = [...tempArray, obj.roleType]));
         let capitalizeArray: any[] = [];
-        // let newValue:string;
         capitalizeArray = tempArray.map(
           (ele: string) =>
             ele &&
@@ -53,7 +52,7 @@ const AddMultiUser = () => {
         setRoleList(capitalizeArray);
       }
     } catch (err) {
-      // console.log(err?.message);
+      showError(err?.message)
     }
   }, []);
 
@@ -135,7 +134,7 @@ const AddMultiUser = () => {
       <div className=" mx-8 pb-10">
         <div className="flex w-full justify-between mt-4 items-center">
           <div>
-            <label className="block text-lg font-medium text-gray-900">
+            <label htmlFor="Users*" className="block text-lg font-medium text-gray-900">
               {t("Add New Users")}
             </label>
             <p className="block text-sm font-normal text-gray-500">

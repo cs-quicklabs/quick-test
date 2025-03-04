@@ -45,21 +45,21 @@ const SignIn = () => {
   });
 
   async function doLogin(loginDetail: any) {
-    const { remember_me = false } = loginDetail;
-    delete loginDetail.remember_me;
+    const { remember_me = false, ...restLoginDetails } = loginDetail;
     try {
-      const userData = await axiosService.post("/auth/login", loginDetail);
-      const { user, token, permissions } = userData.data.data;
+      const { data } = await axiosService.post("/auth/login", restLoginDetails);
+      const { user, token, permissions } = data.data;
       setUserDataInLocalStorage(user, permissions);
-      remember_me && localStorage.setItem("token", token.accessToken);
+      const storage = remember_me ? localStorage : sessionStorage;
+      storage.setItem('token', token.accessToken);
       dispatchUserData(user);
       navigationAfterLoginSuccess(user);
     } catch (error) {
+      showError(error.response?.data?.message);
       if (error.response?.status === 400) {
-        showError(error.response?.data?.message);
         localStorage.setItem("email", loginDetail?.email);
         navigate(appRoutes.VERIFY);
-      } else showError(error.response?.data?.message);
+      }
     }
   }
 

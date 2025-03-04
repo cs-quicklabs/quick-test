@@ -56,7 +56,7 @@ import { ResponseError } from "../../common/dto/ErrorResponseDto";
 @UseFilters(ExceptionResponseFilter)
 @ApiBearerAuth()
 export class OrganizationController {
-  constructor(private _organizationService: OrganizationService) {}
+  constructor(private _organizationService: OrganizationService) { }
 
   @Get()
   @HttpCode(HttpStatus.OK)
@@ -238,7 +238,6 @@ export class OrganizationController {
   @Permissions(Permission.RESET_PASSWORD_LINK)
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({
-    status: HttpStatus.OK,
     description: "Resend reset password link to member's email",
   })
   async resendResetPasswordLink(

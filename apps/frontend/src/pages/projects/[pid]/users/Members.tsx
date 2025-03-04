@@ -24,7 +24,7 @@ import { Tooltip } from "react-tooltip";
 export default function ProjectMembers(props: any) {
   const [open, setOpen] = useState(false);
   const [isShare, setShare] = useState(false);
-  const [message, setMessge] = useState("");
+  const [userData, setUserData] = useState({ fullName: '', id: '' });
   const [deleteUser, setDeleteUser] = useState("");
   const cancelButtonRef = useRef(null);
   const [isLoading, setLoading] = useState(false);
@@ -59,9 +59,7 @@ export default function ProjectMembers(props: any) {
   }, [props?.pid, fetchData]);
 
   const getConfirmation = (user: { fullName: string; id: string }) => {
-    setMessge(
-      `after deleting  ${user.fullName} will no longer have access to any ${props?.pname}-related data, including milestones, testcases and other`
-    );
+    setUserData(user);
     setDeleteUser(user.id);
     setOpen(true);
   };
@@ -111,20 +109,23 @@ export default function ProjectMembers(props: any) {
                             </td>
                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                               {/* <div className="text-indigo-600 hover:text-indigo-900 cursor-pointer"> */}
-                              <TrashIcon
+                              <button
                                 data-tooltip-id="delete-id"
                                 data-tooltip-content="Delete"
                                 onClick={() => getConfirmation(member)}
-                                className="w-4 h-8 text-red-400"
-                              />
+                              >
+                                <TrashIcon
+                                  className="w-4 h-8 text-red-400"
+                                />
+                              </button>
                               {/* </div> */}
                             </td>
                           </tr>
                         ))
                       ) : (
                         <tr >
-                          <td className="text-center p-10">
-                            No Member Found
+                          <td className="flex mt-10 justify-center text-gray-500 text-sm font-normal">
+                            No Member Found.
                           </td>
                         </tr>
                       )}
@@ -215,7 +216,7 @@ export default function ProjectMembers(props: any) {
                         Delete Member
                       </DialogTitle>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-500">{message}</p>
+                        <p className="text-sm text-gray-500">After deleting, <strong>{userData?.fullName}</strong> will no longer have access to any <strong>{props?.pname}</strong>-related data, including milestones, test cases, and other related information.</p>
                       </div>
                     </div>
                   </div>
