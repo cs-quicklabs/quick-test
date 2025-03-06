@@ -155,7 +155,7 @@ export default function UserHeader() {
                 </div>
               </div>
               <div className="m-auto hidden sm:mr-0 grow sm:grow-0 sm:block">
-                <SearchBox inputFieldId={'search-for-desktop-id'} placeholderText="Search projects, milestones and test runs" />
+                <SearchBox inputFieldId={'search-for-desktop-id'} placeholderText="Search for projects, milestones and test runs" />
               </div>
             </div>
             <div className="inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto ml-2 lg:ml-4 sm:pr-0">

@@ -67,8 +67,8 @@ export class UtilsService {
    * @returns {Promise<boolean>}
    */
 
-  static validateHash(password: string, hash: string): Promise<boolean> {
-    return bcrypt.compare(password, hash || "");
+  static validateHash(password: string, hash: string) {
+    return bcrypt.compareSync(password, hash || "");
   }
 
   /**

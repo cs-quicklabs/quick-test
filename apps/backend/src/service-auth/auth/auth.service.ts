@@ -56,25 +56,33 @@ export class AuthService {
    * Internal method to Validate User
    */
   async validateUser(userLoginDto: UserLoginDto): Promise<UserEntity> {
+    console.time("findUserByEmail");
     const user = await this.userReadService.findUserByEmail(
       userLoginDto.email,
       ["role", "organization"],
     );
+    console.timeEnd("findUserByEmail");
+    this.loginErrorHandling(user);
+    console.time("findUserByEmail");
     const isPasswordValid = await UtilsService.validateHash(
       userLoginDto.password,
       user && user.password,
     );
-    if (!user || !isPasswordValid) {
-      throw new ExpectationFailedException(
-        "translations.INCORRECT_CREDENTIALS",
-      );
-    }
+    console.timeEnd("findUserByEmail");
+    this.loginErrorHandling(isPasswordValid);
     if (user.role.roleType === RoleType.ORGADMIN && !user.isVerified) {
       throw new BadRequestException("translations.VERIFY_EMAIL");
     }
     return user;
   }
 
+  loginErrorHandling(value) {
+    if (!value) {
+      throw new ExpectationFailedException(
+        "translations.INCORRECT_CREDENTIALS",
+      );
+    }
+  }
   /**
    * Internal method to Set Auth User
    */
