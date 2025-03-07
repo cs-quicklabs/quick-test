@@ -71,17 +71,11 @@ export class AuthController {
   async userLogin(
     @Body(new ValidationPipe()) userLoginDto: UserLoginDto,
   ): Promise<ResponseSuccess> {
-    console.time("validateUser");
     const userEntity = await this.authService.validateUser(userLoginDto);
-    console.timeEnd("validateUser");
-    console.time("findAllPermissionsByRoleId");
     const permissions = await this.permissionService.findAllPermissionsByRoleId(
       userEntity.roleId,
     );
-    console.timeEnd("findAllPermissionsByRoleId");
-    console.time("createToken");
     const token = await this.authService.createToken(userEntity);
-    console.timeEnd("createToken");
     const response = new LoginPayloadDto(
       userEntity.toDto(),
       token,
