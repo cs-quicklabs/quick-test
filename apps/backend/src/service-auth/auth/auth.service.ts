@@ -60,21 +60,25 @@ export class AuthService {
       userLoginDto.email,
       ["role", "organization"],
     );
+    this.loginErrorHandling(user);
     const isPasswordValid = await UtilsService.validateHash(
       userLoginDto.password,
       user && user.password,
     );
-    if (!user || !isPasswordValid) {
-      throw new ExpectationFailedException(
-        "translations.INCORRECT_CREDENTIALS",
-      );
-    }
+    this.loginErrorHandling(isPasswordValid);
     if (user.role.roleType === RoleType.ORGADMIN && !user.isVerified) {
       throw new BadRequestException("translations.VERIFY_EMAIL");
     }
     return user;
   }
 
+  loginErrorHandling(value) {
+    if (!value) {
+      throw new ExpectationFailedException(
+        "translations.INCORRECT_CREDENTIALS",
+      );
+    }
+  }
   /**
    * Internal method to Set Auth User
    */

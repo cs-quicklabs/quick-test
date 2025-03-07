@@ -56,7 +56,7 @@ export class AuthController {
     public readonly userCreateService: UserCreateService,
     public readonly userReadService: UserReadService,
     public readonly permissionService: PermissionService,
-  ) {}
+  ) { }
 
   /**
    * User Login

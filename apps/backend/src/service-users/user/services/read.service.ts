@@ -60,15 +60,10 @@ export class UserReadService {
     email: string,
     relations?: string[],
   ): Promise<UserEntity> {
-    const queryBuilder = this.userRepository.createQueryBuilder("user");
-    relations?.forEach((relation) => {
-      queryBuilder.leftJoinAndSelect(`user.${relation}`, relation);
+    return this.userRepository.findOne({
+      where: { email },
+      relations,
     });
-
-    const user = await queryBuilder
-      .where("user.email = :email", { email })
-      .getOne();
-    return user;
   }
 
   /**

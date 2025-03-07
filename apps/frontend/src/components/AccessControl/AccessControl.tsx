@@ -51,7 +51,7 @@ const AccessControl = (props: AccessControlProps) => {
           {React.Children.map(children, (child) => {
             return React.cloneElement(child, {
               "aria-disabled": true,
-              className: "cursor-not-allowed",
+              // className: "cursor-not-allowed",
               disabled: true,
               onClick: (e: React.MouseEvent<HTMLElement>) => {
                 e.stopPropagation();

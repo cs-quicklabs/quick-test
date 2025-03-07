@@ -147,7 +147,7 @@ const SignUp = () => {
                       loading={loading}
                       className="w-full flex py-2 px-4"
                     >
-                      {t("Sign Up")}
+                      {t("Sign up")}
                     </Button>
                   </div>
                 </Form>
@@ -163,7 +163,7 @@ const SignUp = () => {
                     {t("Already have an account?")}{" "}
                     <Link to={appRoutes.SIGNIN_PAGE}>
                       <span className="font-medium text-indigo-600 hover:text-indigo-500">
-                        {t("Login")}
+                        {t("Sign in")}
                       </span>
                     </Link>
                   </span>
