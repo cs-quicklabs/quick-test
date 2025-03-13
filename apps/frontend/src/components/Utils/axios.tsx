@@ -35,14 +35,14 @@ instance.interceptors.response.use(
     if (errorResponse) {
       //401=unauthorised access possibly due to being archived
       if (errorResponse) {
-        if (errorResponse.response.status === 401) {
+        if (errorResponse?.response?.status === 401) {
           localStorage.clear();
           sessionStorage.clear();
           window.location.href = appRoutes.SIGNIN_PAGE;
-        } else if (errorResponse.response.status === 403) {
+        } else if (errorResponse?.response?.status === 403) {
           //403=Plan expired
           NotifyExpired();
-        } else if (errorResponse.response.status === 404)
+        } else if (errorResponse?.response?.status === 404)
           showError(i18next.t(ToastMessage.NO_TEST_CASE_PROJECT));
       }
       return Promise.reject(errorResponse);
