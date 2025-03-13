@@ -150,7 +150,7 @@
     "TESTCASE_RESULT_SUBMITTED": "Test Case result submitted successfully",
     "TESTCASE_RESULT_LIST": "Test case result list",
     "TEST_RESULT_DETAILS": "Test result details",
-    "TEST_RUN_DELETED": "Test Run deleted successfully",
+    "TEST_RUN_DELETED": "The Test Run has been successfully deleted.",
     "LIST_USERS": "Users listing",
     "USERS_DETAILS": "Users details",
     "USER_PROJECTS_TESTCASES": "Projects and Test cases counts for User",
