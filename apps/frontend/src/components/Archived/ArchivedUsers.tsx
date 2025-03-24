@@ -21,7 +21,7 @@ import { ToastMessage } from "../Utils/constants/misc";
 import i18next from "i18next";
 
 const ArchivedUsers = () => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const [ifRestore, setIfRestore] = useState(false);
   const [modalMsg, setModalMsg] = useState(<></>);

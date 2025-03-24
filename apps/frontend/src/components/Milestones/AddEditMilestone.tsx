@@ -23,7 +23,7 @@ interface PropsType {
 }
 
 const AddEditMilestone = ({ editMilestone }: PropsType) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
 
@@ -209,7 +209,7 @@ const AddEditMilestone = ({ editMilestone }: PropsType) => {
 
                   <div>
                     <FormikTextArea
-                      placeholder="Description max size can be 500"
+                      placeholder={t("Description max size can be 500.")}
                       type="text"
                       name="description"
                       label={t("Description")}

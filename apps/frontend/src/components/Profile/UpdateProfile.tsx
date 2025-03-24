@@ -59,9 +59,9 @@ interface IUserData {
 }
 
 export default function UpdateProfile() {
-  const { i18n, t } = useTranslation(["common"]);
+  const { i18n, t } = useTranslation();
   const [data, setData] = useState({ ...initialValue });
-  
+
   const navigate = useNavigate();
 
   const [showLoader, setShowLoader] = useState(true);
@@ -100,10 +100,10 @@ export default function UpdateProfile() {
           response.roleId === RoleId.SUPERADMIN
             ? RoleName.SUPERADMIN
             : response.roleId === RoleId.OWNER
-            ? RoleName.OWNER
-            : response.roleId === RoleId.ADMIN
-            ? RoleName.ADMIN
-            : RoleName.MEMBER,
+              ? RoleName.OWNER
+              : response.roleId === RoleId.ADMIN
+                ? RoleName.ADMIN
+                : RoleName.MEMBER,
       });
       setImageURL(response.profileImage || "");
       setShowLoader(false);
@@ -184,7 +184,6 @@ export default function UpdateProfile() {
 
     try {
       localStorage.setItem("i18nextLng", value.language);
-      i18n.changeLanguage(value.language);
       const response = await axiosService.put(`/users/${value.id}`, userData);
       dispatch({
         type: "UPDATE_PROFILE_DATA",
@@ -192,7 +191,8 @@ export default function UpdateProfile() {
       });
       showSuccess(response.data.message);
       setApiLoading(false);
-      getProfileData();
+      await getProfileData();
+      i18n.changeLanguage(value.language);
     } catch (err: any) {
       if (err.response && err.response.data) {
         showError(err.response.data.message);
@@ -338,11 +338,10 @@ export default function UpdateProfile() {
                   onMouseDown={() => setValidation(true)}
                   loading={apiloading === true ? "true" : undefined}
                   type="submit"
-                  className={`sm:order-1 ${
-                    !dirty || !isValid
-                      ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                      : ""
-                  }`}
+                  className={`sm:order-1 ${!dirty || !isValid
+                    ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
+                    : ""
+                    }`}
                   disabled={!(dirty && isValid)}
                 >
                   {t("Update")}

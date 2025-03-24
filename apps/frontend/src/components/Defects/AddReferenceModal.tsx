@@ -47,7 +47,7 @@ export default function AddReferenceModal({
     parent: "",
     issueTypelabel: "",
   };
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
 
   const [initValues, setInitValues] = useState(initialValues);
   const [jiraProjects, setJiraProjects] = useState([]);

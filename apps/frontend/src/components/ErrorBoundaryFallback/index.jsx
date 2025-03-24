@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import bugplotLogo from '../../assets/images/bugplot-logo.svg';
 
 export default function Example() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   return (
     <div>
       <section className="pt-40 bg-gray-50 pb-20">

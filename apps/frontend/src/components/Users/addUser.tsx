@@ -41,7 +41,7 @@ const AddUser = () => {
     userId: params?.id ?? "",
   };
 
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);

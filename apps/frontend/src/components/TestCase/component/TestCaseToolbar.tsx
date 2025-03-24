@@ -34,7 +34,7 @@ const TestCaseToolbar = ({
   HandleDeleteClick,
   projectName,
 }: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const initialSortValue = {
     label: t("Section"),
     key: "section",

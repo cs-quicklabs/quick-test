@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 export default function DeleteConfirmationModal(props: any) {
   const cancelButtonRef = useRef(null);
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
 
   return (
     <Transition show={props.open} as={Fragment}>

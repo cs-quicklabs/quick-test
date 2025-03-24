@@ -19,7 +19,7 @@ import { Trans, useTranslation } from "react-i18next";
 import i18next from "i18next";
 
 const TestView = () => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
   const [searchParams] = useSearchParams();

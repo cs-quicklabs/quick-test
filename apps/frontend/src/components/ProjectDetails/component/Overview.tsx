@@ -23,7 +23,7 @@ import AccessControl from "../../AccessControl";
 import { MilestonePermissions } from "../../Utils/constants/roles-permission";
 
 export default function Overview() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
 

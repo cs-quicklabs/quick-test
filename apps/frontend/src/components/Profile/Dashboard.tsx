@@ -20,7 +20,7 @@ const TapNavData = [
 ];
 
 export default function Dashboard() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const params = useParams();
   const location = useLocation();
 
@@ -34,20 +34,18 @@ export default function Dashboard() {
                 to={val.link}
                 key={i}
                 data-cy={val.dataAttr}
-                className={`text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md py-2 pl-2 pr-3 text-sm leading-6 font-semibold ${
-                  location?.pathname === val.link
-                    ? "bg-gray-50 text-indigo-600  "
-                    : "bg-white hover:bg-gray-50 "
-                }`}
+                className={`text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md py-2 pl-2 pr-3 text-sm leading-6 font-semibold ${location?.pathname === val.link
+                  ? "bg-gray-50 text-indigo-600  "
+                  : "bg-white hover:bg-gray-50 "
+                  }`}
                 aria-current="page"
               >
                 <svg
                   // className="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
-                  className={`h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600 ${
-                    location?.pathname === val.link
-                      ? "text-indigo-600"
-                      : "hover:text-indigo-600"
-                  }`}
+                  className={`h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600 ${location?.pathname === val.link
+                    ? "text-indigo-600"
+                    : "hover:text-indigo-600"
+                    }`}
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"

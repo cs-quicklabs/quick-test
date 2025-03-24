@@ -24,7 +24,7 @@ const TapNavData = [
 ];
 
 export default function Archived() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const params = useParams();
   const location = useLocation();
 

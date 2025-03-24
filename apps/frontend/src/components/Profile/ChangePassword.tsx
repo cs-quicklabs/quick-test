@@ -21,7 +21,7 @@ const initialValue = {
 };
 
 export default function UpdateProfile() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [apiloading, setApiLoading] = useState(false);
   const [validation, setValidation] = useState(false);
 
@@ -129,11 +129,10 @@ export default function UpdateProfile() {
                 onMouseDown={() => setValidation(true)}
                 loading={apiloading === true ? "true" : undefined}
                 type="submit"
-                className={`sm:order-1 ${
-                  !dirty
-                    ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                    : ""
-                }`}
+                className={`sm:order-1 ${!dirty
+                  ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
+                  : ""
+                  }`}
                 disabled={!dirty}
               >
                 {t("Update")}

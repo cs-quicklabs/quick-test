@@ -19,7 +19,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getMilestoneDataDetails } from "../../services/milestoneServices";
 
 export default function TestRunList() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
   const pid = params?.pid;

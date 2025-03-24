@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { AppContext } from "../Context/mainContext";
 
 export default function SessionExpiredPopup(props: any) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [open, setOpen] = useState(true);
   const navigate = useNavigate();
   const { dispatch } = useContext(AppContext);

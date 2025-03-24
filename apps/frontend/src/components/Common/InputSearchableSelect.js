@@ -18,7 +18,7 @@ const InputSearchableSelect = ({ ...props }) => {
     ...props,
   };
 
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const { name } = rest;
   const formik = useFormikContext();
   const { setFieldValue, setFieldTouched } = formik;

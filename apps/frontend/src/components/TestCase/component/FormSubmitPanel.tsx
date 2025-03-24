@@ -24,7 +24,7 @@ export const FormSubmitPanel = ({
   type,
   dataAttr,
 }: IProps) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
 
   return (
     <div className="flex gap-4 justify-end pt-0.5 pb-20 flex-shrink-0">

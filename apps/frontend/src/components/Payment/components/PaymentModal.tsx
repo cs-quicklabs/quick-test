@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export default function PaymentModal(props: any) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [open, setOpen] = useState(true);
   const navigate = useNavigate();
 

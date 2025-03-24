@@ -15,7 +15,7 @@ import { AppContext } from "../Context/mainContext";
 import { showError } from "../Toaster/ToasterFun";
 
 export default function UserDashboard() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [isSubscribed, setIsSubscribed] = useState("");
   const [isFirstLogin, setIsFirstLogin] = useState(false);
   const [loading, setLoading] = useState(false);

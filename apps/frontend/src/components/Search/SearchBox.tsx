@@ -28,7 +28,7 @@ const debounce = (fn: any, wait: number) => {
 };
 
 const SearchBox = ({ inputFieldId, placeholderText }: { inputFieldId: string, placeholderText: string }) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [inputValue, setInputValue] = useState("");
   const [showDropDown, setShowDropDown] = useState(false);
   const [searchResult, setSearchResult] = useState(initialSearchResultState);

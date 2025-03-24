@@ -35,7 +35,7 @@ interface IProps {
 }
 
 export const FormikInput = ({ showLabel = true, ...props }: IProps) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [field, meta] = useField(props.name);
   const { touched, error } = { ...meta };
   return (
@@ -108,7 +108,7 @@ export const FormikTextArea = ({
   showLabel = true,
   ...props
 }: IProps) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [field, meta] = useField(props.name);
   const { touched, error } = { ...meta };
   const [preview, togglePreview] = useState<boolean>(false);
@@ -203,7 +203,7 @@ export const FormikInputSearch = ({
   loading,
   ...props
 }: IProps) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [field, meta] = useField(props.name);
   const { touched, error } = { ...meta };
   return (

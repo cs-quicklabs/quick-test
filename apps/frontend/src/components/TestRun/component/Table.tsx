@@ -26,7 +26,7 @@ interface Props {
 }
 
 export default function Table(props: Props) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [showModal, toggleModal] = useState(false);
   const [modalMsg, setMsg] = useState(<></>);
   const [selectedId, setSelectedId] = useState("");

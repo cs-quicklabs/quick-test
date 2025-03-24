@@ -4,8 +4,8 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useTranslation } from "react-i18next";
 
 export default function Notification(props: any) {
-  const { t } = useTranslation(["common"]);
   const [show, setShow] = useState(true);
+  const { t } = useTranslation();
   useEffect(() => {
     setTimeout(() => {
       setShow(false);

@@ -570,9 +570,11 @@
   "You have successfully registered on QuickTest. A confirmation email has been sent to your inbox. Please verify your email to continue.": "You have successfully registered on QuickTest. A confirmation email has been sent to your inbox. Please verify your email to continue.",
   "OK": "OK",
   "signin": "signin",
-  "Get started with QuickTest": "Get started with QuickTest",
-  "I agree to Terms of Use & Privacy Policy": "I agree to Terms of Use & Privacy Policy",
-  "Already have an account": "Already have an account",
+  "Get started with Quick Test": "Get started with Quick Test",
+  "I agree to": "I agree to",
+  "Terms of Use": "Terms of Use",
+  "Privacy Policy": "Privacy Policy",
+  "Already have an account?": "Already have an account?",
   "Login": "Login",
   "Today": "Today",
   "Yesterday": "Yesterday",
@@ -847,5 +849,9 @@
   "Please update the details of your test run.":"",
   "": "",
   "Options": "Options",
-  "Created At": "Created At"
+  "Created At": "Created At",
+  "Search for projects, milestones and test runs": "Search for projects, milestones and test runs",
+  "No data found.": "No se encontraron datos.",
+  "Description max size can be 500.": "Description max size can be 500.",
+  "Preconditions max size can be 3000": "Preconditions max size can be 3000"
 }

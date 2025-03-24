@@ -22,7 +22,7 @@ interface Iprops {
   getSection: () => void;
 }
 export default function Example({ ...props }: Iprops) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const params = useParams();
   const { dispatch } = useContext(AppContext);
   const addSectionSchema = Yup.object().shape({
@@ -167,7 +167,7 @@ export default function Example({ ...props }: Iprops) {
                         </div>
                         <div>
                           <FormikTextArea
-                            placeholder="Description max size can be 500"
+                            placeholder={t("Description max size can be 500.")}
                             type="text"
                             name="description"
                             label={t("Description")}

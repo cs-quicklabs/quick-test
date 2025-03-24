@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 import bugplotLogo from "../assets/images/bugplot-logo.svg";
 
 const Forgotpassword = () => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("token")) {

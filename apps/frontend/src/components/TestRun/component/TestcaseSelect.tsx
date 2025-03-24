@@ -8,7 +8,7 @@ const TestcaseSelect = ({
   totalTestcases,
   setTotalTestcases,
 }: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [showSpecific, setShowSpecific] = useState(false);
   const [showModal, setShowModal] = useState(false);
 

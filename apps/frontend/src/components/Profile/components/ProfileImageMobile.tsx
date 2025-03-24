@@ -6,7 +6,7 @@ const ProfileImageMobile = ({
   handleImageUpload,
   showProgressBar,
 }: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
 
   return (
     <>

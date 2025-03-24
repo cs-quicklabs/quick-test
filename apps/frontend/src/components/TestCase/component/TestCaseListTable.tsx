@@ -29,7 +29,7 @@ export default function TestCaseListTable({
   selectedTestCase,
   setSelectedTestCase,
 }: any) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
 
