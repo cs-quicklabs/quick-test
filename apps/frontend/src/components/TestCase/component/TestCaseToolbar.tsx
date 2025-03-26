@@ -659,15 +659,17 @@ const TestCaseToolbar = ({
       return dayjs(date).format(DateFormat.SHORT);
     }
   };
-
   const newCSVData = csvData;
   newCSVData?.forEach((item: any) => {
     item.createdAt = dayjs(item?.createdAt).format(DateFormat.LONG);
+    item.steps = item?.steps.replace(/^\"|\"$/g, "");
+    item.preconditions = item?.preconditions.replace(/^\"|\"$/g, "").replace(/\n/g, " ");
+    item.expectedResults = item?.expectedResults.replace(/^\"|\"$/g, "")
+
     item.executionPriority =
       item?.executionPriority?.slice(0, 1) +
       item?.executionPriority?.slice(1).toLowerCase();
   });
-
   return (
     <>
       <div className="bg-gray-200 py-2 px-4 rounded lg:rounded flex justify-between items-center">
