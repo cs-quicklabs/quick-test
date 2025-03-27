@@ -14,7 +14,7 @@ import { deleteSectionApi } from "../../services/sectionServices";
 
 const SectionMain = (props: any) => {
   const dispatch = useAppDispatch();
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const { pid } = useParams();
   const [popup, setPopUp] = useState(false);
   const [showModal, toggleModal] = useState(false);

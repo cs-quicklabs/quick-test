@@ -60,7 +60,7 @@ const TestcaseSection = ({ label, data, routeToPath, setInputValue }: any) => {
 };
 
 const SearchResult = (props: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const { projects, milestones, testCases, testSuites }: ISearchResultProps =
     props.matchedData;
   const navigate = useNavigate();

@@ -17,7 +17,7 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
 const EditManyTestCase = () => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
 

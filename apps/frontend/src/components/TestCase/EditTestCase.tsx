@@ -8,7 +8,7 @@ import { appRoutes, projectRoutes } from "../Utils/constants/page-routes";
 import { useTranslation } from "react-i18next";
 
 const EditTestCase = () => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
 

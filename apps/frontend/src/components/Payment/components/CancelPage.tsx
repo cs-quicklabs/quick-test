@@ -7,7 +7,7 @@ import { Currency, freeTrial } from "../../Utils/constants/misc";
 import Loader from "../../Loader/Loader";
 
 export default function CancelPage() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState("");
   const [loading, setLoading] = useState(true);

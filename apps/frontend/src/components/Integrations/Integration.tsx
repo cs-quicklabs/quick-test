@@ -6,7 +6,7 @@ import { showError } from "../Toaster/ToasterFun";
 import { useTranslation } from "react-i18next";
 
 const Integration = () => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
 
   const [jiraPluginConfig, setJiraPluginConfig] = useState({

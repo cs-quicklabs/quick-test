@@ -7,7 +7,7 @@ interface projectNameType {
 export default function TestCaseProjectNameHeader({
   projectName,
 }: projectNameType) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   return (
     <div className=" text-xl font-medium">
       {projectName}

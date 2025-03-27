@@ -22,7 +22,7 @@ import bugplotLogo from "../../assets/images/bugplot-logo.svg";
 import { initialSignUpValues, SignUpFormValues } from "../Utils/interfaces/userObject";
 
 const SignUp = () => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [showModal, toggleModal] = useState(false);
 

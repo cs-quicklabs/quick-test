@@ -16,7 +16,7 @@ import { showError } from "../Toaster/ToasterFun";
 import Table from "./component/Table";
 
 export default function TestRunList({ projectName }: any) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
   const pid = params.pid as string;

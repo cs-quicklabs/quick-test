@@ -22,7 +22,7 @@ export const FormSubmitPanel = ({
   idForSubmit,
   dataAttr,
 }: IProps) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
 
   return (
     <div className="flex justify-end gap-4 pb-20 pl-30 sm:pl-40">

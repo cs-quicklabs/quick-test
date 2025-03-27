@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
 const AddProject = ({ onSubmit, setApiEndPoint }: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const params = useParams();
@@ -166,7 +166,7 @@ const AddProject = ({ onSubmit, setApiEndPoint }: any) => {
                     </div>
                     <div>
                       <FormikTextArea
-                        placeholder="Description max size can be 500"
+                        placeholder={t("Description max size can be 500.")}
                         type="text"
                         name="description"
                         label={t("Description")}

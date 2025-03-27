@@ -15,7 +15,7 @@ const FilterComponent = React.memo(({
   setUpdatedCustomDate,
   setCreatedCustomDate,
 }: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [filterMenu, setFilterMenu] = useState(false);
   const [isCustomCreated, setIsCustomCreated] = useState(false);
   const [isCustomUpdated, setIsCustomUpdated] = useState(false);

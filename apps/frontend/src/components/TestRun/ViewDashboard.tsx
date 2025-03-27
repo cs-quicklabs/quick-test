@@ -19,7 +19,7 @@ import { getProjectsDetails } from "../../services/headerServices";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Dashboard() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
   const pid = params.pid;

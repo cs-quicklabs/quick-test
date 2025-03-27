@@ -8,7 +8,7 @@ const ModalSectionTable = ({
   setSelectedSectionIds,
   setSelectedTestCaseIds,
 }: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
 
   const handleCheck = (event: any, item: any) => {
     if (event.target.checked && !selectedTestCaseIds.includes(item?.id)) {

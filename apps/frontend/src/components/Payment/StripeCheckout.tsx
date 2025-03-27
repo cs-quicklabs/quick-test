@@ -9,7 +9,7 @@ import { PaymentPermissions } from "../Utils/constants/roles-permission";
 import { AppContext } from "../Context/mainContext";
 
 export default function StripeCheckout() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [isSubscribed, setIsSubscribed] = useState("");
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState("");
@@ -101,7 +101,7 @@ export default function StripeCheckout() {
           ) : (
             <div className="">
               {isSubscribed === SubscriptionStatus.CANCELLED ||
-              isSubscribed === SubscriptionStatus.FREE_TRIAL ? (
+                isSubscribed === SubscriptionStatus.FREE_TRIAL ? (
                 <>
                   <p>
                     {t(

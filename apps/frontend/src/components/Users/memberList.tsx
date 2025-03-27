@@ -28,7 +28,7 @@ import { ArchiveBoxIcon } from "@heroicons/react/24/outline";
 import ConfirmModal from "../Common/ConfirmModal";
 
 const MemberList = () => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [userRoleId, setUserRoleId] = useState<number>(RoleId.MEMBER);
   const [showModal, setShowModal] = useState(false);
   const [selectedId, setSelectedId] = useState("");

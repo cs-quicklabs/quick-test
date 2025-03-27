@@ -26,7 +26,7 @@ export default function PopUp({
   defectStatus,
   refetch,
 }: Props) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
 
   return (
     <Transition show={open} as={Fragment}>
@@ -121,8 +121,8 @@ export default function PopUp({
                               id="submit-inside-popup"
                               type="submit"
                               className={`ml-3 w-12${!(dirty && isValid)
-                                  ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                                  : ""
+                                ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
+                                : ""
                                 }`}
                               disabled={!(dirty && isValid)}
                             >

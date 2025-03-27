@@ -20,7 +20,7 @@ type InitialValuesType = {
 };
 
 const SidePanelTestCaseData: FC<Props> = ({ testCase }) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
 
   const initialValues: InitialValuesType = {
     title: testCase.title,
@@ -39,7 +39,7 @@ const SidePanelTestCaseData: FC<Props> = ({ testCase }) => {
     <Formik
       initialValues={initialValues}
       validationSchema={editTestCaseSchema}
-      onSubmit={() => {}}
+      onSubmit={() => { }}
       enableReinitialize
     >
       <div className="p-4 ">

@@ -28,7 +28,7 @@ interface payloadType {
 }
 
 const TestCaseDetail = ({ page, submitStatus, refetch }: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
 

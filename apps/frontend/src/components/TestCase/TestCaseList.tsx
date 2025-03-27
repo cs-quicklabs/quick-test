@@ -29,7 +29,7 @@ import { createTestCases } from "../../services/testCasesServices";
 import { downloadFile } from "../Utils/helpers";
 
 export default function TestCaseList({ projectName }: any) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { pid } = useParams();
 

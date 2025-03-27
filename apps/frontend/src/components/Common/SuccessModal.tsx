@@ -19,7 +19,7 @@ export default function SuccessModal({
   buttonText,
   message,
 }: PropsType) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
 
   return (
     <Transition show={open} as={Fragment}>

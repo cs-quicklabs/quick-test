@@ -12,7 +12,7 @@ function classNames(...classes: any) {
 }
 
 export default function DefectDetailsModal({ pluginKey }: any) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [apiLoading, setApiLoading] = useState(true);
   const [defectData, setDefectData] = useState<any>({});
   const [showPopup, setShowPopup] = useState(false);

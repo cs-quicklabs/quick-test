@@ -11,7 +11,7 @@ const ModalSectionList = ({
   selectedTestCaseIds,
   setSelectedTestCaseIds,
 }: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [active, setActive] = useState("");
 
   const onSectionClicked = (item: any) => {
@@ -73,11 +73,10 @@ const ModalSectionList = ({
               onChange={(e) => handleCheck(e, item)}
             />
             <span
-              className={`px-2 py-1 cursor-pointer text-sm rounded-md ${
-                active === item?.id
-                  ? "bg-blue-500 text-white"
-                  : "hover:bg-gray-400"
-              }`}
+              className={`px-2 py-1 cursor-pointer text-sm rounded-md ${active === item?.id
+                ? "bg-blue-500 text-white"
+                : "hover:bg-gray-400"
+                }`}
               onClick={() => onSectionClicked(item)}
             >
               {item?.name}

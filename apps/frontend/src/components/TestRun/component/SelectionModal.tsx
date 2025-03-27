@@ -16,7 +16,7 @@ const SelectionModal = ({
   setShowModal,
   setTotalTestcases,
 }: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const params = useParams();
 
   const formik = useFormikContext();

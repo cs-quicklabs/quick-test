@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { RoleId, RoleType } from "../Utils/constants/roles-permission";
 
 const MultipleMemberList = ({ users }: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   return (
     <main className="pb-12 sm:pl-4 lg:col-span-9 ">
       <div className="flex flex-col ">
@@ -91,17 +91,17 @@ const MultipleMemberList = ({ users }: any) => {
                             {user.firstName.length + user.lastName.length < 15
                               ? `${user.email}`
                               : user.email.length > 20
-                              ? `${user.email.slice(0, 20)}...`
-                              : user.email}
+                                ? `${user.email.slice(0, 20)}...`
+                                : user.email}
                           </td>
                           <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
                             {user.roleId === RoleId.OWNER
                               ? RoleType.OWNER.charAt(0) +
-                                RoleType.OWNER.slice(1).toLowerCase()
+                              RoleType.OWNER.slice(1).toLowerCase()
                               : user.roleId === RoleId.ADMIN
-                              ? RoleType.ADMIN.charAt(0) +
+                                ? RoleType.ADMIN.charAt(0) +
                                 RoleType.ADMIN.slice(1).toLowerCase()
-                              : RoleType.MEMBER.charAt(0) +
+                                : RoleType.MEMBER.charAt(0) +
                                 RoleType.MEMBER.slice(1).toLowerCase()}
                           </td>
                         </tr>

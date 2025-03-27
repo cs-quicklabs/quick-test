@@ -66,7 +66,7 @@ const schema = Yup.object().shape({
 });
 
 export default function BillingAddress() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [data, setData] = useState({ ...initialValue });
 
   const navigate = useNavigate();
@@ -258,8 +258,8 @@ export default function BillingAddress() {
                       loading={apiLoading === true ? "true" : undefined}
                       type="submit"
                       className={`sm:order-1 ${!dirty || !isValid
-                          ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                          : ""
+                        ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
+                        : ""
                         }`}
                     // disabled={!(dirty && isValid)}
                     >

@@ -57,7 +57,7 @@ export default function TestCaseHeading({
   seTestCaseNum,
   setPrinterIcon, // page,
 }: PropsData) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [buttonLoader, setButtonLoader] = useState({

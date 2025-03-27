@@ -21,7 +21,7 @@ export default function ConfirmModal({
   message,
 }: PropsType) {
   const cancelButtonRef = useRef(null);
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
 
   return (
     <Transition show={open} as={Fragment}>
