@@ -100,7 +100,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@nestjs/testing": "11.0.10",
+    "@nestjs/testing": "11.0.12",
     "@nrwl/cli": "^15.9.3",
     "@nx/js": "20.6.4",
     "@nx/webpack": "^20.3.1",
