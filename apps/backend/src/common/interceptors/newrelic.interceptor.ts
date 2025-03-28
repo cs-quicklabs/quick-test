@@ -5,24 +5,24 @@ import {
   CallHandler,
 } from "@nestjs/common";
 import { Observable } from "rxjs";
-import { tap, catchError } from "rxjs/operators";
-import * as newrelic from "newrelic";
+import { tap } from "rxjs/operators";
+
+const util = require("util");
+const newrelic = require("newrelic");
 
 @Injectable()
 export class NewrelicInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    const handlerName = context.getHandler().name;
-
-    return newrelic.startWebTransaction(handlerName, () => {
+    return newrelic.startWebTransaction(context.getHandler().name, () => {
       const transaction = newrelic.getTransaction();
-
       return next.handle().pipe(
         tap(() => {
-          transaction.end();
-        }),
-        catchError((error) => {
-          transaction.end();
-          throw error;
+          console.log(
+            `Parent Interceptor after: ${util.inspect(
+              context.getHandler().name,
+            )}`,
+          );
+          return transaction.end();
         }),
       );
     });
