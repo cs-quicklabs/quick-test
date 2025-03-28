@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 
 export default function Dashboard() {
   const [userRole, setUserRoleId] = useState("");
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const params = useParams();
   const pid = params.pid;
 

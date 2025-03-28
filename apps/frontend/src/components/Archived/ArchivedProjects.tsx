@@ -24,7 +24,7 @@ import {
 import axiosService from "../Utils/axios";
 
 const ArchivedProjects = () => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const [ifRestore, setIfRestore] = useState(false);
   const [modalMsg, setModalMsg] = useState(<></>);

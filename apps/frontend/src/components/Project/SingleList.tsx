@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { appRoutes, projectRoutes } from "../Utils/constants/page-routes";
 
 const SingleList = (props: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const navigatePage = (id: string, place: string) => {

@@ -36,7 +36,7 @@ const TapNavData = [
 ];
 
 const Members = () => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const params = useParams();

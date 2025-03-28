@@ -21,7 +21,7 @@ interface InitVal {
 }
 
 const AddTestCase = () => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
   const { state }: any = useLocation();

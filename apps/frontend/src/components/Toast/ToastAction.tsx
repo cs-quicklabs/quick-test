@@ -4,7 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useTranslation } from "react-i18next";
 
 export default function ToastAction(props: any) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [show, setShow] = useState(true);
 
   return (

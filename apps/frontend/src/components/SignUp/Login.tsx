@@ -20,7 +20,7 @@ import bugplotLogo from "../../assets/images/bugplot-logo.svg";
 import { ILoginResponse, ISignInInputFieldProps, SignInInitialValues } from "../Utils/interfaces/userObject";
 
 const SignIn = () => {
-  const { i18n, t } = useTranslation(["common"]);
+  const { i18n, t } = useTranslation();
   const navigate = useNavigate();
   const { dispatch } = useContext(AppContext);
 

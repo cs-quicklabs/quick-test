@@ -11,7 +11,7 @@ const ReferenceMenu = ({
   setShowAddReferencePopup,
   setShowMapReferencePopup,
 }: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
 
   return (
     <Menu as="span" className="relative block">

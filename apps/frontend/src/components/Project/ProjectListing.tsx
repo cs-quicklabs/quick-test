@@ -18,7 +18,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getProjects } from "../../services/projectPageServices";
 
 export default function Example() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -185,7 +185,7 @@ export default function Example() {
                       {activeProjectData.length === 0 ? (
                         <div className="overviewChart w-10/12 h-screen ">
                           <div className="flex justify-center items-center content-center my-2 text-gray-500 text-xs font-normal">
-                            {t("No chart data found yet.")}
+                            {t("No data found.")}
                           </div>
                         </div>
                       ) : (

@@ -8,7 +8,7 @@ import AccessControl from "../../AccessControl";
 import { JiraPluginPermissions } from "../../Utils/constants/roles-permission";
 
 const JiraCard = ({ pluginConfig, getPluginConfig }: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [showPopup, setShowPopup] = useState<boolean>(false);
 
   return (

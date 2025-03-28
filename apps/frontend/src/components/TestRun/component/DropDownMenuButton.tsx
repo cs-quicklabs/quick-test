@@ -23,7 +23,7 @@ const DropDownMenuButton = ({
   RowData,
   setDefectStatus,
 }: IMenuButton) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(" ");
   }

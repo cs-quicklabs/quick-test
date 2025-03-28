@@ -5,7 +5,7 @@ import CancelButton from "../Button/cancelButton";
 import { Trans, useTranslation } from "react-i18next";
 
 export default function Modal(props: any) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const selectInputRef = useRef(null);
   const [numberOfDays, setNumberOfDays] = useState(props.defaultVal);
 
@@ -66,9 +66,8 @@ export default function Modal(props: any) {
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <div
-              className={`inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 ${
-                props.open || "hidden"
-              }`}
+              className={`inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 ${props.open || "hidden"
+                }`}
             >
               <div className="flex justify-between  items-center font-semibold text-gray-500  ">
                 <h1 className="text-gray-900 text-lg font-medium">

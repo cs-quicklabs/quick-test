@@ -7,7 +7,7 @@ const ProfileImage = ({
   handleImageUpload,
   showProgressBar,
 }: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (

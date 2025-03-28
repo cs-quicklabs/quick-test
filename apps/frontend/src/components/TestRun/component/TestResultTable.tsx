@@ -52,7 +52,7 @@ export default function Table({
   isFetchingNextPage,
   refetch,
 }: Props) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [openPopUp, setOpenPopUp] = useState(false);
   const [statusData, setStatusData] = useState({
     status: "",

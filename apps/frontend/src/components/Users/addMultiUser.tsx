@@ -28,7 +28,7 @@ function validateName(name: string) {
 }
 
 const AddMultiUser = () => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [data, setData] = useState<any>([]);
   const navigate = useNavigate();
   const [roleList, setRoleList] = useState<any>([]);

@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function Pagination(data: Props) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [showLastData, setShowLastData] = useState(false);
 
   const state = useMemo(
@@ -64,7 +64,7 @@ export default function Pagination(data: Props) {
                 : data.setPageNum(data.paginationData.page - 1);
             }}
             className={` cursor-pointer relative inline-flex items-center px-2.5 py-1.5 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ${(data.paginationData.page === 1 ||
-                data.paginationData.page === 0) &&
+              data.paginationData.page === 0) &&
               "hidden"
               }`}
           >

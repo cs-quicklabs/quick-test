@@ -9,11 +9,10 @@ i18n
   .use(initReactI18next)
   .init({
     backend: {
-      loadPath: "/public/assets/i18n/{{ns}}/{{lng}}.json",
+      loadPath: "/assets/i18n/common/{{lng}}.json",
     },
-    fallbackLng: "en-US",
+    fallbackLng: localStorage.getItem("i18nextLng") || "en",
     debug: false,
-    ns: ["common"],
     supportedLngs: ["en", "ar", "es"],
     interpolation: {
       escapeValue: false,

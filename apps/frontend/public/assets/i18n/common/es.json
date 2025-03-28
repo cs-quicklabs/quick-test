@@ -570,9 +570,11 @@
   "You have successfully registered on QuickTest. A confirmation email has been sent to your inbox. Please verify your email to continue.": "Se ha registrado con éxito en QuickTest. Se ha enviado un correo electrónico de confirmación a su bandeja de entrada. Verifique su correo electrónico para continuar.",
   "OK": "OK",
   "signin": "iniciar sesión",
-  "Get started with QuickTest": "Comience con QuickTest",
-  "I agree to Terms of Use & Privacy Policy": "Acepto términos de uso y política de privacidad",
-  "Already have an account": "Ya tienes una cuenta",
+  "Get started with Quick Test": "Comience con Quick Test",
+  "I agree to": "Estoy de acuerdo con",
+  "Terms of Use": "Condiciones de uso",
+  "Privacy Policy": "Política de privacidad",
+  "Already have an account?": "¿Ya tienes una cuenta?",
   "Login": "Acceso",
   "Today": "Este Dia",
   "Yesterday": "El dia de ayer",
@@ -861,5 +863,8 @@
   "Start Another Test Run": "Iniciar otra prueba",
   "Account Settings": "Configuración de la cuenta",
   "My Profile": "Mi perfil",
-  "Archive": "Archivo"
+  "Archive": "Archivo",
+  "Search for projects, milestones and test runs": "Búsqueda de proyectos, hitos y ejecuciones de pruebas",
+  "Description max size can be 500.": "Descripción: el tamaño máximo puede ser de 500.",
+  "Preconditions max size can be 3000": "El tamaño máximo de las condiciones previas puede ser 3000"
 }

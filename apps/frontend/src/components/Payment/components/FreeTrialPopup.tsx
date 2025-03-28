@@ -14,7 +14,7 @@ export default function FreeTrialPopup({
   amount,
   currency,
 }: any) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [open, setOpen] = useState(true);
   const navigate = useNavigate();
   const cancelButtonRef = useRef(null);

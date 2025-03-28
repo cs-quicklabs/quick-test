@@ -26,7 +26,7 @@ interface PropsType {
 }
 
 export default function Table({ RowData, endDate }: PropsType) {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const params = useParams();
 
   return (

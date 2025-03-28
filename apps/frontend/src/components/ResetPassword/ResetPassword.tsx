@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 import bugplotLogo from "../../assets/images/bugplot-logo.svg";
 
 export default function ResetPasswordForm() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [showLoader, setShowLoader] = useState(true);
   const [token, setToken] = useState("");
   const navigate = useNavigate();
@@ -128,11 +128,10 @@ export default function ResetPasswordForm() {
                             id="set-password"
                             type="submit"
                             loading={loading}
-                            className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none ${
-                              !(dirty && isValid)
-                                ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                                : ""
-                            }`}
+                            className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none ${!(dirty && isValid)
+                              ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
+                              : ""
+                              }`}
                           >
                             {t("Set Password")}
                           </Button>

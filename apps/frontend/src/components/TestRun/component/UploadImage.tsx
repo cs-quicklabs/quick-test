@@ -9,7 +9,7 @@ import { showError, showSuccess } from "../../Toaster/ToasterFun";
 import { useTranslation } from "react-i18next";
 
 const UploadImage = ({ name }: any) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [fileMeta, setFileMeta] = useState({ name: "", size: 0 });
   const [imageURL, setImageURL] = useState("");
   const [progress, setProgress] = useState(1);
@@ -110,9 +110,8 @@ const UploadImage = ({ name }: any) => {
         )
       </div>
       <div
-        className={`flex items-center justify-between text-xs text-gray-700 space-x-2 pt-4 ${
-          fileMeta.name ? null : "opacity-0"
-        }`}
+        className={`flex items-center justify-between text-xs text-gray-700 space-x-2 pt-4 ${fileMeta.name ? null : "opacity-0"
+          }`}
       >
         <span>{fileMeta?.name || "filename"}</span>
         {showProgressBar ? (

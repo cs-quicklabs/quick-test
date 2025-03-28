@@ -54,7 +54,7 @@ export default function Table({
     id: "",
   });
 
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const [state, setstate] = useState({
     showModal: false,
     modalMsg: <></>,
@@ -173,9 +173,11 @@ export default function Table({
 
                       <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-500">
                         <p>
-                          {value.testsuites.length <= 1
-                            ? `${value.testsuites.length} active Test run`
-                            : `${value.testsuites.length} active Test runs`}
+                          {
+                            value.testsuites.length <= 1
+                              ? `${value.testsuites.length} ${t("active test run")}`
+                              : `${value.testsuites.length} ${t("active test runs")}`
+                          }
                         </p>
                       </td>
 
@@ -184,7 +186,7 @@ export default function Table({
                           ? `Done on ${dayjs(value.endDate).format(
                             DateFormat.MEDIUM
                           )}`
-                          : `Due on ${dayjs(value.endDate).format(
+                          : `${t("Due on")} ${dayjs(value.endDate).format(
                             DateFormat.MEDIUM
                           )}`}
                       </td>

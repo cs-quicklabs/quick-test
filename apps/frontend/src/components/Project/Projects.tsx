@@ -37,7 +37,7 @@ function classNames(...classes: any[]) {
 }
 
 export default function Projects() {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
 
   const [modalMsg, setMsg] = useState(<></>);
 

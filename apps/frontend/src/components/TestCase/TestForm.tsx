@@ -56,7 +56,7 @@ const TestForm = ({
   EditMany,
   onSubmitNext,
 }: TestFormProps) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const params = useParams();
   const { onSubmitHandler, loading } = useFormSubmitWithLoading(onSubmit);
   const [validation, setValidation] = useState(false);
@@ -137,7 +137,7 @@ const TestForm = ({
                 </div>
                 <div>
                   <FormikTextArea
-                    placeholder="Preconditions max size can be 3000"
+                    placeholder={t("Preconditions max size can be 3000")}
                     type="text"
                     name="preconditions"
                     label={t("Preconditions")}

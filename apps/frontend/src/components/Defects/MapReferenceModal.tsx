@@ -28,7 +28,7 @@ export default function MapReferenceModal({
     project: "",
     defectId: "",
   };
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation();
   const headerRef = useRef(null);
 
   const [jiraProjects, setJiraProjects] = useState([]);
