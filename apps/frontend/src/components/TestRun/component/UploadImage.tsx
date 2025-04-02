@@ -110,8 +110,9 @@ const UploadImage = ({ name }: any) => {
         )
       </div>
       <div
-        className={`flex items-center justify-between text-xs text-gray-700 space-x-2 pt-4 ${fileMeta.name ? null : "opacity-0"
-          }`}
+        className={`flex items-center justify-between text-xs text-gray-700 space-x-2 pt-4 ${
+          fileMeta.name ? null : "opacity-0"
+        }`}
       >
         <span>{fileMeta?.name || "filename"}</span>
         {showProgressBar ? (

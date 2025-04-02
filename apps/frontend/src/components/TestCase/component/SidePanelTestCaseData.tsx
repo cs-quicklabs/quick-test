@@ -39,7 +39,7 @@ const SidePanelTestCaseData: FC<Props> = ({ testCase }) => {
     <Formik
       initialValues={initialValues}
       validationSchema={editTestCaseSchema}
-      onSubmit={() => { }}
+      onSubmit={() => {}}
       enableReinitialize
     >
       <div className="p-4 ">

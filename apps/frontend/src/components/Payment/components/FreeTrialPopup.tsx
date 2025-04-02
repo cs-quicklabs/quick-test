@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { Fragment, useRef } from "react";
-import { Dialog, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
+import {
+  Dialog,
+  DialogTitle,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import { Currency, freeTrial } from "../../Utils/constants/misc";

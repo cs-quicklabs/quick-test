@@ -130,7 +130,7 @@ export default function TestCaseList({ projectName }: any) {
         `projects/${pid}/test-cases/pdf`,
         payload
       );
-      downloadFile(response?.data?.data)
+      downloadFile(response?.data?.data);
     } else {
       showError(i18next.t(ToastMessage.EXPORT_TEST_CASE_PDF));
     }

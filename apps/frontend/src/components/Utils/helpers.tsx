@@ -50,7 +50,7 @@ export const NotifyExpired = async () => {
 };
 
 export const downloadFile = (url: string) => {
-  const link = document.createElement('a');
+  const link = document.createElement("a");
   link.href = url;
   link.click();
-}
+};

@@ -47,8 +47,9 @@ export default function TestRunList({ projectName }: any) {
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       return lastPage.prevOffSet > lastPage.data.meta.pageCount
-        ? undefined : lastPage.prevOffSet
-    }
+        ? undefined
+        : lastPage.prevOffSet;
+    },
   });
 
   const testRunData = data?.pages.reduce((acc, page) => {

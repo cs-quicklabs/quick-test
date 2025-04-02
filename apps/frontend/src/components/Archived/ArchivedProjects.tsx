@@ -36,7 +36,7 @@ const ArchivedProjects = () => {
     isLoading,
   } = useQuery({
     queryKey: ["archiveProjects"], // This is your query key
-    queryFn: getArchiveProjects,  // This is the function to fetch data
+    queryFn: getArchiveProjects, // This is the function to fetch data
   });
 
   if (error instanceof Error) {
@@ -85,7 +85,7 @@ const ArchivedProjects = () => {
       showSuccess(resp.data.message);
       refetch();
     } catch (err) {
-      showError(err?.messsage)
+      showError(err?.messsage);
     }
   }, [refetch, selectedId]);
 
@@ -99,7 +99,7 @@ const ArchivedProjects = () => {
       setShowModal(false);
       refetch();
     } catch (err) {
-      showError(err?.messsage)
+      showError(err?.messsage);
     }
   }, [refetch, selectedId]);
 
@@ -177,7 +177,9 @@ const ArchivedProjects = () => {
                         >
                           <span
                             data-tooltip-id="archived-projects-tooltip-id"
-                            data-tooltip-content={t("Permanently Delete Project")}
+                            data-tooltip-content={t(
+                              "Permanently Delete Project"
+                            )}
                           >
                             <TrashIcon
                               className="h-4 w-4 text-red-400 group-hover:text-indigo-800"
@@ -207,26 +209,24 @@ const ArchivedProjects = () => {
         </div>
         <Tooltip id="archived-projects-tooltip-id" />
       </div>
-      {
-        showModal && ifRestore ? (
-          <ConfirmModal
+      {showModal && ifRestore ? (
+        <ConfirmModal
+          open={showModal}
+          message={modalMsg}
+          handleConfirm={restoreProject}
+          handleCancel={() => setShowModal(false)}
+        />
+      ) : (
+        showModal && (
+          <DeleteConfirmationModal
+            msg={modalMsg}
             open={showModal}
-            message={modalMsg}
-            handleConfirm={restoreProject}
-            handleCancel={() => setShowModal(false)}
+            toggleModal={setShowModal}
+            delete={deleteProject}
           />
-        ) : (
-          showModal && (
-            <DeleteConfirmationModal
-              msg={modalMsg}
-              open={showModal}
-              toggleModal={setShowModal}
-              delete={deleteProject}
-            />
-          )
         )
-      }
-    </main >
+      )}
+    </main>
   );
 };
 

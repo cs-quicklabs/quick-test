@@ -24,7 +24,7 @@ const options = {
   plugins: {
     legend: {
       position: "top" as const,
-    }
+    },
   },
   maintainAspectRatio: false,
 };
