@@ -18,7 +18,9 @@ export default function UserHeader() {
   const { t } = useTranslation();
   const [showUserSetting, setShowUserSetting] = useState(false);
   const location = useLocation();
-  const [selectedButton, setSelectedButton] = useState(location.pathname === '/dashboard' ? 'Dashboard' : 'Projects');
+  const [selectedButton, setSelectedButton] = useState(
+    location.pathname === "/dashboard" ? "Dashboard" : "Projects"
+  );
   const [imageURL, setImageURL] = useState<string>("");
   const { state, dispatch } = useContext(AppContext);
 
@@ -32,7 +34,7 @@ export default function UserHeader() {
       const response = state.userDetails;
       setImageURL(response.profileImage);
     } catch (_) {
-      showError("Failed to fetch profile picture")
+      showError("Failed to fetch profile picture");
     }
   }, [state.userDetails]);
 
@@ -130,10 +132,11 @@ export default function UserHeader() {
                 <div className="flex space-x-4 mr-4 sm:mr-0">
                   <Link
                     to={`${appRoutes.DASHBOARD}`}
-                    className={`rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white ${selectedButton === "Dashboard"
-                      ? "bg-gray-900 text-white"
-                      : "bg-transparent text-gray-300"
-                      }`}
+                    className={`rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white ${
+                      selectedButton === "Dashboard"
+                        ? "bg-gray-900 text-white"
+                        : "bg-transparent text-gray-300"
+                    }`}
                     aria-current="page"
                     data-cy="dashboard"
                     onClick={() => handleButtonClick("Dashboard")}
@@ -142,10 +145,11 @@ export default function UserHeader() {
                   </Link>
                   <Link
                     to={`${appRoutes.PROJECTS}`}
-                    className={`rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white ${selectedButton === "Projects"
-                      ? "bg-gray-900 text-white"
-                      : "bg-inherit text-gray-300"
-                      }`}
+                    className={`rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white ${
+                      selectedButton === "Projects"
+                        ? "bg-gray-900 text-white"
+                        : "bg-inherit text-gray-300"
+                    }`}
                     aria-current="page"
                     data-cy="projects"
                     onClick={() => handleButtonClick("Projects")}
@@ -155,7 +159,12 @@ export default function UserHeader() {
                 </div>
               </div>
               <div className="m-auto hidden sm:mr-0 grow sm:grow-0 sm:block">
-                <SearchBox inputFieldId={'search-for-desktop-id'} placeholderText={t("Search for projects, milestones and test runs")} />
+                <SearchBox
+                  inputFieldId={"search-for-desktop-id"}
+                  placeholderText={t(
+                    "Search for projects, milestones and test runs"
+                  )}
+                />
               </div>
             </div>
             <div className="inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto ml-2 lg:ml-4 sm:pr-0">
@@ -249,7 +258,10 @@ export default function UserHeader() {
           className="mx-8 sm:hidden sm:mr-0 flex grow mb-3 mt-2"
           id="mobile-menu"
         >
-          <SearchBox inputFieldId={'search-for-mobile-id'} placeholderText="Search projects, milestones and test runs" />
+          <SearchBox
+            inputFieldId={"search-for-mobile-id"}
+            placeholderText="Search projects, milestones and test runs"
+          />
         </div>
       </nav>
     </>

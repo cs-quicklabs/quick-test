@@ -44,8 +44,9 @@ const ProfileImage = ({
           />
           <label
             htmlFor="desktop-user-photo"
-            className={`absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 ${showProgressBar ? "bg-white opacity-95" : null
-              }`}
+            className={`absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 ${
+              showProgressBar ? "bg-white opacity-95" : null
+            }`}
           >
             {showProgressBar ? (
               <ScaleLoader

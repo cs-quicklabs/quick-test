@@ -97,12 +97,12 @@ const MultipleMemberList = ({ users }: any) => {
                           <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
                             {user.roleId === RoleId.OWNER
                               ? RoleType.OWNER.charAt(0) +
-                              RoleType.OWNER.slice(1).toLowerCase()
+                                RoleType.OWNER.slice(1).toLowerCase()
                               : user.roleId === RoleId.ADMIN
                                 ? RoleType.ADMIN.charAt(0) +
-                                RoleType.ADMIN.slice(1).toLowerCase()
+                                  RoleType.ADMIN.slice(1).toLowerCase()
                                 : RoleType.MEMBER.charAt(0) +
-                                RoleType.MEMBER.slice(1).toLowerCase()}
+                                  RoleType.MEMBER.slice(1).toLowerCase()}
                           </td>
                         </tr>
                       );

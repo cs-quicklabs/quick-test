@@ -22,9 +22,7 @@ export default function ToastAction(props: any) {
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-1 justify-start">
             <p className="text-sm font-medium text-white">{props?.message}</p>
-            <span
-              className="bg-transparent rounded-md text-sm font-bold italic text-indigo-600 hover:text-indigo-500 focus:outline-none"
-            >
+            <span className="bg-transparent rounded-md text-sm font-bold italic text-indigo-600 hover:text-indigo-500 focus:outline-none">
               {props?.actionLabel}
             </span>
           </div>

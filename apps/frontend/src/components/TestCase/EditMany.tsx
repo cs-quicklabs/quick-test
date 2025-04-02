@@ -96,7 +96,7 @@ const EditManyTestCase = () => {
           val === "expectedResults"
             ? { ...value, expectedResults: values[val] }
             : // @ts-ignore
-            { ...value, [val]: values[val] };
+              { ...value, [val]: values[val] };
       }
     }
 
@@ -185,12 +185,13 @@ const EditManyTestCase = () => {
                   id="action-value"
                   className=" px-6 py-4 whitespace-nowrap text-right "
                 >
-                  <div className="flex justify-end" onClick={() => {
-                    setRowData(Row.filter((item) => item.id !== val.id));
-                  }}>
-                    <XCircleIcon
-                      className="text-red-400 h-6 w-5 cursor-pointer mr-1"
-                    />
+                  <div
+                    className="flex justify-end"
+                    onClick={() => {
+                      setRowData(Row.filter((item) => item.id !== val.id));
+                    }}
+                  >
+                    <XCircleIcon className="text-red-400 h-6 w-5 cursor-pointer mr-1" />
                   </div>
                 </td>
               </tr>

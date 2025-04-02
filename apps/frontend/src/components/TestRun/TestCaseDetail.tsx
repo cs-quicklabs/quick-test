@@ -166,12 +166,13 @@ const TestCaseDetail = ({ page, submitStatus, refetch }: any) => {
               <div className="w-24">
                 <div className={`inline-flex justify-between rounded-md  `}>
                   <Badge
-                    className={`mr-2 capitalize flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium ${data?.status === "PASSED"
-                      ? "bg-green-100 text-green-800"
-                      : data?.status === "FAILED"
-                        ? "bg-red-100 text-red-800"
-                        : "bg-gray-200 text-gray-00"
-                      }`}
+                    className={`mr-2 capitalize flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium ${
+                      data?.status === "PASSED"
+                        ? "bg-green-100 text-green-800"
+                        : data?.status === "FAILED"
+                          ? "bg-red-100 text-red-800"
+                          : "bg-gray-200 text-gray-00"
+                    }`}
                   >
                     <Trans>{data?.status.toLowerCase()}</Trans>
                   </Badge>

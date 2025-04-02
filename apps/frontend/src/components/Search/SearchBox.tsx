@@ -27,7 +27,13 @@ const debounce = (fn: any, wait: number) => {
   };
 };
 
-const SearchBox = ({ inputFieldId, placeholderText }: { inputFieldId: string, placeholderText: string }) => {
+const SearchBox = ({
+  inputFieldId,
+  placeholderText,
+}: {
+  inputFieldId: string;
+  placeholderText: string;
+}) => {
   const { t } = useTranslation();
   const [inputValue, setInputValue] = useState("");
   const [showDropDown, setShowDropDown] = useState(false);
@@ -69,7 +75,7 @@ const SearchBox = ({ inputFieldId, placeholderText }: { inputFieldId: string, pl
             );
             setSearchResult(response?.data?.data);
           } catch (err) {
-            showError(err?.response?.data?.message)
+            showError(err?.response?.data?.message);
           }
         }
       }, 300),
@@ -119,8 +125,9 @@ const SearchBox = ({ inputFieldId, placeholderText }: { inputFieldId: string, pl
       {showDropDown && (
         <div
           style={{ width: `${searchWidth}px` }}
-          className={`absolute top-24 sm:top-11 rounded-md shadow-md border border-gray-300 overflow-x-hidden w-96 bg-white z-10 ${getAllSearchCount() > 8 ? "h-64 overflow-y-auto" : "h-auto"
-            } `}
+          className={`absolute top-24 sm:top-11 rounded-md shadow-md border border-gray-300 overflow-x-hidden w-96 bg-white z-10 ${
+            getAllSearchCount() > 8 ? "h-64 overflow-y-auto" : "h-auto"
+          } `}
         >
           {Object.keys(searchResult).length === 0 ? (
             <div className="px-2 py-1 text-sm">{t("No match found")}</div>

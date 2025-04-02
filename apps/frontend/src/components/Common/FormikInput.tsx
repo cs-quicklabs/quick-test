@@ -309,4 +309,4 @@ export const RenderFormikInputs = (fields: Array<InputFieldProps>) => {
       />
     </div>
   ));
-}
+};

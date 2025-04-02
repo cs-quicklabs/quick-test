@@ -33,7 +33,7 @@ const ArchivedUsers = () => {
     refetch,
   } = useQuery({
     queryKey: ["archiveMembers"], // This is your query key
-    queryFn: getArchiveMembers,  // This is the function to fetch data
+    queryFn: getArchiveMembers, // This is the function to fetch data
   });
 
   const openConfirmationModal = (
@@ -76,7 +76,7 @@ const ArchivedUsers = () => {
       setShowModal(false);
       refetch();
     } catch (err) {
-      showError(err?.messsage)
+      showError(err?.messsage);
     }
   }, [refetch, selectedId]);
 
@@ -87,7 +87,7 @@ const ArchivedUsers = () => {
       setShowModal(false);
       refetch();
     } catch (err) {
-      showError(err?.messsage)
+      showError(err?.messsage);
     }
   }, [refetch, selectedId]);
 
@@ -125,9 +125,7 @@ const ArchivedUsers = () => {
                         </div>
                         <div className="flex text-xs items-center gap-2 text-gray-500 font-normal">
                           <div>
-                            <ArchiveBoxIcon
-                              className="h-4 w-4 text-gray-400 group-hover:text-gray-500"
-                            />
+                            <ArchiveBoxIcon className="h-4 w-4 text-gray-400 group-hover:text-gray-500" />
                           </div>
                           <div>
                             {t("Archived on ")}
@@ -155,9 +153,7 @@ const ArchivedUsers = () => {
                               data-tooltip-id="archived-users-tooltip-id"
                               data-tooltip-content={t("Restore Users")}
                             >
-                              <ArrowPathIcon
-                                className="h-4 w-4 text-indigo-600 group-hover:text-indigo-800"
-                              />
+                              <ArrowPathIcon className="h-4 w-4 text-indigo-600 group-hover:text-indigo-800" />
                             </span>
                           </AccessControl>
                         </button>
@@ -172,11 +168,11 @@ const ArchivedUsers = () => {
                           >
                             <span
                               data-tooltip-id="archived-users-tooltip-id"
-                              data-tooltip-content={t("Permanently Delete Users")}
+                              data-tooltip-content={t(
+                                "Permanently Delete Users"
+                              )}
                             >
-                              <TrashIcon
-                                className="h-4 w-4 text-red-400 group-hover:text-indigo-800"
-                              />
+                              <TrashIcon className="h-4 w-4 text-red-400 group-hover:text-indigo-800" />
                             </span>
                           </AccessControl>
                         </button>

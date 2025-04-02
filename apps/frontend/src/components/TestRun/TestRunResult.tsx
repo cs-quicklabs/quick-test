@@ -48,8 +48,7 @@ export default function TestRunResult({
     getNextPageParam: (lastPage) =>
       lastPage.prevOffSet > lastPage.data.meta.pageCount
         ? undefined
-        : lastPage.prevOffSet
-
+        : lastPage.prevOffSet,
   });
 
   const testRunResults = data?.pages.reduce((acc, page) => {

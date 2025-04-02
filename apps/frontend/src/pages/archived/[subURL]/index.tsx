@@ -1,4 +1,3 @@
-
 import { useParams, useLocation, Link } from "react-router-dom";
 import {
   appRoutes,
@@ -30,7 +29,6 @@ export default function Archived() {
 
   return (
     <>
-
       <meta
         name="description"
         content="Restore or completely delete your inactive projects and users in this section."
@@ -44,7 +42,6 @@ export default function Archived() {
         href={`${process.env.REACT_APP_DOMAIN_LINK}/archived`}
       />
 
-
       <div className="pb-10 lg:py-12 px-2 sm:px-7 2xl:px-52">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-5">
           <aside className="py-6 px-2 lg:py-0 lg:px-0 lg:col-span-3">
@@ -54,17 +51,19 @@ export default function Archived() {
                   to={val.link}
                   key={i}
                   data-cy={val.dataAttr}
-                  className={`group rounded-md px-3 py-2 flex items-center text-sm font-medium cursor-pointer w-full ${location?.pathname === val.link
-                    ? "bg-gray-50 text-indigo-600"
-                    : "bg-white hover:bg-gray-50 hover:text-indigo-600"
-                    }`}
+                  className={`group rounded-md px-3 py-2 flex items-center text-sm font-medium cursor-pointer w-full ${
+                    location?.pathname === val.link
+                      ? "bg-gray-50 text-indigo-600"
+                      : "bg-white hover:bg-gray-50 hover:text-indigo-600"
+                  }`}
                   aria-current="page"
                 >
                   <svg
-                    className={`text-gray-400 group-hover:text-indigo-600 flex-shrink-0 -ml-1 mr-3 h-6 w-6 ${location?.pathname === val.link
-                      ? "text-indigo-600"
-                      : "hover:text-indigo-600"
-                      }`}
+                    className={`text-gray-400 group-hover:text-indigo-600 flex-shrink-0 -ml-1 mr-3 h-6 w-6 ${
+                      location?.pathname === val.link
+                        ? "text-indigo-600"
+                        : "hover:text-indigo-600"
+                    }`}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"

@@ -6,7 +6,7 @@ interface Iprops {
   touched?: boolean | string;
   validation?: boolean;
   value?: string;
-  name?: string
+  name?: string;
 }
 
 const InputField: FC<Iprops> = ({ ...props }: Iprops) => {
@@ -19,10 +19,11 @@ const InputField: FC<Iprops> = ({ ...props }: Iprops) => {
         value={value}
         minRows={3}
         maxRows={5}
-        className={`resize-y  w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none  focus:border-indigo-500 sm:text-sm ${(error && touched) || (validation && error)
-          ? " border-red-300"
-          : " border-gray-300"
-          }`}
+        className={`resize-y  w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none  focus:border-indigo-500 sm:text-sm ${
+          (error && touched) || (validation && error)
+            ? " border-red-300"
+            : " border-gray-300"
+        }`}
         {...rest}
       />
       {((error && touched) || (validation && error)) && (
