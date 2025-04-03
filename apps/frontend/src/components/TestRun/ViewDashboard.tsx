@@ -45,12 +45,13 @@ export default function Dashboard() {
               ? "In Progress"
               : response.data.data.status.toLowerCase(),
 
-          description: `${t("Created by")} ${response.data.data.user.firstName +
+          description: `${t("Created by")} ${
+            response.data.data.user.firstName +
             " " +
             response.data.data.user.lastName
-            } ${t("on")} ${dayjs(new Date(response.data.data.createdAt)).format(
-              DateFormat.LONG
-            )}`,
+          } ${t("on")} ${dayjs(new Date(response.data.data.createdAt)).format(
+            DateFormat.LONG
+          )}`,
         });
       } else {
         setuserData({
@@ -79,8 +80,8 @@ export default function Dashboard() {
   }, [navigate, params.id, params.pid, t]);
 
   const { data: projectDetail } = useQuery({
-    queryKey: ["projects-data", pid], queryFn: () =>
-      getProjectsDetails({ pid })
+    queryKey: ["projects-data", pid],
+    queryFn: () => getProjectsDetails({ pid }),
   });
 
   useEffect(() => {

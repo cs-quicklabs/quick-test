@@ -98,8 +98,9 @@ export default function Table(props: Props) {
               {props?.projectName}&nbsp;{t("Project Test Run Report")}
             </div>
             <div
-              className={` border-b border-gray-200 ${props.RowData?.length < 1 && "hidden"
-                } `}
+              className={` border-b border-gray-200 ${
+                props.RowData?.length < 1 && "hidden"
+              } `}
             >
               <table className="min-w-full ">
                 <tbody className="bg-white divide-y divide-gray-200">
@@ -206,9 +207,7 @@ export default function Table(props: Props) {
                                 data-cy={"test-run-" + i + "-delete"}
                                 onClick={() => openDeleteModal(value)}
                               >
-                                <TrashIcon
-                                  className="text-red-400 h-4 w-4 cursor-pointer"
-                                />
+                                <TrashIcon className="text-red-400 h-4 w-4 cursor-pointer" />
                               </button>
                             </div>
                           </div>

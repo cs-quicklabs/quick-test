@@ -21,12 +21,18 @@ export default function ViewMilestone() {
   const pid = params.pid;
   const id = params.id;
 
-  const { data: projectDetail } = useQuery({ queryKey: ["projects-data", pid], queryFn: () => getProjectsDetails({ pid }) });
+  const { data: projectDetail } = useQuery({
+    queryKey: ["projects-data", pid],
+    queryFn: () => getProjectsDetails({ pid }),
+  });
   const {
     data: milestoneDetail,
     isLoading,
     error,
-  } = useQuery({ queryKey: ["single-milestone-data", id], queryFn: () => getSingleMilestoneDataDetails({ id }) });
+  } = useQuery({
+    queryKey: ["single-milestone-data", id],
+    queryFn: () => getSingleMilestoneDataDetails({ id }),
+  });
 
   if (error instanceof Error) {
     const errorMessage =

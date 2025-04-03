@@ -145,7 +145,10 @@ const AddProject = ({ onSubmit, setApiEndPoint }: any) => {
                 return (
                   <Form className="space-y-6" noValidate autoComplete="off">
                     <div>
-                      <label htmlFor="name" className="block text-base font-medium text-gray-900">
+                      <label
+                        htmlFor="name"
+                        className="block text-base font-medium text-gray-900"
+                      >
                         {params.pid
                           ? t("Edit Project Details")
                           : t("Create New Project")}

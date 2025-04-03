@@ -1,6 +1,5 @@
 import EditMilestone from "../../../../components/Milestones/AddEditMilestone";
 
-
 const UpdateMilestone = () => {
   return (
     <>

@@ -173,22 +173,20 @@ export default function Table({
 
                       <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-500">
                         <p>
-                          {
-                            value.testsuites.length <= 1
-                              ? `${value.testsuites.length} ${t("active test run")}`
-                              : `${value.testsuites.length} ${t("active test runs")}`
-                          }
+                          {value.testsuites.length <= 1
+                            ? `${value.testsuites.length} ${t("active test run")}`
+                            : `${value.testsuites.length} ${t("active test runs")}`}
                         </p>
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-500">
                         {value.status === "COMPLETED"
                           ? `Done on ${dayjs(value.endDate).format(
-                            DateFormat.MEDIUM
-                          )}`
+                              DateFormat.MEDIUM
+                            )}`
                           : `${t("Due on")} ${dayjs(value.endDate).format(
-                            DateFormat.MEDIUM
-                          )}`}
+                              DateFormat.MEDIUM
+                            )}`}
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-500">
@@ -219,10 +217,9 @@ export default function Table({
                             <button
                               data-tooltip-id="table-tooltip-id"
                               data-tooltip-content={t("Edit")}
-                              onClick={() => editMilestone(value.id)}>
-                              <PencilSquareIcon
-                                className="text-indigo-500 h-4 w-4 cursor-pointer mr-3"
-                              />
+                              onClick={() => editMilestone(value.id)}
+                            >
+                              <PencilSquareIcon className="text-indigo-500 h-4 w-4 cursor-pointer mr-3" />
                             </button>
                           </AccessControl>
                           {isMilestoneDeleteable ? (
@@ -236,7 +233,9 @@ export default function Table({
                           ) : (
                             <button
                               data-tooltip-id="table-tooltip-id"
-                              data-tooltip-content={NO_PERMISSION_TOOLTIP_MESSAGE}
+                              data-tooltip-content={
+                                NO_PERMISSION_TOOLTIP_MESSAGE
+                              }
                               onClick={(e) => {
                                 e.stopPropagation();
                                 e.preventDefault();
@@ -270,15 +269,14 @@ export default function Table({
                                   MilestonePermissions.UPDATE_MILESTONE_STATUS
                                 }
                               >
-                                <CheckCircleOutline
-                                  className="text-indigo-600 h-4 w-4 cursor-pointer mr-1"
-                                />
+                                <CheckCircleOutline className="text-indigo-600 h-4 w-4 cursor-pointer mr-1" />
                               </AccessControl>
                             </div>
                           ) : (
                             <div
                               data-tooltip-id="table-tooltip-id"
-                              data-tooltip-content={t("Completed")}>
+                              data-tooltip-content={t("Completed")}
+                            >
                               <CheckCircleIcon className="text-green-500 h-5 w-5 mr-1" />
                             </div>
                           )}

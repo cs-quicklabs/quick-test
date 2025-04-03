@@ -1,6 +1,5 @@
 import ViewMilestone from "../../../../components/Milestones/ViewMilestone";
 
-
 export default function Comp() {
   return (
     <>

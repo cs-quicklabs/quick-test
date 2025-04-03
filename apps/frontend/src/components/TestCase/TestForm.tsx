@@ -17,13 +17,14 @@ import { t } from "i18next";
 export const editTestCaseSchema = Yup.object().shape({
   title: Yup.string().trim().required(t(ValidatorMessage.TITLE_REQ)),
   preconditions: Yup.string()
-    .trim().max(3000, 'Preconditions max size can be 3000')
+    .trim()
+    .max(3000, "Preconditions max size can be 3000")
     .required(t(ValidatorMessage.PRECONDITIONS_REQ)),
   steps: Yup.string().trim().required(t(ValidatorMessage.STEPS_REQ)),
   expectedResults: Yup.string()
     .trim()
     .required(t(ValidatorMessage.EXPECTED_RESULT_REQ)),
-  sectionId: Yup.string().required('Section is required')
+  sectionId: Yup.string().required("Section is required"),
 });
 
 interface InitVal {
@@ -101,9 +102,9 @@ const TestForm = ({
                       optionsForSelect={
                         EditMany && optionsForSelect
                           ? [
-                            { name: t("Not selected"), id: "" },
-                            ...optionsForSelect,
-                          ]
+                              { name: t("Not selected"), id: "" },
+                              ...optionsForSelect,
+                            ]
                           : optionsForSelect
                       }
                     />
@@ -119,18 +120,18 @@ const TestForm = ({
                       optionsForSelect={
                         EditMany
                           ? [
-                            { name: t("Not selected"), id: "" },
-                            { name: t("Low"), id: "LOW" },
-                            { name: t("Medium"), id: "MEDIUM" },
-                            { name: t("High"), id: "HIGH" },
-                            { name: t("Critical"), id: "CRITICAL" },
-                          ]
+                              { name: t("Not selected"), id: "" },
+                              { name: t("Low"), id: "LOW" },
+                              { name: t("Medium"), id: "MEDIUM" },
+                              { name: t("High"), id: "HIGH" },
+                              { name: t("Critical"), id: "CRITICAL" },
+                            ]
                           : [
-                            { name: t("Low"), id: "LOW" },
-                            { name: t("Medium"), id: "MEDIUM" },
-                            { name: t("High"), id: "HIGH" },
-                            { name: t("Critical"), id: "CRITICAL" },
-                          ]
+                              { name: t("Low"), id: "LOW" },
+                              { name: t("Medium"), id: "MEDIUM" },
+                              { name: t("High"), id: "HIGH" },
+                              { name: t("Critical"), id: "CRITICAL" },
+                            ]
                       }
                     />
                   </div>

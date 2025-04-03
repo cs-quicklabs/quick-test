@@ -40,8 +40,9 @@ export default function ProjectList(data: Props) {
                   {value.map((val, index) => (
                     <td
                       key={index}
-                      className={`${"px-6 py-2 whitespace-nowrap text-sm text-gray-500"} ${index === 0 && "text-gray-900 font-medium capitalize"
-                        }`}
+                      className={`${"px-6 py-2 whitespace-nowrap text-sm text-gray-500"} ${
+                        index === 0 && "text-gray-900 font-medium capitalize"
+                      }`}
                     >
                       {val}
                     </td>

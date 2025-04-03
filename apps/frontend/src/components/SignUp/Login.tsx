@@ -17,7 +17,11 @@ import { useFormSubmitWithLoading } from "../Utils/hooks/useFormSubmitWithLoadin
 import { AppContext } from "../Context/mainContext";
 import { useTranslation } from "react-i18next";
 import bugplotLogo from "../../assets/images/bugplot-logo.svg";
-import { ILoginResponse, ISignInInputFieldProps, SignInInitialValues } from "../Utils/interfaces/userObject";
+import {
+  ILoginResponse,
+  ISignInInputFieldProps,
+  SignInInitialValues,
+} from "../Utils/interfaces/userObject";
 
 const SignIn = () => {
   const { i18n, t } = useTranslation();
@@ -51,7 +55,7 @@ const SignIn = () => {
       const { user, token, permissions } = data.data;
       setUserDataInLocalStorage(user, permissions);
       const storage = remember_me ? localStorage : sessionStorage;
-      storage.setItem('token', token.accessToken);
+      storage.setItem("token", token.accessToken);
       dispatchUserData(user);
       navigationAfterLoginSuccess(user);
     } catch (error) {
@@ -76,7 +80,10 @@ const SignIn = () => {
     }
   }
 
-  function setUserDataInLocalStorage(userData: ILoginResponse, permissions: String[]) {
+  function setUserDataInLocalStorage(
+    userData: ILoginResponse,
+    permissions: String[]
+  ) {
     localStorage.setItem("allowedPermissions", JSON.stringify(permissions));
     localStorage.setItem("role", userData.role.roleType);
     localStorage.setItem("roleId", userData.role.id);
@@ -120,10 +127,17 @@ const SignIn = () => {
               {() => {
                 return (
                   <Form className="space-y-6" noValidate autoComplete="off">
-
                     {RenderFormikInputs([
-                      { type: "email", name: "email", label: t("Email Address") },
-                      { type: "password", name: "password", label: t("Password") }
+                      {
+                        type: "email",
+                        name: "email",
+                        label: t("Email Address"),
+                      },
+                      {
+                        type: "password",
+                        name: "password",
+                        label: t("Password"),
+                      },
                     ])}
 
                     <div className="flex items-center justify-between">

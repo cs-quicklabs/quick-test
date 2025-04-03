@@ -101,7 +101,7 @@ export default function StripeCheckout() {
           ) : (
             <div className="">
               {isSubscribed === SubscriptionStatus.CANCELLED ||
-                isSubscribed === SubscriptionStatus.FREE_TRIAL ? (
+              isSubscribed === SubscriptionStatus.FREE_TRIAL ? (
                 <>
                   <p>
                     {t(
