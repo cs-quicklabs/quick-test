@@ -247,22 +247,22 @@ export default function Table({
                         </td>
                         <td className="px-3 py-2 whitespace-nowrap text-right text-xs font-normal">
                           {value?.status === "PASSED" && (
-                            <Badge className="bg-green-100 text-green-800">
+                            <Badge className="bg-green-100 text-green-700 rounded-md ring-1 ring-inset ring-green-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
                           {value?.status === "FAILED" && (
-                            <Badge className="bg-red-100 text-red-800">
+                            <Badge className="bg-red-100 text-red-700 rounded-md ring-1 ring-inset ring-red-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
                           {value?.status === "UNTESTED" && (
-                            <Badge className="bg-gray-100 text-gray-800">
+                            <Badge className="bg-gray-100 text-gray-700 rounded-md ring-1 ring-inset ring-gray-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
                           {value?.status === "BLOCKED" && (
-                            <Badge className="bg-yellow-100 text-yellow-800">
+                            <Badge className="bg-yellow-100 text-yellow-700 rounded-md ring-1 ring-inset ring-yellow-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
