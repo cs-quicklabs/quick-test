@@ -33,6 +33,13 @@ export class AddOrganizationMemberDto {
   @ApiProperty()
   email: string;
 
+  @MaxLength(200, { message: "Title max size can be 200" })
+  @IsString({ message: "Title should be a string" })
+  @IsNotEmpty({ message: "Title cannot be empty" })
+  @IsOptional()
+  @ApiProperty()
+  title: string;
+
   @IsNotEmpty({ message: "RoleId cannot be empty" })
   @ApiProperty()
   @IsNumber()

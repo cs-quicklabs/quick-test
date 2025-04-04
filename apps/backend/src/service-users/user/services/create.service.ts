@@ -208,6 +208,10 @@ export class UserCreateService {
     addOrganizationUserDto.email = UtilsService.lowerCase(
       addOrganizationUserDto.email,
     );
+
+    if (addOrganizationUserDto?.title) {
+      addOrganizationUserDto.title = UtilsService.properCase(addOrganizationUserDto.title);
+    }
     if (addOrganizationUserDto?.lastName) {
       addOrganizationUserDto.lastName = UtilsService.properCase(
         addOrganizationUserDto.lastName,
@@ -244,9 +248,9 @@ export class UserCreateService {
       user.role = await this.roleService.findRoleById(
         addOrganizationUserDto.roleId,
       );
-      if (user.roleId === RoleId.ADMIN) {
-        user.title = UserTitle.ADMIN;
-      }
+      // if (user.roleId === RoleId.ADMIN) {
+      //   user.title = UserTitle.ADMIN;
+      // }
       const usersData = await this.userRepository.save(user);
 
       this.authService.sendWelcomeMemberEmail(
