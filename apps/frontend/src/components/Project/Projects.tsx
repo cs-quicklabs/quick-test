@@ -1,24 +1,27 @@
 import { Menu, Transition } from "@headlessui/react";
 import {
   ArchiveBoxIcon,
+  ChevronRightIcon,
   EllipsisVerticalIcon,
   PencilSquareIcon,
 } from "@heroicons/react/24/solid";
 import dayjs from "dayjs";
 import { Fragment, useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+
+import DeleteConfirmationModal from "../Common/DeleteModal";
 import Loader from "../Loader/Loader";
 import { showError, showSuccess } from "../Toaster/ToasterFun";
 import axiosService from "../Utils/axios";
 import { DateFormat } from "../Utils/constants/date-format";
-
+import { NoOfDaysForGraph } from "../Utils/constants/misc";
 import { appRoutes, projectRoutes } from "../Utils/constants/page-routes";
 
 import { Tooltip } from "react-tooltip";
 
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getProjects } from "../../services/projectPageServices";
 import AccessControl from "../AccessControl";
 import ConfirmModal from "../Common/ConfirmModal";
@@ -27,7 +30,7 @@ import {
   ArchivePermissions,
   ProjectPermissions,
 } from "../Utils/constants/roles-permission";
-
+import Modal from "./Modal";
 import { EyeIcon } from "@heroicons/react/24/outline";
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
@@ -48,9 +51,18 @@ export default function Projects() {
       // showError(ToastMessage.SOMETHING_WENT_WRONG)
     }
   };
+  const [searchParams, setSearchParams] = useSearchParams();
+  const daysFromQuery = searchParams.get("days");
 
   const [showModal, toggleModal] = useState(false);
   const [selectedId, setSelectedId] = useState("");
+  const [isDelete, setIsDelete] = useState(false);
+
+  const [daysModal, setDaysModal] = useState(false);
+  const [numberOfDays, setNumberOfDays] = useState(
+    daysFromQuery ? parseInt(daysFromQuery) : NoOfDaysForGraph.DEFAULT
+  );
+  const queryClient = useQueryClient();
 
   const openModal = (e: React.MouseEvent<HTMLSpanElement>, project: any) => {
     setSelectedId(project?.id);
@@ -62,6 +74,18 @@ export default function Projects() {
           ?
         </>
       );
+      setIsDelete(false);
+      setMsg(msg);
+      toggleModal(!showModal);
+    } else {
+      const msg = (
+        <>
+          {t("Are you sure you want to delete the project")}{" "}
+          <span className="font-semibold text-red-500">{`"${project?.name}"`}</span>
+          ?
+        </>
+      );
+      setIsDelete(true);
       setMsg(msg);
       toggleModal(!showModal);
     }
@@ -97,6 +121,20 @@ export default function Projects() {
     }
   }, [refetch, selectedId]);
 
+  const deleteProject = useCallback(async () => {
+    try {
+      const resp = await axiosService.delete(
+        `projects/${selectedId}/delete`,
+        {}
+      );
+      showSuccess(resp.data.message);
+      toggleModal(false);
+      queryClient.invalidateQueries({ queryKey: ["all-projects"] });
+    } catch (err) {
+      showError(err?.message);
+    }
+  }, [selectedId, queryClient]);
+
   return (
     <>
       <div className="bg-gray-50">
@@ -115,8 +153,47 @@ export default function Projects() {
         </div>
       ) : (
         <div className="h-full border flex flex-grow overflow-hidden bg-white">
+          <Modal
+            open={daysModal}
+            toggleModal={setDaysModal}
+            setNumberOfDays={setNumberOfDays}
+            defaultVal={numberOfDays}
+            setSearchParams={setSearchParams}
+          />
           <div className="flex flex-col w-0 flex-1 overflow-hidden">
             <main className="flex-1 relative overflow-y-auto z-0 focus:outline-none">
+              <div className="mt-10 sm:hidden">
+                <div className="px-4 sm:px-6">
+                  <h2 className="text-gray-500 text-xs font-medium tracking-wide">
+                    {t("Projects")}
+                  </h2>
+                </div>
+                <ul className="mt-3 border-t border-gray-200 divide-y divide-gray-100">
+                  {data?.data?.data.map((project: any) => (
+                    <li key={project.id}>
+                      <a
+                        href={`${appRoutes.PROJECTS}/${project?.id}/${projectRoutes.TESTCASES}`}
+                        className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6"
+                      >
+                        <span className="flex items-center truncate space-x-3">
+                          <span
+                            className="bg-indigo-400 w-2.5 h-2.5 flex-shrink-0 rounded-full"
+                            aria-hidden="true"
+                          />
+                          <span className="font-medium truncate text-sm leading-6">
+                            {project?.name}
+                          </span>
+                        </span>
+                        <ChevronRightIcon
+                          className="ml-4 h-4 w-4 text-gray-400 group-hover:text-gray-500"
+                          aria-hidden="true"
+                        />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
               <div className="min-h-full h-auto flex">
                 <div className="w-full pb-14">
                   <div className="p-4 pb-0 hidden">
@@ -381,13 +458,22 @@ export default function Projects() {
           </div>
         </div>
       )}
-      {showModal && (
-        <ConfirmModal
-          message={modalMsg}
+      {showModal && isDelete ? (
+        <DeleteConfirmationModal
+          msg={modalMsg}
           open={showModal}
-          handleConfirm={moveToArchive}
-          handleCancel={() => toggleModal(false)}
+          toggleModal={toggleModal}
+          delete={deleteProject}
         />
+      ) : (
+        showModal && (
+          <ConfirmModal
+            message={modalMsg}
+            open={showModal}
+            handleConfirm={moveToArchive}
+            handleCancel={() => toggleModal(false)}
+          />
+        )
       )}
     </>
   );
