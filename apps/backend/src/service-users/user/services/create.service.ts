@@ -248,9 +248,6 @@ export class UserCreateService {
       user.role = await this.roleService.findRoleById(
         addOrganizationUserDto.roleId,
       );
-      // if (user.roleId === RoleId.ADMIN) {
-      //   user.title = UserTitle.ADMIN;
-      // }
       const usersData = await this.userRepository.save(user);
 
       this.authService.sendWelcomeMemberEmail(
