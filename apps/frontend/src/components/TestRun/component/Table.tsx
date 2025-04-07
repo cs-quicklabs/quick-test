@@ -184,7 +184,7 @@ export default function Table(props: Props) {
                           </div>
                         </td>
                         <td>
-                          <div className="flex justify-end text-center items-center gap-2 text-xs">
+                          <div className="flex justify-end text-center gap-2 text-xs">
                             <button
                               data-tooltip-id="test-run-table-tooltip-id"
                               data-tooltip-content={t("Edit")}
@@ -196,20 +196,14 @@ export default function Table(props: Props) {
                                 aria-hidden="true"
                               />
                             </button>
-
-                            <div
+                            <button
                               data-tooltip-id="test-run-table-tooltip-id"
                               data-tooltip-content={t("Delete")}
+                              data-cy={"test-run-" + i + "-delete"}
+                              onClick={() => openDeleteModal(value)}
                             >
-                              <button
-                                data-tooltip-id="test-run-table-tooltip-id"
-                                data-tooltip-content={t("Delete")}
-                                data-cy={"test-run-" + i + "-delete"}
-                                onClick={() => openDeleteModal(value)}
-                              >
-                                <TrashIcon className="text-red-400 h-4 w-4 cursor-pointer" />
-                              </button>
-                            </div>
+                              <TrashIcon className="text-red-400 h-4 w-4 cursor-pointer" />
+                            </button>
                           </div>
                         </td>
                       </tr>
@@ -219,7 +213,21 @@ export default function Table(props: Props) {
               <div className="flex items-center justify-center">
                 {props.isFetchingNextPage && <Loader />}
               </div>
-              <Tooltip id="test-run-table-tooltip-id" />
+              <Tooltip
+                id="test-run-table-tooltip-id"
+                style={{
+                  position: "absolute",
+                  maxWidth: "24rem",
+                  display: "inline-block",
+                  padding: "4px 8px",
+                  fontSize: "12px",
+                  color: "white",
+                  transitionProperty: "opacity",
+                  transitionDuration: "300ms",
+                  backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
+                  borderRight: "5px",
+                }}
+              />
             </div>
           </div>
         </div>

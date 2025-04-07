@@ -279,103 +279,99 @@ export default function TestCaseList({ projectName }: any) {
       </SidePanel>
 
       <div className="w-full">
-        <>
-          {isLoading ? (
-            <div className="flex justify-center items-center content-center my-32">
-              <Loader />
-            </div>
-          ) : (
-            <>
-              <div className="grid items-start grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2 overflow-hidden">
-                <div className=" overflow-x-auto mx-6 sm:mx-0  col-span-1 lg:col-span-2 height-threshold">
-                  <div className="py-4 align-middle inline-block min-w-full px-7 2xl:pl-52">
-                    <TestCaseToolbar
-                      Row={Row}
-                      setRowData={setRowData}
-                      setShowDragIcon={setShowDragIcon}
-                      initialRowData={initialRowData}
-                      memberList={memberList}
-                      selectedData={selectedData}
-                      csvData={DocumentData}
-                      projectName={projectName}
-                      ColorEnable={Boolean(DocumentData.length)}
-                      handlePrinterClick={printDocument}
-                      HandleDeleteClick={HandleDeleteClick}
-                      HandleEditClick={HandleEditClick}
-                    />
-                    <div
-                      className="overflow-hidden border-gray-200 sm:rounded-lg"
-                      id="test-case-report"
-                    >
-                      <div
-                        id="pdf-header"
-                        className="flex item-center justify-center font-medium text-gray-900 py-3 hidden"
-                      >
-                        {projectName}&nbsp;{t("Project Test Case Report")}
-                      </div>
-                      {Row?.map(
-                        (
-                          section: {
-                            name: string;
-                            id: string;
-                            testcases: any[];
-                          },
-                          index
-                        ) => (
-                          <React.Fragment key={index}>
-                            <div
-                              className="pl-6 py-4 whitespace-nowrap  border-t   flex flex-col items-start"
-                              data-cy={"section-" + index}
-                            >
-                              <span className="text-sm font-medium text-gray-900">
-                                {section?.name}
-                              </span>{" "}
-                              {showDragIcon && (
-                                <span
-                                  onClick={() => {
-                                    setIsAddNewTestCaseModalVisible(true);
-                                    setSelectedId(section.id);
-                                  }}
-                                  className="text-indigo-600 underline cursor-pointer  text-xs font-medium"
-                                  data-cy={"section-" + index + "-add-case"}
-                                >
-                                  {t("Add Case")}
-                                </span>
-                              )}
-                            </div>
-
-                            {section?.testcases?.length > 0 && (
-                              <TestCaseListTable
-                                dataAttr={"section-" + index + "-case-"}
-                                testcases={section?.testcases}
-                                SectionName={section?.name}
-                                openDeleteModal={openDeleteModal}
-                                selectedData={selectedData}
-                                sectionId={section?.id}
-                                showDragIcon={showDragIcon}
-                                selectedTestCase={selectedTestCase}
-                                setSelectedTestCase={setSelectedTestCase}
-                              />
-                            )}
-                          </React.Fragment>
-                        )
-                      )}
-                    </div>
+        {isLoading ? (
+          <div className="flex justify-center items-center content-center my-32">
+            <Loader />
+          </div>
+        ) : (
+          <div className="grid items-start grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2 overflow-hidden">
+            <div className=" overflow-x-auto mx-6 sm:mx-0  col-span-1 lg:col-span-2 height-threshold">
+              <div className="py-4 align-middle inline-block min-w-full px-7 2xl:pl-52">
+                <TestCaseToolbar
+                  Row={Row}
+                  setRowData={setRowData}
+                  setShowDragIcon={setShowDragIcon}
+                  initialRowData={initialRowData}
+                  memberList={memberList}
+                  selectedData={selectedData}
+                  csvData={DocumentData}
+                  projectName={projectName}
+                  ColorEnable={Boolean(DocumentData.length)}
+                  handlePrinterClick={printDocument}
+                  HandleDeleteClick={HandleDeleteClick}
+                  HandleEditClick={HandleEditClick}
+                />
+                <div
+                  className="overflow-hidden border-gray-200 sm:rounded-lg"
+                  id="test-case-report"
+                >
+                  <div
+                    id="pdf-header"
+                    className="flex item-center justify-center font-medium text-gray-900 py-3"
+                  >
+                    {projectName}&nbsp;{t("Project Test Case Report")}
                   </div>
-                  {Row?.length === 0 && (
-                    <div className="flex justify-center items-center content-center text-gray-500 text-xs font-normal my-2">
-                      {t("No test cases found")}
-                    </div>
+                  {Row?.map(
+                    (
+                      section: {
+                        name: string;
+                        id: string;
+                        testcases: any[];
+                      },
+                      index
+                    ) => (
+                      <React.Fragment key={index}>
+                        <div
+                          className="pl-6 py-4 whitespace-nowrap border-t flex flex-col items-start"
+                          data-cy={"section-" + index}
+                        >
+                          <span className="text-sm font-medium text-gray-900">
+                            {section?.name}
+                          </span>{" "}
+                          {showDragIcon && (
+                            <span
+                              onClick={() => {
+                                setIsAddNewTestCaseModalVisible(true);
+                                setSelectedId(section.id);
+                              }}
+                              className="text-indigo-600 underline cursor-pointer  text-xs font-medium"
+                              data-cy={"section-" + index + "-add-case"}
+                            >
+                              {t("Add Case")}
+                            </span>
+                          )}
+                        </div>
+
+                        {section?.testcases?.length > 0 && (
+                          <TestCaseListTable
+                            dataAttr={"section-" + index + "-case-"}
+                            testcases={section?.testcases}
+                            SectionName={section?.name}
+                            openDeleteModal={openDeleteModal}
+                            selectedData={selectedData}
+                            sectionId={section?.id}
+                            showDragIcon={showDragIcon}
+                            selectedTestCase={selectedTestCase}
+                            setSelectedTestCase={setSelectedTestCase}
+                          />
+                        )}
+                      </React.Fragment>
+                    )
                   )}
                 </div>
-                <SectionMain
-                  getTestCases={getData}
-                  addTestCase={() => setIsAddNewTestCaseModalVisible(true)}
-                />
               </div>
-            </>
-          )}
-        </>
+              {Row?.length === 0 && (
+                <div className="flex justify-center items-center content-center text-gray-500 text-xs font-normal my-2">
+                  {t("No test cases found")}
+                </div>
+              )}
+            </div>
+            <SectionMain
+              getTestCases={getData}
+              addTestCase={() => setIsAddNewTestCaseModalVisible(true)}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

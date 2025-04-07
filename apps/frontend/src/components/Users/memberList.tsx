@@ -231,7 +231,7 @@ const MemberList = () => {
                           : t("Member")}
                     </td>
 
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-center">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium flex justify-center gap-2">
                       <span
                         data-tooltip-id="member-list-tooltip-id"
                         data-tooltip-content={t("Resend Password Link")}
@@ -242,7 +242,7 @@ const MemberList = () => {
                           }
                         >
                           <button onClick={() => resendPassword(user.email)}>
-                            <EnvelopeIcon className="text-indigo-600 h-4 w-4 cursor-pointer mr-3" />
+                            <EnvelopeIcon className="text-indigo-600 h-4 w-4 cursor-pointer" />
                           </button>
                         </AccessControl>
                       </span>
@@ -265,7 +265,7 @@ const MemberList = () => {
                               );
                             }}
                           >
-                            <PencilSquareIcon className="text-indigo-500 h-4 w-4 cursor-pointer mr-3" />
+                            <PencilSquareIcon className="text-indigo-500 h-4 w-4 cursor-pointer" />
                           </button>
                         </AccessControl>
                       </span>
@@ -282,7 +282,7 @@ const MemberList = () => {
                             userRoleId !== RoleId.MEMBER
                           }
                         >
-                          <ArchiveBoxIcon className="text-indigo-600 h-4 w-4 cursor-pointer mr-3" />
+                          <ArchiveBoxIcon className="text-indigo-600 h-4 w-4 cursor-pointer" />
                         </AccessControl>
                       </span>
                     </td>
@@ -305,7 +305,21 @@ const MemberList = () => {
             </table>
           )}
         </div>
-        <Tooltip id="member-list-tooltip-id" />
+        <Tooltip
+          id="member-list-tooltip-id"
+          style={{
+            position: "absolute",
+            maxWidth: "24rem",
+            display: "inline-block",
+            padding: "4px 8px",
+            fontSize: "12px",
+            color: "white",
+            transitionProperty: "opacity",
+            transitionDuration: "300ms",
+            backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
+            borderRight: "5px",
+          }}
+        />
       </div>
       {showModal && (
         <ConfirmModal

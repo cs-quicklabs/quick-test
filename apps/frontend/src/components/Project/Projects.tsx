@@ -444,7 +444,22 @@ export default function Projects() {
                           )}
                         </tbody>
                       </table>
-                      <Tooltip id="projects-tooltip-id" />
+                      <Tooltip
+                        id="projects-tooltip-id"
+                        style={{
+                          position: "absolute",
+                          maxWidth: "24rem",
+                          display: "inline-block",
+                          padding: "4px 8px",
+                          fontSize: "12px",
+                          color: "white",
+                          transitionProperty: "opacity",
+                          transitionDuration: "300ms",
+                          backgroundColor:
+                            "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
+                          borderRight: "5px",
+                        }}
+                      />
                     </div>
                     {data?.data?.data.length === 0 && (
                       <div className="flex justify-center items-center content-center text-gray-500 text-xs font-normal my-4">

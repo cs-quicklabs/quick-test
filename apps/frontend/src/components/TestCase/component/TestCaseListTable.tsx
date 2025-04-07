@@ -243,7 +243,7 @@ export default function TestCaseListTable({
                 id="action-value"
                 className=" px-2 py-2 whitespace-nowrap text-center text-xs font-normal"
               >
-                <div className="flex justify-center">
+                <div className="flex justify-center text-center items-center gap-2 text-xs ">
                   <button
                     data-tooltip-id="testcase-list-table-tooltip-id"
                     data-tooltip-content={t("Edit")}
@@ -254,7 +254,7 @@ export default function TestCaseListTable({
                     }}
                   >
                     <PencilSquareIcon
-                      className="text-indigo-500 h-4 w-4 cursor-pointer mr-2"
+                      className="text-indigo-500 h-4 w-4 cursor-pointer"
                       aria-hidden="true"
                     />
                   </button>
@@ -275,7 +275,21 @@ export default function TestCaseListTable({
           ))}
         </tbody>
       </table>
-      <Tooltip id="testcase-list-table-tooltip-id" />
+      <Tooltip
+        id="testcase-list-table-tooltip-id"
+        style={{
+          position: "absolute",
+          maxWidth: "24rem",
+          display: "inline-block",
+          padding: "4px 8px",
+          fontSize: "12px",
+          color: "white",
+          transitionProperty: "opacity",
+          transitionDuration: "300ms",
+          backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
+          borderRight: "5px",
+        }}
+      />
     </ReactDragListView>
   );
 }

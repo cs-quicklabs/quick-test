@@ -197,7 +197,21 @@ const ArchivedUsers = () => {
           )}
           {/* <Pagination setPageNum={setPageNum} paginationData={paginationData} /> */}
         </div>
-        <Tooltip id="archived-users-tooltip-id" />
+        <Tooltip
+          id="archived-users-tooltip-id"
+          style={{
+            position: "absolute",
+            maxWidth: "24rem",
+            display: "inline-block",
+            padding: "4px 8px",
+            fontSize: "12px",
+            color: "white",
+            transitionProperty: "opacity",
+            transitionDuration: "300ms",
+            backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
+            borderRight: "5px",
+          }}
+        />
       </div>
       {showModal && ifRestore ? (
         <ConfirmModal

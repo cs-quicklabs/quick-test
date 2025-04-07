@@ -113,16 +113,14 @@ export default function ProjectMembers(props: any) {
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                               {member["email"]}
                             </td>
-                            <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                              {/* <div className="text-indigo-600 hover:text-indigo-900 cursor-pointer"> */}
+                            <td className="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                               <button
                                 data-tooltip-id="delete-id"
                                 data-tooltip-content="Delete"
                                 onClick={() => getConfirmation(member)}
                               >
-                                <TrashIcon className="w-4 h-8 text-red-400" />
+                                <TrashIcon className="w-4 h-4 text-red-400" />
                               </button>
-                              {/* </div> */}
                             </td>
                           </tr>
                         ))
@@ -135,7 +133,6 @@ export default function ProjectMembers(props: any) {
                       )}
                     </tbody>
                   </table>
-                  <Tooltip id="delete-id" />
                 </div>
               </div>
             </section>
@@ -262,6 +259,22 @@ export default function ProjectMembers(props: any) {
         pname={props.pname}
         pid={props.pid}
         fetchData={fetchData}
+      />
+
+      <Tooltip
+        id="delete-id"
+        style={{
+          position: "absolute",
+          maxWidth: "24rem",
+          display: "inline-block",
+          padding: "4px 8px",
+          fontSize: "12px",
+          color: "white",
+          transitionProperty: "opacity",
+          transitionDuration: "300ms",
+          backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
+          borderRight: "5px",
+        }}
       />
     </>
   );

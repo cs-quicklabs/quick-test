@@ -210,7 +210,7 @@ export default function Table({
                       </td>
 
                       <td className="px-6 py-4 whitespace-nowrap text-right text-xs font-normal">
-                        <div className="flex justify-end">
+                        <div className="flex justify-end text-center items-center gap-2 text-xs">
                           <AccessControl
                             permission={MilestonePermissions.UPDATE_MILESTONE}
                           >
@@ -219,7 +219,7 @@ export default function Table({
                               data-tooltip-content={t("Edit")}
                               onClick={() => editMilestone(value.id)}
                             >
-                              <PencilSquareIcon className="text-indigo-500 h-4 w-4 cursor-pointer mr-3" />
+                              <PencilSquareIcon className="text-indigo-500 h-4 w-4 cursor-pointer" />
                             </button>
                           </AccessControl>
                           {isMilestoneDeleteable ? (
@@ -228,7 +228,7 @@ export default function Table({
                               data-tooltip-content={t("Delete")}
                               onClick={() => openDeleteModal(value)}
                             >
-                              <TrashIcon className="text-red-400 h-4 w-4 mr-3 cursor-pointer" />
+                              <TrashIcon className="text-red-400 h-4 w-4 cursor-pointer" />
                             </button>
                           ) : (
                             <button
@@ -241,7 +241,7 @@ export default function Table({
                                 e.preventDefault();
                               }}
                             >
-                              <TrashIcon className="text-red-400 h-4 w-4 mr-3 cursor-not-allowed" />
+                              <TrashIcon className="text-red-400 h-4 w-4 cursor-not-allowed" />
                             </button>
                           )}
                           {value.status === "OPEN" ? (
@@ -287,7 +287,21 @@ export default function Table({
                 </tbody>
               </table>
             </div>
-            <Tooltip id="table-tooltip-id" />
+            <Tooltip
+              id="table-tooltip-id"
+              style={{
+                position: "absolute",
+                maxWidth: "24rem",
+                display: "inline-block",
+                padding: "4px 8px",
+                fontSize: "12px",
+                color: "white",
+                transitionProperty: "opacity",
+                transitionDuration: "300ms",
+                backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
+                borderRight: "5px",
+              }}
+            />
           </div>
         </div>
       </div>

@@ -24,7 +24,7 @@ const SectionListing = (props: Iprops) => {
               <Trans>{section.name}</Trans>
             </span>
             {section.name !== "Unassigned" && (
-              <span className="float-right">
+              <span className="float-right flex text-center gap-2 text-xs">
                 <div
                   className="inline-block"
                   onClick={() => props.editPopUp(section)}
@@ -32,7 +32,7 @@ const SectionListing = (props: Iprops) => {
                   data-tooltip-content="Edit"
                 >
                   <PencilSquareIcon
-                    className="text-indigo-500 h-6 w-4 cursor-pointer mr-3 inline-block pb-1"
+                    className="text-indigo-500 h-6 w-4 cursor-pointer inline-block pb-1"
                     data-cy={"section-" + i + "-edit"}
                   />
                 </div>
@@ -43,11 +43,25 @@ const SectionListing = (props: Iprops) => {
                   data-tooltip-content="Delete"
                 >
                   <TrashIcon
-                    className="text-red-400 h-6 w-4 cursor-pointer mr-3 inline-block pb-1"
+                    className="text-red-400 h-6 w-4 cursor-pointer inline-block pb-1"
                     data-cy={"section-" + i + "-delete"}
                   />
                 </div>
-                <Tooltip id="section-listing-tooltip-id" />
+                <Tooltip
+                  id="section-listing-tooltip-id"
+                  style={{
+                    position: "absolute",
+                    maxWidth: "24rem",
+                    display: "inline-block",
+                    padding: "4px 8px",
+                    fontSize: "12px",
+                    color: "white",
+                    transitionProperty: "opacity",
+                    transitionDuration: "300ms",
+                    backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
+                    borderRight: "5px",
+                  }}
+                />
               </span>
             )}
           </div>

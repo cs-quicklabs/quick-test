@@ -505,8 +505,8 @@ export default function Overview() {
                                     <span
                                       className={`mr-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-normal text-gray-100 ${
                                         item.entity === "MILESTONE"
-                                          ? "bg-pink-400"
-                                          : "mr-5 bg-purple-400"
+                                          ? "bg-pink-400 ring-1 ring-offset-1 ring-pink-300"
+                                          : "mr-5 bg-purple-400 ring-1 ring-offset-1 ring-purple-300"
                                       }`}
                                     >
                                       <Trans>{item.entity}</Trans>
