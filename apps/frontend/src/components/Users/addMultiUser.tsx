@@ -148,7 +148,7 @@ const AddMultiUser = () => {
           <div className="flex items-center">
             <BackButton
               onMouseDown={() => navigate(-1)}
-              className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none"
+              className="inline-flex items-center rounded-sm border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-xs hover:bg-gray-50 focus:outline-hidden"
               type="button"
             >
               {t("Back")}
@@ -237,7 +237,7 @@ const AddMultiUser = () => {
             <BackButton
               onMouseDown={() => navigate(-1)}
               type="button"
-              className="inline-flex items-center rounded border border-gray-300 bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none"
+              className="inline-flex items-center rounded-sm border border-gray-300 bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-xs hover:bg-gray-50 focus:outline-hidden"
             >
               {t("Cancel")}
             </BackButton>

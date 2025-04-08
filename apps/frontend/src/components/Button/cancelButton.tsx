@@ -20,7 +20,7 @@ export default function Button(props: any) {
       <button
         type="submit"
         {...propsNew}
-        className={`inline-flex justify-center items-center px-2.5 py-1.5 border border-gray-300 text-xs font-medium rounded rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none ${props?.className} my-submit-button`}
+        className={`inline-flex justify-center items-center px-2.5 py-1.5 border border-gray-300 text-xs font-medium rounded-sm rounded-md shadow-xs text-gray-700 bg-white hover:bg-gray-50 focus:outline-hidden ${props?.className} my-submit-button`}
         disabled={props?.loading || props?.disabled ? true : false}
         style={renderStyle}
       >

@@ -76,7 +76,7 @@ export default function PopUp({
               <button
                 type="button"
                 data-cy={dataAttr}
-                className={`mt-1 py-1.5 px-2.5 text-xs inline-flex items-center border border-transparent rounded-md shadow-sm  font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none justify-center ${customCss}`}
+                className={`mt-1 py-1.5 px-2.5 text-xs inline-flex items-center border border-transparent rounded-md shadow-xs  font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-hidden justify-center ${customCss}`}
               >
                 {buttonText}
               </button>

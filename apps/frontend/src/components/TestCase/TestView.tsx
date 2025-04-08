@@ -92,14 +92,14 @@ const TestView = () => {
             <CancelButton
               id="back-test-view"
               onClick={returnToPage}
-              className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none"
+              className="inline-flex items-center rounded-sm border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-xs hover:bg-gray-50 focus:outline-hidden"
               type="button"
             >
               {t("Back")}
             </CancelButton>
           </div>
         </div>
-        <div className="min-h-full h-auto flex flex-col-reverse md:flex-row md:flex-grow border-t border-gray-200">
+        <div className="min-h-full h-auto flex flex-col-reverse md:flex-row md:grow border-t border-gray-200">
           <div className="md:w-8/12 lg:w-9/12 p-4">
             <div className="">
               <dl>

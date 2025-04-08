@@ -269,7 +269,7 @@ const AddUser = () => {
                     <button
                       onMouseUp={() => navigate(-1)}
                       type="button"
-                      className="inline-flex items-center rounded border border-gray-300 bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none"
+                      className="inline-flex items-center rounded-sm border border-gray-300 bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-xs hover:bg-gray-50 focus:outline-hidden"
                     >
                       {t("Cancel")}
                     </button>

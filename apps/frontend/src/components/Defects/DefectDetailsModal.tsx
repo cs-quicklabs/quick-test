@@ -88,14 +88,14 @@ export default function DefectDetailsModal({ pluginKey }: any) {
               >
                 <div className="bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 min-h-48 overflow-hidden flex flex-col">
                   {apiLoading ? (
-                    <div className="flex flex-grow justify-center items-center">
+                    <div className="flex grow justify-center items-center">
                       <Loader />
                     </div>
                   ) : (
                     <div className="space-y-2">
                       <div className="bg-gray-50 p-4 ">
                         <div className="flex space-x-4 items-center">
-                          <span className="inline-flex flex-shrink-0 items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-indigo-100 text-indigo-800">
+                          <span className="inline-flex shrink-0 items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-indigo-100 text-indigo-800">
                             {defectData.issueKey}
                           </span>
                           <div className="inline text-sm leading-6 font-medium text-gray-900">

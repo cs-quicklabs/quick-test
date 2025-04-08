@@ -59,7 +59,7 @@ export default function Archived() {
                   aria-current="page"
                 >
                   <svg
-                    className={`text-gray-400 group-hover:text-indigo-600 flex-shrink-0 -ml-1 mr-3 h-6 w-6 ${
+                    className={`text-gray-400 group-hover:text-indigo-600 shrink-0 -ml-1 mr-3 h-6 w-6 ${
                       location?.pathname === val.link
                         ? "text-indigo-600"
                         : "hover:text-indigo-600"

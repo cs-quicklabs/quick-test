@@ -152,7 +152,7 @@ export default function Projects() {
           <Loader />
         </div>
       ) : (
-        <div className="h-full border flex flex-grow overflow-hidden bg-white">
+        <div className="h-full border flex grow overflow-hidden bg-white">
           <Modal
             open={daysModal}
             toggleModal={setDaysModal}
@@ -161,7 +161,7 @@ export default function Projects() {
             setSearchParams={setSearchParams}
           />
           <div className="flex flex-col w-0 flex-1 overflow-hidden">
-            <main className="flex-1 relative overflow-y-auto z-0 focus:outline-none">
+            <main className="flex-1 relative overflow-y-auto z-0 focus:outline-hidden">
               <div className="mt-10 sm:hidden">
                 <div className="px-4 sm:px-6">
                   <h2 className="text-gray-500 text-xs font-medium tracking-wide">
@@ -177,7 +177,7 @@ export default function Projects() {
                       >
                         <span className="flex items-center truncate space-x-3">
                           <span
-                            className="bg-indigo-400 w-2.5 h-2.5 flex-shrink-0 rounded-full"
+                            className="bg-indigo-400 w-2.5 h-2.5 shrink-0 rounded-full"
                             aria-hidden="true"
                           />
                           <span className="font-medium truncate text-sm leading-6">
@@ -197,7 +197,7 @@ export default function Projects() {
               <div className="min-h-full h-auto flex">
                 <div className="w-full pb-14">
                   <div className="p-4 pb-0 hidden">
-                    <div className=" border-gray-200 bg-gray-50 rounded 2xl:border-none">
+                    <div className=" border-gray-200 bg-gray-50 rounded-sm 2xl:border-none">
                       <div className="px-4 py-2 text-sm text-left ">
                         <span className="text-gray-900">
                           {t("Favorite Projects")}
@@ -277,7 +277,7 @@ export default function Projects() {
                                       </div>
                                     )}
                                     <div
-                                      className="bg-indigo-400 w-2.5 h-2.5 flex-shrink-0 rounded-full"
+                                      className="bg-indigo-400 w-2.5 h-2.5 shrink-0 rounded-full"
                                       aria-hidden="true"
                                     />
                                     <Link
@@ -322,7 +322,7 @@ export default function Projects() {
                                     {({ open }) => (
                                       <>
                                         <Menu.Button
-                                          className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none ${
+                                          className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-hidden ${
                                             open &&
                                             "ring-2 ring-offset-2 ring-purple-500"
                                           }`}
@@ -357,7 +357,7 @@ export default function Projects() {
                                                   }
                                                 : {}
                                             }
-                                            className="mx-3 cursor-pointer origin-top-right absolute right-7 top-0 w-48 mt-1 rounded-md shadow-lg z-10 bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
+                                            className="mx-3 cursor-pointer origin-top-right absolute right-7 top-0 w-48 mt-1 rounded-md shadow-lg z-10 bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-hidden"
                                           >
                                             <div className="py-1">
                                               <AccessControl

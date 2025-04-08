@@ -44,7 +44,7 @@ const DropDownMenuButton = ({
         {({ open }) => (
           <>
             <MenuButton
-              className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none ${
+              className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-hidden ${
                 open && "ring-2 ring-offset-2 ring-purple-500"
               }`}
             >
@@ -72,7 +72,7 @@ const DropDownMenuButton = ({
                       }
                     : {}
                 }
-                className="mx-3 cursor-pointer origin-top-right absolute right-0 top-8 w-48 mt-1 rounded-md shadow-lg z-10 bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
+                className="mx-3 cursor-pointer origin-top-right absolute right-0 top-8 w-48 mt-1 rounded-md shadow-lg z-10 bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-hidden"
               >
                 <div className="py-1">
                   <MenuItem>

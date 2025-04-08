@@ -108,7 +108,7 @@ const SearchBox = ({
             </svg>
           </div>
           <input
-            className="pl-10 pr-3 py-1 h-9 rounded-md text-sm font-medium text-gray-500 bg-gray-700 sm:w-96 grow sm:grow-0 sm:justify-self-end relative focus:border-white focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-white"
+            className="pl-10 pr-3 py-1 h-9 rounded-md text-sm font-medium text-gray-500 bg-gray-700 sm:w-96 grow sm:grow-0 sm:justify-self-end relative focus:border-white focus:bg-white focus:text-gray-900 focus:outline-hidden focus:ring-white"
             ref={searchWidthRef}
             type="search"
             id={inputFieldId}

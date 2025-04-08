@@ -23,7 +23,7 @@ export default function Example() {
               </div>
               <footer className="mt-8">
                 <div className="md:flex md:items-center md:justify-center">
-                  <div className="md:flex-shrink-0"></div>
+                  <div className="md:shrink-0"></div>
                   <div className="mt-3 text-center md:mt-0 md:ml-4 md:flex md:items-center">
                     <button
                       className="text-base font-medium text-indigo-600 hover:text-indigo-700 cursor-pointer"

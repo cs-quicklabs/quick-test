@@ -66,7 +66,7 @@ const TestcaseSelect = ({
           </p>
         </label>
         {showSpecific && (
-          <div className="ml-6 mt-3 text-sm px-3 py-1 flex flex-row justify-start space-x-4 bg-gray-200 rounded">
+          <div className="ml-6 mt-3 text-sm px-3 py-1 flex flex-row justify-start space-x-4 bg-gray-200 rounded-sm">
             <span>
               {totalTestcases} {t("test cases included")}
             </span>

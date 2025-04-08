@@ -108,7 +108,7 @@ export default function AddProjectUser(props: any) {
                   <div>
                     <Listbox value={selected} onChange={setSelected} multiple>
                       <div className="relative mt-1">
-                        <ListboxButton className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                        <ListboxButton className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-hidden focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                           <span className="block truncate">
                             {selected && selected.length > 0
                               ? selected
@@ -132,7 +132,7 @@ export default function AddProjectUser(props: any) {
                           leaveFrom="opacity-100"
                           leaveTo="opacity-0"
                         >
-                          <ListboxOptions className="mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                          <ListboxOptions className="mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-hidden sm:text-sm">
                             {members &&
                               members.map((member: any, memberIdx: Key) => (
                                 <ListboxOption
@@ -161,7 +161,7 @@ export default function AddProjectUser(props: any) {
                                         <input
                                           id={member.id}
                                           type="checkbox"
-                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                          className="h-4 w-4 rounded-sm border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                           checked={selected}
                                           readOnly
                                         />
@@ -178,7 +178,7 @@ export default function AddProjectUser(props: any) {
                   <div className="my-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                     <button
                       type="button"
-                      className="inline-flex w-full justify-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 sm:ml-3 sm:w-auto"
+                      className="inline-flex w-full justify-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-600 sm:ml-3 sm:w-auto"
                       onClick={() => submitform()}
                       disabled={!selected.length}
                     >
@@ -186,7 +186,7 @@ export default function AddProjectUser(props: any) {
                     </button>
                     <button
                       type="button"
-                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                       onClick={() => props.setShare(false)}
                     >
                       Cancel

@@ -205,7 +205,7 @@ export default function Table({
                 {RowData ? (
                   <tbody className="bg-white divide-y divide-gray-200">
                     {RowData.map((value: any, i) => (
-                      <tr key={i} className={`rounded`} ref={lastElementRef}>
+                      <tr key={i} className={`rounded-sm`} ref={lastElementRef}>
                         <td className="px-8 py-2 whitespace-nowrap text-sm font-normal text-gray-900 2xl:pl-52">
                           <span
                             onClick={() => {
@@ -315,7 +315,7 @@ export default function Table({
                 }}
                 loading={buttonLoader}
                 type="button"
-                className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 "
+                className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 "
               >
                 {t("Generate Report")}
               </Button>

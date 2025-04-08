@@ -83,7 +83,7 @@ export default function Modal(props: any) {
                   <select
                     ref={selectInputRef}
                     onChange={handleChange}
-                    className="relative w-full text-gray-600  bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    className="relative w-full text-gray-600  bg-white border border-gray-300 rounded-md shadow-xs pl-3 pr-10 py-2 text-left cursor-default focus:outline-hidden focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     defaultValue={props.defaultVal}
                     name="days"
                   >

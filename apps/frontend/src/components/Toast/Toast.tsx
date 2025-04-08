@@ -25,9 +25,9 @@ export default function Example(toastDetails: any) {
               {toastDetails?.message}
             </p>
           </div>
-          <div className="ml-4 flex-shrink-0 flex">
+          <div className="ml-4 shrink-0 flex">
             <button
-              className="bg-transparent rounded-md inline-flex text-gray-200 hover:text-white focus:outline-none"
+              className="bg-transparent rounded-md inline-flex text-gray-200 hover:text-white focus:outline-hidden"
               onClick={() => {
                 setShow(false);
               }}

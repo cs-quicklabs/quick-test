@@ -66,12 +66,12 @@ export default function CancelPage() {
                 </div>
                 <footer className="mt-8">
                   <div className="md:flex md:items-center md:justify-center">
-                    <div className="md:flex-shrink-0"></div>
+                    <div className="md:shrink-0"></div>
                     <div className="mt-3 text-center md:mt-0 md:ml-4 md:flex md:items-center">
                       <Link
                         data-cy="cancel-page-button"
                         to="/settings/payments"
-                        className="w-full capitalize inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none sm:col-start-2 sm:text-sm"
+                        className="w-full capitalize inline-flex justify-center rounded-md border border-transparent shadow-xs px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-hidden sm:col-start-2 sm:text-sm"
                       >
                         {t("Subscribe for")} {currency === Currency.USD && "$"}
                         {amount}/{paymentDuration}

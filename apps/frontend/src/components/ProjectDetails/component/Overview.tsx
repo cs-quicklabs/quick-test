@@ -353,14 +353,14 @@ export default function Overview() {
           <Loader />
         </div>
       ) : (
-        <div className="flex-grow min-h-full h-auto flex">
+        <div className="grow min-h-full h-auto flex">
           <div className="w-9/12 p-4 pb-14 lg:border-r lg:border-gray-200 2xl:pl-52">
             <div className="p-4 overviewChart" data-cy="overview-chart">
               <OverviewCharts dataset={graphDataset} />
             </div>
             <div className="flex p-4 ">
               <div className="w-6/12">
-                <div className="font-semibold bg-gray-200 text-gray-900 px-4 py-2 text-sm  sm:gap-4 sm:px-4 mr-4 rounded">
+                <div className="font-semibold bg-gray-200 text-gray-900 px-4 py-2 text-sm  sm:gap-4 sm:px-4 mr-4 rounded-sm">
                   {t("Milestones")}
                 </div>
                 {!milestoneList.length && (
@@ -414,7 +414,7 @@ export default function Overview() {
                 )}
               </div>
               <div className="w-6/12">
-                <div className="rounded text-sm font-semibold bg-gray-200 px-4 py-2 sm:gap-4 sm:px-4 text-gray-900">
+                <div className="rounded-sm text-sm font-semibold bg-gray-200 px-4 py-2 sm:gap-4 sm:px-4 text-gray-900">
                   {t("Test Runs")}
                 </div>
                 {testRunList.map((ele: any) => {
@@ -458,7 +458,7 @@ export default function Overview() {
                 )}
               </div>
             </div>
-            <div className="px-4 py-2 text-gray-900 bg-gray-200 mr-4 text-sm  ml-4 rounded font-semibold">
+            <div className="px-4 py-2 text-gray-900 bg-gray-200 mr-4 text-sm  ml-4 rounded-sm font-semibold">
               <span>{t("Activity")}</span>
               <span className="float-right">
                 <span
@@ -589,7 +589,7 @@ export default function Overview() {
                                     <div className="flex items-center">
                                       <div>
                                         <span
-                                          className={`mr-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-normal text-gray-100 `}
+                                          className={`mr-2 inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-normal text-gray-100 `}
                                           style={
                                             activity.status === "UNTESTED"
                                               ? {
@@ -645,7 +645,7 @@ export default function Overview() {
             </div>
           </div>
           <div className="w-3/12 bg-gray-50 py-4 px-7 2xl:pr-52">
-            <div className="bg-gray-200 px-4 py-2 rounded text-sm font-semibold">
+            <div className="bg-gray-200 px-4 py-2 rounded-sm text-sm font-semibold">
               {t("Action")}
             </div>
             <div className="border-b mt-4 pb-2 pl-2">
@@ -706,7 +706,7 @@ export default function Overview() {
                 </Link>
               </div>
             </div>
-            <div className="bg-gray-200 px-4 py-2 rounded text-sm font-semibold">
+            <div className="bg-gray-200 px-4 py-2 rounded-sm text-sm font-semibold">
               {t("Todos")}
             </div>
             {todoList.length ? (

@@ -64,7 +64,7 @@ const ModalSectionTable = ({
               key={index}
             >
               <input
-                className="h-4 w-4 text-indigo-600 focus:outline-none border-gray-300 rounded focus:ring-0 focus:ring-transparent focus:ring-offset-0"
+                className="h-4 w-4 text-indigo-600 focus:outline-hidden border-gray-300 rounded-sm focus:ring-0 focus:ring-transparent focus:ring-offset-0"
                 type="checkbox"
                 checked={selectedTestCaseIds.includes(item?.id)}
                 onChange={(e) => handleCheck(e, item)}

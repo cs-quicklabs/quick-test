@@ -125,7 +125,7 @@ export const FormikTextArea = ({
               <button
                 type="button"
                 onClick={() => togglePreview((prevState) => !prevState)}
-                className="inline-flex items-center px-1 py-1 text-xs font-medium rounded text-indigo-700 focus:outline-none"
+                className="inline-flex items-center px-1 py-1 text-xs font-medium rounded-sm text-indigo-700 focus:outline-hidden"
               >
                 {preview ? t("Editor") : t("Preview")}
               </button>

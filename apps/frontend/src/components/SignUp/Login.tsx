@@ -118,7 +118,7 @@ const SignIn = () => {
           </h2>
         </div>
         <div className="mt-8 ml-3 mr-3 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <div className="bg-white py-8 px-4 shadow-sm sm:rounded-lg sm:px-10">
             <Formik
               initialValues={SignInInitialValues}
               validationSchema={signInSchema}
@@ -162,7 +162,7 @@ const SignIn = () => {
                         id="login-submit"
                         type="submit"
                         loading={loading}
-                        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none`}
+                        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-xs text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-hidden`}
                       >
                         {t("Sign in")}
                       </Button>

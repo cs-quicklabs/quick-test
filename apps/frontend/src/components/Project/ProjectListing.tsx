@@ -167,7 +167,7 @@ export default function Example() {
           <Loader />
         </div>
       ) : (
-        <div className="h-full border flex flex-grow overflow-hidden bg-white">
+        <div className="h-full border flex grow overflow-hidden bg-white">
           <Modal
             open={daysModal}
             toggleModal={setDaysModal}
@@ -176,7 +176,7 @@ export default function Example() {
             setSearchParams={setSearchParams}
           />
           <div className="flex flex-col w-0 flex-1 overflow-hidden">
-            <main className="flex-1 relative overflow-y-auto z-0 focus:outline-none">
+            <main className="flex-1 relative overflow-y-auto z-0 focus:outline-hidden">
               <div className="min-h-full h-auto flex">
                 <div className="w-9/12 p-4 pb-14 2xl:ml-52">
                   {isLoadingActiveResults ? (
@@ -218,7 +218,7 @@ export default function Example() {
                             <div key={ele.name} className="mb-4 pl-2">
                               <div className="flex align-center">
                                 <div
-                                  className="h-4 w-4 mr-2 flex-shrink-0 self-center"
+                                  className="h-4 w-4 mr-2 shrink-0 self-center"
                                   style={{
                                     backgroundColor: `${colorArr[index]}`,
                                   }}
@@ -239,7 +239,7 @@ export default function Example() {
                 </div>
                 <div className="w-3/12 bg-gray-50 px-7 py-4 lg:border-l lg:border-gray-200 2xl:pr-52">
                   {/* <div className="p-4"> */}
-                  <div className="bg-gray-200 text-sm px-4 py-2 mb-2 rounded text-gray-900 font-semibold">
+                  <div className="bg-gray-200 text-sm px-4 py-2 mb-2 rounded-sm text-gray-900 font-semibold">
                     {t("Todos")}
                   </div>
                   {data?.data?.data.map((ele: any) => {

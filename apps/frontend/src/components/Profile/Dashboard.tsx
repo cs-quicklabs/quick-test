@@ -42,7 +42,7 @@ export default function Dashboard() {
                 aria-current="page"
               >
                 <svg
-                  // className="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+                  // className="text-gray-400 group-hover:text-gray-500 shrink-0 -ml-1 mr-3 h-6 w-6"
                   className={`h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600 ${
                     location?.pathname === val.link
                       ? "text-indigo-600"

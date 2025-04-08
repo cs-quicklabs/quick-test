@@ -678,7 +678,7 @@ const TestCaseToolbar = ({
   });
   return (
     <>
-      <div className="bg-gray-200 py-2 px-4 rounded lg:rounded flex justify-between items-center">
+      <div className="bg-gray-200 py-2 px-4 rounded-sm lg:rounded-sm flex justify-between items-center">
         {/* Sort component */}
         <div className="flex flex-row items-center divide-x divide-gray-400 space-x-2">
           <div className="flex flex-row items-center relative space-x-1">
@@ -699,7 +699,7 @@ const TestCaseToolbar = ({
                 <Trans>{sortValue.label}</Trans>
               </span>
               {showSortOptions && (
-                <div className="flex flex-col bg-white z-10 border rounded py-1 text-sm absolute top-6 shadow-md cursor-pointer w-32">
+                <div className="flex flex-col bg-white z-10 border rounded-sm py-1 text-sm absolute top-6 shadow-md cursor-pointer w-32">
                   {sortOptions.map((option) => (
                     <div
                       className={`px-2 py-1 hover:bg-blue-500 hover:text-white ${
@@ -761,7 +761,7 @@ const TestCaseToolbar = ({
               </span>
             </div>
             {showFilters && (
-              <div className="flex flex-col bg-white z-20 border rounded py-1 text-sm absolute top-6 shadow-md cursor-pointer w-60">
+              <div className="flex flex-col bg-white z-20 border rounded-sm py-1 text-sm absolute top-6 shadow-md cursor-pointer w-60">
                 <form onSubmit={handleFilterSubmit}>
                   <div className="overflow-y-auto h-44">
                     {filterOptions.map((option) => (

@@ -32,7 +32,7 @@ export default function Notification(props: any) {
             <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5">
               <div className="p-4">
                 <div className="flex items-start">
-                  <div className="flex-shrink-0 pt-0.5">
+                  <div className="shrink-0 pt-0.5">
                     <p className="h-10 w-10 rounded-full bg-indigo-600 text-white flex justify-center items-center">
                       {props.imgToShow}
                     </p>
@@ -51,22 +51,22 @@ export default function Notification(props: any) {
                           props.primaryButtonFunction();
                         }}
                         type="button"
-                        className="inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none"
+                        className="inline-flex items-center px-3 py-2 border border-transparent shadow-xs text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-hidden"
                       >
                         {props.primaryButtonText}
                       </button>
                       <button
                         onClick={() => props.secondaryButtonFunction()}
                         type="button"
-                        className="ml-3 inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none "
+                        className="ml-3 inline-flex items-center px-3 py-2 border border-gray-300 shadow-xs text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-hidden "
                       >
                         {props.secondaryButtonText}
                       </button>
                     </div>
                   </div>
-                  <div className="ml-4 flex-shrink-0 flex">
+                  <div className="ml-4 shrink-0 flex">
                     <button
-                      className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none"
+                      className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-hidden"
                       onClick={() => {
                         setShow(false);
                         props.cancelFunction();

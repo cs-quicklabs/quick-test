@@ -148,9 +148,9 @@ const TestCaseDetail = ({ page, submitStatus, refetch }: any) => {
 
       {loading && <Loader withoverlay={true} />}
       <div className="pt-2 pb-4 px-8 sm:flex sm:items-center sm:justify-between bg-gray-50 2xl:px-52">
-        <div className="flex flex-grow justify-between items-center">
+        <div className="flex grow justify-between items-center">
           <div className="pb-1 flex items-center">
-            <span className="inline-flex items-center flex-shrink-0 px-2.5 py-0.5 rounded-md text-base font-medium bg-indigo-100 text-indigo-800">
+            <span className="inline-flex items-center shrink-0 px-2.5 py-0.5 rounded-md text-base font-medium bg-indigo-100 text-indigo-800">
               #{data?.testCaseId}
             </span>
             <p className="px-4 text-base font-medium text-gray-800">
@@ -191,7 +191,7 @@ const TestCaseDetail = ({ page, submitStatus, refetch }: any) => {
         </div>
       </div>
 
-      <div className="min-h-screen flex flex-col-reverse md:flex-row md:flex-grow border-t border-gray-200">
+      <div className="min-h-screen flex flex-col-reverse md:flex-row md:grow border-t border-gray-200">
         <div className="md:w-8/12 lg:w-9/12 p-4 2xl:pl-52">
           <div className="">
             <dl>

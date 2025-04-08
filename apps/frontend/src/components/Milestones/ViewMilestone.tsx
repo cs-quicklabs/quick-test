@@ -53,14 +53,14 @@ export default function ViewMilestone() {
       href: `${appRoutes.PROJECTS}/${params?.pid}/${projectRoutes.MILESTONES}`,
       current: false,
       style: "hover:text-blue-600",
-      dividerStyle: "h-5 w-5 flex-shrink-0 text-gray-300 hover:text-blue-600",
+      dividerStyle: "h-5 w-5 shrink-0 text-gray-300 hover:text-blue-600",
     },
     {
       name: "Milestone",
       href: `#`,
       current: false,
       style: "te",
-      dividerStyle: "h-5 w-5 flex-shrink-0 text-gray-300",
+      dividerStyle: "h-5 w-5 shrink-0 text-gray-300",
     },
   ];
 
@@ -136,7 +136,7 @@ export default function ViewMilestone() {
             </div>
           </div>
           {/* <div className="mt-5">
-            <button className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+            <button className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
               Add Another Test Run
             </button>
           </div> */}

@@ -138,7 +138,7 @@ export default function StripeCheckout() {
                       data-cy="stripe-manage-button"
                       onClick={getManageId}
                       loading={apiLoading}
-                      className="mt-4 inline-flex justify-center items-center capitalize px-2.5 py-1.5 border border-transparent rounded-md text-sm font-medium rounded shadow-sm text-white focus:outline-none bg-indigo-600 hover:bg-inidgo-700"
+                      className="mt-4 inline-flex justify-center items-center capitalize px-2.5 py-1.5 border border-transparent rounded-md text-sm font-medium rounded-sm shadow-xs text-white focus:outline-hidden bg-indigo-600 hover:bg-inidgo-700"
                     >
                       {t("Manage Subscription")}
                     </Button>

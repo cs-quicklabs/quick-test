@@ -27,7 +27,7 @@ const InputDateField: FC<Iprops> = ({ ...props }: Iprops) => {
   return (
     <>
       <DatePicker
-        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none  focus:border-indigo-500 sm:text-sm  ${
+        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-hidden  focus:border-indigo-500 sm:text-sm  ${
           (error && touched) || (validation && error)
             ? " border-red-300 pr-10"
             : " border-gray-300"

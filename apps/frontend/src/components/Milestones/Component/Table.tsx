@@ -148,7 +148,7 @@ export default function Table({
               >
                 <tbody className="bg-white divide-y divide-gray-200">
                   {RowData?.map((value, i) => (
-                    <tr key={i} className={`rounded`}>
+                    <tr key={i} className={`rounded-sm`}>
                       <td className="whitespace-nowrap py-3 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0 w-full hover:underline cursor-pointer px-4 2xl:pl-2">
                         <Link
                           to={`${appRoutes.PROJECTS}/${params?.pid}/${projectRoutes.MILESTONES}/${value.id}/${milestoneRoutes.MILESTONE}`}

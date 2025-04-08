@@ -20,7 +20,7 @@ export default function Button(props: any) {
       <button
         type="submit"
         {...propsNew}
-        className={`inline-flex justify-center items-center px-2.5 py-1.5 border border-transparent text-sm font-medium rounded shadow-sm text-white bg-indigo-600  focus:outline-none ${
+        className={`inline-flex justify-center items-center px-2.5 py-1.5 border border-transparent text-sm font-medium rounded shadow-sm text-white bg-indigo-600  focus:outline-hidden ${
           props.hover === "false"
             ? "hover:bg-indigo-600"
             : "hover:bg-indigo-700"

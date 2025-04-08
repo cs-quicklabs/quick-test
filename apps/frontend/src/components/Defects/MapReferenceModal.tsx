@@ -180,7 +180,7 @@ export default function MapReferenceModal({
                     return (
                       <Form className="space-y-6" autoComplete="off" noValidate>
                         <div className="flex flex-col min-h-48">
-                          <div className="flex-grow">
+                          <div className="grow">
                             <div className="grid grid-cols-2 gap-4">
                               <div>
                                 <FormikInputSearch

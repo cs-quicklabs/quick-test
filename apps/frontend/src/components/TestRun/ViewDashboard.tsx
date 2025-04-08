@@ -110,19 +110,19 @@ export default function Dashboard() {
       href: `${appRoutes.PROJECTS}/${params?.pid}/${projectRoutes.TESTRUNS}`,
       current: false,
       style: "hover:text-blue-600",
-      dividerStyle: "h-5 w-5 flex-shrink-0 text-gray-300 hover:text-blue-600",
+      dividerStyle: "h-5 w-5 shrink-0 text-gray-300 hover:text-blue-600",
     },
     {
       name: "Test Runs",
       href: `#`,
       current: false,
       style: "text-gray-400",
-      dividerStyle: "h-5 w-5 flex-shrink-0 text-gray-300 hover:text-blue-600",
+      dividerStyle: "h-5 w-5 shrink-0 text-gray-300 hover:text-blue-600",
     },
   ];
 
   return (
-    <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none">
+    <main className="flex-1 relative z-0 overflow-y-auto focus:outline-hidden">
       <div className="bg-gray-50">
         <BreadCrumb pages={breadCrumbDetails} />
         <Heading

@@ -106,7 +106,7 @@ export default function Table(props: Props) {
                 <tbody className="bg-white divide-y divide-gray-200">
                   {props.RowData &&
                     props.RowData?.map((value: any, i) => (
-                      <tr key={i} className={`rounded`} ref={lastElementRef}>
+                      <tr key={i} className={`rounded-sm`} ref={lastElementRef}>
                         <td className="whitespace-nowrap py-3 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0 w-full hover:underline cursor-pointer">
                           <Link
                             to={`${appRoutes.PROJECTS}/${params.pid}/${projectRoutes.TESTRUNS}/${value?.id}/${testRunRoutes.TEST_RESULTS}`}

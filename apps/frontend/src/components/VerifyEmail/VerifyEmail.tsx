@@ -93,7 +93,7 @@ const VerifyEmail = () => {
             </h2>
           </div>
           <div className="mt-8 ml-3 mr-3 text-xl sm:mx-auto sm:w-full sm:max-w-lg">
-            <div className="bg-white py-4 px-4 shadow sm:rounded-lg text-sm">
+            <div className="bg-white py-4 px-4 shadow-sm sm:rounded-lg text-sm">
               <p className="mb-6">
                 {t("Thank you for choosing")} <b>{t("Quick Test")}</b>.
               </p>
@@ -112,7 +112,7 @@ const VerifyEmail = () => {
               <div className="mt-6 relative flex justify-center text-sm">
                 <span className="px-2 bg-white text-gray-500">
                   <Link to={appRoutes.SIGNIN_PAGE}>
-                    <span className="mt-1 py-1.5 px-2.5 text-xs inline-flex items-center border border-transparent rounded-md shadow-sm  font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none justify-center">
+                    <span className="mt-1 py-1.5 px-2.5 text-xs inline-flex items-center border border-transparent rounded-md shadow-xs  font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-hidden justify-center">
                       <span className="text-md pr-1">&larr;</span>
                       {t("Go back to login")}
                     </span>

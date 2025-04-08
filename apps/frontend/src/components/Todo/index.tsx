@@ -173,7 +173,7 @@ const Todo = () => {
             <Chart dataForChart={dataForChart} />
           </div>
         )}
-        <div className="bg-gray-200 px-4 py-2 mt-5 rounded text-sm ">
+        <div className="bg-gray-200 px-4 py-2 mt-5 rounded-sm text-sm ">
           {t("Todo Test Runs")}
         </div>
         <div className="align-middle inline-block min-w-full px-4">

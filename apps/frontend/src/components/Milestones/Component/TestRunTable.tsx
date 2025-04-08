@@ -42,7 +42,7 @@ export default function Table({ RowData, endDate }: PropsType) {
               <table className="min-w-full divide-y divide-gray-300">
                 <tbody className="bg-white divide-y divide-gray-200">
                   {RowData?.map((value, i) => (
-                    <tr key={i} className={`rounded`}>
+                    <tr key={i} className={`rounded-sm`}>
                       <td className="whitespace-nowrap py-3 px-3 text-sm font-medium text-gray-900 sm:pl-0 w-full hover:underline cursor-pointer">
                         <Link
                           to={`${appRoutes.PROJECTS}/${params.pid}/${projectRoutes.TESTRUNS}/${value.id}/${testRunRoutes.TEST_RESULTS}`}

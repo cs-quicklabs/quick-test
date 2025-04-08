@@ -109,7 +109,7 @@ export default function FreeTrialPopup({
                   <Button
                     data-cy="free-trial-subscribe-btn"
                     type="button"
-                    className="w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
+                    className="w-full rounded-md border border-transparent shadow-xs px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
                     onClick={redirectToPayment}
                     loading={apiLoading}
                   >
@@ -119,7 +119,7 @@ export default function FreeTrialPopup({
                   <button
                     type="button"
                     data-cy="cancel-trial-popup"
-                    className="mt-3 capitalize w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:col-start-1 sm:text-sm"
+                    className="mt-3 capitalize w-full rounded-md border border-gray-300 shadow-xs px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:col-start-1 sm:text-sm"
                     onClick={redirectToDashboard}
                     ref={cancelButtonRef}
                   >

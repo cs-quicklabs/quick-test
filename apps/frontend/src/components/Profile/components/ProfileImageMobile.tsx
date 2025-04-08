@@ -10,7 +10,7 @@ const ProfileImageMobile = ({
 
   return (
     <>
-      <div className="flex-grow lg:mt-0 lg:ml-6 lg:flex-grow-0 lg:flex-shrink-0">
+      <div className="grow lg:mt-0 lg:ml-6 lg:grow-0 lg:shrink-0">
         <p className="text-sm font-medium text-gray-700" aria-hidden="true">
           {t("Photo")}
         </p>
@@ -18,7 +18,7 @@ const ProfileImageMobile = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <div
-                className="flex-shrink-0 relative inline-block rounded-full overflow-hidden h-12 w-12"
+                className="shrink-0 relative inline-block rounded-full overflow-hidden h-12 w-12"
                 aria-hidden="true"
               >
                 <img
@@ -31,10 +31,10 @@ const ProfileImageMobile = ({
                   loading="eager"
                 />
               </div>
-              <div className="ml-5 rounded-md shadow-sm">
+              <div className="ml-5 rounded-md shadow-xs">
                 <label
                   htmlFor="mobile-user-photo"
-                  className="border-gray-300 relative text-gray-700 bg-white hover:bg-gray-50 mt-1 py-1.5 px-2.5 text-xs inline-flex items-center border border-transparent rounded-md shadow-sm  font-medium focus:outline-none cursor-pointer"
+                  className="border-gray-300 relative text-gray-700 bg-white hover:bg-gray-50 mt-1 py-1.5 px-2.5 text-xs inline-flex items-center border border-transparent rounded-md shadow-xs  font-medium focus:outline-hidden cursor-pointer"
                 >
                   {t("Change")}
                   <input

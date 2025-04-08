@@ -127,7 +127,7 @@ export default function TestCaseListTable({
 
                 <input
                   id={sectionId}
-                  className={`h-4 w-4 checkbox1 text-indigo-600  border-gray-300 rounded focus:outline-none focus:ring-0 focus:ring-transparent focus:ring-offset-0`}
+                  className={`h-4 w-4 checkbox1 text-indigo-600  border-gray-300 rounded-sm focus:outline-hidden focus:ring-0 focus:ring-transparent focus:ring-offset-0`}
                   type="checkbox"
                   defaultChecked={checked}
                   ref={targetRef}
@@ -178,7 +178,7 @@ export default function TestCaseListTable({
             <tr
               key={index}
               data-cy={dataAttr + index}
-              className="bg-white rounded"
+              className="bg-white rounded-sm"
             >
               <td className="py-2 whitespace-nowrap text-xs font-normal pr-2">
                 <div className="flex justify-center">
@@ -196,7 +196,7 @@ export default function TestCaseListTable({
                   <input
                     id={`${index}-${sectionId}`}
                     data-cy={dataAttr + index + "-check"}
-                    className={`h-4 w-4 text-indigo-600 focus:outline-none border-gray-300 rounded focus:ring-0 focus:ring-transparent focus:ring-offset-0`}
+                    className={`h-4 w-4 text-indigo-600 focus:outline-hidden border-gray-300 rounded-sm focus:ring-0 focus:ring-transparent focus:ring-offset-0`}
                     type="checkbox"
                     checked={!!test.checked}
                     onChange={(e) =>

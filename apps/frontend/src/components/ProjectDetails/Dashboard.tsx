@@ -91,13 +91,13 @@ export default function Dashboard() {
 
   return (
     <>
-      <main className="flex-1 flex flex-col relative z-0 focus:outline-none h-full">
+      <main className="flex-1 flex flex-col relative z-0 focus:outline-hidden h-full">
         <div className="bg-gray-50  border-b border-gray-200">
           {returnHeader(params.subURL)}
           <NavTab navData={NavProps} />
         </div>
 
-        <div className="relative flex-grow">
+        <div className="relative grow">
           {params.subURL === projectRoutes.OVERVIEW && (
             <div className="absolute h-full w-full">
               <OverviewPage />

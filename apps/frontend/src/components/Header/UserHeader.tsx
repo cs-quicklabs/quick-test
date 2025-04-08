@@ -74,7 +74,7 @@ export default function UserHeader() {
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
               <button
                 type="button"
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-hidden"
                 aria-controls="mobile-menu"
                 aria-expanded="false"
               >
@@ -97,7 +97,7 @@ export default function UserHeader() {
               </button>
             </div>
             <div className="flex-1 flex items-center justify-between sm:items-stretch sm:justify-start">
-              <div className="flex-shrink-0 flex items-center">
+              <div className="shrink-0 flex items-center">
                 <img
                   className="block lg:hidden h-6 w-auto"
                   src={bugplotLogo}
@@ -172,7 +172,7 @@ export default function UserHeader() {
                 <div>
                   <button
                     type="button"
-                    className="flex rounded-full bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    className="flex rounded-full bg-gray-800 text-sm text-white focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     id="user-menu"
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -195,7 +195,7 @@ export default function UserHeader() {
 
                 {showUserSetting && (
                   <div
-                    className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-hidden"
                     role="menu"
                     aria-labelledby="user-menu"
                   >

@@ -141,7 +141,7 @@ const SelectionModal = ({
                     {t("Please select sections to include in test run")}
                   </p>
                 </div>
-                <div className="h-[70%] flex-grow w-full border border-gray-400 flex sm:flex-row md:flex-row flex-col">
+                <div className="h-[70%] grow w-full border border-gray-400 flex sm:flex-row md:flex-row flex-col">
                   <div
                     className="sm:h-full md:h-full h-2/4 sm:w-2/5 md:w-2/5 w-full overflow-y-auto border-r-2 border-gray-400 bg-gray-200"
                     id="sectionList"

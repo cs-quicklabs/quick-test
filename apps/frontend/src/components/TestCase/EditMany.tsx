@@ -160,7 +160,7 @@ const EditManyTestCase = () => {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {Row.map((val, i) => (
-              <tr key={i} className="bg-white  rounded">
+              <tr key={i} className="bg-white  rounded-sm">
                 <td className="pr-6 pl-2 py-4 whitespace-nowrap text-xs font-medium text-gray-900 ">
                   <Link
                     to={`${appRoutes.PROJECTS}/${params.pid}/${projectRoutes.TESTCASES}/${val.id}/${testCaseRoutes.TESTCASE}`}

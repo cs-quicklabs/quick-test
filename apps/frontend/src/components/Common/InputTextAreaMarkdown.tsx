@@ -89,7 +89,7 @@ const InputField: FC<Iprops> = ({ ...props }: Iprops) => {
   return (
     <>
       {showPreview ? (
-        <div className="border px-3 py-2 rounded-md min-h-48 shadow-sm select-none border-gray-300">
+        <div className="border px-3 py-2 rounded-md min-h-48 shadow-xs select-none border-gray-300">
           <PreviewMarkdown markdown={values[name]} />
         </div>
       ) : (
@@ -100,7 +100,7 @@ const InputField: FC<Iprops> = ({ ...props }: Iprops) => {
             disabled={loading}
             maxRows={4}
             name={name}
-            className={`resize-y  w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none  focus:border-indigo-500 sm:text-sm 
+            className={`resize-y  w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-hidden  focus:border-indigo-500 sm:text-sm 
             ${fileOverElement ? "ring-2 ring-indigo-500" : "ring-0"} 
             ${manageHeight ? "min-h-48" : "min-h-48"}
             ${
