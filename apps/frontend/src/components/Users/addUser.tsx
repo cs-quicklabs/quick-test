@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { titleSchema } from "../Utils/validators";
 import { Formik, Form, FormikValues } from "formik";
 import * as Yup from "yup";
 
@@ -249,16 +248,16 @@ const AddUser = () => {
                   (userRoleId === RoleId.OWNER ||
                     userRoleId === RoleId.SUPERADMIN)) ||
                   !params?.id) && (
-                  <div>
-                    <FormikSelect
-                      name="roleId"
-                      label={t("Role")}
-                      validation={validation}
-                      sendIdAsValue={true}
-                      optionsForSelect={roleList}
-                    />
-                  </div>
-                )}
+                    <div>
+                      <FormikSelect
+                        name="roleId"
+                        label={t("Role")}
+                        validation={validation}
+                        sendIdAsValue={true}
+                        optionsForSelect={roleList}
+                      />
+                    </div>
+                  )}
                 <div className="flex justify-end gap-4">
                   <button
                     onMouseUp={() => navigate(-1)}
@@ -272,11 +271,10 @@ const AddUser = () => {
                     onMouseDown={() => setValidation(true)}
                     loading={apiloading}
                     type="submit"
-                    className={`sm:order-1  ${
-                      params?.id && !dirty
+                    className={`sm:order-1  ${params?.id && !dirty
                         ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
                         : ""
-                    }`}
+                      }`}
                     disabled={params?.id && !dirty ? true : false}
                   >
                     {t("Confirm")}
