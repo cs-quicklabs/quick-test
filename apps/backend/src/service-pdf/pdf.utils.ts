@@ -2,7 +2,6 @@ import { TestCaseResultStatus } from "src/common/enums/test-case-result-status";
 import { TestSuiteStatus } from "src/common/enums/test-suite-status";
 import { TestSuiteEntity } from "src/service-organization/test-suite/test-suite.entity";
 
-
 export const getTestResultFromHtml = (testSuite: TestSuiteEntity, testCaseResultsObject) => {
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",];
     const statusTestRun =
@@ -170,25 +169,33 @@ export const getTestResultFromHtml = (testSuite: TestSuiteEntity, testCaseResult
     `
 }
 
-export const getTestCasesFromHtml = (testCasesObject) => {
+export const getTestCasesFromHtml = (testCasesObject, project) => {
     let text = "";
     let sectionCount = 1;
+    let testCasesCount = 0;
+    const testCaseName = project?.name ?? 'Test Cases';
+
     for (const sectionName in testCasesObject) {
         const testCases = testCasesObject[sectionName];
         text += `<h3 class="sectionName">${sectionCount}. ${sectionName}</h3>`;
         text += `<table class="table table-bordered table-striped table-sm">
                         <thead>
                             <tr>
-                                <td class="idWidth" scope="col"><b>ID</b></td>
+                                <td style="width: 20px;" scope="col"><b>#</b></td>
                                 <td scope="col"><b>Title</b></td>
+                                <td style="text-align: center;" scope="col"><b>Priority</b></td>
                             </tr>
                         </thead>
                         <tbody>`;
         for (let i = 0; i < testCases.length; i++) {
             text += `<tr>
-                            <td class="idWidth" scope="row">${testCases[i].testcaseId}</td>
-                            <td>${testCases[i].title}</td>
+                            <td style="width: 20px" scope="row">${testCases[i].testcaseId}</td>
+                            <td style="padding-left=2px;">${testCases[i].title}</td>
+                            <td style="width: 45px; text-align: center;">
+                                ${testCases[i].executionPriority}
+                            </td>                           
                         </tr>`;
+            testCasesCount += 1;
         }
         text += `</tbody></table>`;
         sectionCount += 1;
@@ -196,65 +203,76 @@ export const getTestCasesFromHtml = (testCasesObject) => {
 
     return `<!DOCTYPE html>
         <html>
-        <head>
+            <head>
             <title>Test Case PDF</title>
             <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
             <style>
-                        * {
-                            font-family: 'Roboto', sans-serif;
-                        }
+                * {
+                    font-family: 'Roboto', sans-serif;
+                }
 
-                        body {
-                            margin: 0;
-                            padding: 0;
-                        }
+                body {
+                    background-color: #ffffff;
+                    color: #374151; /* Tailwind gray-700 */
+                }
 
-                        .name {
-                            font-size: 14px;
-                            margin: 0px;
-                        }
+                .sectionName {
+                    font-size: 12px;
+                    font-weight: 600; /* Matches Tailwind font-semibold */
+                    color: #1F2937; /* Tailwind gray-900 */
+                    margin-bottom: 3px;
+                }
 
-                        .sectionNameOther {
-                            font-size: 12px;
-                            margin: 10px 0;
-                        }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    overflow: hidden;
+                    border: 1px solid #000; /* Matches Tailwind divide-gray-300 */
+                }
 
-                        table {
-                            width: 100%;
-                            border-collapse: collapse;
-                            page-break-inside: avoid;
-                            margin-bottom: 28px;
-                        }
+                thead {
+                    color: #1F2937; /* Tailwind gray-900 */
+                    font-size: 10px;
+                    font-weight: 600;
+                    text-align: left;
+                    border-bottom: 1px solid #000000;
+                }
 
-                        td, th {
-                            word-wrap: break-word;
-                            border: 1px solid #ddd;
-                            padding: 8px;
-                        }
+                td, th {
+                    border: 1px solid #E5E7EB;
+                    padding: 3px;
+                    font-size: 9px;
+                    vertical-align: middle;
+                }
 
-                        .table-responsive {
-                            margin-bottom: 28px;
-                            font-size: 10px;
-                        }
+                .col-id {
+                    font-weight: 500;
+                }
+                .name {
+                    font-size: 18px;
+                    font-weight: 400; /* Matches Tailwind font-bold */
+                    color: #111827; /* Tailwind gray-900 */
+                }
 
-                        .page-break {
-                            page-break-before: always;
-                            page-break-after: always;
-                            page-break-inside: avoid;
-                        }
-                    </style>
+            </style>
         </head>
         
         <body>
             <div>
-                <h1 class="name">Test Cases</h1>
+                <div>
+                    <span style="display: inline-block; font-size: 18px; font-weight: 400; color: #111827; margin-right: 3px;">
+                        ${testCaseName}
+                    </span>
+                    <span style="display: inline-block; font-size: 9px; color: #6B7280;">
+                        ( ${testCasesCount} test cases )
+                    </span>
+                </div>
                 <hr />
                 <div class="table-responsive">
                    ${text}
                 </div>
             </div>
         </body>
-        
         </html>
         `;
 }

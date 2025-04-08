@@ -1,4 +1,4 @@
-import { Menu, Transition } from "@headlessui/react";
+import { Menu, MenuButton, MenuItem, MenuItems, Transition } from "@headlessui/react";
 import {
   ArchiveBoxIcon,
   ChevronRightIcon,
@@ -237,11 +237,10 @@ export default function Projects() {
                                     {project.favorite ? (
                                       <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className={`h-4 w-4 cursor-pointer hover:text-indigo-100 ${
-                                          project.favorite
+                                        className={`h-4 w-4 cursor-pointer hover:text-indigo-100 ${project.favorite
                                             ? "text-indigo-700"
                                             : "text-indigo-100 hover:text-indigo-700"
-                                        }`}
+                                          }`}
                                         data-cy={`add-favorite-${index}`}
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
@@ -260,11 +259,10 @@ export default function Projects() {
                                       >
                                         <svg
                                           xmlns="http://www.w3.org/2000/svg"
-                                          className={`h-4 w-4 cursor-pointer hover:text-indigo-100 ${
-                                            project.favorite
+                                          className={`h-4 w-4 cursor-pointer hover:text-indigo-100 ${project.favorite
                                               ? "text-indigo-700"
                                               : "text-indigo-100 hover:text-indigo-700"
-                                          }`}
+                                            }`}
                                           data-cy={`add-favorite-${index}`}
                                           viewBox="0 0 20 20"
                                           fill="currentColor"
@@ -321,11 +319,10 @@ export default function Projects() {
                                   >
                                     {({ open }) => (
                                       <>
-                                        <Menu.Button
-                                          className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none ${
-                                            open &&
+                                        <MenuButton
+                                          className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none ${open &&
                                             "ring-2 ring-offset-2 ring-purple-500"
-                                          }`}
+                                            }`}
                                         >
                                           <span className="sr-only">
                                             {t("Open options")}
@@ -334,7 +331,7 @@ export default function Projects() {
                                             className="h-4 w-4"
                                             aria-hidden="true"
                                           />
-                                        </Menu.Button>
+                                        </MenuButton>
                                         <Transition
                                           show={open}
                                           as={Fragment}
@@ -345,16 +342,16 @@ export default function Projects() {
                                           leaveFrom="transform opacity-100 scale-100"
                                           leaveTo="transform opacity-0 scale-95"
                                         >
-                                          <Menu.Items
+                                          <MenuItems
                                             static
                                             style={
                                               data?.data?.length - 1 ===
                                                 index &&
-                                              data?.data?.length !== 1
+                                                data?.data?.length !== 1
                                                 ? {
-                                                    transform:
-                                                      "translateY(-55%)",
-                                                  }
+                                                  transform:
+                                                    "translateY(-55%)",
+                                                }
                                                 : {}
                                             }
                                             className="mx-3 cursor-pointer origin-top-right absolute right-7 top-0 w-48 mt-1 rounded-md shadow-lg z-10 bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
@@ -365,12 +362,12 @@ export default function Projects() {
                                                   ProjectPermissions.EDIT_PROJECT
                                                 }
                                               >
-                                                <Menu.Item>
-                                                  {({ active }) => (
+                                                <MenuItem>
+                                                  {({ focus }) => (
                                                     <Link
                                                       to={`${appRoutes.PROJECTS}/${project.id}/${projectRoutes.EDIT_PROJECT}`}
                                                       className={classNames(
-                                                        active
+                                                        focus
                                                           ? "bg-gray-100 text-gray-900"
                                                           : "text-gray-700",
                                                         "group flex items-center px-4 py-1.5 text-xs"
@@ -383,14 +380,14 @@ export default function Projects() {
                                                       {t("Edit")}
                                                     </Link>
                                                   )}
-                                                </Menu.Item>
+                                                </MenuItem>
                                               </AccessControl>
-                                              <Menu.Item>
-                                                {({ active }) => (
+                                              <MenuItem>
+                                                {({ focus }) => (
                                                   <Link
                                                     to={`${appRoutes.PROJECTS}/${project.id}/${projectRoutes.OVERVIEW}`}
                                                     className={classNames(
-                                                      active
+                                                      focus
                                                         ? "bg-gray-100 text-gray-900"
                                                         : "text-gray-700",
                                                       "group flex items-center px-4 py-1.5 text-xs"
@@ -403,21 +400,21 @@ export default function Projects() {
                                                     {t("View")}
                                                   </Link>
                                                 )}
-                                              </Menu.Item>
+                                              </MenuItem>
                                               <AccessControl
                                                 permission={
                                                   ArchivePermissions.ARCHIVE_PROJECT &&
                                                   ArchivePermissions.LIST_ARCHIVE_PROJECT
                                                 }
                                               >
-                                                <Menu.Item>
-                                                  {({ active }) => (
+                                                <MenuItem>
+                                                  {({ focus }) => (
                                                     <span
                                                       onClick={(e) =>
                                                         openModal(e, project)
                                                       }
                                                       className={classNames(
-                                                        active
+                                                        focus
                                                           ? "bg-gray-100 text-gray-900"
                                                           : "text-gray-700",
                                                         "group flex items-center px-4 py-1.5 text-xs"
@@ -430,10 +427,10 @@ export default function Projects() {
                                                       {t("Archive")}
                                                     </span>
                                                   )}
-                                                </Menu.Item>
+                                                </MenuItem>
                                               </AccessControl>
                                             </div>
-                                          </Menu.Items>
+                                          </MenuItems>
                                         </Transition>
                                       </>
                                     )}
