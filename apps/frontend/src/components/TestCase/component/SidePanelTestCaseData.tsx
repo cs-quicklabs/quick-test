@@ -121,7 +121,7 @@ const SidePanelTestCaseData: FC<Props> = ({ testCase }) => {
                   </Trans>
                 </span>
               </div>
-              <div>
+              <div className="w-44">
                 <span className="block text-sm font-medium text-gray-700 ">
                   {t("Priority")}
                 </span>

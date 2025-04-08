@@ -9,7 +9,7 @@ import {
   ExclamationTriangleIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useRef, useState } from "react";
 import AddProjectUser from "./AddProjectUser";
 import i18next, { t } from "i18next";
 import Button from "../../../../components/Button";
@@ -40,9 +40,10 @@ export default function ProjectMembers(props: any) {
     refetch,
     error,
   } = useQuery({
-    queryKey: ["project-members"],
+    queryKey: ["project-members", props?.pid],
     queryFn: () => getAssignedProjectMembers(props?.pid),
-    enabled: false, // Disable the query on mount
+    enabled: Boolean(props?.pid), // Disable the query on mount
+    retry: 1, // Disable automatic retries
   });
 
   const fetchData = useCallback(() => {
@@ -57,12 +58,6 @@ export default function ProjectMembers(props: any) {
       error?.message || i18next.t(ToastMessage.SOMETHING_WENT_WRONG);
     showError(errorMessage);
   }
-
-  useEffect(() => {
-    if (props?.pid) {
-      fetchData();
-    }
-  }, [props?.pid, fetchData]);
 
   const getConfirmation = (user: { fullName: string; id: string }) => {
     setUserData(user);
