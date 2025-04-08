@@ -25,7 +25,7 @@ export class PdfService {
         const pdfTestCaseConfig = pdfConfig?.testCase;
         const projectName = project.name.replace(/\s/g, "_");
         const pdfName = `${projectName}_`.concat(pdfTestCaseConfig.fileName);
-        const content = getTestCasesFromHtml(testCasesObject)
+        const content = getTestCasesFromHtml(testCasesObject, project)
         const buffer = await this.generatePdf(content);
         const file = UtilsService.createUploadableFile(pdfName, pdfCommonConfig, buffer);
         const key = await this.awsS3Service.uploadPdf(file);
