@@ -108,7 +108,6 @@ export default function Table({
         Data
       );
       showSuccess(response?.data?.message);
-      // getTestRunResults();
       getTestRunDetais();
       refetch();
       return true;
@@ -190,7 +189,7 @@ export default function Table({
                     </th>
                     <th
                       scope="col"
-                      className="px-4 py-2 text-right text-sm font-semibold text-gray-900 w-8/12"
+                      className="px-4 py-2 text-center text-sm font-semibold text-gray-900 w-8/12"
                     >
                       {t("Status")}
                     </th>
@@ -245,24 +244,24 @@ export default function Table({
                             {value?.testCaseTitle}
                           </span>
                         </td>
-                        <td className="px-3 py-2 whitespace-nowrap text-right text-xs font-normal">
+                        <td className="px-3 py-2 whitespace-nowrap text-center text-xs font-normal">
                           {value?.status === "PASSED" && (
-                            <Badge className="bg-green-100 text-green-700 rounded-md ring-1 ring-inset ring-green-600/20">
+                            <Badge className="bg-green-100 text-green-700 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-green-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
                           {value?.status === "FAILED" && (
-                            <Badge className="bg-red-100 text-red-700 rounded-md ring-1 ring-inset ring-red-600/20">
+                            <Badge className="bg-red-100 text-red-700 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-red-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
                           {value?.status === "UNTESTED" && (
-                            <Badge className="bg-gray-100 text-gray-700 rounded-md ring-1 ring-inset ring-gray-600/20">
+                            <Badge className="bg-gray-100 text-gray-700 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-gray-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
                           {value?.status === "BLOCKED" && (
-                            <Badge className="bg-yellow-100 text-yellow-700 rounded-md ring-1 ring-inset ring-yellow-600/20">
+                            <Badge className="bg-yellow-100 text-yellow-700 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-yellow-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
