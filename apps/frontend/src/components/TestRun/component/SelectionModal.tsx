@@ -1,4 +1,9 @@
-import { Dialog, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
+import {
+  Dialog,
+  DialogTitle,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 import { useCallback } from "react";
 import { Fragment, useState, useEffect } from "react";
 import SectionTable from "./ModalSectionTable";
@@ -48,7 +53,7 @@ const SelectionModal = ({
         setRowData(newRowData);
       } else setRowData(data);
     } catch (err) {
-      showError(err?.message)
+      showError(err?.message);
     }
   }, [params.pid, t]);
 

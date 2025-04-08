@@ -51,10 +51,12 @@ export default function ImageViewer({ source, alt, open, setOpen }: PropTypes) {
                 aria-hidden="true"
               />
             </button>
-            <button ref={cancelButtonRef} className="h-8 w-8" onClick={() => setOpen(false)}>
-              <XMarkIcon
-                className="text-neutral-700"
-              />
+            <button
+              ref={cancelButtonRef}
+              className="h-8 w-8"
+              onClick={() => setOpen(false)}
+            >
+              <XMarkIcon className="text-neutral-700" />
             </button>
           </div>
           <div className="flex flex-col h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">

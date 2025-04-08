@@ -1,6 +1,5 @@
 import TestRunList from "../../../../components/TestRun/TestRunList";
 
-
 export default function TestRunPage(props: any) {
   return (
     <>

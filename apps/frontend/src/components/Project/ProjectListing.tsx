@@ -40,7 +40,10 @@ export default function Example() {
     []
   );
 
-  const { data, isLoading, error } = useQuery({ queryKey: ["all-projects"], queryFn: getProjects });
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["all-projects"],
+    queryFn: getProjects,
+  });
 
   if (error instanceof Error) {
     const errorMessage =
@@ -242,8 +245,8 @@ export default function Example() {
                   {data?.data?.data.map((ele: any) => {
                     const activeEle = ele.testsuites.length
                       ? ele.testsuites.filter(
-                        (item: any) => item.status !== "COMPLETED"
-                      )
+                          (item: any) => item.status !== "COMPLETED"
+                        )
                       : [];
                     if (!activeEle.length) return null;
                     return (

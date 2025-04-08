@@ -6,8 +6,9 @@ export default function Badge(props: any): JSX.Element {
     <>
       <span
         {...rest}
-        className={`capitalize inline-flex items-center px-2 py-0.5 rounded font-medium ${className ?? "bg-gray-100 text-gray-800"
-          }`}
+        className={`capitalize inline-flex items-center px-2 py-0.5 rounded font-medium ${
+          className ?? "bg-gray-100 text-gray-800"
+        }`}
       >
         {children}
       </span>

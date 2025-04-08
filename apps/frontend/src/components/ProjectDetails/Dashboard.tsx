@@ -22,7 +22,10 @@ export default function Dashboard() {
   const params = useParams();
   const pid = params.pid;
 
-  const { data: projectDetail } = useQuery({ queryKey: ["projects-data", pid], queryFn: () => getProjectsDetails({ pid }) });
+  const { data: projectDetail } = useQuery({
+    queryKey: ["projects-data", pid],
+    queryFn: () => getProjectsDetails({ pid }),
+  });
 
   const NavProps = [
     {

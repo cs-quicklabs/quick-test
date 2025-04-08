@@ -338,10 +338,11 @@ export default function UpdateProfile() {
                   onMouseDown={() => setValidation(true)}
                   loading={apiloading === true ? "true" : undefined}
                   type="submit"
-                  className={`sm:order-1 ${!dirty || !isValid
-                    ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                    : ""
-                    }`}
+                  className={`sm:order-1 ${
+                    !dirty || !isValid
+                      ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
+                      : ""
+                  }`}
                   disabled={!(dirty && isValid)}
                 >
                   {t("Update")}

@@ -14,7 +14,7 @@ const SidePanel: FC<SidePanelProps> = ({
   setIsOpen,
   expandRedirectTo,
   children,
-  onClickNavigate
+  onClickNavigate,
 }) => {
   const navigate = useNavigate();
   const togglePanel = () => {
@@ -22,8 +22,9 @@ const SidePanel: FC<SidePanelProps> = ({
   };
   return (
     <div
-      className={`fixed top-0 right-0 h-full w-3/4 bg-gray-100 border-l-2 drop-shadow-lg transform transition-transform overflow-y-auto ${isOpen ? "translate-x-0" : "translate-x-full"
-        } md:w-1/2 z-20`}
+      className={`fixed top-0 right-0 h-full w-3/4 bg-gray-100 border-l-2 drop-shadow-lg transform transition-transform overflow-y-auto ${
+        isOpen ? "translate-x-0" : "translate-x-full"
+      } md:w-1/2 z-20`}
     >
       <div className="mt-10 flex">
         <button className="mt-4 ml-4 text-xl" onClick={togglePanel}>
@@ -31,7 +32,9 @@ const SidePanel: FC<SidePanelProps> = ({
         </button>
         <button
           className="mt-4 ml-4 text-xl"
-          onClick={() => onClickNavigate ? onClickNavigate() : navigate(expandRedirectTo)}
+          onClick={() =>
+            onClickNavigate ? onClickNavigate() : navigate(expandRedirectTo)
+          }
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

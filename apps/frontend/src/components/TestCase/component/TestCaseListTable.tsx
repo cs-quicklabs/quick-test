@@ -175,15 +175,22 @@ export default function TestCaseListTable({
           className="bg-white divide-y divide-gray-200"
         >
           {orderTestCases?.map((test: SerialisedTestCaseType, index) => (
-            <tr key={index} data-cy={dataAttr + index} className="bg-white rounded">
+            <tr
+              key={index}
+              data-cy={dataAttr + index}
+              className="bg-white rounded"
+            >
               <td className="py-2 whitespace-nowrap text-xs font-normal pr-2">
                 <div className="flex justify-center">
                   {showDragIcon && (
-                    <Link to={"#"} title="Drag" data-tooltip-id="testcase-list-table-tooltip-id"
-                      data-tooltip-content={t("Drag")} className="drag mr-2">
-                      <EllipsisVerticalIcon
-                        className="text-gray-900 mx-auto h-4 w-4 cursor-move dragIcon"
-                      />
+                    <Link
+                      to={"#"}
+                      title="Drag"
+                      data-tooltip-id="testcase-list-table-tooltip-id"
+                      data-tooltip-content={t("Drag")}
+                      className="drag mr-2"
+                    >
+                      <EllipsisVerticalIcon className="text-gray-900 mx-auto h-4 w-4 cursor-move dragIcon" />
                     </Link>
                   )}
                   <input
@@ -197,9 +204,9 @@ export default function TestCaseListTable({
                         orderTestCases.map((val) =>
                           val.id === test.id
                             ? {
-                              ...val,
-                              checked: e.target.checked,
-                            }
+                                ...val,
+                                checked: e.target.checked,
+                              }
                             : { ...val }
                         )
                       )
@@ -260,9 +267,7 @@ export default function TestCaseListTable({
                       openDeleteModal(test);
                     }}
                   >
-                    <TrashIcon
-                      className="text-red-400 h-4 w-4 cursor-pointer"
-                    />
+                    <TrashIcon className="text-red-400 h-4 w-4 cursor-pointer" />
                   </button>
                 </div>
               </td>

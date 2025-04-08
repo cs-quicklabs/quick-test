@@ -1,9 +1,15 @@
-import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
+import {
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 import {
   ExclamationTriangleIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useRef, useState } from "react";
 import AddProjectUser from "./AddProjectUser";
 import i18next, { t } from "i18next";
 import Button from "../../../../components/Button";
@@ -24,7 +30,7 @@ import { Tooltip } from "react-tooltip";
 export default function ProjectMembers(props: any) {
   const [open, setOpen] = useState(false);
   const [isShare, setShare] = useState(false);
-  const [userData, setUserData] = useState({ fullName: '', id: '' });
+  const [userData, setUserData] = useState({ fullName: "", id: "" });
   const [deleteUser, setDeleteUser] = useState("");
   const cancelButtonRef = useRef(null);
   const [isLoading, setLoading] = useState(false);
@@ -34,9 +40,10 @@ export default function ProjectMembers(props: any) {
     refetch,
     error,
   } = useQuery({
-    queryKey: ["project-members"],
+    queryKey: ["project-members", props?.pid],
     queryFn: () => getAssignedProjectMembers(props?.pid),
-    enabled: false, // Disable the query on mount
+    enabled: Boolean(props?.pid), // Disable the query on mount
+    retry: 1, // Disable automatic retries
   });
 
   const fetchData = useCallback(() => {
@@ -51,12 +58,6 @@ export default function ProjectMembers(props: any) {
       error?.message || i18next.t(ToastMessage.SOMETHING_WENT_WRONG);
     showError(errorMessage);
   }
-
-  useEffect(() => {
-    if (props?.pid) {
-      fetchData();
-    }
-  }, [props?.pid, fetchData]);
 
   const getConfirmation = (user: { fullName: string; id: string }) => {
     setUserData(user);
@@ -97,8 +98,8 @@ export default function ProjectMembers(props: any) {
                   <table className="min-w-full divide-y divide-gray-300 px-2 2xl:pl-48">
                     <tbody className="divide-y divide-gray-200">
                       {members &&
-                        members !== undefined &&
-                        members.length > 0 ? (
+                      members !== undefined &&
+                      members.length > 0 ? (
                         members.map((member: any) => (
                           <tr key={member["fullName"]}>
                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
@@ -114,16 +115,14 @@ export default function ProjectMembers(props: any) {
                                 data-tooltip-content="Delete"
                                 onClick={() => getConfirmation(member)}
                               >
-                                <TrashIcon
-                                  className="w-4 h-8 text-red-400"
-                                />
+                                <TrashIcon className="w-4 h-8 text-red-400" />
                               </button>
                               {/* </div> */}
                             </td>
                           </tr>
                         ))
                       ) : (
-                        <tr >
+                        <tr>
                           <td className="flex mt-10 justify-center text-gray-500 text-sm font-normal">
                             No Member Found.
                           </td>
@@ -216,7 +215,13 @@ export default function ProjectMembers(props: any) {
                         Delete Member
                       </DialogTitle>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-500">After deleting, <strong>{userData?.fullName}</strong> will no longer have access to any <strong>{props?.pname}</strong>-related data, including milestones, test cases, and other related information.</p>
+                        <p className="text-sm text-gray-500">
+                          After deleting, <strong>{userData?.fullName}</strong>{" "}
+                          will no longer have access to any{" "}
+                          <strong>{props?.pname}</strong>-related data,
+                          including milestones, test cases, and other related
+                          information.
+                        </p>
                       </div>
                     </div>
                   </div>

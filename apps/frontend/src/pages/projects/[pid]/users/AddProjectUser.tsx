@@ -112,11 +112,11 @@ export default function AddProjectUser(props: any) {
                           <span className="block truncate">
                             {selected && selected.length > 0
                               ? selected
-                                .map(
-                                  (member: { fullName: string }) =>
-                                    member?.fullName
-                                )
-                                .join(", ")
+                                  .map(
+                                    (member: { fullName: string }) =>
+                                      member?.fullName
+                                  )
+                                  .join(", ")
                               : "Select Member"}
                           </span>
                           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -138,9 +138,10 @@ export default function AddProjectUser(props: any) {
                                 <ListboxOption
                                   key={memberIdx}
                                   className={({ focus }) =>
-                                    `relative cursor-default select-none py-2 pl-10 pr-4 ${focus
-                                      ? "bg-amber-100 text-amber-900"
-                                      : "text-gray-900"
+                                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                      focus
+                                        ? "bg-amber-100 text-amber-900"
+                                        : "text-gray-900"
                                     }`
                                   }
                                   value={member}
@@ -148,10 +149,11 @@ export default function AddProjectUser(props: any) {
                                   {({ selected }) => (
                                     <>
                                       <span
-                                        className={`block truncate ${selected
-                                          ? "font-medium"
-                                          : "font-normal"
-                                          }`}
+                                        className={`block truncate ${
+                                          selected
+                                            ? "font-medium"
+                                            : "font-normal"
+                                        }`}
                                       >
                                         {member.fullName}
                                       </span>

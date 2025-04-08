@@ -22,7 +22,7 @@ export default function Pagination(data: Props) {
         (data.paginationData.take - 1),
       to:
         data.paginationData.page * data.paginationData.take >
-          data.paginationData.itemCount
+        data.paginationData.itemCount
           ? data.paginationData.itemCount
           : data.paginationData.page * data.paginationData.take,
     }),
@@ -45,10 +45,11 @@ export default function Pagination(data: Props) {
                 ? null
                 : data.setPageNum(data.paginationData.page - 1);
             }}
-            className={` cursor-pointer rounded-l-full inline-flex items-center px-2.5 py-1.5  text-xs font-medium rounded-md text-gray-800 bg-indigo-50 hover:bg-indigo-100 ${(data.paginationData.page === 1 ||
-              data.paginationData.page === 0) &&
+            className={` cursor-pointer rounded-l-full inline-flex items-center px-2.5 py-1.5  text-xs font-medium rounded-md text-gray-800 bg-indigo-50 hover:bg-indigo-100 ${
+              (data.paginationData.page === 1 ||
+                data.paginationData.page === 0) &&
               "hidden"
-              }`}
+            }`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -70,9 +71,10 @@ export default function Pagination(data: Props) {
                 ? null
                 : data.setPageNum(data.paginationData.page + 1);
             }}
-            className={` cursor-pointer rounded-r-full ml-0.5 inline-flex items-center px-2.5 py-1.5 text-xs font-medium rounded-md text-gray-800 bg-indigo-50 hover:bg-indigo-100  ${data.paginationData.page === data.paginationData.pageCount &&
+            className={` cursor-pointer rounded-r-full ml-0.5 inline-flex items-center px-2.5 py-1.5 text-xs font-medium rounded-md text-gray-800 bg-indigo-50 hover:bg-indigo-100  ${
+              data.paginationData.page === data.paginationData.pageCount &&
               "hidden"
-              }`}
+            }`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

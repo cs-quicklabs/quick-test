@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import Chart from "./Chart";
@@ -23,74 +23,82 @@ const Todo = () => {
   const [testRunList, setTestRunList] = useState([]);
   const [showLoader, setShowLoader] = useState(true);
   const [dataForChart, setDataForChart] = useState<{
-    labels: any[];
-    datasets: any[];
+    labels: string[];
+    datasets: {
+      label: string;
+      data: number[];
+      backgroundColor: string;
+      barThickness: number;
+    }[];
   }>({
     labels: [],
     datasets: [],
   });
 
-  const getData = useCallback(async () => {
-    try {
-      const response = await axiosService.get(
-        `/projects/${params.pid}/test-suites`
-      );
-      if (dataForChart.labels.length === 0) {
-        const tableData = await axiosService.get(
-          "/projects/" + params?.pid + "/todo"
-        );
-        const newTableData = tableData.data.data.users;
-        const labelArray: any[] = [];
-        const dataSet1: any[] = [];
-        const dataSet2: any[] = [];
-        for (let i = 0; i < newTableData.length; i++) {
-          labelArray.push(
-            newTableData[i].firstName + " " + newTableData[i].lastName
-          );
-          dataSet1.push(newTableData[i].totalActiveTestCases);
-          dataSet2.push(newTableData[i].totalCompletedTestCases);
-        }
-        const labels = [...labelArray];
-        const datasets = [
-          {
-            label: t("Active"),
-            data: [...dataSet2],
-            backgroundColor: "rgb(124,181,236)",
-            barThickness: 20,
-          },
-          {
-            label: t("Completion pending"),
-            data: [...dataSet1],
-            backgroundColor: "rgb(171,213,254)",
-            barThickness: 20,
-          },
-        ];
-        setDataForChart({
-          labels: [...labels],
-          datasets: [...datasets],
-        });
-      }
-      const data = response.data.data.data;
-      setTestRunList(data);
-      // setPaginationData(response.data.data.meta);
-      setShowLoader(false);
-    } catch (err) {
-      if (err.response && err.response.data) {
-        if (err.response.status === 401) {
-          showError(err.response.data.message);
-          localStorage.clear();
-          sessionStorage.clear();
-          navigate("/");
-          return;
-        } else showError(err.response.data.message);
-      } else showError(i18next.t(ToastMessage.SOMETHING_WENT_WRONG));
-      setShowLoader(false);
-    }
-  }, [dataForChart.labels.length, navigate, params.pid, t]);
-
   useEffect(() => {
-    if (params?.pid) getData();
-  }, [params?.pid, getData]);
+    const fetchData = async () => {
+      if (!params?.pid) return;
+
+      try {
+        setShowLoader(true);
+
+        // Fetch both APIs in parallel to improve performance
+        const [testSuitesResponse, todoResponse] = await Promise.all([
+          axiosService.get(`/projects/${params.pid}/test-suites`),
+          axiosService.get(`/projects/${params.pid}/todo`),
+        ]);
+
+        // Process test suites data
+        const testSuitesData = testSuitesResponse.data.data.data;
+        setTestRunList(testSuitesData);
+
+        // Process chart data
+        const todoData = todoResponse.data.data.users;
+        const labelArray = [];
+        const dataSet1 = [];
+        const dataSet2 = [];
+
+        for (let i = 0; i < todoData.length; i++) {
+          labelArray.push(todoData[i].firstName + " " + todoData[i].lastName);
+          dataSet1.push(todoData[i].totalActiveTestCases);
+          dataSet2.push(todoData[i].totalCompletedTestCases);
+        }
+
+        setDataForChart({
+          labels: [...labelArray],
+          datasets: [
+            {
+              label: t("Active"),
+              data: [...dataSet2],
+              backgroundColor: "rgb(124,181,236)",
+              barThickness: 20,
+            },
+            {
+              label: t("Completion pending"),
+              data: [...dataSet1],
+              backgroundColor: "rgb(171,213,254)",
+              barThickness: 20,
+            },
+          ],
+        });
+
+        setShowLoader(false);
+      } catch (err) {
+        if (err.response && err.response.data) {
+          if (err.response.status === 401) {
+            showError(err.response.data.message);
+            localStorage.clear();
+            sessionStorage.clear();
+            navigate("/");
+            return;
+          } else showError(err.response.data.message);
+        } else showError(i18next.t(ToastMessage.SOMETHING_WENT_WRONG));
+        setShowLoader(false);
+      }
+    };
+
+    fetchData();
+  }, [params?.pid, t, navigate]);
 
   const renderGraph = (
     passed: number,
@@ -164,74 +172,72 @@ const Todo = () => {
   }
 
   return (
-    <Fragment>
-      <div className="mx-7 mt-4 pb-14 2xl:mx-52">
-        {dataForChart.labels.length !== 0 ? (
+    <div className="mx-7 mt-4 pb-14 2xl:mx-52">
+      {dataForChart.labels.length !== 0 ? (
+        <Chart dataForChart={dataForChart} />
+      ) : (
+        <div className="flex justify-center items-center content-center text-gray-500 text-xs font-normal mt-5">
           <Chart dataForChart={dataForChart} />
-        ) : (
-          <div className="flex justify-center items-center content-center text-gray-500 text-xs font-normal mt-5">
-            <Chart dataForChart={dataForChart} />
-          </div>
-        )}
-        <div className="bg-gray-200 px-4 py-2 mt-5 rounded text-sm ">
-          {t("Todo Test Runs")}
         </div>
-        <div className="align-middle inline-block min-w-full px-4">
-          <table className="min-w-full border-b border-gray-200 ">
-            <tbody className="bg-white divide-y divide-gray-200">
-              {testRunList.map((testrun: any, i) => (
-                <tr key={i} className="">
-                  <td className=" max-w-0 w-full whitespace-nowrap font-normal text-gray-900">
-                    <div className="flex items-center space-x-3 lg:pl-2">
-                      <Link
-                        className="truncate hover:underline cursor-pointer text-sm"
-                        to={`${appRoutes.PROJECTS}/${params?.pid}/${projectRoutes.TESTRUNS}/${testrun?.id}/${testRunRoutes.TEST_RESULTS}`}
-                      >
-                        {testrun.name} ( {testrun?.testreport?.total} )
-                      </Link>
-                    </div>
-                  </td>
-                  <td className=" py-2 whitespace-nowrap text-xs text-gray-500 text-right flex justify-center items-center">
-                    <span style={{ display: "inline-block" }}>
-                      {t("Passed") + ": " + testrun?.testreport?.passed}{" "}
-                      {t("Failed") + ": " + testrun?.testreport?.failed}{" "}
-                      {t("Untested") + ": " + testrun?.testreport?.untested}{" "}
-                      {t("Blocked") + ": " + testrun?.testreport?.blocked}{" "}
-                    </span>
-                    <span style={{ display: "inline-block" }}>
-                      {renderGraph(
-                        testrun?.testreport?.passed,
-                        testrun?.testreport?.failed,
-                        testrun?.testreport?.untested,
-                        testrun?.testreport?.blocked
-                      )}
-                    </span>
-                    <span className="font-normal inline-block w-10 text-center">
-                      {" "}
-                      {
-                        (
+      )}
+      <div className="bg-gray-200 px-4 py-2 mt-5 rounded text-sm ">
+        {t("Todo Test Runs")}
+      </div>
+      <div className="align-middle inline-block min-w-full px-4">
+        <table className="min-w-full border-b border-gray-200 ">
+          <tbody className="bg-white divide-y divide-gray-200">
+            {testRunList.map((testrun: any, i) => (
+              <tr key={i} className="">
+                <td className=" max-w-0 w-full whitespace-nowrap font-normal text-gray-900">
+                  <div className="flex items-center space-x-3 lg:pl-2">
+                    <Link
+                      className="truncate hover:underline cursor-pointer text-sm"
+                      to={`${appRoutes.PROJECTS}/${params?.pid}/${projectRoutes.TESTRUNS}/${testrun?.id}/${testRunRoutes.TEST_RESULTS}`}
+                    >
+                      {testrun.name} ( {testrun?.testreport?.total} )
+                    </Link>
+                  </div>
+                </td>
+                <td className=" py-2 whitespace-nowrap text-xs text-gray-500 text-right flex justify-center items-center">
+                  <span style={{ display: "inline-block" }}>
+                    {t("Passed") + ": " + testrun?.testreport?.passed}{" "}
+                    {t("Failed") + ": " + testrun?.testreport?.failed}{" "}
+                    {t("Untested") + ": " + testrun?.testreport?.untested}{" "}
+                    {t("Blocked") + ": " + testrun?.testreport?.blocked}{" "}
+                  </span>
+                  <span style={{ display: "inline-block" }}>
+                    {renderGraph(
+                      testrun?.testreport?.passed,
+                      testrun?.testreport?.failed,
+                      testrun?.testreport?.untested,
+                      testrun?.testreport?.blocked
+                    )}
+                  </span>
+                  <span className="font-normal inline-block w-10 text-center">
+                    {" "}
+                    {testrun?.testreport?.total > 0
+                      ? (
                           (testrun.testreport?.passed /
                             testrun?.testreport?.total) *
                           100
                         )
                           .toString()
                           .split(".")[0]
-                      }{" "}
-                      %
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          {testRunList.length === 0 && (
-            <div className="flex mt-10 justify-center items-center content-center text-gray-500 text-sm font-normal">
-              {t("No test runs added yet.")}
-            </div>
-          )}
-        </div>
+                      : 0}{" "}
+                    %
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {testRunList.length === 0 && (
+          <div className="flex mt-10 justify-center items-center content-center text-gray-500 text-sm font-normal">
+            {t("No test runs added yet.")}
+          </div>
+        )}
       </div>
-    </Fragment>
+    </div>
   );
 };
 

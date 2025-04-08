@@ -91,7 +91,10 @@ export default function Projects() {
     }
   };
 
-  const { data, refetch, isLoading } = useQuery({ queryKey: ["all-projects"], queryFn: getProjects });
+  const { data, refetch, isLoading } = useQuery({
+    queryKey: ["all-projects"],
+    queryFn: getProjects,
+  });
 
   const makeFavorite = async (id: string) => {
     const resp = await axiosService.post(`/projects/${id}/favorites`, {});
@@ -128,7 +131,7 @@ export default function Projects() {
       toggleModal(false);
       queryClient.invalidateQueries({ queryKey: ["all-projects"] });
     } catch (err) {
-      showError(err?.message)
+      showError(err?.message);
     }
   }, [selectedId, queryClient]);
 
@@ -235,8 +238,8 @@ export default function Projects() {
                                       <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         className={`h-4 w-4 cursor-pointer hover:text-indigo-100 ${project.favorite
-                                          ? "text-indigo-700"
-                                          : "text-indigo-100 hover:text-indigo-700"
+                                            ? "text-indigo-700"
+                                            : "text-indigo-100 hover:text-indigo-700"
                                           }`}
                                         data-cy={`add-favorite-${index}`}
                                         viewBox="0 0 20 20"
@@ -250,13 +253,15 @@ export default function Projects() {
                                     ) : (
                                       <div
                                         data-tooltip-id="projects-tooltip-id"
-                                        data-tooltip-content={t("Mark as Favourite")}
+                                        data-tooltip-content={t(
+                                          "Mark as Favourite"
+                                        )}
                                       >
                                         <svg
                                           xmlns="http://www.w3.org/2000/svg"
                                           className={`h-4 w-4 cursor-pointer hover:text-indigo-100 ${project.favorite
-                                            ? "text-indigo-700"
-                                            : "text-indigo-100 hover:text-indigo-700"
+                                              ? "text-indigo-700"
+                                              : "text-indigo-100 hover:text-indigo-700"
                                             }`}
                                           data-cy={`add-favorite-${index}`}
                                           viewBox="0 0 20 20"

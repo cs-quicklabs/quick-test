@@ -30,7 +30,7 @@ export default function UserDashboard() {
   const fetchPluginConfig = async () => {
     try {
       const { data } = await axiosService.get("/plugins/config");
-      localStorage.setItem("isJiraIntegrated", data?.data?.isIntegrated ?? '');
+      localStorage.setItem("isJiraIntegrated", data?.data?.isIntegrated ?? "");
     } catch (error) {
       localStorage.setItem("isJiraIntegrated", "");
     }

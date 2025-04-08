@@ -120,10 +120,11 @@ export default function PopUp({
                             <Button
                               id="submit-inside-popup"
                               type="submit"
-                              className={`ml-3 w-12${!(dirty && isValid)
-                                ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                                : ""
-                                }`}
+                              className={`ml-3 w-12${
+                                !(dirty && isValid)
+                                  ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
+                                  : ""
+                              }`}
                               disabled={!(dirty && isValid)}
                             >
                               {t("Add")}

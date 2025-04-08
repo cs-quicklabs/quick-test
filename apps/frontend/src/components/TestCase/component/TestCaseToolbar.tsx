@@ -354,7 +354,9 @@ const TestCaseToolbar = ({
       filterState.created_on?.to &&
       filterState.created_on?.from
     ) {
-      newArray.push(`${t("Created On: ")}${dateConverter(filterState.created_on.from)}-${dateConverter(filterState.created_on.to)}`);
+      newArray.push(
+        `${t("Created On: ")}${dateConverter(filterState.created_on.from)}-${dateConverter(filterState.created_on.to)}`
+      );
     }
     if (filterState.updated_by.length !== 0) {
       newArray.push(t("Updated By: ") + t(filterState.updated_by.join(", ")));
@@ -370,7 +372,9 @@ const TestCaseToolbar = ({
       filterState.updated_on?.to &&
       filterState.updated_on?.from
     ) {
-      newArray.push(`${t("Updated On: ")}${dateConverter(filterState.updated_on.from)}-${dateConverter(filterState.updated_on.to)}`);
+      newArray.push(
+        `${t("Updated On: ")}${dateConverter(filterState.updated_on.from)}-${dateConverter(filterState.updated_on.to)}`
+      );
     }
     if (filterState.priority.length !== 0) {
       newArray.push(t("Priority: ") + t(filterState.priority.join(", ")));
@@ -663,8 +667,10 @@ const TestCaseToolbar = ({
   newCSVData?.forEach((item: any) => {
     item.createdAt = dayjs(item?.createdAt).format(DateFormat.LONG);
     item.steps = item?.steps.replace(/^\"|\"$/g, "");
-    item.preconditions = item?.preconditions.replace(/^\"|\"$/g, "").replace(/\n/g, " ");
-    item.expectedResults = item?.expectedResults.replace(/^\"|\"$/g, "")
+    item.preconditions = item?.preconditions
+      .replace(/^\"|\"$/g, "")
+      .replace(/\n/g, " ");
+    item.expectedResults = item?.expectedResults.replace(/^\"|\"$/g, "");
 
     item.executionPriority =
       item?.executionPriority?.slice(0, 1) +
@@ -684,10 +690,11 @@ const TestCaseToolbar = ({
             >
               {t("Sort:")}&nbsp;
               <span
-                className={`${sortValue.label !== "Section"
-                  ? "bg-yellow-100 px-1 hover:bg-yellow-200"
-                  : "border-b border-black border-dotted"
-                  } `}
+                className={`${
+                  sortValue.label !== "Section"
+                    ? "bg-yellow-100 px-1 hover:bg-yellow-200"
+                    : "border-b border-black border-dotted"
+                } `}
               >
                 <Trans>{sortValue.label}</Trans>
               </span>
@@ -695,8 +702,9 @@ const TestCaseToolbar = ({
                 <div className="flex flex-col bg-white z-10 border rounded py-1 text-sm absolute top-6 shadow-md cursor-pointer w-32">
                   {sortOptions.map((option) => (
                     <div
-                      className={`px-2 py-1 hover:bg-blue-500 hover:text-white ${option.key === "section" ? "border-t-2" : ""
-                        }`}
+                      className={`px-2 py-1 hover:bg-blue-500 hover:text-white ${
+                        option.key === "section" ? "border-t-2" : ""
+                      }`}
                       key={option.key}
                       onMouseDown={() => selectedSortValue(option)}
                     >
@@ -743,10 +751,11 @@ const TestCaseToolbar = ({
             >
               {t("Filter:")}&nbsp;
               <span
-                className={`${filterValue !== "None"
-                  ? "bg-yellow-100 px-1 hover:bg-yellow-200"
-                  : "border-b border-black border-dotted"
-                  } `}
+                className={`${
+                  filterValue !== "None"
+                    ? "bg-yellow-100 px-1 hover:bg-yellow-200"
+                    : "border-b border-black border-dotted"
+                } `}
               >
                 <Trans>{filterValue}</Trans>
               </span>
@@ -839,8 +848,9 @@ const TestCaseToolbar = ({
               headers={csvHeaders}
             >
               <DocumentArrowDownIcon
-                className={`h-4 w-4 cursor-pointer ${ColorEnable ? "text-indigo-600" : "text-gray-400"
-                  }`}
+                className={`h-4 w-4 cursor-pointer ${
+                  ColorEnable ? "text-indigo-600" : "text-gray-400"
+                }`}
               />
             </CSVLink>
           </div>
@@ -852,8 +862,9 @@ const TestCaseToolbar = ({
             onClick={handlePrinterClick}
           >
             <PrinterIcon
-              className={`h-4 w-4  cursor-pointer ${ColorEnable ? "text-indigo-600" : "text-gray-400"
-                }`}
+              className={`h-4 w-4  cursor-pointer ${
+                ColorEnable ? "text-indigo-600" : "text-gray-400"
+              }`}
             />
           </div>
 
@@ -863,8 +874,9 @@ const TestCaseToolbar = ({
             onClick={HandleEditClick}
           >
             <PencilIcon
-              className={`h-4 w-4  cursor-pointer ${ColorEnable ? "text-indigo-600" : "text-gray-400"
-                }`}
+              className={`h-4 w-4  cursor-pointer ${
+                ColorEnable ? "text-indigo-600" : "text-gray-400"
+              }`}
             />
           </div>
 
@@ -876,13 +888,14 @@ const TestCaseToolbar = ({
             onClick={HandleDeleteClick}
           >
             <TrashIcon
-              className={`h-4 w-4 cursor-pointer ${ColorEnable ? "text-indigo-600" : "text-gray-400"
-                }`}
+              className={`h-4 w-4 cursor-pointer ${
+                ColorEnable ? "text-indigo-600" : "text-gray-400"
+              }`}
             />
           </div>
         </div>
         <Tooltip id="testcase-toolbar-tooltip-id" />
-      </div >
+      </div>
     </>
   );
 };

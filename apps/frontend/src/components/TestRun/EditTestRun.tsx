@@ -71,7 +71,7 @@ const EditTestRun = () => {
 
       setOptions(memberList);
     } catch (error) {
-      showError(error?.message)
+      showError(error?.message);
     }
   }, [params.pid]);
   const getTestRunDetails = useCallback(async () => {
