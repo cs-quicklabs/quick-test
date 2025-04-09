@@ -61,7 +61,7 @@ const AccessControl = (props: AccessControlProps) => {
             });
           })}
         </span>
-        <Tooltips id="no-permission-tooltip" />
+        <Tooltips id="no-permission-tooltip" style={{ zIndex: 9999 }} />
       </>
     );
 };

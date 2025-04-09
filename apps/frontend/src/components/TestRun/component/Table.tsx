@@ -199,7 +199,7 @@ export default function Table(props: Props) {
                               </button>
                             )}
 
-                            <div
+                            <button
                               data-tooltip-id="test-run-table-tooltip-id"
                               data-tooltip-content={t("Delete")}
                               data-cy={"test-run-" + i + "-delete"}
