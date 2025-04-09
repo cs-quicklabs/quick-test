@@ -45,6 +45,7 @@ export default function TestCaseList({ projectName }: any) {
   const [Row, setRowData] = useState<any[]>([]);
 
   const [memberList, setMemberList] = useState<any[]>([]);
+  const [memberListFetched, setMemberListFetched] = useState<boolean>(false);
   const [DocumentData, setDocumentData] = useState<any[]>([]);
   const [modalMsg, setMsg] = useState(<></>);
   const [selectedId, setSelectedId] = useState("");
@@ -56,23 +57,38 @@ export default function TestCaseList({ projectName }: any) {
   const [isAddNewTestCaseModalVisible, setIsAddNewTestCaseModalVisible] =
     useState<boolean>(false);
   const [showDragIcon, setShowDragIcon] = useState(true);
+  const [dataFetched, setDataFetched] = useState(false);
 
-  const getData = () => {
-    appDispatch(getTestCasesData(pid as string));
-  };
-  const getMemberData = async () => {
-    try {
-      const memberListResponse = await axiosService.get(
-        `/projects/${pid}/filter-users`
-      );
-      const memberListData = memberListResponse.data.data;
-      setMemberList(memberListData);
-    } catch (err) {
-      if (err.response && err.response.data) {
-        showError(err.response.data.message);
-      } else showError(t(ToastMessage.SOMETHING_WENT_WRONG));
+  // Combined data fetching function to avoid duplicate calls
+  const fetchInitialData = useCallback(async () => {
+    if (!dataFetched) {
+      // Fetch test cases data
+      appDispatch(getTestCasesData(pid as string));
+
+      // Fetch member data only if not fetched yet
+      if (!memberListFetched) {
+        try {
+          const memberListResponse = await axiosService.get(
+            `/projects/${pid}/filter-users`
+          );
+          const memberListData = memberListResponse.data.data;
+          setMemberList(memberListData);
+          setMemberListFetched(true);
+        } catch (err) {
+          if (err.response && err.response.data) {
+            showError(err.response.data.message);
+          } else showError(t(ToastMessage.SOMETHING_WENT_WRONG));
+        }
+      }
+
+      setDataFetched(true);
     }
-  };
+  }, [appDispatch, memberListFetched, pid, dataFetched, t]);
+
+  // Separate function for refreshing test case data only (for actions that modify test cases)
+  const refreshTestCasesData = useCallback(() => {
+    appDispatch(getTestCasesData(pid as string));
+  }, [appDispatch, pid]);
 
   const openDeleteModal = (value: any) => {
     const msg = (
@@ -97,7 +113,7 @@ export default function TestCaseList({ projectName }: any) {
       if (response?.data?.success) {
         showSuccess(response.data.message);
       }
-      getData();
+      refreshTestCasesData();
     } catch (err) {
       if (err?.response?.data) {
         showError(err.response.data.message);
@@ -164,7 +180,7 @@ export default function TestCaseList({ projectName }: any) {
       const response = await axiosService.delete(`/test-cases`, data);
       if (response?.data?.success) {
         showSuccess(response.data.message);
-        getData();
+        refreshTestCasesData();
       }
     } catch (err) {
       if (err?.response?.data) {
@@ -200,33 +216,34 @@ export default function TestCaseList({ projectName }: any) {
       })
       .catch((error) => showError(error.error))
       .finally(() => {
-        getData();
+        refreshTestCasesData();
       });
   };
 
+  // Initial data fetch on component mount - only once
   useEffect(() => {
-    appDispatch(getTestCasesData(pid as string));
-  }, []);
+    fetchInitialData();
+  }, [fetchInitialData]);
 
+  // Process test case data when it changes
   useEffect(() => {
     if (testCasesList.length) {
       const serialisedTestCasesList = getSerialNumber(testCasesList);
       setRowData(serialisedTestCasesList);
       setInitialRowData(serialisedTestCasesList);
-      getMemberData();
-      setSelectedTestCase(selectedTestCase);
     }
   }, [testCasesList]);
 
+  // Handle section creation - only refresh when actually needed
   useEffect(() => {
     if (state.sectionCreated === true) {
-      getData();
+      refreshTestCasesData();
       dispatch({
         type: "UPDATE_SECTION_RESET",
         data: false,
       });
     }
-  }, [state.sectionCreated]);
+  }, [state.sectionCreated, dispatch, refreshTestCasesData]);
 
   return (
     <div>
@@ -307,7 +324,7 @@ export default function TestCaseList({ projectName }: any) {
                 >
                   <div
                     id="pdf-header"
-                    className="flex item-center justify-center font-medium text-gray-900 py-3"
+                    className="flex item-center justify-center font-medium text-gray-900 py-3 hidden"
                   >
                     {projectName}&nbsp;{t("Project Test Case Report")}
                   </div>
@@ -367,7 +384,7 @@ export default function TestCaseList({ projectName }: any) {
               )}
             </div>
             <SectionMain
-              getTestCases={getData}
+              getTestCases={refreshTestCasesData}
               addTestCase={() => setIsAddNewTestCaseModalVisible(true)}
             />
           </div>

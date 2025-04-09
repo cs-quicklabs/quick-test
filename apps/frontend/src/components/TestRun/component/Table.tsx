@@ -184,19 +184,22 @@ export default function Table(props: Props) {
                           </div>
                         </td>
                         <td>
-                          <div className="flex justify-end text-center gap-2 text-xs">
-                            <button
-                              data-tooltip-id="test-run-table-tooltip-id"
-                              data-tooltip-content={t("Edit")}
-                              data-cy={"test-run-" + i + "-edit"}
-                              onClick={() => props.editTestRun(value.id)}
-                            >
-                              <PencilSquareIcon
-                                className="text-indigo-500 h-4 w-4 cursor-pointer"
-                                aria-hidden="true"
-                              />
-                            </button>
-                            <button
+                          <div className="flex justify-end text-center items-center gap-2 text-xs">
+                            {!(value.status === "COMPLETED") && (
+                              <button
+                                data-tooltip-id="test-run-table-tooltip-id"
+                                data-tooltip-content={t("Edit")}
+                                data-cy={"test-run-" + i + "-edit"}
+                                onClick={() => props.editTestRun(value.id)}
+                              >
+                                <PencilSquareIcon
+                                  className="text-indigo-500 h-4 w-4 cursor-pointer"
+                                  aria-hidden="true"
+                                />
+                              </button>
+                            )}
+
+                            <div
                               data-tooltip-id="test-run-table-tooltip-id"
                               data-tooltip-content={t("Delete")}
                               data-cy={"test-run-" + i + "-delete"}

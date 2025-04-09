@@ -21,9 +21,10 @@ export class PermissionService {
 
   // Get all permission for a specific role Id
   async findAllPermissionsByRoleId(roleId: number): Promise<Permission[]> {
-    return this.permissionRepository.find({
-      where: { roleId },
-      select: ["permissionName"], // Fetch only necessary fields
-    });
+    return this.permissionRepository
+      .createQueryBuilder("permissions")
+      .select("permissions.permissionName")
+      .where("permissions.roleId = :roleId", { roleId })
+      .getMany();
   }
 }
