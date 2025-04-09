@@ -339,7 +339,7 @@ export default function TestCaseList({ projectName }: any) {
                     ) => (
                       <React.Fragment key={index}>
                         <div
-                          className="pl-6 py-4 whitespace-nowrap  border-t   flex flex-col items-start"
+                          className="pl-6 py-4 whitespace-nowrap border-t flex flex-col items-start"
                           data-cy={"section-" + index}
                         >
                           <span className="text-sm font-medium text-gray-900">

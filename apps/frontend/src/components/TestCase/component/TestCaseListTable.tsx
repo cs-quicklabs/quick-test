@@ -14,9 +14,9 @@ import {
   testCaseRoutes,
 } from "../../Utils/constants/page-routes";
 import { useTranslation } from "react-i18next";
-import { Tooltip } from "react-tooltip";
 import ShowPriorityTextIcon from "./ShowPriorityTextIcon";
 import { SerialisedTestCaseType } from "../../../types/testCaseTypes";
+import Tooltips from "../../Tooltip/tooltip";
 
 export default function TestCaseListTable({
   testcases,
@@ -243,7 +243,7 @@ export default function TestCaseListTable({
                 id="action-value"
                 className=" px-2 py-2 whitespace-nowrap text-center text-xs font-normal"
               >
-                <div className="flex justify-center">
+                <div className="flex justify-center text-center items-center gap-2 text-xs ">
                   <button
                     data-tooltip-id="testcase-list-table-tooltip-id"
                     data-tooltip-content={t("Edit")}
@@ -254,7 +254,7 @@ export default function TestCaseListTable({
                     }}
                   >
                     <PencilSquareIcon
-                      className="text-indigo-500 h-4 w-4 cursor-pointer mr-2"
+                      className="text-indigo-500 h-4 w-4 cursor-pointer"
                       aria-hidden="true"
                     />
                   </button>
@@ -275,7 +275,7 @@ export default function TestCaseListTable({
           ))}
         </tbody>
       </table>
-      <Tooltip id="testcase-list-table-tooltip-id" />
+      <Tooltips id="testcase-list-table-tooltip-id" />
     </ReactDragListView>
   );
 }

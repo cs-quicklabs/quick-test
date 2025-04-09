@@ -14,7 +14,7 @@ import {
 import dayjs from "dayjs";
 import { DateFormat } from "../../Utils/constants/date-format";
 import Loader from "../../Loader/Loader";
-import { Tooltip } from "react-tooltip";
+import Tooltips from "../../Tooltip/tooltip";
 interface Props {
   RowData: (string | number)[];
   editTestRun: (id: string) => void | any;
@@ -202,16 +202,11 @@ export default function Table(props: Props) {
                             <div
                               data-tooltip-id="test-run-table-tooltip-id"
                               data-tooltip-content={t("Delete")}
+                              data-cy={"test-run-" + i + "-delete"}
+                              onClick={() => openDeleteModal(value)}
                             >
-                              <button
-                                data-tooltip-id="test-run-table-tooltip-id"
-                                data-tooltip-content={t("Delete")}
-                                data-cy={"test-run-" + i + "-delete"}
-                                onClick={() => openDeleteModal(value)}
-                              >
-                                <TrashIcon className="text-red-400 h-4 w-4 cursor-pointer" />
-                              </button>
-                            </div>
+                              <TrashIcon className="text-red-400 h-4 w-4 cursor-pointer" />
+                            </button>
                           </div>
                         </td>
                       </tr>
@@ -221,7 +216,7 @@ export default function Table(props: Props) {
               <div className="flex items-center justify-center">
                 {props.isFetchingNextPage && <Loader />}
               </div>
-              <Tooltip id="test-run-table-tooltip-id" />
+              <Tooltips id="test-run-table-tooltip-id" />
             </div>
           </div>
         </div>

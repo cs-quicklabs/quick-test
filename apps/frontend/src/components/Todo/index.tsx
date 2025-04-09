@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import Chart from "./Chart";
-import { Tooltip } from "react-tooltip";
 import {
   appRoutes,
   projectRoutes,
@@ -14,6 +13,7 @@ import Loader from "../Loader/Loader";
 import { showError } from "../Toaster/ToasterFun";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import Tooltips from "../Tooltip/tooltip";
 
 const Todo = () => {
   const { t } = useTranslation();
@@ -158,7 +158,7 @@ const Todo = () => {
         {span3}
         {span2}
         {span4}
-        <Tooltip id="todo-index-tooltip-id" />
+        <Tooltips id="todo-index-tooltip-id" />
       </span>
     );
   };

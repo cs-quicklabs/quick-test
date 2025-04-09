@@ -7,7 +7,6 @@ import {
   TrashIcon,
   CheckCircleIcon,
 } from "@heroicons/react/24/solid";
-import { Tooltip } from "react-tooltip";
 import Badge from "../../Badge";
 
 import axiosService from "../../Utils/axios";
@@ -26,6 +25,7 @@ import {
 } from "../../Utils/constants/page-routes";
 import useAccessControl from "../../AccessControl/useAccessControl";
 import { NO_PERMISSION_TOOLTIP_MESSAGE } from "../../Utils/constants/misc";
+import Tooltips from "../../Tooltip/tooltip";
 
 interface PropsType {
   RowData?: {
@@ -210,7 +210,7 @@ export default function Table({
                       </td>
 
                       <td className="px-6 py-4 whitespace-nowrap text-right text-xs font-normal">
-                        <div className="flex justify-end">
+                        <div className="flex justify-end text-center items-center gap-2 text-xs">
                           <AccessControl
                             permission={MilestonePermissions.UPDATE_MILESTONE}
                           >
@@ -219,7 +219,7 @@ export default function Table({
                               data-tooltip-content={t("Edit")}
                               onClick={() => editMilestone(value.id)}
                             >
-                              <PencilSquareIcon className="text-indigo-500 h-4 w-4 cursor-pointer mr-3" />
+                              <PencilSquareIcon className="text-indigo-500 h-4 w-4 cursor-pointer" />
                             </button>
                           </AccessControl>
                           {isMilestoneDeleteable ? (
@@ -228,7 +228,7 @@ export default function Table({
                               data-tooltip-content={t("Delete")}
                               onClick={() => openDeleteModal(value)}
                             >
-                              <TrashIcon className="text-red-400 h-4 w-4 mr-3 cursor-pointer" />
+                              <TrashIcon className="text-red-400 h-4 w-4 cursor-pointer" />
                             </button>
                           ) : (
                             <button
@@ -241,7 +241,7 @@ export default function Table({
                                 e.preventDefault();
                               }}
                             >
-                              <TrashIcon className="text-red-400 h-4 w-4 mr-3 cursor-not-allowed" />
+                              <TrashIcon className="text-red-400 h-4 w-4 cursor-not-allowed" />
                             </button>
                           )}
                           {value.status === "OPEN" ? (
@@ -287,7 +287,7 @@ export default function Table({
                 </tbody>
               </table>
             </div>
-            <Tooltip id="table-tooltip-id" />
+            <Tooltips id="table-tooltip-id" />
           </div>
         </div>
       </div>

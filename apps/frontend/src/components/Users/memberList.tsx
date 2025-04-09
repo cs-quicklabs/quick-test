@@ -2,7 +2,6 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { PencilSquareIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
-import { Tooltip } from "react-tooltip";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -26,6 +25,7 @@ import AccessControl from "../AccessControl";
 import { AppContext } from "../Context/mainContext";
 import { ArchiveBoxIcon } from "@heroicons/react/24/outline";
 import ConfirmModal from "../Common/ConfirmModal";
+import Tooltips from "../Tooltip/tooltip";
 
 const MemberList = () => {
   const { t } = useTranslation();
@@ -231,7 +231,7 @@ const MemberList = () => {
                           : t("Member")}
                     </td>
 
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-center">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium flex justify-center gap-2">
                       <span
                         data-tooltip-id="member-list-tooltip-id"
                         data-tooltip-content={t("Resend Password Link")}
@@ -242,7 +242,7 @@ const MemberList = () => {
                           }
                         >
                           <button onClick={() => resendPassword(user.email)}>
-                            <EnvelopeIcon className="text-indigo-600 h-4 w-4 cursor-pointer mr-3" />
+                            <EnvelopeIcon className="text-indigo-600 h-4 w-4 cursor-pointer" />
                           </button>
                         </AccessControl>
                       </span>
@@ -265,7 +265,7 @@ const MemberList = () => {
                               );
                             }}
                           >
-                            <PencilSquareIcon className="text-indigo-500 h-4 w-4 cursor-pointer mr-3" />
+                            <PencilSquareIcon className="text-indigo-500 h-4 w-4 cursor-pointer" />
                           </button>
                         </AccessControl>
                       </span>
@@ -282,7 +282,7 @@ const MemberList = () => {
                             userRoleId !== RoleId.MEMBER
                           }
                         >
-                          <ArchiveBoxIcon className="text-indigo-600 h-4 w-4 cursor-pointer mr-3" />
+                          <ArchiveBoxIcon className="text-indigo-600 h-4 w-4 cursor-pointer" />
                         </AccessControl>
                       </span>
                     </td>
@@ -305,7 +305,7 @@ const MemberList = () => {
             </table>
           )}
         </div>
-        <Tooltip id="member-list-tooltip-id" />
+        <Tooltips id="member-list-tooltip-id" />
       </div>
       {showModal && (
         <ConfirmModal
