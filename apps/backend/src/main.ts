@@ -36,7 +36,12 @@ async function bootstrap() {
   app.enable("trust proxy"); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB, Nginx, etc)
   app.use("/v1/payments/webhook", bodyParser.raw({ type: "application/json" }));
 
-  app.enableCors();
+  app.enableCors(
+    {
+      origin: process.env.WEB_URL,
+      credentials: true,
+    }
+  );
   app.use(compression());
   app.use(morgan("combined"));
   app.setGlobalPrefix(
