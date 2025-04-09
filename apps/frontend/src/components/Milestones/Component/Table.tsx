@@ -7,7 +7,6 @@ import {
   TrashIcon,
   CheckCircleIcon,
 } from "@heroicons/react/24/solid";
-import { Tooltip } from "react-tooltip";
 import Badge from "../../Badge";
 
 import axiosService from "../../Utils/axios";
@@ -26,6 +25,7 @@ import {
 } from "../../Utils/constants/page-routes";
 import useAccessControl from "../../AccessControl/useAccessControl";
 import { NO_PERMISSION_TOOLTIP_MESSAGE } from "../../Utils/constants/misc";
+import Tooltips from "../../Tooltip/tooltip";
 
 interface PropsType {
   RowData?: {
@@ -287,21 +287,7 @@ export default function Table({
                 </tbody>
               </table>
             </div>
-            <Tooltip
-              id="table-tooltip-id"
-              style={{
-                position: "absolute",
-                maxWidth: "24rem",
-                display: "inline-block",
-                padding: "4px 8px",
-                fontSize: "12px",
-                color: "white",
-                transitionProperty: "opacity",
-                transitionDuration: "300ms",
-                backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
-                borderRight: "5px",
-              }}
-            />
+            <Tooltips id="table-tooltip-id" />
           </div>
         </div>
       </div>

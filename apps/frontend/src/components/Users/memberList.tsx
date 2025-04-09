@@ -2,7 +2,6 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { PencilSquareIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
-import { Tooltip } from "react-tooltip";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -26,6 +25,7 @@ import AccessControl from "../AccessControl";
 import { AppContext } from "../Context/mainContext";
 import { ArchiveBoxIcon } from "@heroicons/react/24/outline";
 import ConfirmModal from "../Common/ConfirmModal";
+import Tooltips from "../Tooltip/tooltip";
 
 const MemberList = () => {
   const { t } = useTranslation();
@@ -305,21 +305,7 @@ const MemberList = () => {
             </table>
           )}
         </div>
-        <Tooltip
-          id="member-list-tooltip-id"
-          style={{
-            position: "absolute",
-            maxWidth: "24rem",
-            display: "inline-block",
-            padding: "4px 8px",
-            fontSize: "12px",
-            color: "white",
-            transitionProperty: "opacity",
-            transitionDuration: "300ms",
-            backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
-            borderRight: "5px",
-          }}
-        />
+        <Tooltips id="member-list-tooltip-id" />
       </div>
       {showModal && (
         <ConfirmModal

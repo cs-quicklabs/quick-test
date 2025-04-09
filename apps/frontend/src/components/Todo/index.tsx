@@ -2,7 +2,6 @@ import { Fragment, useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import Chart from "./Chart";
-import { Tooltip } from "react-tooltip";
 import {
   appRoutes,
   projectRoutes,
@@ -14,6 +13,7 @@ import Loader from "../Loader/Loader";
 import { showError } from "../Toaster/ToasterFun";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import Tooltips from "../Tooltip/tooltip";
 
 const Todo = () => {
   const { t } = useTranslation();
@@ -150,21 +150,7 @@ const Todo = () => {
         {span3}
         {span2}
         {span4}
-        <Tooltip
-          id="todo-index-tooltip-id"
-          style={{
-            position: "absolute",
-            maxWidth: "24rem",
-            display: "inline-block",
-            padding: "4px 8px",
-            fontSize: "12px",
-            color: "white",
-            transitionProperty: "opacity",
-            transitionDuration: "300ms",
-            backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
-            borderRight: "5px",
-          }}
-        />
+        <Tooltips id="todo-index-tooltip-id" />
       </span>
     );
   };

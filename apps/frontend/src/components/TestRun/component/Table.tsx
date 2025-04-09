@@ -14,7 +14,7 @@ import {
 import dayjs from "dayjs";
 import { DateFormat } from "../../Utils/constants/date-format";
 import Loader from "../../Loader/Loader";
-import { Tooltip } from "react-tooltip";
+import Tooltips from "../../Tooltip/tooltip";
 interface Props {
   RowData: (string | number)[];
   editTestRun: (id: string) => void | any;
@@ -213,21 +213,7 @@ export default function Table(props: Props) {
               <div className="flex items-center justify-center">
                 {props.isFetchingNextPage && <Loader />}
               </div>
-              <Tooltip
-                id="test-run-table-tooltip-id"
-                style={{
-                  position: "absolute",
-                  maxWidth: "24rem",
-                  display: "inline-block",
-                  padding: "4px 8px",
-                  fontSize: "12px",
-                  color: "white",
-                  transitionProperty: "opacity",
-                  transitionDuration: "300ms",
-                  backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
-                  borderRight: "5px",
-                }}
-              />
+              <Tooltips id="test-run-table-tooltip-id" />
             </div>
           </div>
         </div>

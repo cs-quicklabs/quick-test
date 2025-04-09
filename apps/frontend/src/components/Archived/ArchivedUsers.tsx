@@ -3,7 +3,6 @@ import {
   ArrowPathIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
-import { Tooltip } from "react-tooltip";
 import dayjs from "dayjs";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -19,6 +18,7 @@ import { DateFormat } from "../Utils/constants/date-format";
 import { ArchivePermissions } from "../Utils/constants/roles-permission";
 import { ToastMessage } from "../Utils/constants/misc";
 import i18next from "i18next";
+import Tooltips from "../Tooltip/tooltip";
 
 const ArchivedUsers = () => {
   const { t } = useTranslation();
@@ -197,21 +197,7 @@ const ArchivedUsers = () => {
           )}
           {/* <Pagination setPageNum={setPageNum} paginationData={paginationData} /> */}
         </div>
-        <Tooltip
-          id="archived-users-tooltip-id"
-          style={{
-            position: "absolute",
-            maxWidth: "24rem",
-            display: "inline-block",
-            padding: "4px 8px",
-            fontSize: "12px",
-            color: "white",
-            transitionProperty: "opacity",
-            transitionDuration: "300ms",
-            backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
-            borderRight: "5px",
-          }}
-        />
+        <Tooltips id="archived-users-tooltip-id" />
       </div>
       {showModal && ifRestore ? (
         <ConfirmModal

@@ -1,7 +1,7 @@
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { Tooltip } from "react-tooltip";
 import { Trans } from "react-i18next";
 import { useAppSelector } from "../../store/hooks";
+import Tooltips from "../Tooltip/tooltip";
 interface Iprops {
   editPopUp: (section: any) => void;
   openDeleteModal: (section: any) => void;
@@ -47,21 +47,7 @@ const SectionListing = (props: Iprops) => {
                     data-cy={"section-" + i + "-delete"}
                   />
                 </div>
-                <Tooltip
-                  id="section-listing-tooltip-id"
-                  style={{
-                    position: "absolute",
-                    maxWidth: "24rem",
-                    display: "inline-block",
-                    padding: "4px 8px",
-                    fontSize: "12px",
-                    color: "white",
-                    transitionProperty: "opacity",
-                    transitionDuration: "300ms",
-                    backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
-                    borderRight: "5px",
-                  }}
-                />
+                <Tooltips id="section-listing-tooltip-id" />
               </span>
             )}
           </div>

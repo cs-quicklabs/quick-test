@@ -25,7 +25,7 @@ import {
 import { ToastMessage } from "../../../../components/Utils/constants/misc";
 import Loader from "../../../../components/Loader/Loader";
 import { useQuery } from "@tanstack/react-query";
-import { Tooltip } from "react-tooltip";
+import Tooltips from "../../../../components/Tooltip/tooltip";
 
 export default function ProjectMembers(props: any) {
   const [open, setOpen] = useState(false);
@@ -261,21 +261,7 @@ export default function ProjectMembers(props: any) {
         fetchData={fetchData}
       />
 
-      <Tooltip
-        id="delete-id"
-        style={{
-          position: "absolute",
-          maxWidth: "24rem",
-          display: "inline-block",
-          padding: "4px 8px",
-          fontSize: "12px",
-          color: "white",
-          transitionProperty: "opacity",
-          transitionDuration: "300ms",
-          backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
-          borderRight: "5px",
-        }}
-      />
+      <Tooltips id="delete-id" />
     </>
   );
 }

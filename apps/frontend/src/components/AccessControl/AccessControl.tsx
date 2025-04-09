@@ -1,7 +1,8 @@
 import { ReactNode, useMemo } from "react";
 import React from "react";
 import { NO_PERMISSION_TOOLTIP_MESSAGE } from "../Utils/constants/misc";
-import { Tooltip } from "react-tooltip";
+
+import Tooltips from "../Tooltip/tooltip";
 
 interface AccessControlProps {
   permission: string | string[];
@@ -60,22 +61,7 @@ const AccessControl = (props: AccessControlProps) => {
             });
           })}
         </span>
-        <Tooltip
-          id="no-permission-tooltip"
-          style={{
-            zIndex: 9999,
-            position: "absolute",
-            maxWidth: "24rem",
-            display: "inline-block",
-            padding: "4px 8px",
-            fontSize: "12px",
-            color: "white",
-            transitionProperty: "opacity",
-            transitionDuration: "300ms",
-            backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
-            borderRight: "5px",
-          }}
-        />
+        <Tooltips id="no-permission-tooltip" />
       </>
     );
 };

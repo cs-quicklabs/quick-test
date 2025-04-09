@@ -10,7 +10,6 @@ import {
 } from "@heroicons/react/24/solid";
 
 import dayjs from "dayjs";
-import { Tooltip } from "react-tooltip";
 import { CSVLink } from "react-csv";
 import Button from "../../Button";
 import CancelButton from "../../Button/cancelButton";
@@ -19,6 +18,7 @@ import { DateFormat } from "../../Utils/constants/date-format";
 import FilterComponent from "./testCaseFilter";
 import { Trans, useTranslation } from "react-i18next";
 import { showError } from "../../Toaster/ToasterFun";
+import Tooltips from "../../Tooltip/tooltip";
 
 const TestCaseToolbar = ({
   Row,
@@ -893,21 +893,7 @@ const TestCaseToolbar = ({
           />
         </div>
       </div>
-      <Tooltip
-        id="testcase-toolbar-tooltip-id"
-        style={{
-          position: "absolute",
-          maxWidth: "24rem",
-          display: "inline-block",
-          padding: "4px 8px",
-          fontSize: "12px",
-          color: "white",
-          transitionProperty: "opacity",
-          transitionDuration: "300ms",
-          backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
-          borderRight: "5px",
-        }}
-      />
+      <Tooltips id="testcase-toolbar-tooltip-id" />
     </div>
   );
 };

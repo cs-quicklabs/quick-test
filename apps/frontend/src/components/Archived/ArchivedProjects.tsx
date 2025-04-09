@@ -1,4 +1,3 @@
-import { Tooltip } from "react-tooltip";
 import React, { useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getArchiveProjects } from "../../services/archivePageServices";
@@ -22,6 +21,7 @@ import {
   ProjectPermissions,
 } from "../Utils/constants/roles-permission";
 import axiosService from "../Utils/axios";
+import Tooltips from "../Tooltip/tooltip";
 
 const ArchivedProjects = () => {
   const { t } = useTranslation();
@@ -207,21 +207,7 @@ const ArchivedProjects = () => {
             </table>
           )}
         </div>
-        <Tooltip
-          id="archived-projects-tooltip-id"
-          style={{
-            position: "absolute",
-            maxWidth: "24rem",
-            display: "inline-block",
-            padding: "4px 8px",
-            fontSize: "12px",
-            color: "white",
-            transitionProperty: "opacity",
-            transitionDuration: "300ms",
-            backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
-            borderRight: "5px",
-          }}
-        />
+        <Tooltips id="archived-projects-tooltip-id" />
       </div>
       {showModal && ifRestore ? (
         <ConfirmModal

@@ -14,9 +14,9 @@ import {
   testCaseRoutes,
 } from "../../Utils/constants/page-routes";
 import { useTranslation } from "react-i18next";
-import { Tooltip } from "react-tooltip";
 import ShowPriorityTextIcon from "./ShowPriorityTextIcon";
 import { SerialisedTestCaseType } from "../../../types/testCaseTypes";
+import Tooltips from "../../Tooltip/tooltip";
 
 export default function TestCaseListTable({
   testcases,
@@ -275,21 +275,7 @@ export default function TestCaseListTable({
           ))}
         </tbody>
       </table>
-      <Tooltip
-        id="testcase-list-table-tooltip-id"
-        style={{
-          position: "absolute",
-          maxWidth: "24rem",
-          display: "inline-block",
-          padding: "4px 8px",
-          fontSize: "12px",
-          color: "white",
-          transitionProperty: "opacity",
-          transitionDuration: "300ms",
-          backgroundColor: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
-          borderRight: "5px",
-        }}
-      />
+      <Tooltips id="testcase-list-table-tooltip-id" />
     </ReactDragListView>
   );
 }

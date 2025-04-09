@@ -16,9 +16,6 @@ import axiosService from "../Utils/axios";
 import { DateFormat } from "../Utils/constants/date-format";
 import { NoOfDaysForGraph } from "../Utils/constants/misc";
 import { appRoutes, projectRoutes } from "../Utils/constants/page-routes";
-
-import { Tooltip } from "react-tooltip";
-
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -32,6 +29,7 @@ import {
 } from "../Utils/constants/roles-permission";
 import Modal from "./Modal";
 import { EyeIcon } from "@heroicons/react/24/outline";
+import Tooltips from "../Tooltip/tooltip";
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -444,22 +442,7 @@ export default function Projects() {
                           )}
                         </tbody>
                       </table>
-                      <Tooltip
-                        id="projects-tooltip-id"
-                        style={{
-                          position: "absolute",
-                          maxWidth: "24rem",
-                          display: "inline-block",
-                          padding: "4px 8px",
-                          fontSize: "12px",
-                          color: "white",
-                          transitionProperty: "opacity",
-                          transitionDuration: "300ms",
-                          backgroundColor:
-                            "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
-                          borderRight: "5px",
-                        }}
-                      />
+                      <Tooltips id="projects-tooltip-id" />
                     </div>
                     {data?.data?.data.length === 0 && (
                       <div className="flex justify-center items-center content-center text-gray-500 text-xs font-normal my-4">
