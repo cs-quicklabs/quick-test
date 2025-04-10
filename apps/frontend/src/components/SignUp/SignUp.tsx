@@ -73,7 +73,7 @@ const SignUp = () => {
     } catch (err) {
       showError(
         err?.response?.data?.message ||
-          t("An error occurred, pleaase try again.")
+        t("An error occurred, pleaase try again.")
       );
     }
   };
@@ -93,10 +93,10 @@ const SignUp = () => {
 
   function getTermsAndPrivacyLabel() {
     return `${t("I agree to")} 
-      <a href='${process.env.REACT_APP_WEBSITE_DOMAIN_LINK}/terms' class="hover:text-indigo-600" rel="noreferrer" target="_blank">
+      <a href='${process.env.REACT_APP_DOMAIN_LINK}/terms' class="hover:text-indigo-600" rel="noreferrer" target="_blank">
         <strong>${t("Terms of Use")}</strong>
       </a> & 
-      <a href='${process.env.REACT_APP_WEBSITE_DOMAIN_LINK}/privacypolicy' class="hover:text-indigo-600" rel="noreferrer" target="_blank">
+      <a href='${process.env.REACT_APP_DOMAIN_LINK}/privacypolicy' class="hover:text-indigo-600" rel="noreferrer" target="_blank">
         <strong>${t("Privacy Policy")}</strong>
       </a>`;
   }
