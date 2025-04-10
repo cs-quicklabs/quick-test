@@ -5,6 +5,7 @@ import { TestSuiteStatus } from "../../../common/enums/test-suite-status";
 import { UserEntity } from "../../../service-users/user/user.entity";
 import { AbstractDto } from "../../../common/dto/AbstractDto";
 import { TestSuiteEntity } from "../test-suite.entity";
+import { TestCaseResultEntity } from "../test-case-result/test-case-result.entity";
 
 export class TestSuiteDto extends AbstractDto {
   @IsNotEmpty({ message: "Name can not empty" })
@@ -25,6 +26,8 @@ export class TestSuiteDto extends AbstractDto {
 
   milestoneId: MilestoneEntity;
 
+  testresults:TestCaseResultEntity[]
+
   constructor(testSuite: TestSuiteEntity) {
     super(testSuite);
     this.name = testSuite.name;
@@ -33,5 +36,6 @@ export class TestSuiteDto extends AbstractDto {
     this.user = testSuite.user ? testSuite.user : null;
     this.assignedTo = testSuite.assignedTo ? testSuite.assignedTo : null;
     this.milestoneId = testSuite.milestoneId ? testSuite.milestoneId : null;
+    this.testresults = testSuite.testresults ? testSuite.testresults : null;
   }
 }

@@ -1,7 +1,7 @@
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { Trans } from "react-i18next";
 import { useAppSelector } from "../../store/hooks";
-import Tooltips from "../Tooltip/tooltip";
+import Tooltips from "../Tooltip/ToolTips";
 interface Iprops {
   editPopUp: (section: any) => void;
   openDeleteModal: (section: any) => void;

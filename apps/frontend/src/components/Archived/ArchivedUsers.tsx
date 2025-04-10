@@ -18,7 +18,7 @@ import { DateFormat } from "../Utils/constants/date-format";
 import { ArchivePermissions } from "../Utils/constants/roles-permission";
 import { ToastMessage } from "../Utils/constants/misc";
 import i18next from "i18next";
-import Tooltips from "../Tooltip/tooltip";
+import Tooltips from "../Tooltip/ToolTips";
 
 const ArchivedUsers = () => {
   const { t } = useTranslation();

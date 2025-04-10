@@ -2,7 +2,7 @@ import { ReactNode, useMemo } from "react";
 import React from "react";
 import { NO_PERMISSION_TOOLTIP_MESSAGE } from "../Utils/constants/misc";
 
-import Tooltips from "../Tooltip/tooltip";
+import Tooltips from "../Tooltip/ToolTips";
 
 interface AccessControlProps {
   permission: string | string[];

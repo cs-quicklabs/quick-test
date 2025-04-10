@@ -25,7 +25,7 @@ import {
 } from "../../Utils/constants/page-routes";
 import useAccessControl from "../../AccessControl/useAccessControl";
 import { NO_PERMISSION_TOOLTIP_MESSAGE } from "../../Utils/constants/misc";
-import Tooltips from "../../Tooltip/tooltip";
+import Tooltips from "../../Tooltip/ToolTips";
 
 interface PropsType {
   RowData?: {

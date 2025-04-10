@@ -25,7 +25,7 @@ import AccessControl from "../AccessControl";
 import { AppContext } from "../Context/mainContext";
 import { ArchiveBoxIcon } from "@heroicons/react/24/outline";
 import ConfirmModal from "../Common/ConfirmModal";
-import Tooltips from "../Tooltip/tooltip";
+import Tooltips from "../Tooltip/ToolTips";
 
 const MemberList = () => {
   const { t } = useTranslation();
