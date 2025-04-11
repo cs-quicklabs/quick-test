@@ -142,7 +142,7 @@ export default function ProjectMembers(props: any) {
                       <h3 className="text-base font-semibold leading-6 text-gray-900">
                         {t("Manage Members")}
                       </h3>
-                      <div className="mt-2 max-w-xl text-sm text-gray-500">
+                      <div className="mt-2 mb-3 max-w-xl text-sm text-gray-500">
                         <p>
                           {t(
                             "A project member can create milestones, test cases and test runs including other things."
@@ -153,7 +153,6 @@ export default function ProjectMembers(props: any) {
                         id="new member"
                         onClick={() => setShare(true)}
                         type="button"
-                        className="inline-flex items-center rounded-md bg-indigo-600 mt-3 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 "
                       >
                         {t("Add Member")}
                       </Button>

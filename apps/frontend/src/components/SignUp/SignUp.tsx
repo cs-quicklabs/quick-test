@@ -73,7 +73,7 @@ const SignUp = () => {
     } catch (err) {
       showError(
         err?.response?.data?.message ||
-        t("An error occurred, pleaase try again.")
+          t("An error occurred, pleaase try again.")
       );
     }
   };
