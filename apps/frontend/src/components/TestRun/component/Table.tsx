@@ -202,8 +202,10 @@ export default function Table(props: Props) {
 
                             {value.status === "COMPLETED" && (
                               <button
+                                data-tooltip-id="test-run-table-tooltip-id"
                                 id="new-test-run"
                                 data-cy="add-test-run"
+                                data-tooltip-content={t("Clone")}
                                 onClick={() => {
                                   // setButtonLoader(true);
                                   navigate(

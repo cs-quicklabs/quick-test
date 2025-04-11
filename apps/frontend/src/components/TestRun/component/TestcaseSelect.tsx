@@ -7,10 +7,20 @@ const TestcaseSelect = ({
   setState,
   totalTestcases,
   setTotalTestcases,
+  initialValues,
 }: any) => {
   const { t } = useTranslation();
   const [showSpecific, setShowSpecific] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
+  const length = Object.keys(initialValues).length;
+  useEffect(() => {
+    if (length !== totalTestcases) {
+      setState("includeSpecific");
+    } else {
+      setState("includeAll");
+    }
+  }, [length]);
 
   useEffect(() => {
     if (state === "includeSpecific") {
@@ -68,7 +78,7 @@ const TestcaseSelect = ({
         {showSpecific && (
           <div className="ml-6 mt-3 text-sm px-3 py-1 flex flex-row justify-start space-x-4 bg-gray-200 rounded">
             <span>
-              {totalTestcases} {t("test cases included")}
+              {totalTestcases || length} {t("test cases included")}
             </span>
             <span
               className="hover:underline cursor-pointer select-none text-indigo-600"
@@ -86,6 +96,7 @@ const TestcaseSelect = ({
         showModal={showModal}
         setShowModal={setShowModal}
         setTotalTestcases={setTotalTestcases}
+        initialValues={initialValues}
       />
     </div>
   );

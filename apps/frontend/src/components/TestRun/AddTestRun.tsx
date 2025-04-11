@@ -133,7 +133,7 @@ const AddTestRun = () => {
           assignTo: testRunData.assignedTo || "",
           milestone: testRunData.milestoneId || "",
           sectionIds: testRunData.sectionIds || [],
-          testCaseIds: testRunData.testCaseIds || [],
+          testCaseIds: testRunData.testresults || [],
         });
         setIsDuplicating(true);
       }
@@ -238,7 +238,6 @@ const AddTestRun = () => {
       setApiLoading(false);
     }
   };
-  console.log("initialValues", initialValues);
   return showLoader ? (
     <Loader withoverlay={true} />
   ) : (
@@ -309,6 +308,7 @@ const AddTestRun = () => {
                     setState={setState}
                     totalTestcases={totalTestcases}
                     setTotalTestcases={setTotalTestcases}
+                    initialValues={initialValues.testCaseIds}
                   />
                 </div>
                 <FormSubmitPanel
