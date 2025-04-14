@@ -66,14 +66,14 @@ export default function Table({ RowData, endDate }: PropsType) {
                           {(value.testReport.passed / value.testReport.total) *
                             100 <
                             100 && (
-                            <Badge className="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-600/20">
+                            <Badge className="inline-flex items-center rounded-md w-[5rem] justify-center bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-600/20">
                               {t("In Progress")}
                             </Badge>
                           )}
                           {(value.testReport.passed / value.testReport.total) *
                             100 ===
                             100 && (
-                            <Badge className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                            <Badge className="inline-flex items-center rounded-md w-[5rem] justify-center bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                               {t("Completed")}
                             </Badge>
                           )}

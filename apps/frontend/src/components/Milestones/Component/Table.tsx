@@ -192,17 +192,17 @@ export default function Table({
                       <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-500">
                         <div className="flex justify-end text-center items-center gap-2 text-xs">
                           {value.status === "START" && (
-                            <Badge className="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-900 ring-1 ring-inset ring-gray-600/20">
+                            <Badge className="inline-flex items-center w-[5rem] justify-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-900 ring-1 ring-inset ring-gray-600/20">
                               {t("Pending")}
                             </Badge>
                           )}
                           {value.status === "OPEN" && (
-                            <Badge className="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-600/20">
+                            <Badge className="inline-flex items-center w-[5rem]  justify-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-600/20">
                               {t("In Progress")}
                             </Badge>
                           )}
                           {value.status === "COMPLETED" && (
-                            <Badge className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                            <Badge className="inline-flex items-center w-[5rem] justify-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                               {t("Completed")}
                             </Badge>
                           )}
