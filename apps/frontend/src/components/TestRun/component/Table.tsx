@@ -1,4 +1,8 @@
-import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
+import {
+  DocumentDuplicateIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from "@heroicons/react/24/solid";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -207,15 +211,13 @@ export default function Table(props: Props) {
                                 data-cy="add-test-run"
                                 data-tooltip-content={t("Clone")}
                                 onClick={() => {
-                                  // setButtonLoader(true);
                                   navigate(
                                     `${appRoutes.PROJECTS}/${params.pid}/${projectRoutes.CREATE_TESTRUN}?duplicateFrom=${value.id}`
                                   );
                                 }}
-                                // loading={buttonLoader}
                                 type="button"
                               >
-                                <PencilSquareIcon
+                                <DocumentDuplicateIcon
                                   className="text-green-500 h-4 w-4 cursor-pointer"
                                   aria-hidden="true"
                                 />
