@@ -51,7 +51,7 @@
     "downloadjs": "1.4.7",
     "ejs": "^3.1.10",
     "env-cmd": "10.1.0",
-    "form-data": "4.0.1",
+    "form-data": "4.0.2",
     "formik": "2.4.6",
     "fs": "^0.0.1-security",
     "handlebars": "^4.7.8",
