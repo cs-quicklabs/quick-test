@@ -12,6 +12,7 @@ const InputSearchableSelect = ({ ...props }) => {
     optionsForSelect,
     dataAttr,
     getSelectedOption,
+    selectedValue,
     emptyCached,
     ...rest
   } = {
@@ -28,13 +29,30 @@ const InputSearchableSelect = ({ ...props }) => {
   const [filteredOptions, setFilteredOptions] = useState([]);
 
   useEffect(() => {
+    if (selectedValue && optionsForSelect?.length > 0) {
+      // Fix: Compare selectedValue directly with option value
+      const selectedOption = optionsForSelect.find(
+        (opt) => opt.value === selectedValue.id || opt.value === selectedValue
+      );
+      
+      if (selectedOption) {
+        setValue(selectedOption.label);
+        setFieldValue(name, selectedOption.value);
+        if (typeof getSelectedOption === "function") {
+          getSelectedOption(selectedOption);
+        }
+      }
+    }
+  }, [selectedValue, optionsForSelect, name, setFieldValue, getSelectedOption]);
+
+  useEffect(() => {
     if (valueOfLabel) {
       setValue(valueOfLabel);
     }
   }, [valueOfLabel]);
 
   useEffect(() => {
-    setFilteredOptions(optionsForSelect);
+    setFilteredOptions(optionsForSelect || []);
   }, [optionsForSelect]);
 
   useEffect(() => {
@@ -74,14 +92,14 @@ const InputSearchableSelect = ({ ...props }) => {
     <>
       <input
         id={rest.name}
-        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none  focus:border-indigo-500 sm:text-sm pr-10 border-gray-300 cursor-default ${
+        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-indigo-500 sm:text-sm pr-10 border-gray-300 cursor-default ${
           (error && touched) || (validation && error)
             ? " border-red-300"
             : " border-gray-300"
         } ${disabled ? "bg-gray-100" : ""}`}
         {...rest}
         disabled={disabled}
-        value={value}
+        value={value || ""}
         onChange={(e) => handleChange(e)}
         onFocus={() => setShowDropdown(true)}
         onBlur={handleBlur}

@@ -35,7 +35,7 @@ import {
 } from "../Utils/constants/roles-permission";
 import Modal from "./Modal";
 import { EyeIcon } from "@heroicons/react/24/outline";
-import Tooltips from "../Tooltip/tooltip";
+import Tooltips from "../Tooltip/ToolTips";
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }

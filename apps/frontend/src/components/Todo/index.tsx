@@ -13,7 +13,7 @@ import Loader from "../Loader/Loader";
 import { showError } from "../Toaster/ToasterFun";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import Tooltips from "../Tooltip/tooltip";
+import Tooltips from "../Tooltip/ToolTips";
 
 const Todo = () => {
   const { t } = useTranslation();

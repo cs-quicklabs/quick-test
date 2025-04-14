@@ -1,7 +1,11 @@
-import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
+import {
+  DocumentDuplicateIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from "@heroicons/react/24/solid";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Badge from "../../Badge";
 import DeleteConfirmationModal from "../../Common/DeleteModal";
 import { showError, showSuccess } from "../../Toaster/ToasterFun";
@@ -14,7 +18,7 @@ import {
 import dayjs from "dayjs";
 import { DateFormat } from "../../Utils/constants/date-format";
 import Loader from "../../Loader/Loader";
-import Tooltips from "../../Tooltip/tooltip";
+import Tooltips from "../../Tooltip/ToolTips";
 interface Props {
   RowData: (string | number)[];
   editTestRun: (id: string) => void | any;
@@ -31,6 +35,7 @@ export default function Table(props: Props) {
   const [modalMsg, setMsg] = useState(<></>);
   const [selectedId, setSelectedId] = useState("");
   const params = useParams();
+  const navigate = useNavigate();
   const testChangeRef = useRef<IntersectionObserver | null>(null);
 
   const lastElementRef = (node: any) => {
@@ -194,6 +199,26 @@ export default function Table(props: Props) {
                               >
                                 <PencilSquareIcon
                                   className="text-indigo-500 h-4 w-4 cursor-pointer"
+                                  aria-hidden="true"
+                                />
+                              </button>
+                            )}
+
+                            {value.status === "COMPLETED" && (
+                              <button
+                                data-tooltip-id="test-run-table-tooltip-id"
+                                id="new-test-run"
+                                data-cy="add-test-run"
+                                data-tooltip-content={t("Clone")}
+                                onClick={() => {
+                                  navigate(
+                                    `${appRoutes.PROJECTS}/${params.pid}/${projectRoutes.CREATE_TESTRUN}?duplicateFrom=${value.id}`
+                                  );
+                                }}
+                                type="button"
+                              >
+                                <DocumentDuplicateIcon
+                                  className="text-green-500 h-4 w-4 cursor-pointer"
                                   aria-hidden="true"
                                 />
                               </button>

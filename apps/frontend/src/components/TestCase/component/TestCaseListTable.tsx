@@ -16,7 +16,7 @@ import {
 import { useTranslation } from "react-i18next";
 import ShowPriorityTextIcon from "./ShowPriorityTextIcon";
 import { SerialisedTestCaseType } from "../../../types/testCaseTypes";
-import Tooltips from "../../Tooltip/tooltip";
+import Tooltips from "../../Tooltip/ToolTips";
 
 export default function TestCaseListTable({
   testcases,

@@ -21,7 +21,7 @@ import {
   ProjectPermissions,
 } from "../Utils/constants/roles-permission";
 import axiosService from "../Utils/axios";
-import Tooltips from "../Tooltip/tooltip";
+import Tooltips from "../Tooltip/ToolTips";
 
 const ArchivedProjects = () => {
   const { t } = useTranslation();

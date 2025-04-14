@@ -1,7 +1,7 @@
 import { Tooltip } from "react-tooltip";
 import type { CSSProperties } from "react";
 
-const Tooltips = ({
+const ToolTips = ({
   id,
   style = {},
 }: {
@@ -24,4 +24,4 @@ const Tooltips = ({
   return <Tooltip id={id} style={{ ...defaultStyle, ...style }} />;
 };
 
-export default Tooltips;
+export default ToolTips;

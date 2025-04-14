@@ -25,7 +25,7 @@ import {
 import { ToastMessage } from "../../../../components/Utils/constants/misc";
 import Loader from "../../../../components/Loader/Loader";
 import { useQuery } from "@tanstack/react-query";
-import Tooltips from "../../../../components/Tooltip/tooltip";
+import Tooltips from "../../../../components/Tooltip/ToolTips";
 
 export default function ProjectMembers(props: any) {
   const [open, setOpen] = useState(false);
