@@ -1,4 +1,3 @@
-import { Tooltip } from "react-tooltip";
 import React, { useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getArchiveProjects } from "../../services/archivePageServices";
@@ -22,6 +21,7 @@ import {
   ProjectPermissions,
 } from "../Utils/constants/roles-permission";
 import axiosService from "../Utils/axios";
+import Tooltips from "../Tooltip/ToolTips";
 
 const ArchivedProjects = () => {
   const { t } = useTranslation();
@@ -36,7 +36,7 @@ const ArchivedProjects = () => {
     isLoading,
   } = useQuery({
     queryKey: ["archiveProjects"], // This is your query key
-    queryFn: getArchiveProjects,  // This is the function to fetch data
+    queryFn: getArchiveProjects, // This is the function to fetch data
   });
 
   if (error instanceof Error) {
@@ -85,7 +85,7 @@ const ArchivedProjects = () => {
       showSuccess(resp.data.message);
       refetch();
     } catch (err) {
-      showError(err?.messsage)
+      showError(err?.messsage);
     }
   }, [refetch, selectedId]);
 
@@ -99,7 +99,7 @@ const ArchivedProjects = () => {
       setShowModal(false);
       refetch();
     } catch (err) {
-      showError(err?.messsage)
+      showError(err?.messsage);
     }
   }, [refetch, selectedId]);
 
@@ -177,7 +177,9 @@ const ArchivedProjects = () => {
                         >
                           <span
                             data-tooltip-id="archived-projects-tooltip-id"
-                            data-tooltip-content={t("Permanently Delete Project")}
+                            data-tooltip-content={t(
+                              "Permanently Delete Project"
+                            )}
                           >
                             <TrashIcon
                               className="h-4 w-4 text-red-400 group-hover:text-indigo-800"
@@ -205,28 +207,26 @@ const ArchivedProjects = () => {
             </table>
           )}
         </div>
-        <Tooltip id="archived-projects-tooltip-id" />
+        <Tooltips id="archived-projects-tooltip-id" />
       </div>
-      {
-        showModal && ifRestore ? (
-          <ConfirmModal
+      {showModal && ifRestore ? (
+        <ConfirmModal
+          open={showModal}
+          message={modalMsg}
+          handleConfirm={restoreProject}
+          handleCancel={() => setShowModal(false)}
+        />
+      ) : (
+        showModal && (
+          <DeleteConfirmationModal
+            msg={modalMsg}
             open={showModal}
-            message={modalMsg}
-            handleConfirm={restoreProject}
-            handleCancel={() => setShowModal(false)}
+            toggleModal={setShowModal}
+            delete={deleteProject}
           />
-        ) : (
-          showModal && (
-            <DeleteConfirmationModal
-              msg={modalMsg}
-              open={showModal}
-              toggleModal={setShowModal}
-              delete={deleteProject}
-            />
-          )
         )
-      }
-    </main >
+      )}
+    </main>
   );
 };
 

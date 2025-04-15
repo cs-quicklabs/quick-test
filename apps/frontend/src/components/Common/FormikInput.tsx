@@ -32,6 +32,7 @@ interface IProps {
   emptyCached?: boolean;
   loading?: boolean;
   manageHeight?: boolean;
+  defaultValue?: string;
 }
 
 export const FormikInput = ({ showLabel = true, ...props }: IProps) => {
@@ -201,6 +202,7 @@ export const FormikSelect = ({ showLabel = true, ...props }: IProps) => {
 export const FormikInputSearch = ({
   isOptional,
   loading,
+  defaultValue,
   ...props
 }: IProps) => {
   const { t } = useTranslation();
@@ -237,6 +239,7 @@ export const FormikInputSearch = ({
           {...props}
           validation={props.validation}
           valueOfLabel={props.valueOfLabel}
+          selectedValue={defaultValue}
         />
       </div>
       {props.validation && error ? (
@@ -309,4 +312,4 @@ export const RenderFormikInputs = (fields: Array<InputFieldProps>) => {
       />
     </div>
   ));
-}
+};

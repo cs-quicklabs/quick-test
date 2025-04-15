@@ -1,4 +1,8 @@
-import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
+import {
+  // DocumentDuplicateIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from "@heroicons/react/24/solid";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
@@ -14,7 +18,7 @@ import {
 import dayjs from "dayjs";
 import { DateFormat } from "../../Utils/constants/date-format";
 import Loader from "../../Loader/Loader";
-import { Tooltip } from "react-tooltip";
+import Tooltips from "../../Tooltip/ToolTips";
 interface Props {
   RowData: (string | number)[];
   editTestRun: (id: string) => void | any;
@@ -31,6 +35,7 @@ export default function Table(props: Props) {
   const [modalMsg, setMsg] = useState(<></>);
   const [selectedId, setSelectedId] = useState("");
   const params = useParams();
+  // const navigate = useNavigate();
   const testChangeRef = useRef<IntersectionObserver | null>(null);
 
   const lastElementRef = (node: any) => {
@@ -98,8 +103,9 @@ export default function Table(props: Props) {
               {props?.projectName}&nbsp;{t("Project Test Run Report")}
             </div>
             <div
-              className={` border-b border-gray-200 ${props.RowData?.length < 1 && "hidden"
-                } `}
+              className={` border-b border-gray-200 ${
+                props.RowData?.length < 1 && "hidden"
+              } `}
             >
               <table className="min-w-full ">
                 <tbody className="bg-white divide-y divide-gray-200">
@@ -161,22 +167,22 @@ export default function Table(props: Props) {
                         <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-500">
                           <div className="flex justify-end text-center items-center gap-2 text-xs">
                             {value.status === "PENDING" && (
-                              <Badge className="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-900 ring-1 ring-inset ring-gray-600/20">
+                              <Badge className="inline-flex items-center rounded-md bg-gray-100 w-[5rem] flex justify-center px-2 py-1 text-xs font-medium text-gray-900 ring-1 ring-inset ring-gray-600/20">
                                 {t("Pending")}
                               </Badge>
                             )}
                             {value.status === "INPROGRESS" && (
-                              <Badge className="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-600/20">
+                              <Badge className="inline-flex items-center rounded-md w-[5rem] flex justify-center bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-600/20">
                                 {t("In Progress")}
                               </Badge>
                             )}
                             {value.status === "COMPLETED" && (
-                              <Badge className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                              <Badge className="inline-flex items-center rounded-md w-[5rem] flex justify-center bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                                 {t("Completed")}
                               </Badge>
                             )}
                             {value.status === "BLOCKED" && (
-                              <Badge className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                              <Badge className="inline-flex items-center rounded-md w-[5rem] flex justify-center bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                                 {t("Blocked")}
                               </Badge>
                             )}
@@ -184,33 +190,48 @@ export default function Table(props: Props) {
                         </td>
                         <td>
                           <div className="flex justify-end text-center items-center gap-2 text-xs">
-                            <button
-                              data-tooltip-id="test-run-table-tooltip-id"
-                              data-tooltip-content={t("Edit")}
-                              data-cy={"test-run-" + i + "-edit"}
-                              onClick={() => props.editTestRun(value.id)}
-                            >
-                              <PencilSquareIcon
-                                className="text-indigo-500 h-4 w-4 cursor-pointer"
-                                aria-hidden="true"
-                              />
-                            </button>
-
-                            <div
-                              data-tooltip-id="test-run-table-tooltip-id"
-                              data-tooltip-content={t("Delete")}
-                            >
+                            {!(value.status === "COMPLETED") && (
                               <button
                                 data-tooltip-id="test-run-table-tooltip-id"
-                                data-tooltip-content={t("Delete")}
-                                data-cy={"test-run-" + i + "-delete"}
-                                onClick={() => openDeleteModal(value)}
+                                data-tooltip-content={t("Edit")}
+                                data-cy={"test-run-" + i + "-edit"}
+                                onClick={() => props.editTestRun(value.id)}
                               >
-                                <TrashIcon
-                                  className="text-red-400 h-4 w-4 cursor-pointer"
+                                <PencilSquareIcon
+                                  className="text-indigo-500 h-4 w-4 cursor-pointer"
+                                  aria-hidden="true"
                                 />
                               </button>
-                            </div>
+                            )}
+
+                            {/* {value.status === "COMPLETED" && (
+                              <button
+                                data-tooltip-id="test-run-table-tooltip-id"
+                                id="new-test-run"
+                                data-cy="add-test-run"
+                                data-tooltip-content={t("Clone")}
+                                onClick={() => {
+                                  navigate(
+                                    `${appRoutes.PROJECTS}/${params.pid}/${projectRoutes.CREATE_TESTRUN}?duplicateFrom=${value.id}`
+                                  );
+                                }}
+                                type="button"
+                              >
+                                <DocumentDuplicateIcon
+                                  className="text-green-500 h-4 w-4 cursor-pointer"
+                                  aria-hidden="true"
+                                />
+                              </button>
+                            )} */}
+
+                            <button
+                              data-tooltip-id="test-run-table-tooltip-id"
+                              data-tooltip-content={t("Delete")}
+                              data-cy={"test-run-" + i + "-delete"}
+                              onClick={() => openDeleteModal(value)}
+                            >
+                              <TrashIcon className="text-red-400 h-4 w-4 cursor-pointer" />
+                            </button>
                           </div>
                         </td>
                       </tr>
@@ -220,7 +241,7 @@ export default function Table(props: Props) {
               <div className="flex items-center justify-center">
                 {props.isFetchingNextPage && <Loader />}
               </div>
-              <Tooltip id="test-run-table-tooltip-id" />
+              <Tooltips id="test-run-table-tooltip-id" />
             </div>
           </div>
         </div>

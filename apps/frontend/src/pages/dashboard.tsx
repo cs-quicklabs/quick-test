@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 const Dashboard = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
-    setIsLoggedIn(!!(sessionStorage.getItem("token") || localStorage.getItem("token")));
+    setIsLoggedIn(
+      !!(sessionStorage.getItem("token") || localStorage.getItem("token"))
+    );
   }, []);
 
   return (

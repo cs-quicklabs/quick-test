@@ -71,17 +71,19 @@ const Members = () => {
                   <button
                     key={i}
                     onClick={() => navigate(val.link)}
-                    className={`group rounded-md px-3 py-2 flex items-center text-sm font-medium cursor-pointer w-full h-10 ${location?.pathname === val.link
-                      ? "bg-gray-50 text-indigo-600"
-                      : "bg-white hover:bg-gray-50 hover:text-indigo-600"
-                      }`}
+                    className={`group rounded-md px-3 py-2 flex items-center text-sm font-medium cursor-pointer w-full h-10 ${
+                      location?.pathname === val.link
+                        ? "bg-gray-50 text-indigo-600"
+                        : "bg-white hover:bg-gray-50 hover:text-indigo-600"
+                    }`}
                     aria-current="page"
                   >
                     <svg
-                      className={`text-gray-400 group-hover:text-indigo-600 flex-shrink-0 -ml-1 mr-3 h-6 w-6 ${location?.pathname === val.link
-                        ? "text-indigo-600"
-                        : "hover:text-indigo-600"
-                        }`}
+                      className={`text-gray-400 group-hover:text-indigo-600 flex-shrink-0 -ml-1 mr-3 h-6 w-6 ${
+                        location?.pathname === val.link
+                          ? "text-indigo-600"
+                          : "hover:text-indigo-600"
+                      }`}
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"

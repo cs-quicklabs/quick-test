@@ -22,7 +22,10 @@ export default function Dashboard() {
   const params = useParams();
   const pid = params.pid;
 
-  const { data: projectDetail } = useQuery({ queryKey: ["projects-data", pid], queryFn: () => getProjectsDetails({ pid }) });
+  const { data: projectDetail } = useQuery({
+    queryKey: ["projects-data", pid],
+    queryFn: () => getProjectsDetails({ pid }),
+  });
 
   const NavProps = [
     {
@@ -109,12 +112,13 @@ export default function Dashboard() {
           )}
           {params.subURL === projectRoutes.MILESTONES && <MilestonesPage />}
           {params.subURL === projectRoutes.TODO && <TodoPage />}
-          {params.subURL === projectRoutes.PROJECT_MEMBERS && (
-            <ProjectMembers
-              pname={projectDetail?.name}
-              pid={projectDetail?.id}
-            />
-          )}
+          {params.subURL === projectRoutes.PROJECT_MEMBERS &&
+            String(userRole) !== String(RoleId.MEMBER) && (
+              <ProjectMembers
+                pname={projectDetail?.name}
+                pid={projectDetail?.id}
+              />
+            )}
         </div>
       </main>
     </>

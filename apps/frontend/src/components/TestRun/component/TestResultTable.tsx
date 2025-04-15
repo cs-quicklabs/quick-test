@@ -12,7 +12,11 @@ import { ToastMessage } from "../../Utils/constants/misc";
 import Loader from "../../Loader/Loader";
 import SidePanel from "../../TestCase/component/SidePanel";
 import SidePanelData from "../../TestCase/component/SidePanelTestCaseData";
-import { appRoutes, projectRoutes, testRunRoutes } from "../../Utils/constants/page-routes";
+import {
+  appRoutes,
+  projectRoutes,
+  testRunRoutes,
+} from "../../Utils/constants/page-routes";
 import { SerialisedTestCaseType } from "../../../types/testCaseTypes";
 import { downloadFile } from "../../Utils/helpers";
 
@@ -104,7 +108,6 @@ export default function Table({
         Data
       );
       showSuccess(response?.data?.message);
-      // getTestRunResults();
       getTestRunDetais();
       refetch();
       return true;
@@ -134,8 +137,8 @@ export default function Table({
   };
 
   const onClickNavigate = () => {
-    seTestCaseNum(selectedTestCase?.index!)
-  }
+    seTestCaseNum(selectedTestCase?.index!);
+  };
 
   return (
     <>
@@ -156,17 +159,19 @@ export default function Table({
       <div className="border-t">
         <div className="grid grid-cols-3 min-h-screen">
           <div
-            className={`col-span-2 border-r border-gray-200 min-w-full ${RowData?.length < 1 && "hidden"
-              }`}
+            className={`col-span-2 border-r border-gray-200 min-w-full ${
+              RowData?.length < 1 && "hidden"
+            }`}
           >
             <div className="col-span-2 min-w-full">
               <table
-                className={`min-w-full divide-y divide-gray-200 ${RowData?.length === 1
-                  ? "mb-24"
-                  : RowData?.length === 0
-                    ? ""
-                    : ""
-                  }`}
+                className={`min-w-full divide-y divide-gray-200 ${
+                  RowData?.length === 1
+                    ? "mb-24"
+                    : RowData?.length === 0
+                      ? ""
+                      : ""
+                }`}
               >
                 <thead className="bg-gray-50 border-b  border-gray-200">
                   <tr>
@@ -178,13 +183,13 @@ export default function Table({
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-2 text-left text-sm font-semibold text-gray-900 w-8/12"
+                      className="px-3 py-2 text-left text-sm font-semibold text-gray-900 w-4/5"
                     >
                       {t("Title")}
                     </th>
                     <th
                       scope="col"
-                      className="px-4 py-2 text-right text-sm font-semibold text-gray-900 w-8/12"
+                      className="px-4 py-2 text-center text-sm font-semibold text-gray-900 w-8/12"
                     >
                       {t("Status")}
                     </th>
@@ -210,7 +215,7 @@ export default function Table({
                             <span>{i + 1}</span>
                           </span>
                         </td>
-                        <td className="px-6 py-2 font-normal text-sm text-gray-900">
+                        <td className="px-3 py-2 font-normal text-sm text-gray-900">
                           <span
                             onClick={() => {
                               let newObj = {
@@ -219,7 +224,8 @@ export default function Table({
                                 testcaseId: value?.testcaseId,
                                 sectionName: value?.SectionName,
                                 steps: value?.testCaseSteps,
-                                executionPriority: value?.testCaseExecutionPriority,
+                                executionPriority:
+                                  value?.testCaseExecutionPriority,
                                 expectedResults: value?.testCaseExpectedResults,
                                 serialNumber: value?.testCaseId,
                                 checked: false,
@@ -230,32 +236,32 @@ export default function Table({
                                 id: value?.id,
                                 createdBy: value?.createdBy,
                                 index: i + 1,
-                              }
-                              setSelectedTestCase(newObj)
+                              };
+                              setSelectedTestCase(newObj);
                             }}
                             className="truncate break-normal whitespace-normal hover:underline cursor-pointer"
                           >
                             {value?.testCaseTitle}
                           </span>
                         </td>
-                        <td className="px-3 py-2 whitespace-nowrap text-right text-xs font-normal">
+                        <td className="px-3 py-2 whitespace-nowrap text-center text-xs font-normal">
                           {value?.status === "PASSED" && (
-                            <Badge className="bg-green-100 text-green-800">
+                            <Badge className="bg-green-100 text-green-700 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-green-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
                           {value?.status === "FAILED" && (
-                            <Badge className="bg-red-100 text-red-800">
+                            <Badge className="bg-red-100 text-red-700 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-red-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
                           {value?.status === "UNTESTED" && (
-                            <Badge className="bg-gray-100 text-gray-800">
+                            <Badge className="bg-gray-100 text-gray-700 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-gray-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
                           {value?.status === "BLOCKED" && (
-                            <Badge className="bg-yellow-100 text-yellow-800">
+                            <Badge className="bg-yellow-100 text-yellow-700 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-yellow-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
@@ -308,7 +314,6 @@ export default function Table({
                 }}
                 loading={buttonLoader}
                 type="button"
-                className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 "
               >
                 {t("Generate Report")}
               </Button>

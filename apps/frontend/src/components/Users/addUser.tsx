@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { titleSchema } from "../Utils/validators";
 import { Formik, Form, FormikValues } from "formik";
 import * as Yup from "yup";
 
@@ -78,9 +77,7 @@ const AddUser = () => {
         /^([\w\-+]|(?<!\.)\.)+[a-z0-9]@[a-z]+\.[a-z]{2,64}$/,
         t(ValidatorMessage.EMAIL_NOT_VALID)
       ),
-    title: Yup.string().when("userId", ([userId], schema) =>
-      userId ? titleSchema() : schema.optional()
-    ),
+    title: Yup.string().required(t(ValidatorMessage.TITLE_REQ)),
   });
 
   useEffect(() => {
@@ -139,10 +136,9 @@ const AddUser = () => {
         );
         setRoleList(tempArray);
       }
-
     } catch (error) {
       setLoading(false);
-      showError(error?.message)
+      showError(error?.message);
     } finally {
       setLoading(false);
     }
@@ -171,6 +167,7 @@ const AddUser = () => {
           firstName: values.firstName,
           lastName: values.lastName,
           roleId: +values.roleId,
+          title: values.title,
         };
         await axiosService.post("/organizations/members", payload);
         navigate(`${appRoutes.SETTINGS}/${settingsRoutes.USERS}`);
@@ -192,109 +189,104 @@ const AddUser = () => {
   }
 
   return (
-    <>
-      <div className="flex items-center justify-center px-6 mt-8 sm:mt-10 sm:mx-4 md:mx-20 lg:mx-4  xl:mx-24  ">
-        <div className=" w-full sm:w-2/3 md:w-2/3 lg:w-2/4 xl:w-1/3 ">
-          <Formik
-            initialValues={initValues}
-            validationSchema={AddProjectSchema}
-            onSubmit={submitFormAddUser}
-            enableReinitialize
-          >
-            {(formik) => {
-              const { dirty } = formik;
-              return (
-                <Form className="space-y-6" noValidate autoComplete="off">
+    <div className="flex items-center justify-center px-6 mt-8 sm:mt-10 sm:mx-4 md:mx-20 lg:mx-4  xl:mx-24  ">
+      <div className=" w-full sm:w-2/3 md:w-2/3 lg:w-2/4 xl:w-1/3 ">
+        <Formik
+          initialValues={initValues}
+          validationSchema={AddProjectSchema}
+          onSubmit={submitFormAddUser}
+          enableReinitialize
+        >
+          {(formik) => {
+            const { dirty } = formik;
+            return (
+              <Form className="space-y-6" noValidate autoComplete="off">
+                <div>
+                  <label className="block text-lg font-medium text-gray-900">
+                    {params?.id ? t("Edit User Details") : t("Add New User")}
+                  </label>
+                  <p className="block text-sm font-normal text-gray-500">
+                    {params?.id
+                      ? t("Please update the details of user")
+                      : t("Please fill in details for new user.")}
+                  </p>
+                </div>
+                <div>
+                  <FormikInput
+                    type="text"
+                    name="firstName"
+                    label={t("First Name")}
+                    validation={validation}
+                  />
+                </div>
+                <div>
+                  <FormikInput
+                    type="text"
+                    name="lastName"
+                    label={t("Last Name")}
+                    validation={validation}
+                  />
+                </div>
+                <div>
+                  <FormikInput
+                    type="text"
+                    name="email"
+                    label={t("Email")}
+                    disabled={params?.id ? true : false}
+                    validation={validation}
+                  />
+                </div>
+                <div>
+                  <FormikInput
+                    type="text"
+                    name="title"
+                    label={t("Title")}
+                    validation={validation}
+                  />
+                </div>
+                {((params?.id &&
+                  (userRoleId === RoleId.OWNER ||
+                    userRoleId === RoleId.SUPERADMIN)) ||
+                  !params?.id) && (
                   <div>
-                    <label className="block text-lg font-medium text-gray-900">
-                      {params?.id ? t("Edit User Details") : t("Add New User")}
-                    </label>
-                    <p className="block text-sm font-normal text-gray-500">
-                      {params?.id
-                        ? t("Please update the details of user")
-                        : t("Please fill in details for new user.")}
-                    </p>
-                  </div>
-                  <div>
-                    <FormikInput
-                      type="text"
-                      name="firstName"
-                      label={t("First Name")}
+                    <FormikSelect
+                      name="roleId"
+                      label={t("Role")}
                       validation={validation}
+                      sendIdAsValue={true}
+                      optionsForSelect={roleList}
                     />
                   </div>
-                  <div>
-                    <FormikInput
-                      type="text"
-                      name="lastName"
-                      label={t("Last Name")}
-                      validation={validation}
-                    />
-                  </div>
-                  <div>
-                    <FormikInput
-                      type="text"
-                      name="email"
-                      label={t("Email")}
-                      disabled={params?.id ? true : false}
-                      validation={validation}
-                    />
-                  </div>
-                  {params?.id ? (
-                    <div>
-                      <FormikInput
-                        type="text"
-                        name="title"
-                        label={t("Title")}
-                        validation={validation}
-                      />
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                  {((params?.id &&
-                    (userRoleId === RoleId.OWNER ||
-                      userRoleId === RoleId.SUPERADMIN)) ||
-                    !params?.id) && (
-                      <div>
-                        <FormikSelect
-                          name="roleId"
-                          label={t("Role")}
-                          validation={validation}
-                          sendIdAsValue={true}
-                          optionsForSelect={roleList}
-                        />
-                      </div>
-                    )}
-                  <div className="flex justify-end gap-4">
-                    <button
-                      onMouseUp={() => navigate(-1)}
-                      type="button"
-                      className="inline-flex items-center rounded border border-gray-300 bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none"
-                    >
-                      {t("Cancel")}
-                    </button>
-                    <Button
-                      id="add-user-submit"
-                      onMouseDown={() => setValidation(true)}
-                      loading={apiloading}
-                      type="submit"
-                      className={`sm:order-1  ${params?.id && !dirty
+                )}
+                <div className="flex justify-end gap-4">
+                  <button
+                    onMouseUp={() => navigate(-1)}
+                    type="button"
+                    className="inline-flex items-center rounded border border-gray-300 bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none"
+                  >
+                    {t("Cancel")}
+                  </button>
+                  <Button
+                    id="add-user-submit"
+                    onMouseDown={() => setValidation(true)}
+                    loading={apiloading}
+                    type="submit"
+                    className={`sm:order-1  ${
+                      params?.id && !dirty
                         ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
                         : ""
-                        }`}
-                      disabled={params?.id && !dirty ? true : false}
-                    >
-                      {t("Confirm")}
-                    </Button>
-                  </div>
-                </Form>
-              );
-            }}
-          </Formik>
-        </div>
+                    }`}
+                    disabled={params?.id && !dirty ? true : false}
+                  >
+                    {t("Confirm")}
+                  </Button>
+                </div>
+              </Form>
+            );
+          }}
+        </Formik>
       </div>
-    </>
+    </div>
   );
 };
 

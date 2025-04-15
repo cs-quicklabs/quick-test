@@ -69,14 +69,20 @@ const ModalSectionList = ({
             <input
               className="h-4 w-4 text-indigo-600 focus:outline-none border-gray-300 rounded focus:ring-0 focus:ring-transparent focus:ring-offset-0"
               type="checkbox"
-              checked={selectedSectionIds.includes(item?.id)}
+              checked={
+                selectedSectionIds.includes(item?.id) ||
+                item.testcases.some((tc: any) =>
+                  selectedTestCaseIds.includes(tc.id)
+                )
+              }
               onChange={(e) => handleCheck(e, item)}
             />
             <span
-              className={`px-2 py-1 cursor-pointer text-sm rounded-md ${active === item?.id
-                ? "bg-blue-500 text-white"
-                : "hover:bg-gray-400"
-                }`}
+              className={`px-2 py-1 cursor-pointer text-sm rounded-md ${
+                active === item?.id
+                  ? "bg-blue-500 text-white"
+                  : "hover:bg-gray-400"
+              }`}
               onClick={() => onSectionClicked(item)}
             >
               {item?.name}

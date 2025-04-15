@@ -99,7 +99,6 @@ export default function Overview() {
           backgroundColor: "rgb(255, 255, 0)",
         });
 
-
         const additionalData: any[] = [];
         const loopLength = 14 - gL.length;
         if (gL.length < 14) {
@@ -252,10 +251,10 @@ export default function Overview() {
 
       const resp = await axiosService.get(
         "/projects/" +
-        params?.pid +
-        "/activities/test-changes?page=" +
-        pageNum +
-        "&take=50"
+          params?.pid +
+          "/activities/test-changes?page=" +
+          pageNum +
+          "&take=50"
       );
       const data = resp?.data?.data?.data?.data;
       const meta = resp?.data?.data?.meta;
@@ -377,7 +376,7 @@ export default function Overview() {
                         data-cy="add-milestone"
                         type="button"
                         onClick={() => navigateAdd("Milestone")}
-                      // className="mt-2"
+                        // className="mt-2"
                       >
                         {t("Add Milestones")}
                       </Button>
@@ -402,8 +401,8 @@ export default function Overview() {
                             {t("Due on")}{" "}
                             {ele?.endDate
                               ? dayjs(new Date(ele?.endDate)).format(
-                                DateFormat.LONG
-                              )
+                                  DateFormat.LONG
+                                )
                               : t("No due date")}
                           </p>
                         )}
@@ -430,8 +429,9 @@ export default function Overview() {
                       {ele?.user && ele?.user?.firstName && (
                         <p className="text-xs text-gray-500">
                           {t("By")}{" "}
-                          {`${ele?.user.firstName} ${ele?.user?.lastName ? ele.user.lastName : ""
-                            }`}{" "}
+                          {`${ele?.user.firstName} ${
+                            ele?.user?.lastName ? ele.user.lastName : ""
+                          }`}{" "}
                           {t("on")}{" "}
                           {dayjs(new Date(ele.createdAt)).format(
                             DateFormat.LONG
@@ -462,16 +462,18 @@ export default function Overview() {
               <span>{t("Activity")}</span>
               <span className="float-right">
                 <span
-                  className={` border-gray-600 cursor-pointer ${defaultActivity === "history" ? "font-medium" : ""
-                    }`}
+                  className={` border-gray-600 cursor-pointer ${
+                    defaultActivity === "history" ? "font-medium" : ""
+                  }`}
                   onClick={() => setDefaultActivity("history")}
                 >
                   {t("History")}
                 </span>
                 <span className="border-l border-gray-600 mx-2"></span>
                 <span
-                  className={` border-gray-600  cursor-pointer ${defaultActivity === "testChanges" ? "font-medium" : ""
-                    }`}
+                  className={` border-gray-600  cursor-pointer ${
+                    defaultActivity === "testChanges" ? "font-medium" : ""
+                  }`}
                   onClick={() => loadTestChanges()}
                 >
                   {t("Test Changes")}
@@ -501,10 +503,11 @@ export default function Overview() {
                                 <div className="flex items-center">
                                   <div>
                                     <span
-                                      className={`mr-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-normal text-gray-100 ${item.entity === "MILESTONE"
-                                        ? "bg-pink-400"
-                                        : "mr-5 bg-purple-400"
-                                        }`}
+                                      className={`mr-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-normal text-gray-100 ${
+                                        item.entity === "MILESTONE"
+                                          ? "bg-pink-400 ring-1 ring-offset-1 ring-pink-300"
+                                          : "mr-5 bg-purple-400 ring-1 ring-offset-1 ring-purple-300"
+                                      }`}
                                     >
                                       <Trans>{item.entity}</Trans>
                                     </span>
@@ -537,10 +540,11 @@ export default function Overview() {
                                       <Trans>{item.status}</Trans>
                                     )}
                                     &nbsp;{t("by")}&nbsp;
-                                    {`${item?.user.firstName} ${item?.user?.lastName
-                                      ? item.user.lastName
-                                      : ""
-                                      }`}
+                                    {`${item?.user.firstName} ${
+                                      item?.user?.lastName
+                                        ? item.user.lastName
+                                        : ""
+                                    }`}
                                   </div>
                                 )}
                               </div>
@@ -576,7 +580,7 @@ export default function Overview() {
                                     ref={
                                       indexOfTestChangeList ===
                                         testChangeList?.length - 1 &&
-                                        index ===
+                                      index ===
                                         testChange?.activities.length - 1
                                         ? lastElementRef
                                         : null
@@ -589,18 +593,18 @@ export default function Overview() {
                                           style={
                                             activity.status === "UNTESTED"
                                               ? {
-                                                backgroundColor:
-                                                  "rgb(151, 151, 151)",
-                                              }
+                                                  backgroundColor:
+                                                    "rgb(151, 151, 151)",
+                                                }
                                               : activity.status === "PASSED"
                                                 ? {
-                                                  backgroundColor:
-                                                    "rgb(60, 184, 80)",
-                                                }
+                                                    backgroundColor:
+                                                      "rgb(60, 184, 80)",
+                                                  }
                                                 : {
-                                                  backgroundColor:
-                                                    "rgb(228, 0, 70)",
-                                                }
+                                                    backgroundColor:
+                                                      "rgb(228, 0, 70)",
+                                                  }
                                           }
                                         >
                                           <Trans>{activity.status}</Trans>

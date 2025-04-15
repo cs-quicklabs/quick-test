@@ -1,7 +1,7 @@
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { Tooltip } from "react-tooltip";
 import { Trans } from "react-i18next";
 import { useAppSelector } from "../../store/hooks";
+import Tooltips from "../Tooltip/ToolTips";
 interface Iprops {
   editPopUp: (section: any) => void;
   openDeleteModal: (section: any) => void;
@@ -15,28 +15,39 @@ const SectionListing = (props: Iprops) => {
         sections.map((section, i) => (
           <div
             key={i}
-            className={`pb-2 pt-2 ${i !== sections.length - 1 ? "border-b border-gray-200" : ""
-              }`}
+            className={`pb-2 pt-2 ${
+              i !== sections.length - 1 ? "border-b border-gray-200" : ""
+            }`}
           >
             <span className="inline-block mr-2 text-sm">{i + 1}.</span>
             <span className="inline-block mr-2 text-sm">
               <Trans>{section.name}</Trans>
             </span>
             {section.name !== "Unassigned" && (
-              <span className="float-right">
-                <div className="inline-block" onClick={() => props.editPopUp(section)} data-tooltip-id="section-listing-tooltip-id" data-tooltip-content="Edit">
+              <span className="float-right flex text-center gap-2 text-xs">
+                <div
+                  className="inline-block"
+                  onClick={() => props.editPopUp(section)}
+                  data-tooltip-id="section-listing-tooltip-id"
+                  data-tooltip-content="Edit"
+                >
                   <PencilSquareIcon
-                    className="text-indigo-500 h-6 w-4 cursor-pointer mr-3 inline-block pb-1"
+                    className="text-indigo-500 h-6 w-4 cursor-pointer inline-block pb-1"
                     data-cy={"section-" + i + "-edit"}
                   />
                 </div>
-                <div className="inline-block" onClick={() => props.openDeleteModal(section)} data-tooltip-id="section-listing-tooltip-id" data-tooltip-content="Delete">
+                <div
+                  className="inline-block"
+                  onClick={() => props.openDeleteModal(section)}
+                  data-tooltip-id="section-listing-tooltip-id"
+                  data-tooltip-content="Delete"
+                >
                   <TrashIcon
-                    className="text-red-400 h-6 w-4 cursor-pointer mr-3 inline-block pb-1"
+                    className="text-red-400 h-6 w-4 cursor-pointer inline-block pb-1"
                     data-cy={"section-" + i + "-delete"}
                   />
                 </div>
-                <Tooltip id="section-listing-tooltip-id" />
+                <Tooltips id="section-listing-tooltip-id" />
               </span>
             )}
           </div>

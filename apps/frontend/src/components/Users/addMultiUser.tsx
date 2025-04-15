@@ -52,7 +52,7 @@ const AddMultiUser = () => {
         setRoleList(capitalizeArray);
       }
     } catch (err) {
-      showError(err?.message)
+      showError(err?.message);
     }
   }, []);
 
@@ -134,7 +134,10 @@ const AddMultiUser = () => {
       <div className=" mx-8 pb-10">
         <div className="flex w-full justify-between mt-4 items-center">
           <div>
-            <label htmlFor="Users*" className="block text-lg font-medium text-gray-900">
+            <label
+              htmlFor="Users*"
+              className="block text-lg font-medium text-gray-900"
+            >
               {t("Add New Users")}
             </label>
             <p className="block text-sm font-normal text-gray-500">
@@ -216,7 +219,7 @@ const AddMultiUser = () => {
               </label>
               <div className="mt-1 relative">
                 <textarea
-                  id='Users*'
+                  id="Users*"
                   data-cy="textarea-multiple-user"
                   onChange={textAreahandler}
                   className="w-full border-2 border-gray-200 text-sm p-3"

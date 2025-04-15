@@ -7,7 +7,6 @@ import {
   TrashIcon,
   CheckCircleIcon,
 } from "@heroicons/react/24/solid";
-import { Tooltip } from "react-tooltip";
 import Badge from "../../Badge";
 
 import axiosService from "../../Utils/axios";
@@ -26,6 +25,7 @@ import {
 } from "../../Utils/constants/page-routes";
 import useAccessControl from "../../AccessControl/useAccessControl";
 import { NO_PERMISSION_TOOLTIP_MESSAGE } from "../../Utils/constants/misc";
+import Tooltips from "../../Tooltip/ToolTips";
 
 interface PropsType {
   RowData?: {
@@ -173,38 +173,36 @@ export default function Table({
 
                       <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-500">
                         <p>
-                          {
-                            value.testsuites.length <= 1
-                              ? `${value.testsuites.length} ${t("active test run")}`
-                              : `${value.testsuites.length} ${t("active test runs")}`
-                          }
+                          {value.testsuites.length <= 1
+                            ? `${value.testsuites.length} ${t("active test run")}`
+                            : `${value.testsuites.length} ${t("active test runs")}`}
                         </p>
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-500">
                         {value.status === "COMPLETED"
                           ? `Done on ${dayjs(value.endDate).format(
-                            DateFormat.MEDIUM
-                          )}`
+                              DateFormat.MEDIUM
+                            )}`
                           : `${t("Due on")} ${dayjs(value.endDate).format(
-                            DateFormat.MEDIUM
-                          )}`}
+                              DateFormat.MEDIUM
+                            )}`}
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-500">
                         <div className="flex justify-end text-center items-center gap-2 text-xs">
                           {value.status === "START" && (
-                            <Badge className="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-900 ring-1 ring-inset ring-gray-600/20">
+                            <Badge className="inline-flex items-center w-[5rem] justify-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-900 ring-1 ring-inset ring-gray-600/20">
                               {t("Pending")}
                             </Badge>
                           )}
                           {value.status === "OPEN" && (
-                            <Badge className="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-600/20">
+                            <Badge className="inline-flex items-center w-[5rem]  justify-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-600/20">
                               {t("In Progress")}
                             </Badge>
                           )}
                           {value.status === "COMPLETED" && (
-                            <Badge className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                            <Badge className="inline-flex items-center w-[5rem] justify-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                               {t("Completed")}
                             </Badge>
                           )}
@@ -212,17 +210,16 @@ export default function Table({
                       </td>
 
                       <td className="px-6 py-4 whitespace-nowrap text-right text-xs font-normal">
-                        <div className="flex justify-end">
+                        <div className="flex justify-end text-center items-center gap-2 text-xs">
                           <AccessControl
                             permission={MilestonePermissions.UPDATE_MILESTONE}
                           >
                             <button
                               data-tooltip-id="table-tooltip-id"
                               data-tooltip-content={t("Edit")}
-                              onClick={() => editMilestone(value.id)}>
-                              <PencilSquareIcon
-                                className="text-indigo-500 h-4 w-4 cursor-pointer mr-3"
-                              />
+                              onClick={() => editMilestone(value.id)}
+                            >
+                              <PencilSquareIcon className="text-indigo-500 h-4 w-4 cursor-pointer" />
                             </button>
                           </AccessControl>
                           {isMilestoneDeleteable ? (
@@ -231,18 +228,20 @@ export default function Table({
                               data-tooltip-content={t("Delete")}
                               onClick={() => openDeleteModal(value)}
                             >
-                              <TrashIcon className="text-red-400 h-4 w-4 mr-3 cursor-pointer" />
+                              <TrashIcon className="text-red-400 h-4 w-4 cursor-pointer" />
                             </button>
                           ) : (
                             <button
                               data-tooltip-id="table-tooltip-id"
-                              data-tooltip-content={NO_PERMISSION_TOOLTIP_MESSAGE}
+                              data-tooltip-content={
+                                NO_PERMISSION_TOOLTIP_MESSAGE
+                              }
                               onClick={(e) => {
                                 e.stopPropagation();
                                 e.preventDefault();
                               }}
                             >
-                              <TrashIcon className="text-red-400 h-4 w-4 mr-3 cursor-not-allowed" />
+                              <TrashIcon className="text-red-400 h-4 w-4 cursor-not-allowed" />
                             </button>
                           )}
                           {value.status === "OPEN" ? (
@@ -270,15 +269,14 @@ export default function Table({
                                   MilestonePermissions.UPDATE_MILESTONE_STATUS
                                 }
                               >
-                                <CheckCircleOutline
-                                  className="text-indigo-600 h-4 w-4 cursor-pointer mr-1"
-                                />
+                                <CheckCircleOutline className="text-indigo-600 h-4 w-4 cursor-pointer mr-1" />
                               </AccessControl>
                             </div>
                           ) : (
                             <div
                               data-tooltip-id="table-tooltip-id"
-                              data-tooltip-content={t("Completed")}>
+                              data-tooltip-content={t("Completed")}
+                            >
                               <CheckCircleIcon className="text-green-500 h-5 w-5 mr-1" />
                             </div>
                           )}
@@ -289,7 +287,7 @@ export default function Table({
                 </tbody>
               </table>
             </div>
-            <Tooltip id="table-tooltip-id" />
+            <Tooltips id="table-tooltip-id" />
           </div>
         </div>
       </div>

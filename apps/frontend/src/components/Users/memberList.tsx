@@ -2,7 +2,6 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { PencilSquareIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
-import { Tooltip } from "react-tooltip";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -26,6 +25,7 @@ import AccessControl from "../AccessControl";
 import { AppContext } from "../Context/mainContext";
 import { ArchiveBoxIcon } from "@heroicons/react/24/outline";
 import ConfirmModal from "../Common/ConfirmModal";
+import Tooltips from "../Tooltip/ToolTips";
 
 const MemberList = () => {
   const { t } = useTranslation();
@@ -57,7 +57,7 @@ const MemberList = () => {
       return lastPage?.prevOffSet > lastPage.data.meta.pageCount
         ? undefined
         : lastPage?.prevOffSet;
-    }
+    },
   });
 
   const userData = data?.pages.reduce((acc, page) => {
@@ -231,25 +231,26 @@ const MemberList = () => {
                           : t("Member")}
                     </td>
 
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-center">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium flex justify-center gap-2">
                       <span
                         data-tooltip-id="member-list-tooltip-id"
-                        data-tooltip-content={t("Resend Password Link")}>
+                        data-tooltip-content={t("Resend Password Link")}
+                      >
                         <AccessControl
                           permission={
                             UserManagementPermissions.RESET_PASSWORD_LINK
                           }
                         >
                           <button onClick={() => resendPassword(user.email)}>
-                            <EnvelopeIcon
-                              className="text-indigo-600 h-4 w-4 cursor-pointer mr-3"
-                            />
+                            <EnvelopeIcon className="text-indigo-600 h-4 w-4 cursor-pointer" />
                           </button>
                         </AccessControl>
                       </span>
-                      <span data-cy={`edit-user-${index}`}
+                      <span
+                        data-cy={`edit-user-${index}`}
                         data-tooltip-id="member-list-tooltip-id"
-                        data-tooltip-content={t("Edit Member")}>
+                        data-tooltip-content={t("Edit Member")}
+                      >
                         <AccessControl
                           permission={UserManagementPermissions.UPDATE_MEMBER}
                           upperRoleEditPermission={
@@ -264,9 +265,7 @@ const MemberList = () => {
                               );
                             }}
                           >
-                            <PencilSquareIcon
-                              className="text-indigo-500 h-4 w-4 cursor-pointer mr-3"
-                            />
+                            <PencilSquareIcon className="text-indigo-500 h-4 w-4 cursor-pointer" />
                           </button>
                         </AccessControl>
                       </span>
@@ -283,9 +282,7 @@ const MemberList = () => {
                             userRoleId !== RoleId.MEMBER
                           }
                         >
-                          <ArchiveBoxIcon
-                            className="text-indigo-600 h-4 w-4 cursor-pointer mr-3"
-                          />
+                          <ArchiveBoxIcon className="text-indigo-600 h-4 w-4 cursor-pointer" />
                         </AccessControl>
                       </span>
                     </td>
@@ -308,19 +305,17 @@ const MemberList = () => {
             </table>
           )}
         </div>
-        <Tooltip id="member-list-tooltip-id" />
+        <Tooltips id="member-list-tooltip-id" />
       </div>
-      {
-        showModal && (
-          <ConfirmModal
-            message={modalMsg}
-            open={showModal}
-            handleConfirm={moveToArchive}
-            handleCancel={() => setShowModal(false)}
-          />
-        )
-      }
-    </main >
+      {showModal && (
+        <ConfirmModal
+          message={modalMsg}
+          open={showModal}
+          handleConfirm={moveToArchive}
+          handleCancel={() => setShowModal(false)}
+        />
+      )}
+    </main>
   );
 };
 

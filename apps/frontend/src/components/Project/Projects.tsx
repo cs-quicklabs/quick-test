@@ -1,4 +1,10 @@
-import { Menu, Transition } from "@headlessui/react";
+import {
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Transition,
+} from "@headlessui/react";
 import {
   ArchiveBoxIcon,
   ChevronRightIcon,
@@ -16,9 +22,6 @@ import axiosService from "../Utils/axios";
 import { DateFormat } from "../Utils/constants/date-format";
 import { NoOfDaysForGraph } from "../Utils/constants/misc";
 import { appRoutes, projectRoutes } from "../Utils/constants/page-routes";
-
-import { Tooltip } from "react-tooltip";
-
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -32,6 +35,7 @@ import {
 } from "../Utils/constants/roles-permission";
 import Modal from "./Modal";
 import { EyeIcon } from "@heroicons/react/24/outline";
+import Tooltips from "../Tooltip/ToolTips";
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -91,7 +95,10 @@ export default function Projects() {
     }
   };
 
-  const { data, refetch, isLoading } = useQuery({ queryKey: ["all-projects"], queryFn: getProjects });
+  const { data, refetch, isLoading } = useQuery({
+    queryKey: ["all-projects"],
+    queryFn: getProjects,
+  });
 
   const makeFavorite = async (id: string) => {
     const resp = await axiosService.post(`/projects/${id}/favorites`, {});
@@ -128,7 +135,7 @@ export default function Projects() {
       toggleModal(false);
       queryClient.invalidateQueries({ queryKey: ["all-projects"] });
     } catch (err) {
-      showError(err?.message)
+      showError(err?.message);
     }
   }, [selectedId, queryClient]);
 
@@ -234,10 +241,11 @@ export default function Projects() {
                                     {project.favorite ? (
                                       <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className={`h-4 w-4 cursor-pointer hover:text-indigo-100 ${project.favorite
-                                          ? "text-indigo-700"
-                                          : "text-indigo-100 hover:text-indigo-700"
-                                          }`}
+                                        className={`h-4 w-4 cursor-pointer hover:text-indigo-100 ${
+                                          project.favorite
+                                            ? "text-indigo-700"
+                                            : "text-indigo-100 hover:text-indigo-700"
+                                        }`}
                                         data-cy={`add-favorite-${index}`}
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
@@ -250,14 +258,17 @@ export default function Projects() {
                                     ) : (
                                       <div
                                         data-tooltip-id="projects-tooltip-id"
-                                        data-tooltip-content={t("Mark as Favourite")}
+                                        data-tooltip-content={t(
+                                          "Mark as Favourite"
+                                        )}
                                       >
                                         <svg
                                           xmlns="http://www.w3.org/2000/svg"
-                                          className={`h-4 w-4 cursor-pointer hover:text-indigo-100 ${project.favorite
-                                            ? "text-indigo-700"
-                                            : "text-indigo-100 hover:text-indigo-700"
-                                            }`}
+                                          className={`h-4 w-4 cursor-pointer hover:text-indigo-100 ${
+                                            project.favorite
+                                              ? "text-indigo-700"
+                                              : "text-indigo-100 hover:text-indigo-700"
+                                          }`}
                                           data-cy={`add-favorite-${index}`}
                                           viewBox="0 0 20 20"
                                           fill="currentColor"
@@ -314,10 +325,11 @@ export default function Projects() {
                                   >
                                     {({ open }) => (
                                       <>
-                                        <Menu.Button
-                                          className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none ${open &&
+                                        <MenuButton
+                                          className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none ${
+                                            open &&
                                             "ring-2 ring-offset-2 ring-purple-500"
-                                            }`}
+                                          }`}
                                         >
                                           <span className="sr-only">
                                             {t("Open options")}
@@ -326,7 +338,7 @@ export default function Projects() {
                                             className="h-4 w-4"
                                             aria-hidden="true"
                                           />
-                                        </Menu.Button>
+                                        </MenuButton>
                                         <Transition
                                           show={open}
                                           as={Fragment}
@@ -337,16 +349,16 @@ export default function Projects() {
                                           leaveFrom="transform opacity-100 scale-100"
                                           leaveTo="transform opacity-0 scale-95"
                                         >
-                                          <Menu.Items
+                                          <MenuItems
                                             static
                                             style={
                                               data?.data?.length - 1 ===
                                                 index &&
-                                                data?.data?.length !== 1
+                                              data?.data?.length !== 1
                                                 ? {
-                                                  transform:
-                                                    "translateY(-55%)",
-                                                }
+                                                    transform:
+                                                      "translateY(-55%)",
+                                                  }
                                                 : {}
                                             }
                                             className="mx-3 cursor-pointer origin-top-right absolute right-7 top-0 w-48 mt-1 rounded-md shadow-lg z-10 bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
@@ -357,12 +369,12 @@ export default function Projects() {
                                                   ProjectPermissions.EDIT_PROJECT
                                                 }
                                               >
-                                                <Menu.Item>
-                                                  {({ active }) => (
+                                                <MenuItem>
+                                                  {({ focus }) => (
                                                     <Link
                                                       to={`${appRoutes.PROJECTS}/${project.id}/${projectRoutes.EDIT_PROJECT}`}
                                                       className={classNames(
-                                                        active
+                                                        focus
                                                           ? "bg-gray-100 text-gray-900"
                                                           : "text-gray-700",
                                                         "group flex items-center px-4 py-1.5 text-xs"
@@ -375,14 +387,14 @@ export default function Projects() {
                                                       {t("Edit")}
                                                     </Link>
                                                   )}
-                                                </Menu.Item>
+                                                </MenuItem>
                                               </AccessControl>
-                                              <Menu.Item>
-                                                {({ active }) => (
+                                              <MenuItem>
+                                                {({ focus }) => (
                                                   <Link
                                                     to={`${appRoutes.PROJECTS}/${project.id}/${projectRoutes.OVERVIEW}`}
                                                     className={classNames(
-                                                      active
+                                                      focus
                                                         ? "bg-gray-100 text-gray-900"
                                                         : "text-gray-700",
                                                       "group flex items-center px-4 py-1.5 text-xs"
@@ -395,21 +407,21 @@ export default function Projects() {
                                                     {t("View")}
                                                   </Link>
                                                 )}
-                                              </Menu.Item>
+                                              </MenuItem>
                                               <AccessControl
                                                 permission={
                                                   ArchivePermissions.ARCHIVE_PROJECT &&
                                                   ArchivePermissions.LIST_ARCHIVE_PROJECT
                                                 }
                                               >
-                                                <Menu.Item>
-                                                  {({ active }) => (
+                                                <MenuItem>
+                                                  {({ focus }) => (
                                                     <span
                                                       onClick={(e) =>
                                                         openModal(e, project)
                                                       }
                                                       className={classNames(
-                                                        active
+                                                        focus
                                                           ? "bg-gray-100 text-gray-900"
                                                           : "text-gray-700",
                                                         "group flex items-center px-4 py-1.5 text-xs"
@@ -422,10 +434,10 @@ export default function Projects() {
                                                       {t("Archive")}
                                                     </span>
                                                   )}
-                                                </Menu.Item>
+                                                </MenuItem>
                                               </AccessControl>
                                             </div>
-                                          </Menu.Items>
+                                          </MenuItems>
                                         </Transition>
                                       </>
                                     )}
@@ -436,7 +448,7 @@ export default function Projects() {
                           )}
                         </tbody>
                       </table>
-                      <Tooltip id="projects-tooltip-id" />
+                      <Tooltips id="projects-tooltip-id" />
                     </div>
                     {data?.data?.data.length === 0 && (
                       <div className="flex justify-center items-center content-center text-gray-500 text-xs font-normal my-4">

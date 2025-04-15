@@ -14,9 +14,9 @@ import {
   testCaseRoutes,
 } from "../../Utils/constants/page-routes";
 import { useTranslation } from "react-i18next";
-import { Tooltip } from "react-tooltip";
 import ShowPriorityTextIcon from "./ShowPriorityTextIcon";
 import { SerialisedTestCaseType } from "../../../types/testCaseTypes";
+import Tooltips from "../../Tooltip/ToolTips";
 
 export default function TestCaseListTable({
   testcases,
@@ -175,15 +175,22 @@ export default function TestCaseListTable({
           className="bg-white divide-y divide-gray-200"
         >
           {orderTestCases?.map((test: SerialisedTestCaseType, index) => (
-            <tr key={index} data-cy={dataAttr + index} className="bg-white rounded">
+            <tr
+              key={index}
+              data-cy={dataAttr + index}
+              className="bg-white rounded"
+            >
               <td className="py-2 whitespace-nowrap text-xs font-normal pr-2">
                 <div className="flex justify-center">
                   {showDragIcon && (
-                    <Link to={"#"} title="Drag" data-tooltip-id="testcase-list-table-tooltip-id"
-                      data-tooltip-content={t("Drag")} className="drag mr-2">
-                      <EllipsisVerticalIcon
-                        className="text-gray-900 mx-auto h-4 w-4 cursor-move dragIcon"
-                      />
+                    <Link
+                      to={"#"}
+                      title="Drag"
+                      data-tooltip-id="testcase-list-table-tooltip-id"
+                      data-tooltip-content={t("Drag")}
+                      className="drag mr-2"
+                    >
+                      <EllipsisVerticalIcon className="text-gray-900 mx-auto h-4 w-4 cursor-move dragIcon" />
                     </Link>
                   )}
                   <input
@@ -197,9 +204,9 @@ export default function TestCaseListTable({
                         orderTestCases.map((val) =>
                           val.id === test.id
                             ? {
-                              ...val,
-                              checked: e.target.checked,
-                            }
+                                ...val,
+                                checked: e.target.checked,
+                              }
                             : { ...val }
                         )
                       )
@@ -236,7 +243,7 @@ export default function TestCaseListTable({
                 id="action-value"
                 className=" px-2 py-2 whitespace-nowrap text-center text-xs font-normal"
               >
-                <div className="flex justify-center">
+                <div className="flex justify-center text-center items-center gap-2 text-xs ">
                   <button
                     data-tooltip-id="testcase-list-table-tooltip-id"
                     data-tooltip-content={t("Edit")}
@@ -247,7 +254,7 @@ export default function TestCaseListTable({
                     }}
                   >
                     <PencilSquareIcon
-                      className="text-indigo-500 h-4 w-4 cursor-pointer mr-2"
+                      className="text-indigo-500 h-4 w-4 cursor-pointer"
                       aria-hidden="true"
                     />
                   </button>
@@ -260,9 +267,7 @@ export default function TestCaseListTable({
                       openDeleteModal(test);
                     }}
                   >
-                    <TrashIcon
-                      className="text-red-400 h-4 w-4 cursor-pointer"
-                    />
+                    <TrashIcon className="text-red-400 h-4 w-4 cursor-pointer" />
                   </button>
                 </div>
               </td>
@@ -270,7 +275,7 @@ export default function TestCaseListTable({
           ))}
         </tbody>
       </table>
-      <Tooltip id="testcase-list-table-tooltip-id" />
+      <Tooltips id="testcase-list-table-tooltip-id" />
     </ReactDragListView>
   );
 }

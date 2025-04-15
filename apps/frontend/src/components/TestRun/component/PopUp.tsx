@@ -28,6 +28,10 @@ export default function PopUp({
 }: Props) {
   const { t } = useTranslation();
 
+  const handleClose = () => {
+    submitData("", "", false, true);
+  };
+
   return (
     <Transition show={open} as={Fragment}>
       <Dialog
@@ -35,7 +39,7 @@ export default function PopUp({
         static
         className="fixed z-10 inset-0 overflow-y-auto"
         open={open}
-        onClose={() => submitData("", "", false, true)}
+        onClose={handleClose}
       >
         <div className="flex items-end justify-center min-h-screen pt-1 px-1 pb-20 text-center sm:block sm:p-0">
           <TransitionChild
@@ -109,6 +113,14 @@ export default function PopUp({
                             </div>
                           ) : null}
                           <div className="flex justify-end pt-0.5">
+                            <button
+                              type="button"
+                              className="inline-flex justify-center items-center px-2.5 py-1.5 border border-gray-300 text-xs font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none undefined my-submit-button mr-3"
+                              onClick={handleClose}
+                              data-cy="close-modal-overlay"
+                            >
+                              {t("Cancel")}
+                            </button>
                             <CancelButton
                               data-cy="skip-and-submit"
                               onMouseDown={() => submitData("", "", false)}
@@ -120,10 +132,11 @@ export default function PopUp({
                             <Button
                               id="submit-inside-popup"
                               type="submit"
-                              className={`ml-3 w-12${!(dirty && isValid)
-                                ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                                : ""
-                                }`}
+                              className={`ml-3 w-12${
+                                !(dirty && isValid)
+                                  ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
+                                  : ""
+                              }`}
                               disabled={!(dirty && isValid)}
                             >
                               {t("Add")}

@@ -19,7 +19,10 @@ import { ToastMessage } from "../Utils/constants/misc";
 import { useFormSubmitWithLoading } from "../Utils/hooks/useFormSubmitWithLoading";
 import { useTranslation } from "react-i18next";
 import bugplotLogo from "../../assets/images/bugplot-logo.svg";
-import { initialSignUpValues, SignUpFormValues } from "../Utils/interfaces/userObject";
+import {
+  initialSignUpValues,
+  SignUpFormValues,
+} from "../Utils/interfaces/userObject";
 
 const SignUp = () => {
   const { t } = useTranslation();
@@ -68,7 +71,10 @@ const SignUp = () => {
         toggleModal(true);
       }
     } catch (err) {
-      showError(err?.response?.data?.message || t("An error occurred, pleaase try again."));
+      showError(
+        err?.response?.data?.message ||
+          t("An error occurred, pleaase try again.")
+      );
     }
   };
 
@@ -87,10 +93,10 @@ const SignUp = () => {
 
   function getTermsAndPrivacyLabel() {
     return `${t("I agree to")} 
-      <a href='${process.env.REACT_APP_WEBSITE_DOMAIN_LINK}/terms' class="hover:text-indigo-600" rel="noreferrer" target="_blank">
+      <a href='${process.env.REACT_APP_DOMAIN_LINK}/terms' class="hover:text-indigo-600" rel="noreferrer" target="_blank">
         <strong>${t("Terms of Use")}</strong>
       </a> & 
-      <a href='${process.env.REACT_APP_WEBSITE_DOMAIN_LINK}/privacypolicy' class="hover:text-indigo-600" rel="noreferrer" target="_blank">
+      <a href='${process.env.REACT_APP_DOMAIN_LINK}/privacypolicy' class="hover:text-indigo-600" rel="noreferrer" target="_blank">
         <strong>${t("Privacy Policy")}</strong>
       </a>`;
   }
@@ -125,12 +131,42 @@ const SignUp = () => {
               {() => (
                 <Form className="space-y-6" action="#" method="POST" noValidate>
                   {RenderFormikInputs([
-                    { type: "text", name: "firstName", label: t("First Name"), validation: false },
-                    { type: "text", name: "lastName", label: t("Last Name"), validation: false },
-                    { type: "email", name: "email", label: t("Work Email"), validation: false },
-                    { type: "text", name: "org", label: t("Organization"), validation: false },
-                    { type: "password", name: "password", label: t("Password"), validation: false },
-                    { type: "password", name: "cnfpassword", label: t("Confirm Password"), validation: false },
+                    {
+                      type: "text",
+                      name: "firstName",
+                      label: t("First Name"),
+                      validation: false,
+                    },
+                    {
+                      type: "text",
+                      name: "lastName",
+                      label: t("Last Name"),
+                      validation: false,
+                    },
+                    {
+                      type: "email",
+                      name: "email",
+                      label: t("Work Email"),
+                      validation: false,
+                    },
+                    {
+                      type: "text",
+                      name: "org",
+                      label: t("Organization"),
+                      validation: false,
+                    },
+                    {
+                      type: "password",
+                      name: "password",
+                      label: t("Password"),
+                      validation: false,
+                    },
+                    {
+                      type: "password",
+                      name: "cnfpassword",
+                      label: t("Confirm Password"),
+                      validation: false,
+                    },
                   ])}
 
                   <FormikCheckbox

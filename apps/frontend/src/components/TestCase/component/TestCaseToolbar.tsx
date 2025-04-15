@@ -10,7 +10,6 @@ import {
 } from "@heroicons/react/24/solid";
 
 import dayjs from "dayjs";
-import { Tooltip } from "react-tooltip";
 import { CSVLink } from "react-csv";
 import Button from "../../Button";
 import CancelButton from "../../Button/cancelButton";
@@ -19,6 +18,7 @@ import { DateFormat } from "../../Utils/constants/date-format";
 import FilterComponent from "./testCaseFilter";
 import { Trans, useTranslation } from "react-i18next";
 import { showError } from "../../Toaster/ToasterFun";
+import Tooltips from "../../Tooltip/ToolTips";
 
 const TestCaseToolbar = ({
   Row,
@@ -354,7 +354,9 @@ const TestCaseToolbar = ({
       filterState.created_on?.to &&
       filterState.created_on?.from
     ) {
-      newArray.push(`${t("Created On: ")}${dateConverter(filterState.created_on.from)}-${dateConverter(filterState.created_on.to)}`);
+      newArray.push(
+        `${t("Created On: ")}${dateConverter(filterState.created_on.from)}-${dateConverter(filterState.created_on.to)}`
+      );
     }
     if (filterState.updated_by.length !== 0) {
       newArray.push(t("Updated By: ") + t(filterState.updated_by.join(", ")));
@@ -370,7 +372,9 @@ const TestCaseToolbar = ({
       filterState.updated_on?.to &&
       filterState.updated_on?.from
     ) {
-      newArray.push(`${t("Updated On: ")}${dateConverter(filterState.updated_on.from)}-${dateConverter(filterState.updated_on.to)}`);
+      newArray.push(
+        `${t("Updated On: ")}${dateConverter(filterState.updated_on.from)}-${dateConverter(filterState.updated_on.to)}`
+      );
     }
     if (filterState.priority.length !== 0) {
       newArray.push(t("Priority: ") + t(filterState.priority.join(", ")));
@@ -663,227 +667,234 @@ const TestCaseToolbar = ({
   newCSVData?.forEach((item: any) => {
     item.createdAt = dayjs(item?.createdAt).format(DateFormat.LONG);
     item.steps = item?.steps.replace(/^\"|\"$/g, "");
-    item.preconditions = item?.preconditions.replace(/^\"|\"$/g, "").replace(/\n/g, " ");
-    item.expectedResults = item?.expectedResults.replace(/^\"|\"$/g, "")
+    item.preconditions = item?.preconditions
+      .replace(/^\"|\"$/g, "")
+      .replace(/\n/g, " ");
+    item.expectedResults = item?.expectedResults.replace(/^\"|\"$/g, "");
 
     item.executionPriority =
       item?.executionPriority?.slice(0, 1) +
       item?.executionPriority?.slice(1).toLowerCase();
   });
   return (
-    <>
-      <div className="bg-gray-200 py-2 px-4 rounded lg:rounded flex justify-between items-center">
-        {/* Sort component */}
-        <div className="flex flex-row items-center divide-x divide-gray-400 space-x-2">
-          <div className="flex flex-row items-center relative space-x-1">
-            <div
-              className="cursor-pointer text-sm"
-              tabIndex={0}
-              onBlur={() => setShowSortOptions(false)}
-              onClick={() => setShowSortOptions(!showSortOptions)}
-            >
-              {t("Sort:")}&nbsp;
-              <span
-                className={`${sortValue.label !== "Section"
+    <div className="bg-gray-200 py-2 px-4 rounded lg:rounded flex justify-between items-center">
+      {/* Sort component */}
+      <div className="flex flex-row items-center divide-x divide-gray-400 space-x-2">
+        <div className="flex flex-row items-center relative space-x-1">
+          <div
+            className="cursor-pointer text-sm"
+            tabIndex={0}
+            onBlur={() => setShowSortOptions(false)}
+            onClick={() => setShowSortOptions(!showSortOptions)}
+          >
+            {t("Sort:")}&nbsp;
+            <span
+              className={`${
+                sortValue.label !== "Section"
                   ? "bg-yellow-100 px-1 hover:bg-yellow-200"
                   : "border-b border-black border-dotted"
-                  } `}
-              >
-                <Trans>{sortValue.label}</Trans>
-              </span>
-              {showSortOptions && (
-                <div className="flex flex-col bg-white z-10 border rounded py-1 text-sm absolute top-6 shadow-md cursor-pointer w-32">
-                  {sortOptions.map((option) => (
-                    <div
-                      className={`px-2 py-1 hover:bg-blue-500 hover:text-white ${option.key === "section" ? "border-t-2" : ""
-                        }`}
-                      key={option.key}
-                      onMouseDown={() => selectedSortValue(option)}
-                    >
-                      <Trans>{option.label}</Trans>
-                    </div>
+              } `}
+            >
+              <Trans>{sortValue.label}</Trans>
+            </span>
+            {showSortOptions && (
+              <div className="flex flex-col bg-white z-10 border rounded py-1 text-sm absolute top-6 shadow-md cursor-pointer w-32">
+                {sortOptions.map((option) => (
+                  <div
+                    className={`px-2 py-1 hover:bg-blue-500 hover:text-white ${
+                      option.key === "section" ? "border-t-2" : ""
+                    }`}
+                    key={option.key}
+                    onMouseDown={() => selectedSortValue(option)}
+                  >
+                    <Trans>{option.label}</Trans>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {sortValue.key !== "section" && (
+            <div
+              data-tooltip-id="testcase-toolbar-tooltip-id"
+              data-tooltip-content={"Reset grouping to sections"}
+              data-tooltip-delay-show={750}
+              data-tooltip-place="bottom-start"
+              onClick={() => selectedSortValue(initialSortValue)}
+              className="cursor-pointer self-center"
+            >
+              <XMarkIcon className="h-4 w-4 text-red-500 hover:text-red-600" />
+            </div>
+          )}
+
+          <div
+            className="cursor-pointer justify-self-center"
+            onClick={toggleSort}
+          >
+            {isSortAscending ? (
+              <BarsArrowUpIcon className="h-4 w-4 text-gray-600" />
+            ) : (
+              <BarsArrowDownIcon className="h-4 w-4 text-gray-600" />
+            )}
+          </div>
+        </div>
+
+        {/* Filter component */}
+        <div className="flex flex-row space-x-2 relative">
+          <div
+            className="cursor-pointer pl-2 text-sm"
+            onClick={() => {
+              setShowFilters(!showFilters);
+              setFilterState(initialFilterState);
+            }}
+          >
+            {t("Filter:")}&nbsp;
+            <span
+              className={`${
+                filterValue !== "None"
+                  ? "bg-yellow-100 px-1 hover:bg-yellow-200"
+                  : "border-b border-black border-dotted"
+              } `}
+            >
+              <Trans>{filterValue}</Trans>
+            </span>
+          </div>
+          {showFilters && (
+            <div className="flex flex-col bg-white z-20 border rounded py-1 text-sm absolute top-6 shadow-md cursor-pointer w-60">
+              <form onSubmit={handleFilterSubmit}>
+                <div className="overflow-y-auto h-44">
+                  {filterOptions.map((option) => (
+                    <FilterComponent
+                      key={option.value}
+                      filterState={filterState}
+                      setFilterState={setFilterState}
+                      option={option}
+                      row={initialRowData}
+                      memberList={memberList}
+                      hideInnerOpen={hideInnerOpen}
+                      setInnerOpen={setInnerOpen}
+                      updatedCustomDate={updatedCustomDate}
+                      createdCustomDate={createdCustomDate}
+                      setUpdatedCustomDate={setUpdatedCustomDate}
+                      setCreatedCustomDate={setCreatedCustomDate}
+                    />
                   ))}
                 </div>
-              )}
+                <div className="py-2 flex flex-row justify-end border-t-2">
+                  <CancelButton
+                    onClick={() => {
+                      setInnerOpen(true);
+                      setShowFilters(false);
+                    }}
+                  >
+                    {t("Cancel")}
+                  </CancelButton>
+                  <Button
+                    type="reset"
+                    value="Reset"
+                    onClick={() => {
+                      setFilterValue(t("None"));
+                      setFilterState(initialFilterState);
+                      setInnerOpen(true);
+                      setFilteredRowData([]);
+                      setIsSortAscending(true);
+                    }}
+                    className=" ml-2"
+                  >
+                    {t("Reset")}
+                  </Button>
+                  <Button type="submit" className="mr-2 ml-2">
+                    {t("Apply")}
+                  </Button>
+                </div>
+              </form>
             </div>
+          )}
 
-            {sortValue.key !== "section" && (
-              <div
-                data-tooltip-id="testcase-toolbar-tooltip-id"
-                data-tooltip-content={"Reset grouping to sections"}
-                data-tooltip-delay-show={750}
-                data-tooltip-place="bottom-start"
-                onClick={() => selectedSortValue(initialSortValue)}
-                className="cursor-pointer self-center"
-              >
-                <XMarkIcon className="h-4 w-4 text-red-500 hover:text-red-600" />
-              </div>
-            )}
-
+          {filterValue !== "None" && (
             <div
-              className="cursor-pointer justify-self-center"
-              onClick={toggleSort}
-            >
-              {isSortAscending ? (
-                <BarsArrowUpIcon className="h-4 w-4 text-gray-600" />
-              ) : (
-                <BarsArrowDownIcon className="h-4 w-4 text-gray-600" />
-              )}
-            </div>
-          </div>
-
-          {/* Filter component */}
-          <div className="flex flex-row space-x-2 relative">
-            <div
-              className="cursor-pointer pl-2 text-sm"
               onClick={() => {
-                setShowFilters(!showFilters);
+                setFilterValue(t("None"));
                 setFilterState(initialFilterState);
+                setRowData(initialRowData);
+                setFilteredRowData([]);
+                setIsSortAscending(true);
               }}
+              className="cursor-pointer self-center"
             >
-              {t("Filter:")}&nbsp;
-              <span
-                className={`${filterValue !== "None"
-                  ? "bg-yellow-100 px-1 hover:bg-yellow-200"
-                  : "border-b border-black border-dotted"
-                  } `}
-              >
-                <Trans>{filterValue}</Trans>
-              </span>
+              <XMarkIcon className="h-4 w-4 text-red-500 hover:text-red-600" />
             </div>
-            {showFilters && (
-              <div className="flex flex-col bg-white z-20 border rounded py-1 text-sm absolute top-6 shadow-md cursor-pointer w-60">
-                <form onSubmit={handleFilterSubmit}>
-                  <div className="overflow-y-auto h-44">
-                    {filterOptions.map((option) => (
-                      <FilterComponent
-                        key={option.value}
-                        filterState={filterState}
-                        setFilterState={setFilterState}
-                        option={option}
-                        row={initialRowData}
-                        memberList={memberList}
-                        hideInnerOpen={hideInnerOpen}
-                        setInnerOpen={setInnerOpen}
-                        updatedCustomDate={updatedCustomDate}
-                        createdCustomDate={createdCustomDate}
-                        setUpdatedCustomDate={setUpdatedCustomDate}
-                        setCreatedCustomDate={setCreatedCustomDate}
-                      />
-                    ))}
-                  </div>
-                  <div className="py-2 flex flex-row justify-end border-t-2">
-                    <CancelButton
-                      onClick={() => {
-                        setInnerOpen(true);
-                        setShowFilters(false);
-                      }}
-                    >
-                      {t("Cancel")}
-                    </CancelButton>
-                    <Button
-                      type="reset"
-                      value="Reset"
-                      onClick={() => {
-                        setFilterValue(t("None"));
-                        setFilterState(initialFilterState);
-                        setInnerOpen(true);
-                        setFilteredRowData([]);
-                        setIsSortAscending(true);
-                      }}
-                      className=" ml-2"
-                    >
-                      {t("Reset")}
-                    </Button>
-                    <Button type="submit" className="mr-2 ml-2">
-                      {t("Apply")}
-                    </Button>
-                  </div>
-                </form>
-              </div>
-            )}
-
-            {filterValue !== "None" && (
-              <div
-                onClick={() => {
-                  setFilterValue(t("None"));
-                  setFilterState(initialFilterState);
-                  setRowData(initialRowData);
-                  setFilteredRowData([]);
-                  setIsSortAscending(true);
-                }}
-                className="cursor-pointer self-center"
-              >
-                <XMarkIcon className="h-4 w-4 text-red-500 hover:text-red-600" />
-              </div>
-            )}
-          </div>
+          )}
         </div>
-        <div className="flex flex-row items-center">
-          <div
-            data-tooltip-id="testcase-toolbar-tooltip-id"
-            data-tooltip-content={t("Export test cases to csv")}
+      </div>
+      <div className="flex flex-row items-center">
+        <div
+          data-tooltip-id="testcase-toolbar-tooltip-id"
+          data-tooltip-content={t("Export test cases to csv")}
+        >
+          <CSVLink
+            onClick={() => {
+              if (csvData?.length > 0) return true;
+              showError(
+                t(
+                  "Please select test cases or individual section to export test cases."
+                )
+              );
+              return false;
+            }}
+            filename={t(`${projectName}_testCases.csv`)}
+            data={newCSVData}
+            headers={csvHeaders}
           >
-            <CSVLink
-              onClick={() => {
-                if (csvData?.length > 0) return true;
-                showError(
-                  t(
-                    "Please select test cases or individual section to export test cases."
-                  )
-                );
-                return false;
-              }}
-              filename={t(`${projectName}_testCases.csv`)}
-              data={newCSVData}
-              headers={csvHeaders}
-            >
-              <DocumentArrowDownIcon
-                className={`h-4 w-4 cursor-pointer ${ColorEnable ? "text-indigo-600" : "text-gray-400"
-                  }`}
-              />
-            </CSVLink>
-          </div>
-
-          <div
-            data-tooltip-id="testcase-toolbar-tooltip-id"
-            data-tooltip-content={t("Export test cases to pdf")}
-            className="mx-3"
-            onClick={handlePrinterClick}
-          >
-            <PrinterIcon
-              className={`h-4 w-4  cursor-pointer ${ColorEnable ? "text-indigo-600" : "text-gray-400"
-                }`}
+            <DocumentArrowDownIcon
+              className={`h-4 w-4 cursor-pointer ${
+                ColorEnable ? "text-indigo-600" : "text-gray-400"
+              }`}
             />
-          </div>
-
-          <div
-            data-tooltip-id="testcase-toolbar-tooltip-id"
-            data-tooltip-content={t("Edit multiple test cases")}
-            onClick={HandleEditClick}
-          >
-            <PencilIcon
-              className={`h-4 w-4  cursor-pointer ${ColorEnable ? "text-indigo-600" : "text-gray-400"
-                }`}
-            />
-          </div>
-
-          <div
-            data-tooltip-id="testcase-toolbar-tooltip-id"
-            data-tooltip-content={t("Delete multiple test cases")}
-            data-cy={"delete-multiple-test-case"}
-            className="mx-2"
-            onClick={HandleDeleteClick}
-          >
-            <TrashIcon
-              className={`h-4 w-4 cursor-pointer ${ColorEnable ? "text-indigo-600" : "text-gray-400"
-                }`}
-            />
-          </div>
+          </CSVLink>
         </div>
-        <Tooltip id="testcase-toolbar-tooltip-id" />
-      </div >
-    </>
+
+        <div
+          data-tooltip-id="testcase-toolbar-tooltip-id"
+          data-tooltip-content={t("Export test cases to pdf")}
+          className="mx-3"
+          onClick={handlePrinterClick}
+        >
+          <PrinterIcon
+            className={`h-4 w-4  cursor-pointer ${
+              ColorEnable ? "text-indigo-600" : "text-gray-400"
+            }`}
+          />
+        </div>
+
+        <div
+          data-tooltip-id="testcase-toolbar-tooltip-id"
+          data-tooltip-content={t("Edit multiple test cases")}
+          onClick={HandleEditClick}
+        >
+          <PencilIcon
+            className={`h-4 w-4  cursor-pointer ${
+              ColorEnable ? "text-indigo-600" : "text-gray-400"
+            }`}
+          />
+        </div>
+
+        <div
+          data-tooltip-id="testcase-toolbar-tooltip-id"
+          data-tooltip-content={t("Delete multiple test cases")}
+          data-cy={"delete-multiple-test-case"}
+          className="mx-2"
+          onClick={HandleDeleteClick}
+        >
+          <TrashIcon
+            className={`h-4 w-4 cursor-pointer ${
+              ColorEnable ? "text-indigo-600" : "text-gray-400"
+            }`}
+          />
+        </div>
+      </div>
+      <Tooltips id="testcase-toolbar-tooltip-id" />
+    </div>
   );
 };
 

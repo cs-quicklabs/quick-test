@@ -13,9 +13,6 @@ const newrelic = require("newrelic");
 @Injectable()
 export class NewrelicInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    console.log(
-      `Parent Interceptor before: ${util.inspect(context.getHandler().name)}`,
-    );
     return newrelic.startWebTransaction(context.getHandler().name, () => {
       const transaction = newrelic.getTransaction();
       return next.handle().pipe(

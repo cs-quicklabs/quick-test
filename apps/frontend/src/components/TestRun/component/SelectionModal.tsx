@@ -1,4 +1,9 @@
-import { Dialog, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
+import {
+  Dialog,
+  DialogTitle,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 import { useCallback } from "react";
 import { Fragment, useState, useEffect } from "react";
 import SectionTable from "./ModalSectionTable";
@@ -15,7 +20,10 @@ const SelectionModal = ({
   showModal,
   setShowModal,
   setTotalTestcases,
+  initialValues,
 }: any) => {
+  const defaultTestCasesIds =
+    Object.values(initialValues).map((item: any) => item.testCaseId) || [];
   const { t } = useTranslation();
   const params = useParams();
 
@@ -42,13 +50,23 @@ const SelectionModal = ({
         (item: any) => item.testcases.length
       );
 
+      const initialSelectedTestCaseUUID: any = [];
+      data.forEach((suite: any) => {
+        suite.testcases.forEach((testcase: any) => {
+          if (defaultTestCasesIds.includes(testcase.testcaseId)) {
+            initialSelectedTestCaseUUID.push(testcase.id);
+          }
+        });
+      });
+      setSelectedTestCaseIds(initialSelectedTestCaseUUID);
+
       if (data[0]?.name === t("Unassigned")) {
         const [first, ...rest] = data;
         const newRowData = [...rest, first];
         setRowData(newRowData);
       } else setRowData(data);
     } catch (err) {
-      showError(err?.message)
+      showError(err?.message);
     }
   }, [params.pid, t]);
 

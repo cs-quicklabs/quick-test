@@ -1,6 +1,5 @@
 import Overview from "../../../../components/ProjectDetails/component/Overview";
 
-
 export default function OverviewPage() {
   return (
     <>
