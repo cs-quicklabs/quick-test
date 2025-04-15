@@ -12,7 +12,6 @@ import PreviewMarkdown from "../../Common/PreviewMarkdown";
 import { SerialisedTestCaseType } from "../../../types/testCaseTypes";
 import { useFormikContext } from "formik";
 import { useTranslation } from "react-i18next";
-import ShowPriorityTextIcon from "./ShowPriorityTextIcon";
 import { showError } from "../../Toaster/ToasterFun";
 
 interface Props {
@@ -50,15 +49,20 @@ const ClickFormikFields: FC<Props> = ({
       !panelRef.current.contains(event.target)
     ) {
       setCurrentEditableField(null);
-      values[currentEditableField || ""] !==
-        testCase[currentEditableField as keyof SerialisedTestCaseType] &&
+      if (
+        currentEditableField &&
+        values[currentEditableField] !==
+          testCase[currentEditableField as keyof SerialisedTestCaseType]
+      ) {
         editTestCasesApi(pid as string, testCase.id, values)
           .then(() => {
             dispatch(getTestCasesData(pid as string));
           })
           .catch((err) => showError(err.response.data.message));
+      }
     }
   };
+
   useEffect(() => {
     Object.keys(errors).length !== 0 &&
       document.removeEventListener("mousedown", handleClickOutside);
@@ -66,21 +70,62 @@ const ClickFormikFields: FC<Props> = ({
   }, [errors]);
 
   useEffect(() => {
-    if (currentEditableField && Object.keys(errors).length === 0) {
+    if (
+      currentEditableField &&
+      inputType !== "dropDown" &&
+      Object.keys(errors).length === 0
+    ) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
     }
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values[currentEditableField as string]]);
 
+  // ✅ Save dropdown value on change (not relying on click outside)
+  useEffect(() => {
+    if (inputType === "dropDown") {
+      const originalValue = testCase[fieldName as keyof SerialisedTestCaseType];
+      const currentValue = values[fieldName];
+
+      if (currentValue !== originalValue) {
+        editTestCasesApi(pid as string, testCase.id, values)
+          .then(() => {
+            dispatch(getTestCasesData(pid as string));
+          })
+          .catch((err) => showError(err.response?.data?.message));
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values[fieldName]]);
+
   return (
-    <dd className="mt-1 text-sm text-gray-900 sm:mt-0  whitespace-normal break-all col-span-9">
-      {currentEditableField === fieldName ? (
-        <div className="" ref={panelRef}>
+    <dd className="mt-1 text-sm text-gray-900 sm:mt-0 whitespace-normal break-all col-span-9 cursor-pointer">
+      {inputType === "dropDown" ? (
+        <div className="pl-1 col-span-3" ref={panelRef}>
+          <FormikSelect
+            data-cy="select-priority"
+            type="text"
+            name="executionPriority"
+            label={t("Priority")}
+            sendIdAsValue={true}
+            optionsForSelect={[
+              { name: t("Low"), id: "LOW" },
+              { name: t("Medium"), id: "MEDIUM" },
+              { name: t("High"), id: "HIGH" },
+              { name: t("Critical"), id: "CRITICAL" },
+            ]}
+            showLabel={false}
+            validation
+            valueOfLabel={values[fieldName]}
+          />
+        </div>
+      ) : currentEditableField === fieldName ? (
+        <div ref={panelRef}>
           {inputType === "textArea" && (
             <FormikTextArea
               placeholder={`${
@@ -107,26 +152,6 @@ const ClickFormikFields: FC<Props> = ({
               />
             </div>
           )}
-          {inputType === "dropDown" && (
-            <div className="pl-1 col-span-3">
-              <FormikSelect
-                data-cy="select-priority"
-                type="text"
-                name="executionPriority"
-                label={t("Priority")}
-                sendIdAsValue={true}
-                optionsForSelect={[
-                  { name: t("Low"), id: "LOW" },
-                  { name: t("Medium"), id: "MEDIUM" },
-                  { name: t("High"), id: "HIGH" },
-                  { name: t("Critical"), id: "CRITICAL" },
-                ]}
-                showLabel={false}
-                validation
-                valueOfLabel={values[fieldName]}
-              />
-            </div>
-          )}
         </div>
       ) : inputType === "textArea" ? (
         <PreviewMarkdown
@@ -141,16 +166,7 @@ const ClickFormikFields: FC<Props> = ({
           {values[fieldName]?.charAt(0)?.toUpperCase() +
             values[fieldName]?.slice(1)}
         </h1>
-      ) : (
-        inputType === "dropDown" && (
-          <span
-            className="block text-sm text-gray-500 mb-4"
-            onClick={handleClick}
-          >
-            <ShowPriorityTextIcon value={values.executionPriority} />
-          </span>
-        )
-      )}
+      ) : null}
     </dd>
   );
 };
