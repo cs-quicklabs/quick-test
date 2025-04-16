@@ -282,7 +282,7 @@ const MemberList = () => {
                             userRoleId !== RoleId.MEMBER
                           }
                         >
-                          <ArchiveBoxIcon className="text-indigo-600 h-4 w-4 cursor-pointer" />
+                          <ArchiveBoxIcon className="text-red-400 h-4 w-4 cursor-pointer" />
                         </AccessControl>
                       </span>
                     </td>
