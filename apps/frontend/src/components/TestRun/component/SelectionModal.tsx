@@ -28,18 +28,31 @@ const SelectionModal = ({
   const params = useParams();
 
   const formik = useFormikContext();
+  const { setFieldValue }: any = formik;
 
-  const { setFieldValue } = formik;
   const [RowData, setRowData] = useState<any>([]);
   const [sectionData, setSectionData] = useState({});
+
+  // Main values stored in formik (permanent)
   const [selectedSectionIds, setSelectedSectionIds] = useState<any[]>([]);
   const [selectedTestCaseIds, setSelectedTestCaseIds] = useState<any[]>([]);
 
-  const { values }: any = formik;
+  // Temporary values used inside the modal only
+  const [tempSelectedSectionIds, setTempSelectedSectionIds] = useState<any[]>(
+    []
+  );
+  const [tempSelectedTestCaseIds, setTempSelectedTestCaseIds] = useState<any[]>(
+    []
+  );
 
+  // Set temp values only when modal opens
   useEffect(() => {
-    if (showModal) setSelectedSectionIds(values.sectionIds);
-  }, [showModal, values.sectionIds]);
+    if (showModal) {
+      setTempSelectedSectionIds([...selectedSectionIds]);
+      setTempSelectedTestCaseIds([...selectedTestCaseIds]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showModal]);
 
   const getTestcases = useCallback(async () => {
     try {
@@ -59,12 +72,13 @@ const SelectionModal = ({
         });
       });
       setSelectedTestCaseIds(initialSelectedTestCaseUUID);
-
+      setTempSelectedTestCaseIds(initialSelectedTestCaseUUID);
       if (data[0]?.name === t("Unassigned")) {
         const [first, ...rest] = data;
-        const newRowData = [...rest, first];
-        setRowData(newRowData);
-      } else setRowData(data);
+        setRowData([...rest, first]);
+      } else {
+        setRowData(data);
+      }
     } catch (err) {
       showError(err?.message);
     }
@@ -75,9 +89,13 @@ const SelectionModal = ({
   }, [getTestcases, params?.pid]);
 
   const submitSections = () => {
-    setFieldValue("sectionIds", selectedSectionIds);
-    setFieldValue("testCaseIds", selectedTestCaseIds);
-    const noOfTestcases = countAllTestcases();
+    setSelectedSectionIds(tempSelectedSectionIds);
+    setSelectedTestCaseIds(tempSelectedTestCaseIds);
+
+    setFieldValue("sectionIds", tempSelectedSectionIds);
+    setFieldValue("testCaseIds", tempSelectedTestCaseIds);
+
+    const noOfTestcases = countAllTestcases(tempSelectedTestCaseIds);
     setTotalTestcases(noOfTestcases);
     setShowModal(false);
   };
@@ -85,19 +103,19 @@ const SelectionModal = ({
   const addAllSections = () => {
     const newSectionIds: any[] = [];
     RowData.forEach((item: any) => {
-      if (!selectedSectionIds.includes(item.id)) {
+      if (!tempSelectedSectionIds.includes(item.id)) {
         newSectionIds.push(item.id);
       }
     });
 
-    setSelectedSectionIds([...selectedSectionIds, ...newSectionIds]);
+    setTempSelectedSectionIds([...tempSelectedSectionIds, ...newSectionIds]);
   };
 
-  const countAllTestcases = () => {
+  const countAllTestcases = (testIds: string[]) => {
     let count = 0;
     RowData.forEach((item: any) => {
       item?.testcases.forEach((item: any) => {
-        if (selectedTestCaseIds.includes(item.id)) {
+        if (testIds.includes(item.id)) {
           count += 1;
         }
       });
@@ -163,10 +181,10 @@ const SelectionModal = ({
                       RowData={RowData}
                       sectionData={sectionData}
                       setSectionData={setSectionData}
-                      selectedSectionIds={selectedSectionIds}
-                      setSelectedSectionIds={setSelectedSectionIds}
-                      selectedTestCaseIds={selectedTestCaseIds}
-                      setSelectedTestCaseIds={setSelectedTestCaseIds}
+                      selectedSectionIds={tempSelectedSectionIds}
+                      setSelectedSectionIds={setTempSelectedSectionIds}
+                      selectedTestCaseIds={tempSelectedTestCaseIds}
+                      setSelectedTestCaseIds={setTempSelectedTestCaseIds}
                       addAllSections={addAllSections}
                     />
                   </div>
@@ -177,10 +195,10 @@ const SelectionModal = ({
                     <SectionTable
                       RowData={RowData}
                       sectionData={sectionData}
-                      selectedTestCaseIds={selectedTestCaseIds}
-                      setSelectedTestCaseIds={setSelectedTestCaseIds}
-                      selectedSectionIds={selectedSectionIds}
-                      setSelectedSectionIds={setSelectedSectionIds}
+                      selectedSectionIds={tempSelectedSectionIds}
+                      setSelectedSectionIds={setTempSelectedSectionIds}
+                      selectedTestCaseIds={tempSelectedTestCaseIds}
+                      setSelectedTestCaseIds={setTempSelectedTestCaseIds}
                     />
                   </div>
                 </div>

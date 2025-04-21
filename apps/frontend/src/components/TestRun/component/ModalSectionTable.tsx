@@ -39,7 +39,6 @@ const ModalSectionTable = ({
   };
 
   return (
-    <>
       <table className="min-w-full divide-y divide-gray-200 table-fixed">
         <thead className="bg-gray-50">
           <div className=" ml-4 flex flex-row whitespace-nowrap space-x-2 items-center">
@@ -71,7 +70,7 @@ const ModalSectionTable = ({
               />
               <tr key={index} className="bg-white">
                 <td className="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900 w-8 ">
-                  {item.testcaseId}
+                  {index + 1}
                 </td>
                 <td className="px-20 py-2 whitespace-nowrap text-sm font-medium text-gray-500">
                   {item.title}
@@ -81,7 +80,6 @@ const ModalSectionTable = ({
           ))}
         </tbody>
       </table>
-    </>
   );
 };
 
