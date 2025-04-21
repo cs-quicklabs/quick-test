@@ -22,7 +22,6 @@ const TestcaseSelect = ({
       setState("includeAll");
     } else {
       setState("includeSpecific");
-      setTotalTestCaseCount(length)
     }
   }, [length, totalTestCasesCount]);
 
