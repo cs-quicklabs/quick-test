@@ -21,6 +21,7 @@ const SelectionModal = ({
   setShowModal,
   setTotalTestcases,
   initialValues,
+  setTotalTestCasesCount
 }: any) => {
   const defaultTestCasesIds =
     Object.values(initialValues).map((item: any) => item.testCaseId) || [];
@@ -49,6 +50,11 @@ const SelectionModal = ({
       const data = response?.data?.data.filter(
         (item: any) => item.testcases.length
       );
+     // Calculate total test cases across all sections
+    const totalTestCases = data.reduce((total: number, section: any) => {
+      return total + section.testcases.length;
+    }, 0);
+    setTotalTestCasesCount(totalTestCases)
 
       const initialSelectedTestCaseUUID: any = [];
       data.forEach((suite: any) => {

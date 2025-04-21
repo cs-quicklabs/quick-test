@@ -7,20 +7,24 @@ const TestcaseSelect = ({
   setState,
   totalTestcases,
   setTotalTestcases,
+  setTotalTestCaseCount,
   initialValues,
 }: any) => {
   const { t } = useTranslation();
   const [showSpecific, setShowSpecific] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [totalTestCasesCount , setTotalTestCasesCount] = useState()
 
-  const length = Object.keys(initialValues).length;
+  const length = Object.keys(initialValues).length
+  
   useEffect(() => {
-    if (length !== totalTestcases) {
-      setState("includeSpecific");
-    } else {
+    if (totalTestCasesCount && length === totalTestCasesCount) {
       setState("includeAll");
+    } else {
+      setState("includeSpecific");
+      setTotalTestCaseCount(length)
     }
-  }, [length]);
+  }, [length, totalTestCasesCount]);
 
   useEffect(() => {
     if (state === "includeSpecific") {
@@ -29,6 +33,7 @@ const TestcaseSelect = ({
       setShowSpecific(false);
     }
   }, [state]);
+
   return (
     <div className="space-y-6">
       <hr></hr>
@@ -96,6 +101,7 @@ const TestcaseSelect = ({
         showModal={showModal}
         setShowModal={setShowModal}
         setTotalTestcases={setTotalTestcases}
+        setTotalTestCasesCount={setTotalTestCasesCount}
         initialValues={initialValues}
       />
     </div>
