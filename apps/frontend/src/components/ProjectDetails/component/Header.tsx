@@ -80,7 +80,6 @@ export default function TestCaseHeading({
   }
 
   return (
-    <>
       <div className="py-4 mx-8 sm:flex sm:items-start sm:justify-between bg-gray-50 2xl:mx-52">
         <div className="flex-1 min-w-0">
           {title && (
@@ -159,6 +158,5 @@ export default function TestCaseHeading({
           )}
         </div>
       </div>
-    </>
   );
 }

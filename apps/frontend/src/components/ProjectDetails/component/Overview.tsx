@@ -39,6 +39,39 @@ export default function Overview() {
   const [hasMore, setHasMore] = useState(false);
   const [loadingTestChange, setLoadingTestChange] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
+ 
+  const fetchTestSuites = useCallback(async () => {
+    try {
+      
+      const response = await axiosService.get(
+        `/projects/${params.pid}/test-suites?order=DESC`
+      );
+      
+      if (response?.data?.data?.data) {
+        const data = response.data.data.data;
+        
+        // Process data for test runs
+        setTestRunList(data);
+        
+        // Process data for todos
+        const todos = data.filter((ele: any) => ele.status !== "COMPLETED");
+      setTodoList(todos);
+      }
+    
+    } catch (err) {
+      
+      if (err.response && err.response.data) {
+        if (err.response.status === 401) {
+          showError(err.response.data.message);
+          localStorage.clear();
+          sessionStorage.clear();
+          navigate("/");
+          return;
+        } else showError(err.response.data.message);
+      } else showError(i18next.t(ToastMessage.SOMETHING_WENT_WRONG));
+    }
+  }, [navigate, params.pid]);
+
 
   const getGraphDetails = useCallback(async () => {
     try {
@@ -133,52 +166,9 @@ export default function Overview() {
     }
   }, [navigate, params.pid, t]);
 
-  const getTestRunList = useCallback(async () => {
-    try {
-      const resp = await axiosService.get(
-        `projects/${params.pid}/activity/test-suites?order=DESC`
-      );
-      if (resp?.data?.data) {
-        setTestRunList(resp.data.data);
-      }
-    } catch (err) {
-      if (err.response && err.response.data) {
-        if (err.response.status === 401) {
-          showError(err.response.data.message);
-          localStorage.clear();
-          sessionStorage.clear();
-          navigate("/");
-          return;
-        } else showError(err.response.data.message);
-      } else showError(i18next.t(ToastMessage.SOMETHING_WENT_WRONG));
-    }
-  }, [navigate, params.pid]);
-
-  const getData = useCallback(async () => {
-    try {
-      const response = await axiosService.get(
-        `/projects/${params.pid}/test-suites?order=DESC`
-      );
-
-      const data = response.data.data.data;
-      const todos = data.filter((ele: any) => ele.status !== "COMPLETED");
-      setTodoList(todos);
-    } catch (err) {
-      if (err.response && err.response.data) {
-        if (err.response.status === 401) {
-          showError(err.response.data.message);
-          localStorage.clear();
-          sessionStorage.clear();
-          navigate("/");
-          return;
-        } else showError(err.response.data.message);
-      } else showError(i18next.t(ToastMessage.SOMETHING_WENT_WRONG));
-    }
-  }, [navigate, params.pid]);
-
-  useEffect(() => {
-    if (params.pid) getData();
-  }, [getData, params.pid]);
+  // useEffect(() => {
+  //   if (params.pid) getData();
+  // }, [getData, params.pid]);
 
   const getActivityList = useCallback(async () => {
     try {
@@ -299,16 +289,19 @@ export default function Overview() {
 
   useEffect(() => {
     if (params.pid) {
-      getMilestoneList();
-      getActivityList();
-      getTestRunList();
-      getGraphDetails();
+      // Fetch all required data in parallel
+      Promise.all([
+        fetchTestSuites(),
+        getMilestoneList(),
+        getActivityList(),
+        getGraphDetails()
+      ]);
     }
   }, [
+    fetchTestSuites,
     getActivityList,
     getGraphDetails,
     getMilestoneList,
-    getTestRunList,
     params.pid,
   ]);
 
