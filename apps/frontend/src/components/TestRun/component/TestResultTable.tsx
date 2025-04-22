@@ -246,22 +246,22 @@ export default function Table({
                         </td>
                         <td className="px-3 py-2 whitespace-nowrap text-center text-xs font-normal">
                           {value?.status === "PASSED" && (
-                            <Badge className="bg-green-100 text-green-700 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-green-600/20">
+                            <Badge className="bg-green-50 text-green-700 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-green-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
                           {value?.status === "FAILED" && (
-                            <Badge className="bg-red-100 text-red-700 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-red-600/20">
+                            <Badge className="bg-red-50 text-red-700 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-red-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
                           {value?.status === "UNTESTED" && (
-                            <Badge className="bg-gray-100 text-gray-700 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-gray-600/20">
+                            <Badge className="bg-gray-100 text-gray-900 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-gray-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
                           {value?.status === "BLOCKED" && (
-                            <Badge className="bg-yellow-100 text-yellow-700 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-yellow-600/20">
+                            <Badge className="bg-yellow-50 text-yellow-700 w-[4.5rem] flex justify-center rounded-md ring-1 ring-inset ring-yellow-600/20">
                               <Trans>{value?.status.toLowerCase()}</Trans>
                             </Badge>
                           )}
