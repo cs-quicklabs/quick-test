@@ -88,6 +88,29 @@ const SelectionModal = ({
     if (params?.pid) getTestcases();
   }, [getTestcases, params?.pid]);
 
+  const addAllSections = () => {
+  // Get all section IDs
+  const allSectionIds = RowData.map((item: any) => item.id);
+  
+  // Get all test case IDs from all sections
+  const allTestCaseIds: string[] = [];
+  RowData.forEach((section: any) => {
+    section.testcases.forEach((testcase: any) => {
+      allTestCaseIds.push(testcase.id);
+    });
+  });
+  
+  // Set both section IDs and test case IDs
+  setTempSelectedSectionIds(allSectionIds);
+  setTempSelectedTestCaseIds(allTestCaseIds);
+};
+
+// Add this function to handle "None" selection
+const deselectAll = () => {
+  setTempSelectedSectionIds([]);
+  setTempSelectedTestCaseIds([]);
+};
+
   const submitSections = () => {
     setSelectedSectionIds(tempSelectedSectionIds);
     setSelectedTestCaseIds(tempSelectedTestCaseIds);
@@ -100,16 +123,6 @@ const SelectionModal = ({
     setShowModal(false);
   };
 
-  const addAllSections = () => {
-    const newSectionIds: any[] = [];
-    RowData.forEach((item: any) => {
-      if (!tempSelectedSectionIds.includes(item.id)) {
-        newSectionIds.push(item.id);
-      }
-    });
-
-    setTempSelectedSectionIds([...tempSelectedSectionIds, ...newSectionIds]);
-  };
 
   const countAllTestcases = (testIds: string[]) => {
     let count = 0;
@@ -186,6 +199,7 @@ const SelectionModal = ({
                       selectedTestCaseIds={tempSelectedTestCaseIds}
                       setSelectedTestCaseIds={setTempSelectedTestCaseIds}
                       addAllSections={addAllSections}
+                      deselectAll={deselectAll} 
                     />
                   </div>
                   <div
