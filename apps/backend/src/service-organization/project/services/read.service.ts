@@ -346,12 +346,13 @@ export class ProjectReadService {
     );
     const testSuites =
       await this.testSuiteService.getTestSuiteDetail(testSuiteId);
-    const { user, assignedTo, milestoneId, ...rest } = testSuites;
+    const { user, assignedTo, milestoneId, testresults, ...rest } = testSuites;
     const result = {
       ...rest,
       user: { ...user?.toDto() },
       assignedTo: { ...assignedTo?.toDto() },
-      milestoneId: { ...milestoneId?.toDto() }
+      milestoneId: { ...milestoneId?.toDto() },
+      testresults: {...testresults?.toDtos() },
     };
     return result;
   }
