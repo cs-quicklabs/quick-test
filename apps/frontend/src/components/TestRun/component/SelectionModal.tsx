@@ -60,17 +60,6 @@ const SelectionModal = ({
         (item: any) => item.testcases.length
       );
 
-      const initialSelectedTestCaseUUID: any = [];
-      data.forEach((suite: any) => {
-        suite.testcases.forEach((testcase: any) => {
-          if (defaultTestCasesIds.includes(testcase.testcaseId)) {
-            initialSelectedTestCaseUUID.push(testcase.id);
-          }
-        });
-      });
-      setSelectedTestCaseIds(initialSelectedTestCaseUUID);
-      setTempSelectedTestCaseIds(initialSelectedTestCaseUUID);
-
       if (data[0]?.name === t("Unassigned")) {
         const [first, ...rest] = data;
         setRowData([...rest, first]);
@@ -107,7 +96,7 @@ const SelectionModal = ({
     setTempSelectedTestCaseIds(allTestCaseIds);
   };
 
-// Add this function to handle "None" selection
+  // Add this function to handle "None" selection
   const deselectAll = () => {
     setTempSelectedSectionIds([]);
     setTempSelectedTestCaseIds([]);
