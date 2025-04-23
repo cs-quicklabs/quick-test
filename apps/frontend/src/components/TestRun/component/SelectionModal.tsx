@@ -20,10 +20,7 @@ const SelectionModal = ({
   showModal,
   setShowModal,
   setTotalTestcases,
-  initialValues,
 }: any) => {
-  const defaultTestCasesIds =
-    Object.values(initialValues).map((item: any) => item.testCaseId) || [];
   const { t } = useTranslation();
   const params = useParams();
 
