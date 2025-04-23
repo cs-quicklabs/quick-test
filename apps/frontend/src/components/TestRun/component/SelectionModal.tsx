@@ -20,10 +20,7 @@ const SelectionModal = ({
   showModal,
   setShowModal,
   setTotalTestcases,
-  initialValues,
 }: any) => {
-  const defaultTestCasesIds =
-    Object.values(initialValues).map((item: any) => item.testCaseId) || [];
   const { t } = useTranslation();
   const params = useParams();
 
@@ -73,6 +70,7 @@ const SelectionModal = ({
       });
       setSelectedTestCaseIds(initialSelectedTestCaseUUID);
       setTempSelectedTestCaseIds(initialSelectedTestCaseUUID);
+
       if (data[0]?.name === t("Unassigned")) {
         const [first, ...rest] = data;
         setRowData([...rest, first]);

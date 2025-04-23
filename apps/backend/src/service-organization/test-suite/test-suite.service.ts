@@ -569,7 +569,6 @@ export class TestSuiteService {
       .withDeleted()
       .leftJoinAndSelect("testsuite.assignedTo", "assignedTo")
       .leftJoinAndSelect("testsuite.milestoneId", "milestoneId")
-      .leftJoinAndSelect("testsuite.testresults", "testresults")
       .where("testsuite.id = :testSuiteId", { testSuiteId })
       .getOne();
     if (!testSuite)
