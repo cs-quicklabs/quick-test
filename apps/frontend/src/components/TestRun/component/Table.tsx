@@ -1,5 +1,4 @@
 import {
-  // DocumentDuplicateIcon,
   PencilSquareIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
@@ -35,7 +34,6 @@ export default function Table(props: Props) {
   const [modalMsg, setMsg] = useState(<></>);
   const [selectedId, setSelectedId] = useState("");
   const params = useParams();
-  // const navigate = useNavigate();
   const testChangeRef = useRef<IntersectionObserver | null>(null);
 
   const lastElementRef = (node: any) => {
@@ -203,27 +201,6 @@ export default function Table(props: Props) {
                                 />
                               </button>
                             )}
-
-                            {/* {value.status === "COMPLETED" && (
-                              <button
-                                data-tooltip-id="test-run-table-tooltip-id"
-                                id="new-test-run"
-                                data-cy="add-test-run"
-                                data-tooltip-content={t("Clone")}
-                                onClick={() => {
-                                  navigate(
-                                    `${appRoutes.PROJECTS}/${params.pid}/${projectRoutes.CREATE_TESTRUN}?duplicateFrom=${value.id}`
-                                  );
-                                }}
-                                type="button"
-                              >
-                                <DocumentDuplicateIcon
-                                  className="text-green-500 h-4 w-4 cursor-pointer"
-                                  aria-hidden="true"
-                                />
-                              </button>
-                            )} */}
-
                             <button
                               data-tooltip-id="test-run-table-tooltip-id"
                               data-tooltip-content={t("Delete")}

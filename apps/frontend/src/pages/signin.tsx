@@ -3,7 +3,7 @@ import Login from "../components/SignUp/Login";
 export default function SignIn() {
   return (
     <>
-      <title>Test Loginnn</title>
+      <title>Test Login</title>
       <meta
         name="description"
         content="Already a user of Buglot! SignIn and start testing"
