@@ -10,6 +10,7 @@ const ModalSectionList = ({
   addAllSections,
   selectedTestCaseIds,
   setSelectedTestCaseIds,
+  deselectAll,
 }: any) => {
   const { t } = useTranslation();
   const [active, setActive] = useState("");
@@ -54,7 +55,7 @@ const ModalSectionList = ({
           {t("All")}
         </span>
         <span
-          onClick={() => setSelectedSectionIds([])}
+          onClick={deselectAll}
           className="hover:underline cursor-pointer pl-2"
         >
           {t("None")}
