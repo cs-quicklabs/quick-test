@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -28,6 +28,9 @@ const AddTestRun = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const duplicateFromId = queryParams.get("duplicateFrom");
 
   const addTestRunSchema = Yup.object().shape({
     name: Yup.string()
@@ -36,14 +39,14 @@ const AddTestRun = () => {
       .required(t(ValidatorMessage.NAME_REQ)),
   });
 
-  const initialValues = {
+  const [initialValues, setInitialValues] = useState({
     name: "",
     description: "",
     assignTo: "",
     milestone: "",
     sectionIds: [],
     testCaseIds: [],
-  };
+  });
 
   const [showLoader, setShowLoader] = useState(true);
   const [apiloading, setApiLoading] = useState(false);
@@ -52,6 +55,7 @@ const AddTestRun = () => {
   const [milestoneOptions, setMilestoneOptions] = useState([]);
   const [state, setState] = useState("includeAll");
   const [totalTestcases, setTotalTestcases] = useState(0);
+  const [isDuplicating, setIsDuplicating] = useState(false);
 
   const returnToMainPage = () =>
     navigate(`${appRoutes.PROJECTS}/${params.pid}/${projectRoutes.TESTRUNS}`);
@@ -66,7 +70,9 @@ const AddTestRun = () => {
         return { value: item.id, label: item.firstName + " " + item.lastName };
       });
       setOptions(memberList);
-      setShowLoader(false);
+      if (!duplicateFromId) {
+        setShowLoader(false);
+      }
     } catch (err) {
       setShowLoader(false);
       if (err.response && err.response.data) {
@@ -78,11 +84,7 @@ const AddTestRun = () => {
         }
       }
     }
-    }, [navigate, params.pid]);
-
-  useEffect(() => {
-    getSelectOptions();
-  }, [getSelectOptions]);
+  }, [navigate, params.pid, duplicateFromId]);
 
   const getMilestoneOptions = useCallback(async () => {
     try {
@@ -94,8 +96,9 @@ const AddTestRun = () => {
         return { value: item.id, label: item.name };
       });
       setMilestoneOptions(milestoneList);
-       setShowLoader(false);
-      
+      if (!duplicateFromId) {
+        setShowLoader(false);
+      }
     } catch (err) {
       setShowLoader(false);
       if (err.response && err.response.data) {
@@ -107,11 +110,62 @@ const AddTestRun = () => {
         }
       } else showError(i18next.t(ToastMessage.SOMETHING_WENT_WRONG));
     }
-  }, [navigate, params.pid]);
+  }, [navigate, params.pid, duplicateFromId]);
+
+  // Fetch test run data if we're duplicating from an existing one
+  const fetchTestRunData = useCallback(async () => {
+    if (!duplicateFromId) return;
+
+    try {
+      setShowLoader(true);
+      // Using the API endpoint you specified
+      const response = await axiosService.get(
+        `/projects/${params.pid}/test-suite-detail/${duplicateFromId}`
+      );
+
+      if (response?.data?.success) {
+        const testRunData = response.data.data;
+
+        // Pre-fill form data with values from the test run being duplicated
+        setInitialValues({
+          name: `${testRunData.name}`,
+          description: testRunData.description || "",
+          assignTo: testRunData.assignedTo || "",
+          milestone: testRunData.milestoneId || "",
+          sectionIds: testRunData.sectionIds || [],
+          testCaseIds: testRunData.testresults || [],
+        });
+        setIsDuplicating(true);
+      }
+      setShowLoader(false);
+    } catch (err) {
+      setShowLoader(false);
+      if (err?.response?.data) {
+        showError(err.response.data.message);
+      } else {
+        showError(i18next.t(ToastMessage.SOMETHING_WENT_WRONG));
+      }
+    }
+  }, [params.pid, duplicateFromId, t]);
 
   useEffect(() => {
-   if (params?.pid) getMilestoneOptions();
-  }, [getMilestoneOptions, params?.pid]);
+    getSelectOptions();
+
+    if (params?.pid) {
+      getMilestoneOptions();
+    }
+
+    // If duplicating from an existing test run, fetch its data
+    if (duplicateFromId) {
+      fetchTestRunData();
+    }
+  }, [
+    getSelectOptions,
+    getMilestoneOptions,
+    params?.pid,
+    fetchTestRunData,
+    duplicateFromId,
+  ]);
 
   const submitFormAddTestRun = async (value: typeof initialValues) => {
     setApiLoading(true);
@@ -153,7 +207,7 @@ const AddTestRun = () => {
       let response;
       if (
         state === "includeSpecific" &&
-        value.sectionIds  &&
+        value.testCaseIds &&
         totalTestcases > 0
       ) {
         const newData: any = { ...data };
@@ -161,13 +215,9 @@ const AddTestRun = () => {
         newData.testSuite.testCaseIds = value.testCaseIds;
         response = await axiosService.post(
           `/projects/${params.pid}/test-suites/filtered`,
-          data
+          newData
         );
-      } else if (
-        state === "includeSpecific" &&
-        value.sectionIds &&
-        totalTestcases === 0
-      ) {
+      } else if (state === "includeSpecific" && totalTestcases === 0) {
         showError(i18next.t(ToastMessage.TEST_CASE_SELECT_ATLEAST_ONE));
         setApiLoading(false);
         return;
@@ -204,10 +254,14 @@ const AddTestRun = () => {
               <Form className="space-y-6" autoComplete="off">
                 <div>
                   <h1 className="text-lg leading-6 font-medium text-gray-900">
-                    {t("Create New Test Run")}
+                    {isDuplicating
+                      ? t("Clone Test Run")
+                      : t("Create New Test Run")}
                   </h1>
                   <p className="mt-1 text-sm text-gray-500">
-                     {t("Please fill in details of your new test run")}
+                    {isDuplicating
+                      ? t("Create a new test run based on an existing one")
+                      : t("Please fill in details of your new test run")}
                   </p>
                 </div>
                 <div>
@@ -226,7 +280,7 @@ const AddTestRun = () => {
                     optionsForSelect={options}
                     validation={validation}
                     dataAttr="assignee"
-                    
+                    defaultValue={initialValues.assignTo}
                   />
                 </div>
                 <div>
@@ -236,7 +290,7 @@ const AddTestRun = () => {
                     name="milestone"
                     optionsForSelect={milestoneOptions}
                     isOptional
-                   
+                    defaultValue={initialValues.milestone}
                   />
                 </div>
                 <div>
@@ -254,6 +308,7 @@ const AddTestRun = () => {
                     setState={setState}
                     totalTestcases={totalTestcases}
                     setTotalTestcases={setTotalTestcases}
+                    initialValues={initialValues.testCaseIds}
                   />
                 </div>
                 <FormSubmitPanel
@@ -263,7 +318,7 @@ const AddTestRun = () => {
                   onCancel={returnToMainPage}
                   loading={apiloading}
                   validSubmit={false}
-                  submitTitle={t("Create")}
+                  submitTitle={isDuplicating ? t("Clone") : t("Create")}
                 />
               </Form>
             );
