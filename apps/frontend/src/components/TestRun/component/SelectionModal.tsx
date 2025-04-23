@@ -73,6 +73,7 @@ const SelectionModal = ({
       });
       setSelectedTestCaseIds(initialSelectedTestCaseUUID);
       setTempSelectedTestCaseIds(initialSelectedTestCaseUUID);
+
       if (data[0]?.name === t("Unassigned")) {
         const [first, ...rest] = data;
         setRowData([...rest, first]);
@@ -88,28 +89,32 @@ const SelectionModal = ({
     if (params?.pid) getTestcases();
   }, [getTestcases, params?.pid]);
 
+ /**
+* Add this function to select all section when we 
+* click on select all button in selection model
+*/
   const addAllSections = () => {
-  // Get all section IDs
-  const allSectionIds = RowData.map((item: any) => item.id);
-  
-  // Get all test case IDs from all sections
-  const allTestCaseIds: string[] = [];
-  RowData.forEach((section: any) => {
-    section.testcases.forEach((testcase: any) => {
-      allTestCaseIds.push(testcase.id);
+    // Get all section IDs
+    const allSectionIds = RowData.map((item: any) => item.id);
+    
+    // Get all test case IDs from all sections
+    const allTestCaseIds: string[] = [];
+    RowData.forEach((section: any) => {
+      section.testcases.forEach((testcase: any) => {
+        allTestCaseIds.push(testcase.id);
+      });
     });
-  });
-  
-  // Set both section IDs and test case IDs
-  setTempSelectedSectionIds(allSectionIds);
-  setTempSelectedTestCaseIds(allTestCaseIds);
-};
+    
+    // Set both section IDs and test case IDs
+    setTempSelectedSectionIds(allSectionIds);
+    setTempSelectedTestCaseIds(allTestCaseIds);
+  };
 
 // Add this function to handle "None" selection
-const deselectAll = () => {
-  setTempSelectedSectionIds([]);
-  setTempSelectedTestCaseIds([]);
-};
+  const deselectAll = () => {
+    setTempSelectedSectionIds([]);
+    setTempSelectedTestCaseIds([]);
+  };
 
   const submitSections = () => {
     setSelectedSectionIds(tempSelectedSectionIds);
