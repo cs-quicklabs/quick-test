@@ -166,10 +166,6 @@ export default function Overview() {
     }
   }, [navigate, params.pid, t]);
 
-  // useEffect(() => {
-  //   if (params.pid) getData();
-  // }, [getData, params.pid]);
-
   const getActivityList = useCallback(async () => {
     try {
       const resp = await axiosService.get(
