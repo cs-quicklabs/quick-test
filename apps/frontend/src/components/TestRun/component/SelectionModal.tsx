@@ -82,20 +82,20 @@ const SelectionModal = ({
     } catch (err) {
       showError(err?.message);
     }
-  }, [params.pid, t]);
+  }, [params.pid, t, defaultTestCasesIds]);
 
   useEffect(() => {
     if (params?.pid) getTestcases();
   }, [getTestcases, params?.pid]);
 
- /**
-* Add this function to select all section when we 
-* click on select all button in selection model
-*/
+  /**
+ * Add this function to select all section when we 
+ * click on select all button in selection model
+ */
   const addAllSections = () => {
     // Get all section IDs
     const allSectionIds = RowData.map((item: any) => item.id);
-    
+
     // Get all test case IDs from all sections
     const allTestCaseIds: string[] = [];
     RowData.forEach((section: any) => {
@@ -103,7 +103,7 @@ const SelectionModal = ({
         allTestCaseIds.push(testcase.id);
       });
     });
-    
+
     // Set both section IDs and test case IDs
     setTempSelectedSectionIds(allSectionIds);
     setTempSelectedTestCaseIds(allTestCaseIds);
@@ -203,7 +203,7 @@ const SelectionModal = ({
                       selectedTestCaseIds={tempSelectedTestCaseIds}
                       setSelectedTestCaseIds={setTempSelectedTestCaseIds}
                       addAllSections={addAllSections}
-                      deselectAll={deselectAll} 
+                      deselectAll={deselectAll}
                     />
                   </div>
                   <div
