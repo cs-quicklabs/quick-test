@@ -3,7 +3,7 @@ import { appRoutes } from "./constants/page-routes";
 import { NotifyExpired } from "./helpers";
 import { showError } from "../Toaster/ToasterFun";
 import i18next from "i18next";
-import { ToastMessage } from "./constants/misc";
+import { ErrorMessages } from "./constants/misc";
 
 const serverUrl: string | undefined = process.env.REACT_APP_API_URL;
 const instance = axios.create({
@@ -32,24 +32,47 @@ instance.interceptors.response.use(
   (response) => {
     return response;
   },
-  async (errorResponse) => {
-    if (errorResponse) {
-      //401=unauthorised access possibly due to being archived
-      if (errorResponse) {
-        if (errorResponse?.response?.status === 401) {
-          localStorage.clear();
-          sessionStorage.clear();
-          window.location.href = appRoutes.SIGNIN_PAGE;
-        } else if (errorResponse?.response?.status === 403) {
-          //403=Plan expired
-          NotifyExpired();
-        } else if (errorResponse?.response?.status === 404)
-          showError(i18next.t(ToastMessage.NO_TEST_CASE_PROJECT));
-      }
-      return Promise.reject(errorResponse);
+  async (error) => {
+    if (error) {
+      handleErrorCodes(error?.response)
+      return Promise.reject(error);
     }
   }
 );
+
+function handleErrorCodes(errorResponse: any) {
+  switch (errorResponse?.status) {
+    case 400: // Bad Request
+      showError(ErrorMessages.BAD_REQUEST);
+      break;
+
+    case 401: // Unauthorized
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = appRoutes.SIGNIN_PAGE;
+      showError(ErrorMessages.UNAUTHORIZED);
+      break;
+
+    case 403: // Forbidden: User does't have access rights to the content.
+      NotifyExpired();
+      showError(ErrorMessages.FORBIDDEN);
+      break;
+
+    case 404: // Resource Not Found:
+      showError(ErrorMessages.RESOURCE_NOT_FOUND);
+      break;
+
+    case 500: // Internal Server Error
+    case 502: // Bad gateway
+    case 503: // Service unavailable
+    case 504: // Gateway Timeout
+      showError(ErrorMessages.SOMETHING_WENT_WRONG);
+      break;
+
+    default:
+      showError(ErrorMessages.UNEXPECTED_ERROR);
+  }
+}
 
 const axiosService = {
   get: (endPoint: string, headers = {}) => {

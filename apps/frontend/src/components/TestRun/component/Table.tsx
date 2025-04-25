@@ -217,7 +217,7 @@ export default function Table(props: Props) {
                                 type="button"
                               >
                                 <DocumentDuplicateIcon
-                                  className="text-green-500 h-4 w-4 cursor-pointer"
+                                  className="text-indigo-500 h-4 w-4 cursor-pointer"
                                   aria-hidden="true"
                                 />
                               </button>

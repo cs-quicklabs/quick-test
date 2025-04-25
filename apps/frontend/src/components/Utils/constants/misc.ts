@@ -24,6 +24,15 @@ export const enum ToastMessage {
   MEMBER_DELETED = "Member deleted successfully",
 }
 
+export const enum ErrorMessages {
+  SOMETHING_WENT_WRONG = "Something went wrong on the server. Please try again later.",
+  RESOURCE_NOT_FOUND = "The requested resource was not found. Please check the URL or try again later.",
+  FORBIDDEN = "You don’t have permission to access this resource.",
+  UNAUTHORIZED = "Your session has expired. Redirecting to sign-in page...",
+  BAD_REQUEST = "The request was invalid. Please check your input and try again.",
+  UNEXPECTED_ERROR = "An unexpected error occurred. Please try again."
+}
+
 export const ValidatorMessage = {
   EMAIL_NOT_VALID: "Email is not valid",
   EMAIL_REQ: "Email is required",
