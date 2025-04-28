@@ -4,8 +4,7 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import { useCallback } from "react";
-import { Fragment, useState, useEffect } from "react";
+import { useCallback, Fragment, useState, useEffect } from "react";
 import SectionTable from "./ModalSectionTable";
 import { useParams } from "react-router-dom";
 import CancelButton from "../../Button/cancelButton";
@@ -22,8 +21,6 @@ const SelectionModal = ({
   setTotalTestcases,
   initialValues,
 }: any) => {
-  const defaultTestCasesIds =
-    Object.values(initialValues).map((item: any) => item.testCaseId) || [];
   const { t } = useTranslation();
   const params = useParams();
 
@@ -54,11 +51,19 @@ const SelectionModal = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showModal]);
 
+  // Move this inside the getTestcases function to prevent it from
+  // being a dependency that causes re-renders
   const getTestcases = useCallback(async () => {
     try {
+      // Extract testCaseIds only when the function is called
+      const defaultTestCasesIds = Object.values(initialValues).map(
+        (item: any) => item.testCaseId
+      ) || [];
+
       const response = await axiosService.get(
         `/projects/${params.pid}/test-cases`
       );
+      
       const data = response?.data?.data.filter(
         (item: any) => item.testcases.length
       );
@@ -82,11 +87,18 @@ const SelectionModal = ({
     } catch (err) {
       showError(err?.message);
     }
-  }, [params.pid, t, defaultTestCasesIds]);
+  }, [params.pid, t, initialValues]); // Include initialValues here, but it's now used inside the function
+
+  // Use a ref to track if we've already loaded the data to prevent extra API calls
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
-    if (params?.pid) getTestcases();
-  }, [getTestcases, params?.pid]);
+    // Only fetch data if we haven't loaded it yet and we have a project ID
+    if (params?.pid && !hasLoaded) {
+      getTestcases();
+      setHasLoaded(true);
+    }
+  }, [getTestcases, params?.pid, hasLoaded]);
 
   /**
  * Add this function to select all section when we 
@@ -126,7 +138,6 @@ const SelectionModal = ({
     setTotalTestcases(noOfTestcases);
     setShowModal(false);
   };
-
 
   const countAllTestcases = (testIds: string[]) => {
     let count = 0;
