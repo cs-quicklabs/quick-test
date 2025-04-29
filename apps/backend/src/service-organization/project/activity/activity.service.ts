@@ -106,13 +106,7 @@ export class ActivityService {
       .orderBy("activity.createdAt", Order.DESC)
       .getMany();
 
-    const filteredActivity: ActivityEntity[] = [];
-    activities.forEach((activity) => {
-      if (!(activity.testSuite === null && activity.milestone === null)) {
-        filteredActivity.push(activity);
-      }
-    });
-    const result = this.groupActivitiesByDate(filteredActivity);
+    const result = this.groupActivitiesByDate(activities);
     return result;
   }
 

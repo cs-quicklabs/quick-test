@@ -56,14 +56,13 @@ const SelectionModal = ({
   const getTestcases = useCallback(async () => {
     try {
       // Extract testCaseIds only when the function is called
-      const defaultTestCasesIds = Object.values(initialValues).map(
-        (item: any) => item.testCaseId
-      ) || [];
+      const defaultTestCasesIds =
+        Object.values(initialValues).map((item: any) => item.testCaseId) || [];
 
       const response = await axiosService.get(
         `/projects/${params.pid}/test-cases`
       );
-      
+
       const data = response?.data?.data.filter(
         (item: any) => item.testcases.length
       );
@@ -101,9 +100,9 @@ const SelectionModal = ({
   }, [getTestcases, params?.pid, hasLoaded]);
 
   /**
- * Add this function to select all section when we 
- * click on select all button in selection model
- */
+   * Add this function to select all section when we
+   * click on select all button in selection model
+   */
   const addAllSections = () => {
     // Get all section IDs
     const allSectionIds = RowData.map((item: any) => item.id);

@@ -39,27 +39,24 @@ export default function Overview() {
   const [hasMore, setHasMore] = useState(false);
   const [loadingTestChange, setLoadingTestChange] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
- 
+
   const fetchTestSuites = useCallback(async () => {
     try {
-      
       const response = await axiosService.get(
         `/projects/${params.pid}/test-suites?order=DESC`
       );
-      
+
       if (response?.data?.data?.data) {
         const data = response.data.data.data;
-        
+
         // Process data for test runs
         setTestRunList(data);
-        
+
         // Process data for todos
         const todos = data.filter((ele: any) => ele.status !== "COMPLETED");
-      setTodoList(todos);
+        setTodoList(todos);
       }
-    
     } catch (err) {
-      
       if (err.response && err.response.data) {
         if (err.response.status === 401) {
           showError(err.response.data.message);
@@ -71,7 +68,6 @@ export default function Overview() {
       } else showError(i18next.t(ToastMessage.SOMETHING_WENT_WRONG));
     }
   }, [navigate, params.pid]);
-
 
   const getGraphDetails = useCallback(async () => {
     try {
@@ -290,7 +286,7 @@ export default function Overview() {
         fetchTestSuites(),
         getMilestoneList(),
         getActivityList(),
-        getGraphDetails()
+        getGraphDetails(),
       ]);
     }
   }, [

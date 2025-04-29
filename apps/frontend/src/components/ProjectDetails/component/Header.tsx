@@ -80,63 +80,45 @@ export default function TestCaseHeading({
   }
 
   return (
-      <div className="py-4 mx-8 sm:flex sm:items-start sm:justify-between bg-gray-50 2xl:mx-52">
-        <div className="flex-1 min-w-0">
-          {title && (
-            <h2 className="flex-1 text-2xl font-bold text-gray-900">{title}</h2>
-          )}
-          {text && (
-            <div className="text-sm text-gray-500 truncate mt-1">{text}</div>
-          )}
-          {description && (
-            <div className="mt-1 truncate text-sm text-gray-500">
-              {description}
-            </div>
-          )}
-        </div>
+    <div className="py-4 mx-8 sm:flex sm:items-start sm:justify-between bg-gray-50 2xl:mx-52">
+      <div className="flex-1 min-w-0">
+        {title && (
+          <h2 className="flex-1 text-2xl font-bold text-gray-900">{title}</h2>
+        )}
+        {text && (
+          <div className="text-sm text-gray-500 truncate mt-1">{text}</div>
+        )}
+        {description && (
+          <div className="mt-1 truncate text-sm text-gray-500">
+            {description}
+          </div>
+        )}
+      </div>
 
-        <div className="mt-4 flex items-center gap-0 sm:mt-0 sm:ml-4">
-          {status && (
-            <>
-              {status?.toLowerCase() === "pending" && (
-                <Badge className="bg-gray-100 text-gray-900 rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ring-gray-600/20">
-                  {t(status)}
-                </Badge>
-              )}
-              {status?.toLowerCase() === "in progress" && (
-                <Badge className="bg-yellow-50 text-yellow-700 text-sm rounded-md px-2 py-1 font-medium ring-1 ring-inset ring-yellow-600/20">
-                  {t(status)}
-                </Badge>
-              )}
-              {status?.toLowerCase() === "completed" && (
-                <Badge className="rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                  {t(status)}
-                </Badge>
-              )}
-            </>
-          )}
-          {redirectToPage && (
-            <div className="pl-1">
-              {redirectToPage?.text === t("New Project") ? (
-                <AccessControl permission={ProjectPermissions.CREATE_PROJECT}>
-                  <Button
-                    id={redirectToPage?.text}
-                    loading={buttonLoader.redirectButton}
-                    type="button"
-                    data-cy={dataAttr}
-                    onClick={() => {
-                      setButtonLoader({
-                        ...buttonLoader,
-                        redirectButton: true,
-                      });
-                      navigate(redirectToPage.url);
-                    }}
-                    className="sm:order-1 "
-                  >
-                    {redirectToPage?.text}
-                  </Button>
-                </AccessControl>
-              ) : (
+      <div className="mt-4 flex items-center gap-0 sm:mt-0 sm:ml-4">
+        {status && (
+          <>
+            {status?.toLowerCase() === "pending" && (
+              <Badge className="bg-gray-100 text-gray-900 rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ring-gray-600/20">
+                {t(status)}
+              </Badge>
+            )}
+            {status?.toLowerCase() === "in progress" && (
+              <Badge className="bg-yellow-50 text-yellow-700 text-sm rounded-md px-2 py-1 font-medium ring-1 ring-inset ring-yellow-600/20">
+                {t(status)}
+              </Badge>
+            )}
+            {status?.toLowerCase() === "completed" && (
+              <Badge className="rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                {t(status)}
+              </Badge>
+            )}
+          </>
+        )}
+        {redirectToPage && (
+          <div className="pl-1">
+            {redirectToPage?.text === t("New Project") ? (
+              <AccessControl permission={ProjectPermissions.CREATE_PROJECT}>
                 <Button
                   id={redirectToPage?.text}
                   loading={buttonLoader.redirectButton}
@@ -153,10 +135,28 @@ export default function TestCaseHeading({
                 >
                   {redirectToPage?.text}
                 </Button>
-              )}
-            </div>
-          )}
-        </div>
+              </AccessControl>
+            ) : (
+              <Button
+                id={redirectToPage?.text}
+                loading={buttonLoader.redirectButton}
+                type="button"
+                data-cy={dataAttr}
+                onClick={() => {
+                  setButtonLoader({
+                    ...buttonLoader,
+                    redirectButton: true,
+                  });
+                  navigate(redirectToPage.url);
+                }}
+                className="sm:order-1 "
+              >
+                {redirectToPage?.text}
+              </Button>
+            )}
+          </div>
+        )}
       </div>
+    </div>
   );
 }
