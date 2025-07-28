@@ -131,7 +131,7 @@
     "@types/supertest": "6.0.2",
     "@types/uuid": "10.0.0",
     "@typescript-eslint/eslint-plugin": "7.0.0",
-    "@typescript-eslint/parser": "6.0.0",
+    "@typescript-eslint/parser": "8.38.0",
     "autoprefixer": "10.4.20",
     "cypress": "13.17.0",
     "cypress-xpath": "^2.0.1",
