@@ -1,420 +1,377 @@
+import { jsPDF } from 'jspdf';
 import { TestCaseResultStatus } from "src/common/enums/test-case-result-status";
 import { TestSuiteStatus } from "src/common/enums/test-suite-status";
 import { TestSuiteEntity } from "src/service-organization/test-suite/test-suite.entity";
+import { ProjectEntity } from "src/service-organization/project/project.entity";
 
-export const getTestResultFromHtml = (testSuite: TestSuiteEntity, testCaseResultsObject) => {
-    const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",];
-    const statusTestRun =
-        testSuite.status === TestSuiteStatus.INPROGRESS
-            ? `${testSuite.status.charAt(0) + testSuite.status.charAt(1).toLowerCase()} ${testSuite.status.charAt(2)}${testSuite.status.substring(3, testSuite.status.length).toLowerCase()}`
-            : testSuite.status.charAt(0) + testSuite.status.substring(1, testSuite.status.length).toLowerCase();
-    let statusClassName = testSuite?.status?.toLocaleLowerCase();
+interface TestCase {
+    testcaseId: string;
+    title: string;
+    executionPriority: string;
+}
+
+interface TestCaseResult {
+    testCaseId: string;
+    testCaseTitle: string;
+    status: TestCaseResultStatus;
+}
+
+export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResultsObject: Record<string, TestCaseResult[]>): Buffer => {
+    const doc = new jsPDF();
+    doc.setFont('helvetica', 'normal');
+    let yPos = 20;
+
+    // Title
+    doc.setFontSize(18);
+    doc.text(testSuite.name, 20, yPos);
+    yPos += 10;
+
+    // Horizontal line
+    doc.line(20, yPos, 190, yPos);
+    yPos += 6;
+
+    // Created On
+    const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    doc.setFontSize(12);
+    doc.text(`Created On: ${month[testSuite.createdAt.getMonth()]} ${testSuite.createdAt.getDate()}, ${testSuite.createdAt.getFullYear()}`, 20, yPos);
+    yPos += 8;
+
+    // Status
+    const statusText = testSuite.status === TestSuiteStatus.INPROGRESS
+        ? `${testSuite.status.charAt(0) + testSuite.status.charAt(1).toLowerCase()} ${testSuite.status.charAt(2)}${testSuite.status.substring(3, testSuite.status.length).toLowerCase()}`
+        : testSuite.status.charAt(0) + testSuite.status.substring(1, testSuite.status.length).toLowerCase();
+    
+    doc.text(`Status: ${statusText}`, 20, yPos);
+    yPos += 15;
+
+    // Summary table
     const { passed, failed, untested, blocked, total } = testSuite.testreport;
-    const passedResultPercentage = Math.ceil((passed * 100) / total);
-    const failedResultPercentage = Math.ceil((failed * 100) / total);
-    const blocekdResultPercentage = Math.ceil((blocked * 100) / total);
-    const untestedResultPercentage = Math.ceil((untested * 100) / total);
+    const passedPercentage = Math.ceil((passed * 100) / total);
+    const failedPercentage = Math.ceil((failed * 100) / total);
+    const blockedPercentage = Math.ceil((blocked * 100) / total);
+    const untestedPercentage = Math.ceil((untested * 100) / total);
 
-    let text = "";
+    // Summary table headers
+    doc.setFontSize(10);
+    const summaryHeaders = ['Passed', 'Failed', 'Untested', 'Blocked'];
+    const summaryData = [
+        `${passedPercentage}% (${passed}/${total})`,
+        `${failedPercentage}% (${failed}/${total})`,
+        `${untestedPercentage}% (${untested}/${total})`,
+        `${blockedPercentage}% (${blocked}/${total})`
+    ];
+
+    const tableWidth = 150;
+    const cellWidth = tableWidth / 4;
+    const tableStartX = 20;
+
+    // Header row
+    for (let i = 0; i < summaryHeaders.length; i++) {
+        const x = tableStartX + (i * cellWidth);
+        doc.rect(x, yPos, cellWidth, 8);
+        doc.text(summaryHeaders[i], x + 2, yPos + 6);
+    }
+    yPos += 8;
+
+    // Data row
+    for (let i = 0; i < summaryData.length; i++) {
+        const x = tableStartX + (i * cellWidth);
+        doc.rect(x, yPos, cellWidth, 8);
+        doc.text(summaryData[i], x + 2, yPos + 6);
+    }
+    yPos += 20;
+
+    // Test case results by section
     let sectionCount = 1;
     for (const sectionName in testCaseResultsObject) {
         const testCaseResults = testCaseResultsObject[sectionName];
-        text += `<h3 class="sectionNameOther">${sectionCount}. ${sectionName}</h3>
-                        <table class="table table-bordered table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <td scope="col" class="idWidth"><b>ID</b></td>
-                                <td scope="col" class="title"><b>Title</b></td>
-                                <td scope="col" class="status"><b>Status</b></td>
-                            </tr>
-                        </thead>
-                        <tbody>`;
-        for (let i = 0; i < testCaseResults.length; i++) {
-            let className = "";
-            switch (testCaseResults[i].status) {
-                case TestCaseResultStatus.PASSED:
-                    className = "passed";
-                    break;
-                case TestCaseResultStatus.FAILED:
-                    className = "failed";
-                    break;
-                case TestCaseResultStatus.BLOCKED:
-                    className = "blocked";
-                    break;
-                case TestCaseResultStatus.UNTESTED:
-                    className = "untested";
-                    break;
-                default:
-                    className = "untested";
-                    break;
-            }
-            text += `<tr>
-                                <td class="idWidth">${testCaseResults[i].testCaseId}</td>
-                                <td class="title">${testCaseResults[i].testCaseTitle}</td>
-                                <td class="status ${className}">${testCaseResults[i].status}</td>
-                                </tr>`;
+        
+        // Check if we need a new page for section header and at least first row
+        if (yPos > 240) {
+            doc.addPage();
+            yPos = 20;
         }
-        text += `</tbody></table>`;
-        sectionCount += 1;
+
+        // Section header
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
+        doc.text(`${sectionCount}. ${sectionName}`, 20, yPos);
+        yPos += 6;
+
+        // Table headers
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'bold');
+        doc.setDrawColor(128, 128, 128); // Set border color to gray
+        const headers = ['ID', 'Title', 'Status'];
+        const columnWidths = [15, 125, 25];
+        let currentX = 20;
+
+        for (let i = 0; i < headers.length; i++) {
+            doc.rect(currentX, yPos, columnWidths[i], 6);
+            if (i === 0) { // Center align ID column
+                const headerTextWidth = doc.getTextWidth(headers[i]);
+                const headerCenterX = currentX + (columnWidths[i] - headerTextWidth) / 2;
+                doc.text(headers[i], headerCenterX, yPos + 4);
+            } else {
+                doc.text(headers[i], currentX + 2, yPos + 4);
+            }
+            currentX += columnWidths[i];
+        }
+        doc.setFont('helvetica', 'normal');
+        yPos += 6;
+
+        // Table data
+        for (const result of testCaseResults) {
+            // Check if we need a new page
+            if (yPos > 270) {
+                doc.addPage();
+                yPos = 20;
+                
+                // Re-add table headers on new page
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'bold');
+                doc.setDrawColor(128, 128, 128); // Set border color to gray
+                let headerX = 20;
+                for (let i = 0; i < headers.length; i++) {
+                    doc.rect(headerX, yPos, columnWidths[i], 6);
+                    if ((headers[0] === '#' && (i === 0 || i === 2)) || (headers[0] === 'ID' && i === 0)) { // Center align # and Priority columns, or ID column
+                        const headerTextWidth = doc.getTextWidth(headers[i]);
+                        const headerCenterX = headerX + (columnWidths[i] - headerTextWidth) / 2;
+                        doc.text(headers[i], headerCenterX, yPos + 4);
+                    } else {
+                        doc.text(headers[i], headerX + 2, yPos + 4);
+                    }
+                    headerX += columnWidths[i];
+                }
+                doc.setFont('helvetica', 'normal');
+                yPos += 6;
+            }
+
+            currentX = 20;
+            
+            // Calculate row height based on title text
+            const cleanTitleText = result.testCaseTitle.replace(/_/g, ' ');
+            const titleLines = doc.splitTextToSize(cleanTitleText, columnWidths[1] - 4);
+            const rowHeight = Math.max(6, titleLines.length * 5);
+            
+            // ID
+            doc.rect(currentX, yPos, columnWidths[0], rowHeight);
+            const resultIdText = result.testCaseId.toString();
+            const resultIdTextWidth = doc.getTextWidth(resultIdText);
+            const resultIdCenterX = currentX + (columnWidths[0] - resultIdTextWidth) / 2;
+            doc.text(resultIdText, resultIdCenterX, yPos + 4);
+            currentX += columnWidths[0];
+            
+            // Title
+            doc.rect(currentX, yPos, columnWidths[1], rowHeight);
+            doc.text(titleLines, currentX + 2, yPos + 4);
+            currentX += columnWidths[1];
+            
+            // Status
+            doc.rect(currentX, yPos, columnWidths[2], rowHeight);
+            doc.text(result.status, currentX + 2, yPos + 4);
+            
+            yPos += rowHeight;
+        }
+        
+        yPos += 6;
+        sectionCount++;
     }
 
-    return `<!DOCTYPE html>
-            <html>
-                <head>
-                    <title>Test Case PDF</title>
-                    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-                    <style>
-                        * {
-                            font-family: 'Roboto', sans-serif;
-                        }
+    return Buffer.from(doc.output('arraybuffer'));
+};
 
-                        body {
-                            margin: 0;
-                            padding: 0;
-                        }
-
-                        .name {
-                            font-size: 14px;
-                            margin: 0px;
-                        }
-
-                        .sectionNameOther {
-                            font-size: 12px;
-                            margin: 10px 0;
-                        }
-
-                        table {
-                            width: 100%;
-                            border-collapse: collapse;
-                            page-break-inside: avoid;
-                            margin-bottom: 28px;
-                        }
-
-                        td, th {
-                            word-wrap: break-word;
-                            border: 1px solid #ddd;
-                            padding: 8px;
-                        }
-
-                        .table-responsive {
-                            margin-bottom: 28px;
-                            font-size: 10px;
-                        }
-
-                        .page-break {
-                            page-break-before: always;
-                            page-break-after: always;
-                            page-break-inside: avoid;
-                        }
-
-                                    .pending {
-                                        color: #3498db;
-                                    }
-                            
-                                    .inprogress {
-                                        color: #f1c40f;
-                                    }
-                            
-                                    .completed {
-                                        color: #07bc0c;
-                                    }
-                            
-                                    .untested {
-                                        color: #3498db;
-                                    }
-                            
-                                    .passed {
-                                        color: #07bc0c;
-                                    }
-                            
-                                    .failed {
-                                        color: #e74c3c;
-                                    }
-
-                                    .blocked {
-                                        color: #000000;
-                                    }
-                    </style>
-                            </head>
-                            <body>
-                                <div>
-                                    <h1 class="name">${testSuite.name}</h1>
-                                    <hr />
-                                    <div class="table-responsive">
-                                        <h3 class="sectionNameOther">Created On: ${month[testSuite.createdAt.getMonth()]} ${testSuite.createdAt.getDate()}, ${testSuite.createdAt.getFullYear()}</h3>
-                                        <h3 class="sectionNameOther">Status: <span class=${statusClassName}>${statusTestRun}</span></h3>
-                                        <table class="table table-bordered table-striped table-sm">
-                                            <thead>
-                                                <tr>
-                                                    <td scope="col" class="text-center"><b>Passed</b></td>
-                                                    <td scope="col" class="text-center"><b>Failed</b></td>
-                                                    <td scope="col" class="text-center"><b>Untested</b></td>
-                                                    <td scope="col" class="text-center"><b>Blocked</b></td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-center">${passedResultPercentage}% (${passed}/${total})</td>
-                                                    <td class="text-center">${failedResultPercentage}% (${failed}/${total})</td>
-                                                    <td class="text-center">${untestedResultPercentage}% (${untested}/${total})</td>
-                                                    <td class="text-center">${blocekdResultPercentage}% (${blocked}/${total})</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        ${text}
-                                    </div>
-                                </div>
-                            </body>
-            </html>
-    `
-}
-
-export const getTestCasesFromHtml = (testCasesObject, project) => {
-    let text = "";
-    let sectionCount = 1;
+export const generateTestCasesPdf = (testCasesObject: Record<string, TestCase[]>, project: ProjectEntity): Buffer => {
+    const doc = new jsPDF();
+    doc.setFont('helvetica', 'normal');
+    let yPos = 20;
     let testCasesCount = 0;
+
     const testCaseName = project?.name ?? 'Test Cases';
 
+    // Title
+    doc.setFontSize(18);
+    const titleWidth = doc.getTextWidth(testCaseName);
+    doc.text(testCaseName, 20, yPos);
+    
+    // Count total test cases
+    for (const sectionName in testCasesObject) {
+        testCasesCount += testCasesObject[sectionName].length;
+    }
+    
+    // Add test case count on same line, but ensure no overlap
+    doc.setFontSize(10);
+    doc.text(`( ${testCasesCount} test cases )`, 25 + titleWidth, yPos);
+    yPos += 10;
+
+    // Horizontal line
+    doc.line(20, yPos, 190, yPos);
+    yPos += 8;
+
+    let sectionCount = 1;
     for (const sectionName in testCasesObject) {
         const testCases = testCasesObject[sectionName];
-        text += `<h3 class="sectionName">${sectionCount}. ${sectionName}</h3>`;
-        text += `<table class="table table-bordered table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <td style="width: 20px;" scope="col"><b>#</b></td>
-                                <td scope="col"><b>Title</b></td>
-                                <td style="text-align: center;" scope="col"><b>Priority</b></td>
-                            </tr>
-                        </thead>
-                        <tbody>`;
-        for (let i = 0; i < testCases.length; i++) {
-            text += `<tr>
-                            <td style="width: 20px" scope="row">${testCases[i].testcaseId}</td>
-                            <td style="padding-left=2px;">${testCases[i].title}</td>
-                            <td style="width: 45px; text-align: center;">
-                                ${testCases[i].executionPriority}
-                            </td>                           
-                        </tr>`;
-            testCasesCount += 1;
-        }
-        text += `</tbody></table>`;
-        sectionCount += 1;
-    }
-
-    return `<!DOCTYPE html>
-        <html>
-            <head>
-            <title>Test Case PDF</title>
-            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-            <style>
-                * {
-                    font-family: 'Roboto', sans-serif;
-                }
-
-                body {
-                    background-color: #ffffff;
-                    color: #374151; /* Tailwind gray-700 */
-                }
-
-                .sectionName {
-                    font-size: 12px;
-                    font-weight: 600; /* Matches Tailwind font-semibold */
-                    color: #1F2937; /* Tailwind gray-900 */
-                    margin-bottom: 3px;
-                }
-
-                table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    overflow: hidden;
-                    border: 1px solid #000; /* Matches Tailwind divide-gray-300 */
-                }
-
-                thead {
-                    color: #1F2937; /* Tailwind gray-900 */
-                    font-size: 10px;
-                    font-weight: 600;
-                    text-align: left;
-                    border-bottom: 1px solid #000000;
-                }
-
-                td, th {
-                    border: 1px solid #E5E7EB;
-                    padding: 3px;
-                    font-size: 9px;
-                    vertical-align: middle;
-                }
-
-                .col-id {
-                    font-weight: 500;
-                }
-                .name {
-                    font-size: 18px;
-                    font-weight: 400; /* Matches Tailwind font-bold */
-                    color: #111827; /* Tailwind gray-900 */
-                }
-
-            </style>
-        </head>
         
-        <body>
-            <div>
-                <div>
-                    <span style="display: inline-block; font-size: 18px; font-weight: 400; color: #111827; margin-right: 3px;">
-                        ${testCaseName}
-                    </span>
-                    <span style="display: inline-block; font-size: 9px; color: #6B7280;">
-                        ( ${testCasesCount} test cases )
-                    </span>
-                </div>
-                <hr />
-                <div class="table-responsive">
-                   ${text}
-                </div>
-            </div>
-        </body>
-        </html>
-        `;
-}
-
-export const getTestSuitesFromHtml = (testSuites: TestSuiteEntity[]) => {
-    let text = "";
-    for (let i = 0; i < testSuites.length; i++) {
-        text += `<h3 class="sectionName">${i + 1}. ${testSuites[i].name}</h3>`;
-        let className = "pending";
-        const status =
-            testSuites[i].status === TestSuiteStatus.INPROGRESS
-                ? `${testSuites[i].status.charAt(0) +
-                testSuites[i].status.charAt(1).toLowerCase()
-                } ${testSuites[i].status.charAt(2)}${testSuites[i].status
-                    .substring(3, testSuites[i].status.length)
-                    .toLowerCase()}`
-                : testSuites[i].status.charAt(0) +
-                testSuites[i].status
-                    .substring(1, testSuites[i].status.length)
-                    .toLowerCase();
-        switch (testSuites[i].status) {
-            case TestSuiteStatus.INPROGRESS:
-                className = "inProgress";
-                break;
-            case TestSuiteStatus.PENDING:
-                className = "pending";
-                break;
-            case TestSuiteStatus.COMPLETED:
-                className = "completed";
-                break;
-            default:
-                className = "pending";
+        // Check if we need a new page for section header and at least first row
+        if (yPos > 240) {
+            doc.addPage();
+            yPos = 20;
         }
-        text += `<table class="table table-bordered table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <td scope="col" class="idWidth">Passed</td>
-                                <td scope="col" class="idWidth">Failed</td>
-                                <td scope="col" class="idWidth">Untested</td>
-                                <td scope="col" class="idWidth">Total</td>
-                                <td scope="col" class="idWidth">Status</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="idWidth">${testSuites[i].testreport.passed}</td>
-                                <td class="idWidth">${testSuites[i].testreport.failed}</td>
-                                <td class="idWidth">${testSuites[i].testreport.untested}</td>
-                                <td class="idWidth">${testSuites[i].testreport.total}</td>
-                                <td class="idWidth ${className}">${status}</td>
-                            </tr>
-                        </tbody>
-                    </table>`;
+
+        // Section header
+        doc.setFontSize(12);
+        doc.text(`${sectionCount}. ${sectionName}`, 20, yPos);
+        yPos += 6;
+
+        // Table headers
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'bold');
+        doc.setDrawColor(128, 128, 128); // Set border color to gray
+        const headers = ['#', 'Title', 'Priority'];
+        const columnWidths = [15, 135, 25];
+        let currentX = 20;
+
+        for (let i = 0; i < headers.length; i++) {
+            doc.rect(currentX, yPos, columnWidths[i], 6);
+            if (i === 0 || i === 2) { // Center align # and Priority columns
+                const headerTextWidth = doc.getTextWidth(headers[i]);
+                const headerCenterX = currentX + (columnWidths[i] - headerTextWidth) / 2;
+                doc.text(headers[i], headerCenterX, yPos + 4);
+            } else {
+                doc.text(headers[i], currentX + 2, yPos + 4);
+            }
+            currentX += columnWidths[i];
+        }
+        doc.setFont('helvetica', 'normal');
+        yPos += 6;
+
+        // Table data
+        for (const testCase of testCases) {
+            // Check if we need a new page
+            if (yPos > 270) {
+                doc.addPage();
+                yPos = 20;
+                
+                // Re-add table headers on new page
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'bold');
+                doc.setDrawColor(128, 128, 128); // Set border color to gray
+                let headerX = 20;
+                for (let i = 0; i < headers.length; i++) {
+                    doc.rect(headerX, yPos, columnWidths[i], 6);
+                    if ((headers[0] === '#' && (i === 0 || i === 2)) || (headers[0] === 'ID' && i === 0)) { // Center align # and Priority columns, or ID column
+                        const headerTextWidth = doc.getTextWidth(headers[i]);
+                        const headerCenterX = headerX + (columnWidths[i] - headerTextWidth) / 2;
+                        doc.text(headers[i], headerCenterX, yPos + 4);
+                    } else {
+                        doc.text(headers[i], headerX + 2, yPos + 4);
+                    }
+                    headerX += columnWidths[i];
+                }
+                doc.setFont('helvetica', 'normal');
+                yPos += 6;
+            }
+
+            currentX = 20;
+            
+            // Calculate row height based on title text
+            const cleanTitleText = testCase.title.replace(/_/g, ' ');
+            const titleLines = doc.splitTextToSize(cleanTitleText, columnWidths[1] - 4);
+            const rowHeight = Math.max(6, titleLines.length * 5);
+            
+            // ID
+            doc.rect(currentX, yPos, columnWidths[0], rowHeight);
+            const idText = testCase.testcaseId.toString();
+            const idTextWidth = doc.getTextWidth(idText);
+            const idCenterX = currentX + (columnWidths[0] - idTextWidth) / 2;
+            doc.text(idText, idCenterX, yPos + 4);
+            currentX += columnWidths[0];
+            
+            // Title
+            doc.rect(currentX, yPos, columnWidths[1], rowHeight);
+            doc.text(titleLines, currentX + 2, yPos + 4);
+            currentX += columnWidths[1];
+            
+            // Priority
+            doc.rect(currentX, yPos, columnWidths[2], rowHeight);
+            const priorityText = testCase.executionPriority.toString();
+            const priorityTextWidth = doc.getTextWidth(priorityText);
+            const priorityCenterX = currentX + (columnWidths[2] - priorityTextWidth) / 2;
+            doc.text(priorityText, priorityCenterX, yPos + 4);
+            
+            yPos += rowHeight;
+        }
+        
+        yPos += 6;
+        sectionCount++;
     }
 
-    return `<!DOCTYPE html>
-        <html>
-        <head>
-            <title>Test Case PDF</title>
-            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-            <style>
-                        * {
-                            font-family: 'Roboto', sans-serif;
-                        }
+    return Buffer.from(doc.output('arraybuffer'));
+};
 
-                        body {
-                            margin: 0;
-                            padding: 0;
-                        }
+export const generateTestSuitesPdf = (testSuites: TestSuiteEntity[]): Buffer => {
+    const doc = new jsPDF();
+    doc.setFont('helvetica', 'normal');
+    let yPos = 20;
 
-                        .name {
-                            font-size: 14px;
-                            margin: 0px;
-                        }
+    // Title
+    doc.setFontSize(18);
+    doc.text('Test Runs', 20, yPos);
+    yPos += 10;
 
-                        .sectionNameOther {
-                            font-size: 12px;
-                            margin: 10px 0;
-                        }
+    // Horizontal line
+    doc.line(20, yPos, 190, yPos);
+    yPos += 6;
 
-                        table {
-                            width: 100%;
-                            border-collapse: collapse;
-                            page-break-inside: avoid;
-                            margin-bottom: 28px;
-                        }
+    for (let i = 0; i < testSuites.length; i++) {
+        const testSuite = testSuites[i];
+        
+        // Check if we need a new page
+        if (yPos > 240) {
+            doc.addPage();
+            yPos = 20;
+        }
 
-                        td, th {
-                            word-wrap: break-word;
-                            border: 1px solid #ddd;
-                            padding: 8px;
-                        }
+        // Test suite name
+        doc.setFontSize(12);
+        doc.text(`${i + 1}. ${testSuite.name}`, 20, yPos);
+        yPos += 6;
 
-                        .table-responsive {
-                            margin-bottom: 28px;
-                            font-size: 10px;
-                        }
+        // Table headers
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'bold');
+        doc.setDrawColor(128, 128, 128); // Set border color to gray
+        const headers = ['Passed', 'Failed', 'Untested', 'Total', 'Status'];
+        const columnWidths = [30, 30, 30, 30, 30];
+        let currentX = 20;
 
-                        .page-break {
-                            page-break-before: always;
-                            page-break-after: always;
-                            page-break-inside: avoid;
-                        }
+        for (let j = 0; j < headers.length; j++) {
+            doc.rect(currentX, yPos, columnWidths[j], 8);
+            doc.text(headers[j], currentX + 2, yPos + 6);
+            currentX += columnWidths[j];
+        }
+        doc.setFont('helvetica', 'normal');
+        yPos += 6;
 
-                                    .pending {
-                                        color: #3498db;
-                                    }
-                            
-                                    .inprogress {
-                                        color: #f1c40f;
-                                    }
-                            
-                                    .completed {
-                                        color: #07bc0c;
-                                    }
-                            
-                                    .untested {
-                                        color: #3498db;
-                                    }
-                            
-                                    .passed {
-                                        color: #07bc0c;
-                                    }
-                            
-                                    .failed {
-                                        color: #e74c3c;
-                                    }
+        // Data row
+        currentX = 20;
+        const { passed, failed, untested, total } = testSuite.testreport;
+        
+        // Format status
+        const status = testSuite.status === TestSuiteStatus.INPROGRESS
+            ? `${testSuite.status.charAt(0) + testSuite.status.charAt(1).toLowerCase()} ${testSuite.status.charAt(2)}${testSuite.status.substring(3, testSuite.status.length).toLowerCase()}`
+            : testSuite.status.charAt(0) + testSuite.status.substring(1, testSuite.status.length).toLowerCase();
 
-                                    .blocked {
-                                        color: #000000;
-                                    }
-                    </style>
-        </head>
-        <body>
-            <div>
-                <h1 class="name">Test Runs</h1>
-                <hr />
-                <div class="table-responsive">
-                    ${text}
-                </div>
-            </div>
-        </body>
-        </html>
-        `;
-}
+        const data = [passed.toString(), failed.toString(), untested.toString(), total.toString(), status];
+        
+        for (let j = 0; j < data.length; j++) {
+            doc.rect(currentX, yPos, columnWidths[j], 8);
+            doc.text(data[j], currentX + 2, yPos + 6);
+            currentX += columnWidths[j];
+        }
+        
+        yPos += 6;
+    }
+
+    return Buffer.from(doc.output('arraybuffer'));
+};
