@@ -3,6 +3,7 @@ import { TestCaseResultStatus } from "src/common/enums/test-case-result-status";
 import { TestSuiteStatus } from "src/common/enums/test-suite-status";
 import { TestSuiteEntity } from "src/service-organization/test-suite/test-suite.entity";
 import { ProjectEntity } from "src/service-organization/project/project.entity";
+import { UtilsService } from "src/_helpers/utils.service";
 
 interface TestCase {
     testcaseId: string;
@@ -16,9 +17,21 @@ interface TestCaseResult {
     status: TestCaseResultStatus;
 }
 
-export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResultsObject: Record<string, TestCaseResult[]>): Buffer => {
+const initializePDF = (): jsPDF => {
     const doc = new jsPDF();
     doc.setFont('helvetica', 'normal');
+    return doc;
+};
+
+const formatTestSuiteStatus = (status: TestSuiteStatus): string => {
+    if (status === TestSuiteStatus.INPROGRESS) {
+        return 'In Progress';
+    }
+    return UtilsService.titleCase(status.toLowerCase());
+};
+
+export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResultsObject: Record<string, TestCaseResult[]>): Buffer => {
+    const doc = initializePDF();
     let yPos = 20;
 
     // Title
@@ -37,9 +50,7 @@ export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResult
     yPos += 8;
 
     // Status
-    const statusText = testSuite.status === TestSuiteStatus.INPROGRESS
-        ? `${testSuite.status.charAt(0) + testSuite.status.charAt(1).toLowerCase()} ${testSuite.status.charAt(2)}${testSuite.status.substring(3, testSuite.status.length).toLowerCase()}`
-        : testSuite.status.charAt(0) + testSuite.status.substring(1, testSuite.status.length).toLowerCase();
+    const statusText = formatTestSuiteStatus(testSuite.status);
     
     doc.text(`Status: ${statusText}`, 20, yPos);
     yPos += 15;
@@ -182,8 +193,7 @@ export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResult
 };
 
 export const generateTestCasesPdf = (testCasesObject: Record<string, TestCase[]>, project: ProjectEntity): Buffer => {
-    const doc = new jsPDF();
-    doc.setFont('helvetica', 'normal');
+    const doc = initializePDF();
     let yPos = 20;
     let testCasesCount = 0;
 
@@ -310,8 +320,7 @@ export const generateTestCasesPdf = (testCasesObject: Record<string, TestCase[]>
 };
 
 export const generateTestSuitesPdf = (testSuites: TestSuiteEntity[]): Buffer => {
-    const doc = new jsPDF();
-    doc.setFont('helvetica', 'normal');
+    const doc = initializePDF();
     let yPos = 20;
 
     // Title
@@ -358,9 +367,7 @@ export const generateTestSuitesPdf = (testSuites: TestSuiteEntity[]): Buffer => 
         const { passed, failed, untested, total } = testSuite.testreport;
         
         // Format status
-        const status = testSuite.status === TestSuiteStatus.INPROGRESS
-            ? `${testSuite.status.charAt(0) + testSuite.status.charAt(1).toLowerCase()} ${testSuite.status.charAt(2)}${testSuite.status.substring(3, testSuite.status.length).toLowerCase()}`
-            : testSuite.status.charAt(0) + testSuite.status.substring(1, testSuite.status.length).toLowerCase();
+        const status = formatTestSuiteStatus(testSuite.status);
 
         const data = [passed.toString(), failed.toString(), untested.toString(), total.toString(), status];
         
