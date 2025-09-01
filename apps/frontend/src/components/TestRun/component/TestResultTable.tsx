@@ -299,7 +299,7 @@ export default function Table({
             <div className="mt-2 max-w-xl text-sm text-gray-500 font-normal">
               <p>
                 {t(
-                  "A test run is a collection of test cases which are tested to create a report about passing and failing tests."
+                  "Test run is a collection of test cases which are tested to create a report about passing and failing tests."
                 )}
               </p>
             </div>
