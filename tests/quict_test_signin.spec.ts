@@ -68,21 +68,14 @@ test('Test Case 9:Verify that when a new user tries to sign in without signing u
     await page.getByRole('button', { name: 'Sign in' }).click()
     await expect(page.locator('text=Email/Password mismatch. Try again')).toBeVisible()
 })
-test('Test Case 10:Verify that when a new user tries to sign in without signing up, the user is not logged in.', async ({ page }) => {
-    await page.goto(process.env.QUICK_TEST_BASE_URL!)
-    await page.fill('[label="Email Address"]', process.env.QUICK_NEW_EMAIL!)
-    await page.fill('[label="Password"]', process.env.QUICK_NEW_PASSWORD!)
-    await page.getByRole('button', { name: 'Sign in' }).click()
-    await expect(page.locator('text=Email/Password mismatch. Try again')).toBeVisible()
-})
-test('Test Case 11:Verify that if a user tries to enter invalid email format , an error should be visible on the ui.', async ({ page }) => {
+test('Test Case 10:Verify that if a user tries to enter invalid email format , an error should be visible on the ui.', async ({ page }) => {
     await page.goto(process.env.QUICK_TEST_BASE_URL!)
     await page.fill('[label="Email Address"]', "qwyopmail.com")
     await page.fill('[label="Password"]', process.env.QUICK_NEW_PASSWORD!)
     await page.getByRole('button', { name: 'Sign in' }).click()
     await expect(page.locator('text=Email is not valid')).toBeVisible()
 })
-test('Test Case 12: Verify if password characters are less , error should be visible on the ui', async ({ page }) => {
+test('Test Case 11: Verify if password characters are less , error should be visible on the ui', async ({ page }) => {
     await page.goto(process.env.QUICK_TEST_BASE_URL!)
     await page.fill('[label="Email Address"]', process.env.QUICK_NEW_EMAIL!)
     await page.fill('[label="Password"]', "passwor")

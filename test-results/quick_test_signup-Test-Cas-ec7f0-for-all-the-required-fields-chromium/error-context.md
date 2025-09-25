@@ -1,0 +1,75 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - img "QuickTest" [ref=e6] [cursor=pointer]
+      - heading "Get started with Quick Test" [level=2] [ref=e7]
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - generic [ref=e11]:
+          - generic [ref=e13]: First Name
+          - generic [ref=e14]:
+            - textbox "First Name" [ref=e15]
+            - generic:
+              - img
+          - generic [ref=e16]: First Name is required
+        - generic [ref=e17]:
+          - generic [ref=e19]: Last Name
+          - generic [ref=e20]:
+            - textbox "Last Name" [ref=e21]
+            - generic:
+              - img
+          - generic [ref=e22]: Last Name is required
+        - generic [ref=e23]:
+          - generic [ref=e25]: Work Email
+          - generic [ref=e26]:
+            - textbox "Work Email" [ref=e27]
+            - generic:
+              - img
+          - generic [ref=e28]: Email is required
+        - generic [ref=e29]:
+          - generic [ref=e31]: Organization
+          - generic [ref=e32]:
+            - textbox "Organization" [ref=e33]
+            - generic:
+              - img
+          - generic [ref=e34]: Organization is required
+        - generic [ref=e35]:
+          - generic [ref=e37]: Password
+          - generic [ref=e38]:
+            - textbox "Password" [ref=e39]
+            - generic:
+              - img
+          - generic [ref=e40]: Password is required
+        - generic [ref=e41]:
+          - generic [ref=e43]: Confirm Password
+          - generic [ref=e44]:
+            - textbox "Confirm Password" [ref=e45]
+            - generic:
+              - img
+          - generic [ref=e46]: Confirm Password is required
+        - generic [ref=e47]:
+          - checkbox "I agree to Terms of Use & Privacy Policy" [ref=e48]
+          - generic [ref=e49]:
+            - text: I agree to
+            - link "Terms of Use" [ref=e50] [cursor=pointer]:
+              - /url: http://localhost:3000/terms
+              - strong [ref=e51] [cursor=pointer]: Terms of Use
+            - text: "&"
+            - link "Privacy Policy" [ref=e52] [cursor=pointer]:
+              - /url: http://localhost:3000/privacypolicy
+              - strong [ref=e53] [cursor=pointer]: Privacy Policy
+        - generic [ref=e54]: Please accept Terms of Use & Privacy Policy
+        - button "Sign up" [active] [ref=e56] [cursor=pointer]
+      - generic [ref=e61]:
+        - text: Already have an account?
+        - link "Sign in" [ref=e62] [cursor=pointer]:
+          - /url: /signin
+          - generic [ref=e63] [cursor=pointer]: Sign in
+  - generic [ref=e64]:
+    - img [ref=e66]
+    - button "Open Tanstack query devtools" [ref=e114] [cursor=pointer]:
+      - img [ref=e115] [cursor=pointer]
+```
