@@ -1,0 +1,50 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - img "QuickTest" [ref=e6] [cursor=pointer]
+      - heading "Get started with Quick Test" [level=2] [ref=e7]
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - generic [ref=e11]:
+          - generic [ref=e13]: First Name
+          - textbox "First Name" [ref=e15]
+        - generic [ref=e16]:
+          - generic [ref=e18]: Last Name
+          - textbox "Last Name" [ref=e20]
+        - generic [ref=e21]:
+          - generic [ref=e23]: Work Email
+          - textbox "Work Email" [ref=e25]
+        - generic [ref=e26]:
+          - generic [ref=e28]: Organization
+          - textbox "Organization" [ref=e30]
+        - generic [ref=e31]:
+          - generic [ref=e33]: Password
+          - textbox "Password" [ref=e35]
+        - generic [ref=e36]:
+          - generic [ref=e38]: Confirm Password
+          - textbox "Confirm Password" [ref=e40]
+        - generic [ref=e41]:
+          - checkbox "I agree to Terms of Use & Privacy Policy" [ref=e42]
+          - generic [ref=e43]:
+            - text: I agree to
+            - link "Terms of Use" [ref=e44] [cursor=pointer]:
+              - /url: http://localhost:3000/terms
+              - strong [ref=e45] [cursor=pointer]: Terms of Use
+            - text: "&"
+            - link "Privacy Policy" [ref=e46] [cursor=pointer]:
+              - /url: http://localhost:3000/privacypolicy
+              - strong [ref=e47] [cursor=pointer]: Privacy Policy
+        - button "Sign up" [ref=e49] [cursor=pointer]
+      - generic [ref=e54]:
+        - text: Already have an account?
+        - link "Sign in" [ref=e55] [cursor=pointer]:
+          - /url: /signin
+          - generic [ref=e56] [cursor=pointer]: Sign in
+  - generic [ref=e57]:
+    - img [ref=e59]
+    - button "Open Tanstack query devtools" [ref=e107] [cursor=pointer]:
+      - img [ref=e108] [cursor=pointer]
+```
