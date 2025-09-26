@@ -17,7 +17,7 @@ test('Test Case 2:Verify user should get validation messages for all the require
     await expect(page.getByText('Last Name is required')).toBeVisible()
     await expect(page.getByText('Email is required')).toBeVisible()
     await expect(page.getByText('Organization is required')).toBeVisible()
-    await expect(page.getByText('Password is required')).toBeVisible()
+    await expect(page.getByText('Password is required', { exact: true })).toBeVisible();
     await expect(page.getByText('Confirm Password is required')).toBeVisible()
     await expect(page.getByText('Please accept Terms of Use & Privacy Policy')).toBeVisible()
 })
@@ -36,7 +36,7 @@ test('Test Case 3:Verify after entering all required fields and clicking on sign
     await page.click('#sign-up')
     await expect(page.getByText('Registration Successful!')).toBeVisible()  
     await page.getByRole('button', { name: 'OK' }).click()
-    await page.waitForURL(process.env.QUICK_TEST_BASE_URL!)
+    await page.waitForURL(process.env.WITHOUT_SIGNIN_URL!)
 })
 test('Test Case 4:Verify that sign up button should not be disabled while sign up', async ({ page }) => {
     await page.goto(process.env.QUICK_TEST_BASE_URL!)
@@ -66,8 +66,6 @@ test('Test Case 5:Verify that without selecting "I agree to Terms of Use & Priva
 test('Test Case 6:After clicking on quick test icon on sign up page user should be redirected to sign in page', async ({ page }) => {
    await page.goto(process.env.QUICK_TEST_BASE_URL!)
    await page.getByRole('link', { name: 'Sign up' }).click()
-   await page.click(".mx-auto h-12 w-auto")
-   await page.waitForURL(process.env.QUICK_TEST_BASE_URL!)
-
-
- })
+   await page.getByRole('img', { name: 'QuickTest' }).click()
+   await page.waitForURL(process.env.WITHOUT_SIGNIN_URL!)
+})
