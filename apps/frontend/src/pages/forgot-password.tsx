@@ -76,80 +76,57 @@ const Forgotpassword = () => {
       />
 
       {showModal && <PopUP {...popUpProps} />}
-      <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <span onMouseDown={() => navigate("/")} className="cursor-pointer">
-            <img
-              className="mx-auto h-12 w-auto"
-              src={bugplotLogo}
-              alt="Workflow"
-            />
-          </span>
-
-          <h2 className="mt-6 text-center text-xl 2xl:text-3xl font-extrabold text-gray-900">
-            {t("Reset your password")}
-          </h2>
-        </div>
-        <div className="mt-8 ml-3 mr-3 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <Formik
-              initialValues={initialValues}
-              validationSchema={SignInSchema}
-              onSubmit={onSubmitHandler}
-            >
-              {() => {
-                return (
-                  <Form
-                    className="space-y-6"
-                    noValidate
-                    // https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion#preventing_autofilling_with_autocompletenew-password
-                    autoComplete="new-password"
-                  >
-                    <div>
-                      <div className="mt-1">
+      <section className="bg-gray-50 dark:bg-gray-900">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+          <a
+            href="/quick-test"
+            className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+          >
+            <img className="w-8 h-8 mr-2" src={bugplotLogo} alt="QuickTest" />
+            Quick Test
+          </a>
+          <div className="w-full bg-white rounded-sm shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div className="p-6 space-y-4 md:space-y-4 sm:p-8">
+              <h1 className="h1">{t("Forgot your password?")}</h1>
+              <Formik
+                initialValues={initialValues}
+                validationSchema={SignInSchema}
+                onSubmit={onSubmitHandler}
+              >
+                {() => {
+                  return (
+                    <Form className="mt-4 space-y-4 lg:mt-5 md:space-y-5" noValidate>
+                      <div>
                         <FormikInput
                           type="email"
                           name="email"
-                          label={t("Email Address")}
+                          label={t("Your email")}
+                          placeholder={t("name@company.com")}
                         />
                       </div>
-                    </div>
-                    <div>
-                      <Button
-                        id="forgot-password"
-                        loading={loading}
-                        type="submit"
-                        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none`}
-                      >
-                        {t("Forgot Password")}
-                      </Button>
-                    </div>
-                  </Form>
-                );
-              }}
-            </Formik>
-            <div className="mt-2">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">
-                    <Link to={appRoutes.SIGNIN_PAGE}>
-                      <span className="flex items-center font-medium text-indigo-600 hover:text-indigo-500">
-                        <span className="text-md block">&larr;</span>{" "}
-                        <span className="block" style={{ paddingTop: "2px" }}>
-                          {t("Back to Login")}
-                        </span>
-                      </span>
-                    </Link>
-                  </span>
-                </div>
-              </div>
+                      <div>
+                        <Button
+                          id="forgot-password"
+                          loading={loading}
+                          type="submit"
+                          className={`btn-primary w-full mt-4`}
+                        >
+                          {t("Request Password Reset Instructions")}
+                        </Button>
+                      </div>
+                      <p className="text-sm font-light text-gray-500 dark:text-gray-400 flex items-center justify-center">
+                        <Link to={appRoutes.SIGNIN_PAGE}>
+                          <span className="link ml-2">{t("Return back to Log in")}</span>
+                        </Link>
+                      </p>
+                    </Form>
+                  );
+                }}
+              </Formik>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };

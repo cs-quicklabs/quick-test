@@ -41,37 +41,35 @@ export const FormikInput = ({ showLabel = true, ...props }: IProps) => {
   const { touched, error } = { ...meta };
   return (
     <>
-      <div className="flex justify-between">
-        {showLabel && (
-          <label
-            htmlFor={props.name}
-            className="form-input-label"
-          >
-            {props.label}
-          </label>
-        )}
-        {props.isOptional && (
-          <span className="text-sm text-gray-500">{t("Optional")}</span>
-        )}
-      </div>
-      <div className="mt-1 relative">
-        <InputField
-          touched={touched}
-          error={error}
-          {...field}
-          {...props}
-          validation={props.validation}
-        />
-      </div>
-      {props.validation && error ? (
-        <span className="text-red-600 mt-2 text-sm">{error}</span>
-      ) : (
-        <ErrorMessage
-          name={props.name}
-          component="span"
-          className="text-red-600 mt-2 text-sm"
-        />
+      {showLabel && (
+        <label
+          htmlFor={props.name}
+          className="form-input-label"
+        >
+          {props.label}
+        </label>
       )}
+      {props.isOptional && (
+        <span className="text-sm text-gray-500">{t("Optional")}</span>
+      )}
+      <InputField
+        touched={touched}
+        error={error}
+        {...field}
+        {...props}
+        validation={props.validation}
+      />
+      {
+        props.validation && error ? (
+          <span className="text-red-600 mt-2 text-sm">{error}</span>
+        ) : (
+          <ErrorMessage
+            name={props.name}
+            component="span"
+            className="text-red-600 mt-2 text-sm"
+          />
+        )
+      }
     </>
   );
 };
@@ -86,7 +84,7 @@ export const FormikCheckbox = ({ ...props }: IProps) => {
         <InputCheckbox touched={touched} error={error} {...field} {...props} />
         <label
           htmlFor={props.name}
-          className="ml-2 text-sm text-gray-500 dark:text-gray-300"
+          className="form-light ml-3 text-gray-500 dark:text-gray-300"
           dangerouslySetInnerHTML={{ __html: props.label }}
         ></label>
       </div>
