@@ -45,7 +45,7 @@ export const FormikInput = ({ showLabel = true, ...props }: IProps) => {
         {showLabel && (
           <label
             htmlFor={props.name}
-            className="block text-sm font-medium text-gray-900"
+            className="form-input-label"
           >
             {props.label}
           </label>
@@ -86,7 +86,7 @@ export const FormikCheckbox = ({ ...props }: IProps) => {
         <InputCheckbox touched={touched} error={error} {...field} {...props} />
         <label
           htmlFor={props.name}
-          className="ml-2 block text-sm text-gray-900"
+          className="ml-2 text-sm text-gray-500 dark:text-gray-300"
           dangerouslySetInnerHTML={{ __html: props.label }}
         ></label>
       </div>
@@ -308,6 +308,7 @@ export const RenderFormikInputs = (fields: Array<InputFieldProps>) => {
         type={field.type}
         name={field.name}
         label={field.label}
+        placeholder={field.placeholder}
         {...(field.validation ? { validation: field.validation } : {})}
       />
     </div>
