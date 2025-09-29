@@ -77,24 +77,17 @@ export default function ResetPasswordForm() {
         </div>
       ) : (
         <>
-          <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-            <div className="sm:mx-auto sm:w-full sm:max-w-md">
-              <span
-                onMouseDown={() => navigate("/")}
-                className="cursor-pointer"
+          <section className="bg-gray-50 dark:bg-gray-900">
+            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+              <a
+                href="/quick-test"
+                className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
               >
-                <img
-                  className="mx-auto h-12 w-auto"
-                  src={bugplotLogo}
-                  alt="Workflow"
-                />
-              </span>
-              <h2 className="mt-6 text-center text-xl 2xl:text-3xl font-extrabold text-gray-900">
-                {t("Setup your new password")}
-              </h2>
-            </div>
-            <div className="mt-8 ml-3 mr-3 sm:mx-auto sm:w-full sm:max-w-md">
-              <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <img className="w-8 h-8 mr-2" src={bugplotLogo} alt="QuickTest" />
+                Quick Test
+              </a>
+              <div className="w-full p-6 bg-white rounded-sm shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
+                <h1 className="h1">{t("Set a new password")}</h1>
                 <Formik
                   initialValues={initialValues}
                   validationSchema={SignInSchema}
@@ -103,47 +96,47 @@ export default function ResetPasswordForm() {
                   {(formik) => {
                     const { errors, isValid, dirty } = formik;
                     return (
-                      <Form className="space-y-6" autoComplete="off">
+                      <Form className="mt-4 space-y-4 lg:mt-5 md:space-y-4" autoComplete="off">
                         <div>
                           <FormikInput
                             type="password"
                             name="password"
                             label={t("New Password")}
+                            placeholder={t("••••••••")}
                           />
                         </div>
                         <div>
                           <FormikInput
                             type="password"
                             name="cnfpassword"
-                            label={t("Confirm Password")}
+                            label={t("Confirm password")}
+                            placeholder={t("••••••••")}
                           />
                         </div>
-                        <div>
-                          {typeof errors === "string" && (
-                            <div className="text-red-600 mb-2 text-sm">
-                              {errors}
-                            </div>
-                          )}
-                          <Button
-                            id="set-password"
-                            type="submit"
-                            loading={loading}
-                            className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none ${
-                              !(dirty && isValid)
-                                ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                                : ""
+                        {typeof errors === "string" && (
+                          <div className="text-red-600 mb-2 text-sm">{errors}</div>
+                        )}
+                        <Button
+                          id="set-password"
+                          type="submit"
+                          loading={loading}
+                          className={`btn-primary w-full ${!(dirty && isValid) ? "opacity-80" : ""
                             }`}
-                          >
-                            {t("Set Password")}
-                          </Button>
-                        </div>
+                        >
+                          {t("Set password")}
+                        </Button>
+                        <p className="text-sm font-light text-gray-500 dark:text-gray-400 text-center">
+                          <a href="/quick-test/login" className="link">
+                            {t("Return Back to Login")}
+                          </a>
+                        </p>
                       </Form>
                     );
                   }}
                 </Formik>
               </div>
             </div>
-          </div>
+          </section>
         </>
       )}
     </>
