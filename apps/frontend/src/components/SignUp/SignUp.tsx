@@ -15,7 +15,7 @@ import {
 } from "../Utils/validators";
 import PopUp from "./Modal";
 import { showError, showSuccess } from "../Toaster/ToasterFun";
-import { ToastMessage } from "../Utils/constants/misc";
+import { ButtonCSSStyles, ToastMessage } from "../Utils/constants/misc";
 import { useFormSubmitWithLoading } from "../Utils/hooks/useFormSubmitWithLoading";
 import { useTranslation } from "react-i18next";
 import bugplotLogo from "../../assets/images/bugplot-logo.svg";
@@ -93,10 +93,10 @@ const SignUp = () => {
 
   function getTermsAndPrivacyLabel() {
     return `${t("I agree to")} 
-      <a href='${process.env.REACT_APP_DOMAIN_LINK}/terms' class="hover:text-indigo-600" rel="noreferrer" target="_blank">
+      <a href='${process.env.REACT_APP_DOMAIN_LINK}/terms' class="font-medium text-primary-600 hover:underline dark:text-primary-500" target="_blank" rel="noreferrer">
         <strong>${t("Terms of Use")}</strong>
       </a> & 
-      <a href='${process.env.REACT_APP_DOMAIN_LINK}/privacypolicy' class="hover:text-indigo-600" rel="noreferrer" target="_blank">
+      <a href='${process.env.REACT_APP_DOMAIN_LINK}/privacypolicy' class="font-medium text-primary-600 hover:underline dark:text-primary-500" target="_blank" rel="noreferrer">
         <strong>${t("Privacy Policy")}</strong>
       </a>`;
   }
@@ -122,8 +122,8 @@ const SignUp = () => {
                 onSubmit={onSubmitHandler}
               >
                 {() => (
-                  <Form className="space-y-6 md:space-y-6" action="#" method="POST" noValidate>
-                    <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
+                  <Form className="space-y-4 md:space-y-4" action="#" method="POST" noValidate>
+                    <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
                       <div>
                         <FormikInput
                           type="text"
@@ -164,13 +164,13 @@ const SignUp = () => {
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
+                    <div className="mt-4 grid gap-4 sm:grid-cols-2 sm:gap-6">
                       <div>
                         <FormikInput
                           type="password"
                           name="password"
                           label={t("Password")}
-                          placeholder={t("********")}
+                          placeholder={t("••••••••")}
                           validation={false}
                         />
                       </div>
@@ -179,51 +179,38 @@ const SignUp = () => {
                           type="password"
                           name="cnfpassword"
                           label={t("Confirm Password")}
-                          placeholder={t("********")}
+                          placeholder={t("••••••••")}
                           validation={false}
                         />
                       </div>
                     </div>
 
-                    <div className="flex items-start">
-                      <div className="flex items-center h-5">
-                        <FormikCheckbox
-                          name="termAndCondition"
-                          type="checkbox"
-                          label={getTermsAndPrivacyLabel()}
-                          validation={validation}
-                        />
-                      </div>
+                    <div className="flex items-center h-5">
+                      <FormikCheckbox
+                        name="termAndCondition"
+                        type="checkbox"
+                        label={getTermsAndPrivacyLabel()}
+                        validation={validation}
+                      />
                     </div>
-                    <div>
-                      <Button
-                        id="sign-up"
-                        onMouseDown={() => setValidation(true)}
-                        type="submit"
-                        loading={loading}
-                        className="btn-primary w-full mt-4"
-                      >
-                        {t("Sign up")}
-                      </Button>
-                    </div>
-                  </Form>
-                )}
-              </Formik>
-              <div className="mt-6">
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full" />
-                  </div>
-                  <div className="relative flex justify-center text-sm">
+                    <Button
+                      id="sign-up"
+                      onMouseDown={() => setValidation(true)}
+                      type="submit"
+                      loading={loading}
+                      className={`${ButtonCSSStyles.btnPrimary} btn-primary w-full mt-4`}
+                    >
+                      {t("Create an account")}
+                    </Button>
                     <p className="text-sm font-light text-gray-500 dark:text-gray-400 flex justify-center items-center">
                       {t("Already have an account?")}{" "}
                       <Link to={appRoutes.SIGNIN_PAGE}>
-                        <span className="link ml-2">{t("Sign in")}</span>
+                        <span className="link ml-2">{t("Login")}</span>
                       </Link>
                     </p>
-                  </div>
-                </div>
-              </div>
+                  </Form>
+                )}
+              </Formik>
             </div>
           </div>
         </div>

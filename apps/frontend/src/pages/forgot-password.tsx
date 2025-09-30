@@ -11,7 +11,7 @@ import { showError, showSuccess } from "../components/Toaster/ToasterFun";
 import { validateRequiredEmail } from "../components/Utils/validators";
 import { useNavigate } from "react-router-dom";
 import { appRoutes } from "../components/Utils/constants/page-routes";
-import { ToastMessage } from "../components/Utils/constants/misc";
+import { ButtonCSSStyles, ToastMessage } from "../components/Utils/constants/misc";
 import { useTranslation } from "react-i18next";
 import bugplotLogo from "../assets/images/bugplot-logo.svg";
 
@@ -109,7 +109,7 @@ const Forgotpassword = () => {
                           id="forgot-password"
                           loading={loading}
                           type="submit"
-                          className={`btn-primary w-full mt-4`}
+                          className={`${ButtonCSSStyles.btnPrimary} w-full`}
                         >
                           {t("Request Password Reset Instructions")}
                         </Button>
