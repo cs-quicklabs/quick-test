@@ -174,5 +174,17 @@
   "LIST_ARCHIVED_MEMBERS":"Lista de usuarios archivados en la organización",
   "USER_DELETED": "Usuario eliminado exitosamente",
   "USER_REACTIVATED":"Usuario reactivado con éxito",
-  "USER_ARCHIVED": "Usuario archivado con éxito"
+  "USER_ARCHIVED": "Usuario archivado con éxito",
+  
+  "PDF_TEST_RUNS": "Ejecuciones de Prueba",
+  "PDF_CREATED_ON": "Creado En",
+  "PDF_STATUS": "Estado",
+  "PDF_PASSED": "Pasó",
+  "PDF_FAILED": "Falló",
+  "PDF_UNTESTED": "No Probado",
+  "PDF_BLOCKED": "Bloqueado",
+  "PDF_ID": "ID",
+  "PDF_TITLE": "Título",
+  "PDF_PRIORITY": "Prioridad",
+  "PDF_TEST_CASES": "casos de prueba"
 }

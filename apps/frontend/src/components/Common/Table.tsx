@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 interface Props {
   header: (string | number)[];
   RowData: (string | number)[][];
@@ -14,6 +16,7 @@ const ViewEditTH = ({ text }: Text) => (
 );
 
 export default function ProjectList(data: Props) {
+  const { t } = useTranslation();
   return (
     <>
       <div className="flex flex-col max-w-7xl mx-auto px-4 mt-8 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 py-2 align-middle min-w-full sm:px-6 lg:px-8">
@@ -30,8 +33,8 @@ export default function ProjectList(data: Props) {
                     {val}
                   </th>
                 ))}
-                <ViewEditTH text={"View"} />
-                <ViewEditTH text={"Edit"} />
+                <ViewEditTH text={t("View")} />
+                <ViewEditTH text={t("Edit")} />
               </tr>
             </thead>
             <tbody>

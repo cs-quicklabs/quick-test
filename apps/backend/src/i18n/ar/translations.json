@@ -174,5 +174,17 @@
   "LIST_ARCHIVED_MEMBERS":"قائمة المستخدمين المؤرشفة في المؤسسة",
   "USER_DELETED": "تم حذف المستخدم بنجاح",
   "USER_REACTIVATED":"تمت إعادة تنشيط المستخدم بنجاح",
-  "USER_ARCHIVED": "تمت أرشفة المستخدم بنجاح"
+  "USER_ARCHIVED": "تمت أرشفة المستخدم بنجاح",
+  
+  "PDF_TEST_RUNS": "تشغيل الاختبارات",
+  "PDF_CREATED_ON": "تم الإنشاء في",
+  "PDF_STATUS": "الحالة",
+  "PDF_PASSED": "نجح",
+  "PDF_FAILED": "فشل",
+  "PDF_UNTESTED": "لم يُختبر",
+  "PDF_BLOCKED": "مُحجوب",
+  "PDF_ID": "المعرف",
+  "PDF_TITLE": "العنوان",
+  "PDF_PRIORITY": "الأولوية",
+  "PDF_TEST_CASES": "حالات الاختبار"
 }
