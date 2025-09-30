@@ -6,9 +6,10 @@ import { Formik, Form } from "formik";
 import { appRoutes } from "../Utils/constants/page-routes";
 import axiosService from "../Utils/axios";
 import Button from "../Button";
-import { FormikCheckbox, RenderFormikInputs } from "../Common/FormikInput";
+import { FormikCheckbox, FormikInput } from "../Common/FormikInput";
 import { showError, showSuccess } from "../Toaster/ToasterFun";
 import {
+  ButtonCSSStyles,
   SubscriptionStatus,
   ToastMessage,
   ValidatorMessage,
@@ -100,97 +101,95 @@ const SignIn = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <span onMouseDown={() => navigate("/")} className="cursor-pointer">
+      <section className="bg-gray-50 dark:bg-gray-900">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+          <a
+            href="/quick-test"
+            className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
             <img
-              className="mx-auto h-12 w-auto"
+              className="w-8 h-8 mr-2"
               src={bugplotLogo}
-              alt="QuickTest"
-              loading="eager"
-              title="Quick Test Logo"
-              width={48}
-              height={48}
-            />
-          </span>
-          <h2 className="mt-6 text-center text-xl 2xl:text-3xl font-extrabold text-gray-900">
-            {t("Sign in to your account")}
-          </h2>
-        </div>
-        <div className="mt-8 ml-3 mr-3 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <Formik
-              initialValues={SignInInitialValues}
-              validationSchema={signInSchema}
-              onSubmit={onSubmitHandler}
-            >
-              {() => {
-                return (
-                  <Form className="space-y-6" noValidate autoComplete="off">
-                    {RenderFormikInputs([
-                      {
-                        type: "email",
-                        name: "email",
-                        label: t("Email Address"),
-                      },
-                      {
-                        type: "password",
-                        name: "password",
-                        label: t("Password"),
-                      },
-                    ])}
+              alt="QuickTest" />
+            Quick Test
+          </a>
+          <div className="w-full bg-white rounded-sm shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div className="p-6 space-y-4 md:space-y-4 sm:p-8">
+              <h1 className="h1">{t("Sign in to your account")}</h1>
 
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <FormikCheckbox
-                          type="checkbox"
-                          name="remember_me"
-                          label={t("Remember Me")}
+              <Formik
+                initialValues={SignInInitialValues}
+                validationSchema={signInSchema}
+                onSubmit={onSubmitHandler}
+              >
+                {() => {
+                  return (
+                    <Form className="space-y-4 md:space-y-4" noValidate autoComplete="off">
+                      <div>
+                        <FormikInput
+                          type="email"
+                          name="email"
+                          label={t("Your email")}
+                          placeholder={t("name@company.com")}
                         />
                       </div>
-                      <div className="text-sm">
+
+                      <div>
+                        <FormikInput
+                          type="password"
+                          name="password"
+                          label={t("Password")}
+                          placeholder={t("••••••••")}
+                        />
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-start">
+                          <div className="flex items-center h-5">
+                            <FormikCheckbox
+                              type="checkbox"
+                              name="remember_me"
+                              label={t("Remember me")}
+                            />
+                          </div>
+                        </div>
                         <Link
-                          className="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer"
+                          className="link"
                           to={appRoutes.FORGOT_PASSWORD}
                         >
                           {t("Forgot password?")}
                         </Link>
                       </div>
-                    </div>
-                    <div>
                       <Button
                         id="login-submit"
                         type="submit"
                         loading={loading}
-                        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none`}
+                        className={`${ButtonCSSStyles.btnPrimary} w-full mt-4`}
                       >
                         {t("Sign in")}
                       </Button>
-                    </div>
-                  </Form>
-                );
-              }}
-            </Formik>
-            <div className="mt-6">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">
-                    {t("Don't have an account?")}{" "}
-                    <Link to={appRoutes.SIGNUP_PAGE}>
-                      <span className="font-medium text-indigo-600 hover:text-indigo-500">
-                        {t("Sign up")}
-                      </span>
-                    </Link>
-                  </span>
+                    </Form>
+                  );
+                }}
+              </Formik>
+              <div className="mt-6">
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full" />
+                  </div>
+                  <div className="relative flex justify-center text-sm">
+                    <span className="text-sm font-light text-gray-500 dark:text-gray-400 flex items-center justify-center">
+                      {t("Don’t have an account yet?")}{" "}
+                      <Link to={appRoutes.SIGNUP_PAGE}>
+                        <span className="link ml-2">{t("Sign up")}</span>
+                      </Link>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section >
     </>
   );
 };

@@ -80,7 +80,6 @@ export default function TestCaseHeading({
   }
 
   return (
-    <>
       <div className="py-4 mx-8 sm:flex sm:items-start sm:justify-between bg-gray-50 2xl:mx-52">
         <div className="flex-1 min-w-0">
           {title && (
@@ -100,17 +99,17 @@ export default function TestCaseHeading({
           {status && (
             <>
               {status?.toLowerCase() === "pending" && (
-                <Badge className="bg-gray-100 text-gray-700 rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ring-gray-600/20">
+                <Badge className="bg-gray-100 text-gray-900 rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ring-gray-600/20">
                   {t(status)}
                 </Badge>
               )}
               {status?.toLowerCase() === "in progress" && (
-                <Badge className="bg-yellow-100 text-yellow-700 text-sm rounded-md px-2 py-1 font-medium ring-1 ring-inset ring-yellow-600/20">
+                <Badge className="bg-yellow-50 text-yellow-700 text-sm rounded-md px-2 py-1 font-medium ring-1 ring-inset ring-yellow-600/20">
                   {t(status)}
                 </Badge>
               )}
               {status?.toLowerCase() === "completed" && (
-                <Badge className="rounded-md bg-green-100 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                <Badge className="rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                   {t(status)}
                 </Badge>
               )}
@@ -159,6 +158,5 @@ export default function TestCaseHeading({
           )}
         </div>
       </div>
-    </>
   );
 }

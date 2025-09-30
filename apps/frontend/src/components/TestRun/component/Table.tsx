@@ -1,11 +1,11 @@
 import {
-  // DocumentDuplicateIcon,
+  DocumentDuplicateIcon,
   PencilSquareIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Badge from "../../Badge";
 import DeleteConfirmationModal from "../../Common/DeleteModal";
 import { showError, showSuccess } from "../../Toaster/ToasterFun";
@@ -35,7 +35,7 @@ export default function Table(props: Props) {
   const [modalMsg, setMsg] = useState(<></>);
   const [selectedId, setSelectedId] = useState("");
   const params = useParams();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const testChangeRef = useRef<IntersectionObserver | null>(null);
 
   const lastElementRef = (node: any) => {
@@ -103,9 +103,8 @@ export default function Table(props: Props) {
               {props?.projectName}&nbsp;{t("Project Test Run Report")}
             </div>
             <div
-              className={` border-b border-gray-200 ${
-                props.RowData?.length < 1 && "hidden"
-              } `}
+              className={` border-b border-gray-200 ${props.RowData?.length < 1 && "hidden"
+                } `}
             >
               <table className="min-w-full ">
                 <tbody className="bg-white divide-y divide-gray-200">
@@ -121,14 +120,14 @@ export default function Table(props: Props) {
                             <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500 font-normal">
                               {value?.status === "COMPLETED" ? (
                                 <p className="whitespace-nowrap">
-                                  Completed on{" "}
+                                  {t("Completed on")}{" "}
                                   {dayjs(value?.testreport?.createdAt).format(
                                     DateFormat.LONG
                                   )}
                                 </p>
                               ) : (
                                 <p className="whitespace-nowrap">
-                                  Started on{" "}
+                                  {t("Started on")}{" "}
                                   {dayjs(value?.testreport?.createdAt).format(
                                     DateFormat.LONG
                                   )}
@@ -155,9 +154,9 @@ export default function Table(props: Props) {
                                     <circle cx="1" cy="1" r="1"></circle>
                                   </svg>
                                   <p className="whitespace-nowrap">
-                                    {value?.testreport?.passed} Passed,{" "}
-                                    {value?.testreport?.failed} Failed,{" "}
-                                    {value?.testreport?.blocked} Blocked
+                                    {value?.testreport?.passed} {t("Passed")},{" "}
+                                    {value?.testreport?.failed} {t("Failed")},{" "}
+                                    {value?.testreport?.blocked} {t("Blocked")}
                                   </p>
                                 </>
                               )}
@@ -204,12 +203,12 @@ export default function Table(props: Props) {
                               </button>
                             )}
 
-                            {/* {value.status === "COMPLETED" && (
+                            {value.status === "COMPLETED" && (
                               <button
                                 data-tooltip-id="test-run-table-tooltip-id"
                                 id="new-test-run"
                                 data-cy="add-test-run"
-                                data-tooltip-content={t("Clone")}
+                                data-tooltip-content={t("Clone Test Run")}
                                 onClick={() => {
                                   navigate(
                                     `${appRoutes.PROJECTS}/${params.pid}/${projectRoutes.CREATE_TESTRUN}?duplicateFrom=${value.id}`
@@ -222,7 +221,7 @@ export default function Table(props: Props) {
                                   aria-hidden="true"
                                 />
                               </button>
-                            )} */}
+                            )}
 
                             <button
                               data-tooltip-id="test-run-table-tooltip-id"

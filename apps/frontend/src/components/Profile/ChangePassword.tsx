@@ -5,9 +5,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
 import axiosService from "../Utils/axios";
-import { appRoutes } from "../Utils/constants/page-routes";
 import Button from "../Button";
-import CancelButton from "../Button/cancelButton";
 import { ToastMessage, ValidatorMessage } from "../Utils/constants/misc";
 import { FormikInput } from "../Common/FormikInput";
 import { showError, showSuccess } from "../Toaster/ToasterFun";
@@ -80,68 +78,58 @@ export default function UpdateProfile() {
       {(formik) => {
         const { dirty } = formik;
         return (
-          <Form
-            className="max-w-full lg:max-w-3xl space-y-6"
-            autoComplete="off"
-          >
-            <div className="border-gray-300">
-              <h1 className="text-base leading-6 font-medium text-gray-900">
-                {t("Change Password")}
-              </h1>
-              <h1 className="mt-1 text-sm leading-6 text-gray-600">
-                {t("Change your old password and a set a new one")}
-              </h1>
-            </div>
+          <main className="max-w-xl pb-12 px-4 lg:col-span-6">
             <div>
-              <FormikInput
-                type="password"
-                name="oldPassword"
-                label={t("Old Password")}
-                validation={validation}
-              />
-            </div>
-            <div>
-              <FormikInput
-                type="password"
-                name="newPassword"
-                label={t("New Password")}
-                validation={validation}
-              />
-            </div>
-            <div>
-              <FormikInput
-                type="password"
-                name="confirmPassword"
-                label={t("Confirm Password")}
-                validation={validation}
-              />
-            </div>
-            <div className="flex justify-end gap-4">
-              <CancelButton
-                onMouseDown={() => navigate(appRoutes.DASHBOARD)}
-                onClick={() => navigate(appRoutes.DASHBOARD)}
-                type="button"
+              <h1 className="form-title">{t("Change Password")}</h1>
+              <p className="form-subtitle">{t("Setup a new password for your account")}</p>
+
+              <Form
+                className="w-full mt-6 space-y-4"
+                autoComplete="off"
               >
-                {t("Cancel")}
-              </CancelButton>
-              <Button
-                id="change-password"
-                onMouseDown={() => setValidation(true)}
-                loading={apiloading === true ? "true" : undefined}
-                type="submit"
-                className={`sm:order-1 ${
-                  !dirty
-                    ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                    : ""
-                }`}
-                disabled={!dirty}
-              >
-                {t("Update")}
-              </Button>
+                <div>
+                  <FormikInput
+                    type="password"
+                    name="oldPassword"
+                    label={t("Old Password")}
+                    validation={validation}
+                    placeholder="••••••••"
+                  />
+                </div>
+                <div>
+                  <FormikInput
+                    type="password"
+                    name="newPassword"
+                    label={t("New Password")}
+                    validation={validation}
+                    placeholder="••••••••"
+                  />
+                </div>
+                <div>
+                  <FormikInput
+                    type="password"
+                    name="confirmPassword"
+                    label={t("Confirm Password")}
+                    validation={validation}
+                    placeholder="••••••••"
+                  />
+                </div>
+                <Button
+                  id="change-password"
+                  onMouseDown={() => setValidation(true)}
+                  loading={apiloading === true ? "true" : undefined}
+                  type="submit"
+                  className="btn-primary"
+                  disabled={!dirty}
+                >
+                  {t("Save")}
+                </Button>
+              </Form>
             </div>
-          </Form>
+
+          </main>
         );
       }}
-    </Formik>
+    </Formik >
   );
 }

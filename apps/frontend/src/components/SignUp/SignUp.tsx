@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { appRoutes } from "../Utils/constants/page-routes";
 import axiosService from "../Utils/axios";
 import Button from "../Button";
-import { FormikCheckbox, RenderFormikInputs } from "../Common/FormikInput";
+import { FormikCheckbox, FormikInput } from "../Common/FormikInput";
 import {
   validateRequiredEmail,
   validateRequiredFirstName,
@@ -15,7 +15,7 @@ import {
 } from "../Utils/validators";
 import PopUp from "./Modal";
 import { showError, showSuccess } from "../Toaster/ToasterFun";
-import { ToastMessage } from "../Utils/constants/misc";
+import { ButtonCSSStyles, ToastMessage } from "../Utils/constants/misc";
 import { useFormSubmitWithLoading } from "../Utils/hooks/useFormSubmitWithLoading";
 import { useTranslation } from "react-i18next";
 import bugplotLogo from "../../assets/images/bugplot-logo.svg";
@@ -73,7 +73,7 @@ const SignUp = () => {
     } catch (err) {
       showError(
         err?.response?.data?.message ||
-          t("An error occurred, pleaase try again.")
+        t("An error occurred, pleaase try again.")
       );
     }
   };
@@ -93,10 +93,10 @@ const SignUp = () => {
 
   function getTermsAndPrivacyLabel() {
     return `${t("I agree to")} 
-      <a href='${process.env.REACT_APP_DOMAIN_LINK}/terms' class="hover:text-indigo-600" rel="noreferrer" target="_blank">
+      <a href='${process.env.REACT_APP_DOMAIN_LINK}/terms' class="font-medium text-primary-600 hover:underline dark:text-primary-500" target="_blank" rel="noreferrer">
         <strong>${t("Terms of Use")}</strong>
       </a> & 
-      <a href='${process.env.REACT_APP_DOMAIN_LINK}/privacypolicy' class="hover:text-indigo-600" rel="noreferrer" target="_blank">
+      <a href='${process.env.REACT_APP_DOMAIN_LINK}/privacypolicy' class="font-medium text-primary-600 hover:underline dark:text-primary-500" target="_blank" rel="noreferrer">
         <strong>${t("Privacy Policy")}</strong>
       </a>`;
   }
@@ -104,111 +104,117 @@ const SignUp = () => {
   return (
     <>
       {showModal && <PopUp {...popUpProps} />}
-      <div className="bg-gray-50 flex flex-col justify-center py-7 sm:px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <span onMouseDown={() => navigate("/")} className="cursor-pointer">
-            <img
-              className="mx-auto h-12 w-auto"
-              src={bugplotLogo}
-              alt="QuickTest"
-              loading="eager"
-              title="Quick Test Logo"
-              width={48}
-              height={48}
-            />
-          </span>
-          <h2 className="mt-6 text-center text-xl 2xl:text-3xl font-extrabold text-gray-900">
-            {t("Get started with Quick Test")}
-          </h2>
-        </div>
-        <div className="mt-8 ml-3 mr-3 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <Formik
-              initialValues={initialSignUpValues}
-              validationSchema={signUpSchema}
-              onSubmit={onSubmitHandler}
-            >
-              {() => (
-                <Form className="space-y-6" action="#" method="POST" noValidate>
-                  {RenderFormikInputs([
-                    {
-                      type: "text",
-                      name: "firstName",
-                      label: t("First Name"),
-                      validation: false,
-                    },
-                    {
-                      type: "text",
-                      name: "lastName",
-                      label: t("Last Name"),
-                      validation: false,
-                    },
-                    {
-                      type: "email",
-                      name: "email",
-                      label: t("Work Email"),
-                      validation: false,
-                    },
-                    {
-                      type: "text",
-                      name: "org",
-                      label: t("Organization"),
-                      validation: false,
-                    },
-                    {
-                      type: "password",
-                      name: "password",
-                      label: t("Password"),
-                      validation: false,
-                    },
-                    {
-                      type: "password",
-                      name: "cnfpassword",
-                      label: t("Confirm Password"),
-                      validation: false,
-                    },
-                  ])}
+      <section className="bg-gray-50 dark:bg-gray-900">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+          <a
+            href="/quick-test"
+            className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+          >
+            <img className="w-8 h-8 mr-2" src={bugplotLogo} alt="QuickTest" />
+            Quick Test
+          </a>
+          <div className="w-full bg-white rounded-sm shadow dark:border md:mt-0 sm:max-w-[512px] xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div className="p-6 space-y-4 md:space-y-4 sm:p-8">
+              <h1 className="h1">{t("Create your account")}</h1>
+              < Formik
+                initialValues={initialSignUpValues}
+                validationSchema={signUpSchema}
+                onSubmit={onSubmitHandler}
+              >
+                {() => (
+                  <Form className="space-y-4 md:space-y-4" action="#" method="POST" noValidate>
+                    <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                      <div>
+                        <FormikInput
+                          type="text"
+                          name="firstName"
+                          label={t("First Name")}
+                          placeholder={t("First name")}
+                          validation={false}
+                        />
+                      </div>
+                      <div>
+                        <FormikInput
+                          type="text"
+                          name="lastName"
+                          label={t("Last Name")}
+                          placeholder={t("Last name")}
+                          validation={false}
+                        />
+                      </div>
+                    </div>
 
-                  <FormikCheckbox
-                    name="termAndCondition"
-                    type="checkbox"
-                    label={getTermsAndPrivacyLabel()}
-                    validation={validation}
-                  />
-                  <div>
+                    <div>
+                      <FormikInput
+                        type="email"
+                        name="email"
+                        label={t("Your email")}
+                        placeholder={t("name@company.com")}
+                        validation={false}
+                      />
+                    </div>
+
+                    <div>
+                      <FormikInput
+                        type="text"
+                        name="org"
+                        label={t("Organization Name")}
+                        placeholder={t("Company name")}
+                        validation={false}
+                      />
+                    </div>
+
+                    <div className="mt-4 grid gap-4 sm:grid-cols-2 sm:gap-6">
+                      <div>
+                        <FormikInput
+                          type="password"
+                          name="password"
+                          label={t("Password")}
+                          placeholder={t("••••••••")}
+                          validation={false}
+                        />
+                      </div>
+                      <div>
+                        <FormikInput
+                          type="password"
+                          name="cnfpassword"
+                          label={t("Confirm Password")}
+                          placeholder={t("••••••••")}
+                          validation={false}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex items-center h-5">
+                      <FormikCheckbox
+                        name="termAndCondition"
+                        type="checkbox"
+                        label={getTermsAndPrivacyLabel()}
+                        validation={validation}
+                      />
+                    </div>
                     <Button
                       id="sign-up"
                       onMouseDown={() => setValidation(true)}
                       type="submit"
                       loading={loading}
-                      className="w-full flex py-2 px-4"
+                      className={`${ButtonCSSStyles.btnPrimary} btn-primary w-full mt-4`}
                     >
-                      {t("Sign up")}
+                      {t("Create an account")}
                     </Button>
-                  </div>
-                </Form>
-              )}
-            </Formik>
-            <div className="mt-6">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">
-                    {t("Already have an account?")}{" "}
-                    <Link to={appRoutes.SIGNIN_PAGE}>
-                      <span className="font-medium text-indigo-600 hover:text-indigo-500">
-                        {t("Sign in")}
-                      </span>
-                    </Link>
-                  </span>
-                </div>
-              </div>
+                    <p className="text-sm font-light text-gray-500 dark:text-gray-400 flex justify-center items-center">
+                      {t("Already have an account?")}{" "}
+                      <Link to={appRoutes.SIGNIN_PAGE}>
+                        <span className="link ml-2">{t("Login")}</span>
+                      </Link>
+                    </p>
+                  </Form>
+                )}
+              </Formik>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };

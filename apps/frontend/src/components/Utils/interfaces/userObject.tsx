@@ -30,6 +30,7 @@ export interface InputFieldProps {
   name: keyof SignUpFormValues; // Restrict to valid form field keys
   label: string;
   validation?: boolean;
+  placeholder?: string;
 }
 
 export interface ISignInInputFieldProps {

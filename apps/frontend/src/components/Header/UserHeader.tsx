@@ -13,16 +13,39 @@ import bugplotLogo from "../../assets/images/bugplot-logo.svg";
 import AccessControl from "../AccessControl";
 import { ArchivePermissions } from "../Utils/constants/roles-permission";
 import { showError } from "../Toaster/ToasterFun";
+import { ChevronDownIcon, LanguageIcon } from "@heroicons/react/24/outline";
 
 export default function UserHeader() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [showUserSetting, setShowUserSetting] = useState(false);
+  const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
   const location = useLocation();
   const [selectedButton, setSelectedButton] = useState(
     location.pathname === "/dashboard" ? "Dashboard" : "Projects"
   );
   const [imageURL, setImageURL] = useState<string>("");
   const { state, dispatch } = useContext(AppContext);
+
+  const languages = [
+    { code: "en", nameKey: "English", flag: "🇺🇸" },
+    { code: "ar", nameKey: "العربية", flag: "🇸🇦" },
+    { code: "es", nameKey: "Español", flag: "🇪🇸" }
+  ];
+
+  const getCurrentLanguage = () => {
+    const currentLang = i18n.language || localStorage.getItem("i18nextLng") || "en";
+    return languages.find(lang => lang.code === currentLang) || languages[0];
+  };
+
+  const handleLanguageChange = (languageCode: string) => {
+    i18n.changeLanguage(languageCode);
+    localStorage.setItem("i18nextLng", languageCode);
+    setShowLanguageDropdown(false);
+  };
+
+  const toggleLanguageDropdown = () => {
+    setShowLanguageDropdown(!showLanguageDropdown);
+  };
 
   const handleButtonClick = (button: any) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -34,7 +57,7 @@ export default function UserHeader() {
       const response = state.userDetails;
       setImageURL(response.profileImage);
     } catch (_) {
-      showError("Failed to fetch profile picture");
+      showError(t("Failed to fetch profile picture"));
     }
   }, [state.userDetails]);
 
@@ -50,6 +73,7 @@ export default function UserHeader() {
 
   const handleClick = (e: any) => {
     if (e.target?.id !== "OpenProfile") setShowUserSetting(false);
+    if (!e.target?.closest("#language-dropdown")) setShowLanguageDropdown(false);
   };
 
   useEffect(() => {
@@ -68,10 +92,10 @@ export default function UserHeader() {
 
   return (
     <>
-      <nav className="bg-gray-800 sticky top-0 z-10">
-        <div className="px-8">
-          <div className="relative flex items-center justify-between h-12 2xl:mx-44">
-            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+      <nav className="bg-gray-800">
+        <div className="mx-auto px-2 sm:px-4 lg:px-8">
+          <div className="relative flex h-12 items-center justify-between">
+            <div className="flex items-center px-2 lg:px-0">
               <button
                 type="button"
                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"
@@ -132,11 +156,10 @@ export default function UserHeader() {
                 <div className="flex space-x-4 mr-4 sm:mr-0">
                   <Link
                     to={`${appRoutes.DASHBOARD}`}
-                    className={`rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white ${
-                      selectedButton === "Dashboard"
-                        ? "bg-gray-900 text-white"
-                        : "bg-transparent text-gray-300"
-                    }`}
+                    className={`rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white ${selectedButton === "Dashboard"
+                      ? "bg-gray-900 text-white"
+                      : "bg-transparent text-gray-300"
+                      }`}
                     aria-current="page"
                     data-cy="dashboard"
                     onClick={() => handleButtonClick("Dashboard")}
@@ -145,11 +168,10 @@ export default function UserHeader() {
                   </Link>
                   <Link
                     to={`${appRoutes.PROJECTS}`}
-                    className={`rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white ${
-                      selectedButton === "Projects"
-                        ? "bg-gray-900 text-white"
-                        : "bg-inherit text-gray-300"
-                    }`}
+                    className={`rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white ${selectedButton === "Projects"
+                      ? "bg-gray-900 text-white"
+                      : "bg-inherit text-gray-300"
+                      }`}
                     aria-current="page"
                     data-cy="projects"
                     onClick={() => handleButtonClick("Projects")}
@@ -168,6 +190,42 @@ export default function UserHeader() {
               </div>
             </div>
             <div className="inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto ml-2 lg:ml-4 sm:pr-0">
+              {/* Language Dropdown */}
+              <div className="relative mr-3" id="language-dropdown">
+                <button
+                  type="button"
+                  onClick={toggleLanguageDropdown}
+                  className="flex items-center rounded-md bg-gray-800 px-2 py-1 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  aria-expanded={showLanguageDropdown}
+                  aria-haspopup="true"
+                >
+                  <LanguageIcon className="h-4 w-4 mr-1" />
+                  <span className="mr-1">{getCurrentLanguage().flag}</span>
+                  <span className="hidden sm:inline">{t(getCurrentLanguage().nameKey)}</span>
+                  <ChevronDownIcon className="h-3 w-3 ml-1" />
+                </button>
+
+                {showLanguageDropdown && (
+                  <div className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div className="py-1">
+                      {languages.map((language) => (
+                        <button
+                          key={language.code}
+                          onClick={() => handleLanguageChange(language.code)}
+                          className={`flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100 ${
+                            getCurrentLanguage().code === language.code
+                              ? "bg-gray-50 text-gray-900 font-medium"
+                              : "text-gray-700"
+                          }`}
+                        >
+                          <span className="mr-2">{language.flag}</span>
+                          {t(language.nameKey)}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
               <div className="ml-3 relative">
                 <div>
                   <button

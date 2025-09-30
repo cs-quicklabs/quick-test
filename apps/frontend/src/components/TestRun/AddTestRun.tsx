@@ -24,6 +24,21 @@ import TestcaseSelect from "./component/TestcaseSelect";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
+interface FormValues {
+  name: string
+  description: string
+  assignTo: string
+  milestone: string
+  sectionIds: string[]
+  testCaseIds: TestRunResult[]
+}
+
+interface TestRunResult {
+  id: string
+  testcaseId: number,
+  testCaseId: number
+}
+
 const AddTestRun = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -39,7 +54,7 @@ const AddTestRun = () => {
       .required(t(ValidatorMessage.NAME_REQ)),
   });
 
-  const [initialValues, setInitialValues] = useState({
+  const [initialValues, setInitialValues] = useState<FormValues>({
     name: "",
     description: "",
     assignTo: "",
@@ -56,6 +71,7 @@ const AddTestRun = () => {
   const [state, setState] = useState("includeAll");
   const [totalTestcases, setTotalTestcases] = useState(0);
   const [isDuplicating, setIsDuplicating] = useState(false);
+  const [allTestCases, setAllTestCases] = useState<TestRunResult[]>();
 
   const returnToMainPage = () =>
     navigate(`${appRoutes.PROJECTS}/${params.pid}/${projectRoutes.TESTRUNS}`);
@@ -86,6 +102,21 @@ const AddTestRun = () => {
     }
   }, [navigate, params.pid, duplicateFromId]);
 
+  /**
+  * Get all the test caes relted to provided project Id.
+  */
+  const getTestcases = useCallback(async () => {
+    try {
+      const response = await axiosService.get(
+        `/projects/${params.pid}`
+      );
+      setAllTestCases(response?.data?.data?.testcases);
+    } catch (err) {
+      showError(err?.message);
+    }
+  }, [params.pid]);
+
+
   const getMilestoneOptions = useCallback(async () => {
     try {
       const milestoneResponse = await axiosService.get(
@@ -112,7 +143,9 @@ const AddTestRun = () => {
     }
   }, [navigate, params.pid, duplicateFromId]);
 
-  // Fetch test run data if we're duplicating from an existing one
+  /**
+  * Fetch test run data for which we are going to clone the test run.
+  */
   const fetchTestRunData = useCallback(async () => {
     if (!duplicateFromId) return;
 
@@ -124,7 +157,7 @@ const AddTestRun = () => {
       );
 
       if (response?.data?.success) {
-        const testRunData = response.data.data;
+        const testRunData = response?.data?.data;
 
         // Pre-fill form data with values from the test run being duplicated
         setInitialValues({
@@ -146,12 +179,13 @@ const AddTestRun = () => {
         showError(i18next.t(ToastMessage.SOMETHING_WENT_WRONG));
       }
     }
-  }, [params.pid, duplicateFromId, t]);
+  }, [params.pid, duplicateFromId]);
 
   useEffect(() => {
     getSelectOptions();
 
     if (params?.pid) {
+      getTestcases();
       getMilestoneOptions();
     }
 
@@ -165,10 +199,25 @@ const AddTestRun = () => {
     params?.pid,
     fetchTestRunData,
     duplicateFromId,
+    getTestcases
   ]);
 
   const submitFormAddTestRun = async (value: typeof initialValues) => {
     setApiLoading(true);
+    /**
+    * Manage codition for clone feature as we are using Add test run file for both Creatig and Cloning the test run.
+    */
+    let testCaseIdCount = value.testCaseIds.length;
+    let testCaseIdArray;
+    if (duplicateFromId && !(Array.isArray(value?.testCaseIds))) {
+      const nestedIds = new Set(Object.values(value?.testCaseIds).map((item: any) => item?.testCaseId))
+      testCaseIdArray = allTestCases?.filter(obj =>
+        nestedIds.has(obj?.testcaseId)
+      ).map(item => item.id);
+      testCaseIdCount = Object.values(value?.testCaseIds).length;
+    } else {
+      testCaseIdArray = value.testCaseIds
+    }
     try {
       let data = {};
       if (!value.description.trim() && !value?.milestone) {
@@ -208,16 +257,16 @@ const AddTestRun = () => {
       if (
         state === "includeSpecific" &&
         value.testCaseIds &&
-        totalTestcases > 0
+        testCaseIdCount > 0
       ) {
         const newData: any = { ...data };
         newData.testSuite.sectionIds = [];
-        newData.testSuite.testCaseIds = value.testCaseIds;
+        newData.testSuite.testCaseIds = testCaseIdArray;
         response = await axiosService.post(
           `/projects/${params.pid}/test-suites/filtered`,
           newData
         );
-      } else if (state === "includeSpecific" && totalTestcases === 0) {
+      } else if (state === "includeSpecific" && testCaseIdCount === 0) {
         showError(i18next.t(ToastMessage.TEST_CASE_SELECT_ATLEAST_ONE));
         setApiLoading(false);
         return;

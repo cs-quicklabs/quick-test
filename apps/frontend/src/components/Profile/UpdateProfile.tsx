@@ -6,11 +6,9 @@ import * as Yup from "yup";
 
 import axiosService from "../Utils/axios";
 import { AppContext } from "../Context/mainContext";
-import { appRoutes } from "../Utils/constants/page-routes";
 import Button from "../Button";
-import CancelButton from "../Button/cancelButton";
 import defaultProfilePicture from "../../assets/images/profile.png";
-import { ToastMessage, LanguageList } from "../Utils/constants/misc";
+import { ToastMessage, LanguageList, ButtonCSSStyles } from "../Utils/constants/misc";
 import { FormikInput, FormikSelect } from "../Common/FormikInput";
 import Loader from "../Loader/Loader";
 import { showError, showSuccess } from "../Toaster/ToasterFun";
@@ -21,7 +19,6 @@ import {
 } from "../Utils/validators";
 
 import ProfileImageDesktop from "./components/ProfileImageDesktop";
-import ProfileImageMobile from "./components/ProfileImageMobile";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import { RoleId, RoleName } from "../Utils/constants/roles-permission";
@@ -230,128 +227,97 @@ export default function UpdateProfile() {
       {(formik) => {
         const { dirty, values, isValid } = formik;
         return (
-          <Form className="space-y-6" autoComplete="off">
-            <div className="space-y-6">
-              <div className="lg:w-3/4">
-                <h1 className="text-base font-semibold leading-7 text-gray-900">
-                  {t("Personal Information")}
-                </h1>
-                <h1 className="mt-1 text-sm leading-6 text-gray-600">
-                  {t("Update your personal information")}
-                </h1>
-              </div>
-              <div className="lg:grid lg:grid-cols-12">
-                <div className="lg:col-span-9 ">
-                  <div className="lg:hidden flex">
-                    <ProfileImageMobile
-                      profileImage={imageURL || defaultProfilePicture}
-                      handleImageUpload={handleImageUpload}
-                      showProgressBar={showProgressBar}
-                    />
-                  </div>
-                  <div className="flex ">
-                    <div className="w-full mr-4">
-                      <FormikInput
-                        type="name"
-                        name="firstName"
-                        label={t("First Name")}
-                        validation={validation}
-                      />
-                    </div>
-                    <div className="w-full">
-                      <FormikInput
-                        type="name"
-                        name="lastName"
-                        label={t("Last Name")}
-                        validation={validation}
-                      />
-                    </div>
-                  </div>
+          <main className="max-w-7xl mx-auto lg:px-8">
+            <div className="lg:grid lg:grid-cols-12 lg:gap-x-5">
 
-                  <div className="flex ">
-                    <div className="w-full pt-6">
+              <main className="max-w-xl pb-12 px-4 lg:col-span-6">
+                <div className="mt-0">
+                  <h1 className="form-title">{t("Profile Settings")}</h1>
+                  <p className="form-subtitle">{t("Change your personal profile settings")}</p>
+
+                  <Form className="w-full mt-6 space-y-4" autoComplete="off">
+                    <div className="sm:col-span-2">
+                      <label className="form-input-label" htmlFor="file_input">
+                        {t("Upload avatar")}
+                      </label>
+                      <div className="items-center w-20 h-20 sm:flex my-2">
+                        <ProfileImageDesktop
+                          profileImage={imageURL || defaultProfilePicture}
+                          handleImageUpload={handleImageUpload}
+                          showProgressBar={showProgressBar}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid gap-4 sm:grid-cols-2 sm:gap-4">
+                      <div>
+                        <FormikInput
+                          type="text"
+                          name="firstName"
+                          label={t("First Name")}
+                          placeholder={t("First name")}
+                          validation={validation}
+                        />
+                      </div>
+                      <div>
+                        <FormikInput
+                          type="text"
+                          name="lastName"
+                          label={t("Last Name")}
+                          placeholder={t("Last name")}
+                          validation={validation}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="mb-4">
                       <FormikInput
                         type="email"
                         name="email"
-                        label={t("Email Address")}
+                        label={t("Email")}
+                        placeholder={t("email@gmail.com")}
                         disabled
                       />
                     </div>
-                  </div>
 
-                  <div className="flex">
-                    <div className="w-full pt-6">
+                    <div className="mb-4">
                       <FormikInput
                         type="text"
                         name="organization"
                         label={t("Organization Name")}
+                        placeholder={t("Crownstack")}
                         validation={validation}
                         disabled={values.role === RoleName.OWNER ? false : true}
                       />
                     </div>
-                  </div>
 
-                  <div className="flex">
-                    <div className="w-full pt-6">
-                      <FormikInput
-                        type="text"
-                        name="role"
-                        label={t("Role")}
-                        disabled
-                      />
-                    </div>
-                  </div>
-                  <div className="flex">
-                    <div className="w-full pt-6">
+                    <div>
                       <FormikSelect
-                        type="text"
                         name="language"
-                        label={t("Language")}
-                        validation={validation}
+                        label={t("Select Language")}
                         optionsForSelect={LanguageList}
                         sendIdAsValue={true}
+                        validation={validation}
                       />
                     </div>
-                  </div>
-                </div>
-                <div className="lg:col-span-3 flex justify-end">
-                  <ProfileImageDesktop
-                    profileImage={imageURL || defaultProfilePicture}
-                    handleImageUpload={handleImageUpload}
-                    showProgressBar={showProgressBar}
-                  />
-                </div>
-              </div>
-            </div>
 
-            <div className="space-y-6 lg:w-3/4">
-              <div className="flex justify-end gap-4">
-                <CancelButton
-                  onMouseDown={() => navigate(appRoutes.DASHBOARD)}
-                  onClick={() => navigate(appRoutes.DASHBOARD)}
-                  type="button"
-                >
-                  {t("Cancel")}
-                </CancelButton>
-                <Button
-                  id="update-profile"
-                  onMouseDown={() => setValidation(true)}
-                  loading={apiloading === true ? "true" : undefined}
-                  type="submit"
-                  className={`sm:order-1 ${
-                    !dirty || !isValid
-                      ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                      : ""
-                  }`}
-                  disabled={!(dirty && isValid)}
-                >
-                  {t("Update")}
-                </Button>
-              </div>
+                    <Button
+                      id="update-profile"
+                      onMouseDown={() => setValidation(true)}
+                      loading={apiloading === true ? "true" : undefined}
+                      type="submit"
+                      className={`${ButtonCSSStyles.btnPrimary}`}
+                      disabled={!(dirty && isValid)}
+                    >
+                      {t("Save")}
+                    </Button>
+                  </Form>
+                </div>
+              </main>
             </div>
-          </Form>
+          </main>
         );
       }}
-    </Formik>
+    </Formik >
   );
 }

@@ -41,37 +41,35 @@ export const FormikInput = ({ showLabel = true, ...props }: IProps) => {
   const { touched, error } = { ...meta };
   return (
     <>
-      <div className="flex justify-between">
-        {showLabel && (
-          <label
-            htmlFor={props.name}
-            className="block text-sm font-medium text-gray-900"
-          >
-            {props.label}
-          </label>
-        )}
-        {props.isOptional && (
-          <span className="text-sm text-gray-500">{t("Optional")}</span>
-        )}
-      </div>
-      <div className="mt-1 relative">
-        <InputField
-          touched={touched}
-          error={error}
-          {...field}
-          {...props}
-          validation={props.validation}
-        />
-      </div>
-      {props.validation && error ? (
-        <span className="text-red-600 mt-2 text-sm">{error}</span>
-      ) : (
-        <ErrorMessage
-          name={props.name}
-          component="span"
-          className="text-red-600 mt-2 text-sm"
-        />
+      {showLabel && (
+        <label
+          htmlFor={props.name}
+          className="form-input-label"
+        >
+          {props.label}
+        </label>
       )}
+      {props.isOptional && (
+        <span className="text-sm text-gray-500">{t("Optional")}</span>
+      )}
+      <InputField
+        touched={touched}
+        error={error}
+        {...field}
+        {...props}
+        validation={props.validation}
+      />
+      {
+        props.validation && error ? (
+          <span className="text-red-600 mt-2 text-sm">{error}</span>
+        ) : (
+          <ErrorMessage
+            name={props.name}
+            component="span"
+            className="text-red-600 mt-2 text-sm"
+          />
+        )
+      }
     </>
   );
 };
@@ -82,23 +80,27 @@ export const FormikCheckbox = ({ ...props }: IProps) => {
 
   return (
     <>
-      <div className="flex items-center">
-        <InputCheckbox touched={touched} error={error} {...field} {...props} />
-        <label
-          htmlFor={props.name}
-          className="ml-2 block text-sm text-gray-900"
-          dangerouslySetInnerHTML={{ __html: props.label }}
-        ></label>
+
+      <div className="flex items-start">
+        <div className="flex items-center h-5">
+          <InputCheckbox touched={touched} error={error} {...field} {...props} />
+        </div>
+        <div className="ml-3 text-sm">
+          <label htmlFor={props.name} className="font-light text-gray-500 dark:text-gray-300" dangerouslySetInnerHTML={{ __html: props.label }}></label>
+        </div>
       </div>
-      {props.validation && error ? (
-        <span className="text-red-600 mt-2 text-sm">{error}</span>
-      ) : (
-        <ErrorMessage
-          name={props.name}
-          component="span"
-          className="text-red-600 mt-2 text-sm"
-        />
-      )}
+
+      {
+        props.validation && error ? (
+          <span className="text-red-600 mt-2 text-sm">{error}</span>
+        ) : (
+          <ErrorMessage
+            name={props.name}
+            component="span"
+            className="text-red-600 mt-2 text-sm"
+          />
+        )
+      }
     </>
   );
 };
@@ -308,6 +310,7 @@ export const RenderFormikInputs = (fields: Array<InputFieldProps>) => {
         type={field.type}
         name={field.name}
         label={field.label}
+        placeholder={field.placeholder}
         {...(field.validation ? { validation: field.validation } : {})}
       />
     </div>

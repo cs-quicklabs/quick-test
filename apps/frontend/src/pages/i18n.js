@@ -11,9 +11,14 @@ i18n
     backend: {
       loadPath: "/assets/i18n/common/{{lng}}.json",
     },
-    fallbackLng: localStorage.getItem("i18nextLng") || "en",
+    fallbackLng: "en",
+    lng: localStorage.getItem("i18nextLng") || "en",
     debug: false,
     supportedLngs: ["en", "ar", "es"],
+    detection: {
+      order: ['localStorage', 'navigator', 'htmlTag'],
+      caches: ['localStorage'],
+    },
     interpolation: {
       escapeValue: false,
       formatSeparator: ",",

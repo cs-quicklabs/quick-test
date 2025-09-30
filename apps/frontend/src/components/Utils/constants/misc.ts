@@ -114,3 +114,9 @@ export enum NoOfTestCases {
 export enum NoOfDaysForGraph {
   DEFAULT = 7,
 }
+
+
+export enum ButtonCSSStyles {
+    btnPrimary= "px-4 py-2 text-sm font-medium text-white rounded-sm bg-primary-700 hover:bg-primary-800",
+    btnSecondary= "px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-300 hover:bg-gray-100",
+}

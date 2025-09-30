@@ -28,26 +28,20 @@ export default function Dashboard() {
     <div className="pb-10 lg:py-12 px-2 sm:px-7 2xl:px-52">
       <div className="lg:grid lg:grid-cols-12 lg:gap-x-5">
         <aside className="py-6 px-2 lg:py-0 lg:px-0 lg:col-span-3">
-          <nav className="lg:space-y-1 space-x-1 lg:space-x-0 flex justify-between lg:block">
+          <nav className="space-y-1">
             {TapNavData.map((val, i) => (
               <Link
                 to={val.link}
                 key={i}
                 data-cy={val.dataAttr}
-                className={`text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md py-2 pl-2 pr-3 text-sm leading-6 font-semibold ${
-                  location?.pathname === val.link
-                    ? "bg-gray-50 text-indigo-600  "
-                    : "bg-white hover:bg-gray-50 "
-                }`}
+                className={`${location?.pathname === val.link
+                  ? "selected-sidebar-nav"
+                  : "sidebar-nav"
+                  }`}
                 aria-current="page"
               >
                 <svg
-                  // className="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
-                  className={`h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600 ${
-                    location?.pathname === val.link
-                      ? "text-indigo-600"
-                      : "hover:text-indigo-600"
-                  }`}
+                  className="w-6 h-6 text-gray-800 dark:text-white"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -61,7 +55,7 @@ export default function Dashboard() {
                     d={val.d}
                   />
                 </svg>
-                <span className="truncate">{t(val.text)}</span>
+                <span className="truncate ml-2">{t(val.text)}</span>
               </Link>
             ))}
           </nav>
@@ -71,6 +65,6 @@ export default function Dashboard() {
           {params?.subURL === "change-password" && <ChangePassword />}
         </div>
       </div>
-    </div>
+    </div >
   );
 }

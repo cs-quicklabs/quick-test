@@ -43,13 +43,12 @@ const Todo = () => {
         setShowLoader(true);
 
         // Fetch both APIs in parallel to improve performance
-        const [testSuitesResponse, todoResponse] = await Promise.all([
-          axiosService.get(`/projects/${params.pid}/test-suites`),
+        const [todoResponse] = await Promise.all([
           axiosService.get(`/projects/${params.pid}/todo`),
         ]);
 
         // Process test suites data
-        const testSuitesData = testSuitesResponse.data.data.data;
+        const testSuitesData = todoResponse.data.data.testRuns;
         setTestRunList(testSuitesData);
 
         // Process chart data
