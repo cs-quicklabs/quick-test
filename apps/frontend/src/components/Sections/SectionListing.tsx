@@ -1,5 +1,5 @@
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useAppSelector } from "../../store/hooks";
 import Tooltips from "../Tooltip/ToolTips";
 interface Iprops {
@@ -7,6 +7,7 @@ interface Iprops {
   openDeleteModal: (section: any) => void;
 }
 const SectionListing = (props: Iprops) => {
+  const { t } = useTranslation();
   const sections = useAppSelector((state) => state.sections.sections);
 
   return (
@@ -23,13 +24,13 @@ const SectionListing = (props: Iprops) => {
             <span className="inline-block mr-2 text-sm">
               <Trans>{section.name}</Trans>
             </span>
-            {section.name !== "Unassigned" && (
+            {section.name !== t("Unassigned") && (
               <span className="float-right flex text-center gap-2 text-xs">
                 <div
                   className="inline-block"
                   onClick={() => props.editPopUp(section)}
                   data-tooltip-id="section-listing-tooltip-id"
-                  data-tooltip-content="Edit"
+                  data-tooltip-content={t("Edit")}
                 >
                   <PencilSquareIcon
                     className="text-indigo-500 h-6 w-4 cursor-pointer inline-block pb-1"
@@ -40,7 +41,7 @@ const SectionListing = (props: Iprops) => {
                   className="inline-block"
                   onClick={() => props.openDeleteModal(section)}
                   data-tooltip-id="section-listing-tooltip-id"
-                  data-tooltip-content="Delete"
+                  data-tooltip-content={t("Delete")}
                 >
                   <TrashIcon
                     className="text-red-400 h-6 w-4 cursor-pointer inline-block pb-1"

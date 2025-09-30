@@ -120,14 +120,14 @@ export default function Table(props: Props) {
                             <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500 font-normal">
                               {value?.status === "COMPLETED" ? (
                                 <p className="whitespace-nowrap">
-                                  Completed on{" "}
+                                  {t("Completed on")}{" "}
                                   {dayjs(value?.testreport?.createdAt).format(
                                     DateFormat.LONG
                                   )}
                                 </p>
                               ) : (
                                 <p className="whitespace-nowrap">
-                                  Started on{" "}
+                                  {t("Started on")}{" "}
                                   {dayjs(value?.testreport?.createdAt).format(
                                     DateFormat.LONG
                                   )}
@@ -154,9 +154,9 @@ export default function Table(props: Props) {
                                     <circle cx="1" cy="1" r="1"></circle>
                                   </svg>
                                   <p className="whitespace-nowrap">
-                                    {value?.testreport?.passed} Passed,{" "}
-                                    {value?.testreport?.failed} Failed,{" "}
-                                    {value?.testreport?.blocked} Blocked
+                                    {value?.testreport?.passed} {t("Passed")},{" "}
+                                    {value?.testreport?.failed} {t("Failed")},{" "}
+                                    {value?.testreport?.blocked} {t("Blocked")}
                                   </p>
                                 </>
                               )}

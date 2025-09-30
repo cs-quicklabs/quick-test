@@ -99,7 +99,7 @@ export default function Dashboard() {
 
   const breadCrumbDetails = [
     {
-      name: "Projects",
+      name: t("Projects"),
       href: `${appRoutes.PROJECTS}`,
       current: false,
       style: "hover:text-blue-600",
@@ -113,7 +113,7 @@ export default function Dashboard() {
       dividerStyle: "h-5 w-5 flex-shrink-0 text-gray-300 hover:text-blue-600",
     },
     {
-      name: "Test Runs",
+      name: t("Test Runs"),
       href: `#`,
       current: false,
       style: "text-gray-400",

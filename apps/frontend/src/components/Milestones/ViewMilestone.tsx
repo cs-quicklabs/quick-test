@@ -8,6 +8,7 @@ import { DateFormat } from "../Utils/constants/date-format";
 import { appRoutes, projectRoutes } from "../Utils/constants/page-routes";
 
 import i18next from "i18next";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { getProjectsDetails } from "../../services/headerServices";
 import { getSingleMilestoneDataDetails } from "../../services/milestoneServices";
@@ -17,6 +18,7 @@ import { ToastMessage } from "../Utils/constants/misc";
 import TestRunTable from "./Component/TestRunTable";
 
 export default function ViewMilestone() {
+  const { t } = useTranslation();
   const params = useParams();
   const pid = params.pid;
   const id = params.id;
@@ -42,7 +44,7 @@ export default function ViewMilestone() {
 
   const breadCrumbDetails = [
     {
-      name: "Projects",
+      name: t("Projects"),
       href: `${appRoutes.PROJECTS}`,
       current: false,
       style: "hover:text-blue-600",
@@ -56,7 +58,7 @@ export default function ViewMilestone() {
       dividerStyle: "h-5 w-5 flex-shrink-0 text-gray-300 hover:text-blue-600",
     },
     {
-      name: "Milestone",
+      name: t("Milestone"),
       href: `#`,
       current: false,
       style: "te",
@@ -104,7 +106,7 @@ export default function ViewMilestone() {
           <div className="flex justify-between">
             <div className="mt-4 text-sm">
               <label htmlFor="small" className="font-medium text-gray-900">
-                Start Date
+                {t("Start Date")}
               </label>
               <p className="text-gray-500">
                 {dayjs(milestoneDetail?.startDate).format(DateFormat.LONG)}
@@ -112,7 +114,7 @@ export default function ViewMilestone() {
             </div>
             <div className="mt-4 text-sm">
               <label htmlFor="small" className="font-medium text-gray-900">
-                End Date
+                {t("End Date")}
               </label>
               <p className="text-gray-500">
                 {dayjs(milestoneDetail?.endDate).format(DateFormat.LONG)}
@@ -128,7 +130,7 @@ export default function ViewMilestone() {
             </div> */}
             <div className="mt-4 text-sm">
               <label htmlFor="small" className="font-medium text-gray-900">
-                Created on
+                {t("Created on")}
               </label>
               <p className="text-gray-500">
                 {dayjs(milestoneDetail?.createdAt).format(DateFormat.LONG)}

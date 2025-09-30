@@ -11,7 +11,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { Fragment, useCallback, useRef, useState } from "react";
 import AddProjectUser from "./AddProjectUser";
-import i18next, { t } from "i18next";
+import i18next from "i18next";
+import { useTranslation } from "react-i18next";
 import Button from "../../../../components/Button";
 import {
   deleteProjectMembers,
@@ -28,6 +29,7 @@ import { useQuery } from "@tanstack/react-query";
 import Tooltips from "../../../../components/Tooltip/ToolTips";
 
 export default function ProjectMembers(props: any) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [isShare, setShare] = useState(false);
   const [userData, setUserData] = useState({ fullName: "", id: "" });
@@ -68,7 +70,7 @@ export default function ProjectMembers(props: any) {
   const deleteMember = () => {
     setLoading(true);
     deleteProjectMembers(props?.pid, deleteUser)
-      .then((response) => {
+      .then(() => {
         setOpen(false);
         fetchData();
         showSuccess(ToastMessage.MEMBER_DELETED);
@@ -111,7 +113,7 @@ export default function ProjectMembers(props: any) {
                             <td className="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                               <button
                                 data-tooltip-id="delete-id"
-                                data-tooltip-content="Delete"
+                                data-tooltip-content={t("Delete")}
                                 onClick={() => getConfirmation(member)}
                               >
                                 <TrashIcon className="w-4 h-4 text-red-400" />
@@ -122,7 +124,7 @@ export default function ProjectMembers(props: any) {
                       ) : (
                         <tr>
                           <td className="flex mt-10 justify-center text-gray-500 text-sm font-normal">
-                            No Member Found.
+                            {t("No Member Found.")}
                           </td>
                         </tr>
                       )}
@@ -208,15 +210,17 @@ export default function ProjectMembers(props: any) {
                         as="h3"
                         className="text-base font-semibold leading-6 text-gray-900"
                       >
-                        Delete Member
+                        {t("Delete Member")}
                       </DialogTitle>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                          After deleting, <strong>{userData?.fullName}</strong>{" "}
-                          will no longer have access to any{" "}
-                          <strong>{props?.pname}</strong>-related data,
-                          including milestones, test cases, and other related
-                          information.
+                          {t(
+                            "After deleting, {{fullName}} will no longer have access to any {{projectName}}-related data, including milestones, test cases, and other related information.",
+                            {
+                              fullName: userData?.fullName,
+                              projectName: props?.pname,
+                            }
+                          )}
                         </p>
                       </div>
                     </div>
@@ -229,7 +233,7 @@ export default function ProjectMembers(props: any) {
                         deleteMember();
                       }}
                     >
-                      Delete
+                      {t("Delete")}
                     </button>
                     <button
                       type="button"
@@ -237,7 +241,7 @@ export default function ProjectMembers(props: any) {
                       onClick={() => setOpen(false)}
                       ref={cancelButtonRef}
                     >
-                      Cancel
+                      {t("Cancel")}
                     </button>
                   </div>
                 </DialogPanel>
