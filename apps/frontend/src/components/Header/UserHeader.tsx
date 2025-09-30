@@ -68,10 +68,10 @@ export default function UserHeader() {
 
   return (
     <>
-      <nav className="bg-gray-800 sticky top-0 z-10">
-        <div className="px-8">
-          <div className="relative flex items-center justify-between h-12 2xl:mx-44">
-            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+      <nav className="bg-gray-800">
+        <div className="mx-auto px-2 sm:px-4 lg:px-8">
+          <div className="relative flex h-12 items-center justify-between">
+            <div className="flex items-center px-2 lg:px-0">
               <button
                 type="button"
                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"
@@ -132,11 +132,10 @@ export default function UserHeader() {
                 <div className="flex space-x-4 mr-4 sm:mr-0">
                   <Link
                     to={`${appRoutes.DASHBOARD}`}
-                    className={`rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white ${
-                      selectedButton === "Dashboard"
-                        ? "bg-gray-900 text-white"
-                        : "bg-transparent text-gray-300"
-                    }`}
+                    className={`rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white ${selectedButton === "Dashboard"
+                      ? "bg-gray-900 text-white"
+                      : "bg-transparent text-gray-300"
+                      }`}
                     aria-current="page"
                     data-cy="dashboard"
                     onClick={() => handleButtonClick("Dashboard")}
@@ -145,11 +144,10 @@ export default function UserHeader() {
                   </Link>
                   <Link
                     to={`${appRoutes.PROJECTS}`}
-                    className={`rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white ${
-                      selectedButton === "Projects"
-                        ? "bg-gray-900 text-white"
-                        : "bg-inherit text-gray-300"
-                    }`}
+                    className={`rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white ${selectedButton === "Projects"
+                      ? "bg-gray-900 text-white"
+                      : "bg-inherit text-gray-300"
+                      }`}
                     aria-current="page"
                     data-cy="projects"
                     onClick={() => handleButtonClick("Projects")}
