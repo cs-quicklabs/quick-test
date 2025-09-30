@@ -25,18 +25,18 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
 interface FormValues {
-  name: string
-  description: string
-  assignTo: string
-  milestone: string
-  sectionIds: string[]
-  testCaseIds: TestRunResult[]
+  name: string;
+  description: string;
+  assignTo: string;
+  milestone: string;
+  sectionIds: string[];
+  testCaseIds: TestRunResult[];
 }
 
 interface TestRunResult {
-  id: string
-  testcaseId: number,
-  testCaseId: number
+  id: string;
+  testcaseId: number;
+  testCaseId: number;
 }
 
 const AddTestRun = () => {
@@ -103,19 +103,16 @@ const AddTestRun = () => {
   }, [navigate, params.pid, duplicateFromId]);
 
   /**
-  * Get all the test caes relted to provided project Id.
-  */
+   * Get all the test caes relted to provided project Id.
+   */
   const getTestcases = useCallback(async () => {
     try {
-      const response = await axiosService.get(
-        `/projects/${params.pid}`
-      );
+      const response = await axiosService.get(`/projects/${params.pid}`);
       setAllTestCases(response?.data?.data?.testcases);
     } catch (err) {
       showError(err?.message);
     }
   }, [params.pid]);
-
 
   const getMilestoneOptions = useCallback(async () => {
     try {
@@ -144,8 +141,8 @@ const AddTestRun = () => {
   }, [navigate, params.pid, duplicateFromId]);
 
   /**
-  * Fetch test run data for which we are going to clone the test run.
-  */
+   * Fetch test run data for which we are going to clone the test run.
+   */
   const fetchTestRunData = useCallback(async () => {
     if (!duplicateFromId) return;
 
@@ -199,24 +196,26 @@ const AddTestRun = () => {
     params?.pid,
     fetchTestRunData,
     duplicateFromId,
-    getTestcases
+    getTestcases,
   ]);
 
   const submitFormAddTestRun = async (value: typeof initialValues) => {
     setApiLoading(true);
     /**
-    * Manage codition for clone feature as we are using Add test run file for both Creatig and Cloning the test run.
-    */
+     * Manage codition for clone feature as we are using Add test run file for both Creatig and Cloning the test run.
+     */
     let testCaseIdCount = value.testCaseIds.length;
     let testCaseIdArray;
-    if (duplicateFromId && !(Array.isArray(value?.testCaseIds))) {
-      const nestedIds = new Set(Object.values(value?.testCaseIds).map((item: any) => item?.testCaseId))
-      testCaseIdArray = allTestCases?.filter(obj =>
-        nestedIds.has(obj?.testcaseId)
-      ).map(item => item.id);
+    if (duplicateFromId && !Array.isArray(value?.testCaseIds)) {
+      const nestedIds = new Set(
+        Object.values(value?.testCaseIds).map((item: any) => item?.testCaseId)
+      );
+      testCaseIdArray = allTestCases
+        ?.filter((obj) => nestedIds.has(obj?.testcaseId))
+        .map((item) => item.id);
       testCaseIdCount = Object.values(value?.testCaseIds).length;
     } else {
-      testCaseIdArray = value.testCaseIds
+      testCaseIdArray = value.testCaseIds;
     }
     try {
       let data = {};

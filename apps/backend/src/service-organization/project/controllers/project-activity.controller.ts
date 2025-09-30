@@ -40,43 +40,7 @@ export class ActivityRelatedProjectController {
     private _projectReadService: ProjectReadService,
     private activityService: ActivityService,
   ) {}
-
-  /**
-   * Get test Suites for Activity
-   * @Param id
-   */
-  @Get("/:id/activity/test-suites")
-  @UseGuards(SubscriptionAuthGuard, PermissionsGuard, ProjectAuthGuard)
-  @Permissions(Permission.GET_ACTIVITY_TESTSUITES)
-  @SubscriptionAuthStatus(
-    OrgSubscriptionStatus.active,
-    OrgSubscriptionStatus.freeTrial,
-    OrgSubscriptionStatus.cancelAtPeriodEnd,
-  )
-  @HttpCode(HttpStatus.OK)
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: "Get test suites details",
-    type: ActivityPageOptionsDto,
-  })
-  async getActivityTestSuites(
-    @Query(
-      new ValidationPipe({
-        transform: true,
-      }),
-    )
-    pageOptionsDto: ActivityPageOptionsDto,
-    @Param("id") projectId: string,
-    @AuthUser() user: UserEntity,
-  ): Promise<ResponseSuccess> {
-    const testSuites = await this._projectReadService.getActivityTestSuites(
-      pageOptionsDto,
-      projectId,
-      user,
-    );
-    return new ResponseSuccess("translations.TEST_SUITES_LIST", testSuites);
-  }
-
+  
   /*
    *  Get All open milestones for Activity
    */

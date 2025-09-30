@@ -312,26 +312,6 @@ export class ProjectReadService {
   }
 
   /**
-   * Find all test suites
-   */
-  async getActivityTestSuites(
-    pageOptionsDto: ActivityPageOptionsDto,
-    projectId: string,
-    currentLoggerInUser: UserEntity,
-  ): Promise<TestSuiteListDto> {
-    await this.checkProjectForUser(
-      projectId,
-      currentLoggerInUser.organization.id,
-    );
-
-    const testSuites = await this.testSuiteService.getActivityTestSuites(
-      pageOptionsDto,
-      projectId,
-    );
-    return testSuites;
-  }
-
-  /**
    * Find single test suite
    */
 
@@ -384,7 +364,7 @@ export class ProjectReadService {
   async getProjectTodo(
     projectId: string,
     currentLoggedInUser: UserEntity,
-  ): Promise<TestSuiteTodoListDto> {
+  ) {
     await this.checkProjectForUser(
       projectId,
       currentLoggedInUser.organization.id,
@@ -436,7 +416,7 @@ export class ProjectReadService {
   async getAllMilestones(
     projectId: string,
     currentLoggerInUser: UserEntity,
-  ): Promise<MilestoneDetailsDto[]> {
+  ) {
     await this.checkProjectForUser(
       projectId,
       currentLoggerInUser.organization.id,

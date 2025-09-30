@@ -42,12 +42,20 @@ const ModalSectionTable = ({
     <table className="min-w-full divide-y divide-gray-200 table-fixed">
       <thead className="bg-gray-50">
         <tr>
-          <th scope="col" className="px-6 py-2 text-left text-xs text-gray-500 uppercase tracking-wider w-1/12">
-          </th>
-          <th scope="col" className="px-6 py-2 text-left text-xs text-gray-500 uppercase tracking-wider w-2/12">
+          <th
+            scope="col"
+            className="px-6 py-2 text-left text-xs text-gray-500 uppercase tracking-wider w-1/12"
+          ></th>
+          <th
+            scope="col"
+            className="px-6 py-2 text-left text-xs text-gray-500 uppercase tracking-wider w-2/12"
+          >
             {t("ID")}
           </th>
-          <th scope="col" className="px-6 py-2 text-left text-xs text-gray-500 uppercase tracking-wider w-9/12">
+          <th
+            scope="col"
+            className="px-6 py-2 text-left text-xs text-gray-500 uppercase tracking-wider w-9/12"
+          >
             {t("Title")}
           </th>
         </tr>

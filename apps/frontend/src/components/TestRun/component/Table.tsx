@@ -103,8 +103,9 @@ export default function Table(props: Props) {
               {props?.projectName}&nbsp;{t("Project Test Run Report")}
             </div>
             <div
-              className={` border-b border-gray-200 ${props.RowData?.length < 1 && "hidden"
-                } `}
+              className={` border-b border-gray-200 ${
+                props.RowData?.length < 1 && "hidden"
+              } `}
             >
               <table className="min-w-full ">
                 <tbody className="bg-white divide-y divide-gray-200">

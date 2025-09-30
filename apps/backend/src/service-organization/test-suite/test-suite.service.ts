@@ -473,55 +473,8 @@ export class TestSuiteService {
       pageOptionsDto,
       itemCount: testSuitesCount,
     });
-    const testSuiteList = [];
-    if (testSuites !== undefined) {
-      testSuites.forEach((testsuite) => {
-        const data = new TestSuiteListDto(testsuite);
-        const { testreport, assignedTo, user, ...rest } = data;
-        const result = {
-          ...rest,
-          testreport: { ...testreport },
-          assignedTo: { ...assignedTo?.toDto() },
-          user: { ...user?.toDto() },
-        };
-        testSuiteList.push(result);
-      });
-    }
 
-    return new TestSuitesPageDto(testSuiteList, pageMetaDto);
-  }
-
-  /**
-   * Find all testSuite
-   */
-
-  async getActivityTestSuites(
-    pageOptionsDto: ActivityPageOptionsDto,
-    projectId: string,
-  ): Promise<any> {
-    const date = UtilsService.getPastDate(pageOptionsDto.days);
-    const testSuites = await this.testSuiteRepository
-      .createQueryBuilder("testSuite")
-      .withDeleted()
-      .leftJoinAndSelect("testSuite.assignedTo", "assignedTo")
-      .leftJoinAndSelect("testSuite.user", "user")
-      .where("testSuite.project_id = :projectId", {
-        projectId,
-      })
-      .andWhere("testSuite.createdAt >= :date", {
-        date,
-      })
-      .skip(pageOptionsDto.skip)
-      .take(pageOptionsDto.take)
-      .orderBy("testSuite.createdAt", pageOptionsDto.order)
-      .getMany();
-
-    const testSuiteList: TestSuiteListDto[] = [];
-    testSuites.forEach((testsuite) => {
-      testSuiteList.push(new TestSuiteListDto(testsuite));
-    });
-
-    return testSuiteList;
+    return new TestSuitesPageDto(testSuites, pageMetaDto);
   }
 
   /**
@@ -617,19 +570,7 @@ export class TestSuiteService {
     const users: UserAssignedTestCasesDto[] =
       this.addTestCasesToAssignedUsers(testSuites);
 
-    const testSuiteList = [];
-    testSuites.forEach((testSuite) => {
-      const data = new TestSuiteListDto(testSuite);
-      const { assignedTo, testreport, ...rest } = data;
-      const result = {
-        ...rest,
-        assignedTo: { ...assignedTo?.toDto() },
-        testreport: { ...testreport },
-      };
-      testSuiteList.push(result);
-    });
-
-    return new TestSuiteTodoListDto(users, testSuiteList);
+    return new TestSuiteTodoListDto(users, testSuites);
   }
 
   /**

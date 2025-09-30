@@ -234,7 +234,7 @@ export class MilestoneService {
    * Get all milestone of a project
    */
 
-  async getAllMilestones(projectId: string): Promise<MilestoneDetailsDto[]> {
+  async getAllMilestones(projectId: string) {
     const project = await this.projectReadService.findOne({ id: projectId });
     if (!project) throw new NotFoundException("translations.RECORD_NOT_FOUND");
     const milestones = await this.milestoneRepository
@@ -247,12 +247,7 @@ export class MilestoneService {
       .orderBy("milestone.createdAt", Order.DESC)
       .getMany();
 
-    const results: MilestoneDetailsDto[] = [];
-    milestones.forEach((el) => {
-      results.push(new MilestoneDetailsDto(el));
-    });
-
-    return results;
+    return milestones;
   }
 
   /**
