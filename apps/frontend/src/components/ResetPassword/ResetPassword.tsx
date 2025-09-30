@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import { showError, showSuccess } from "../Toaster/ToasterFun";
 import { appRoutes } from "../Utils/constants/page-routes";
-import { ValidatorMessage } from "../Utils/constants/misc";
+import { ButtonCSSStyles, ValidatorMessage } from "../Utils/constants/misc";
 import { useTranslation } from "react-i18next";
 import bugplotLogo from "../../assets/images/bugplot-logo.svg";
 
@@ -94,7 +94,7 @@ export default function ResetPasswordForm() {
                   onSubmit={onSubmitHandler}
                 >
                   {(formik) => {
-                    const { errors, isValid, dirty } = formik;
+                    const { errors } = formik;
                     return (
                       <Form className="mt-4 space-y-4 lg:mt-5 md:space-y-4" autoComplete="off">
                         <div>
@@ -120,8 +120,7 @@ export default function ResetPasswordForm() {
                           id="set-password"
                           type="submit"
                           loading={loading}
-                          className={`btn-primary w-full ${!(dirty && isValid) ? "opacity-80" : ""
-                            }`}
+                          className={`${ButtonCSSStyles.btnPrimary} btn-primary w-full`}
                         >
                           {t("Set password")}
                         </Button>

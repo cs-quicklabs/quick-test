@@ -6,11 +6,9 @@ import * as Yup from "yup";
 
 import axiosService from "../Utils/axios";
 import { AppContext } from "../Context/mainContext";
-import { appRoutes } from "../Utils/constants/page-routes";
 import Button from "../Button";
-import CancelButton from "../Button/cancelButton";
 import defaultProfilePicture from "../../assets/images/profile.png";
-import { ToastMessage, LanguageList } from "../Utils/constants/misc";
+import { ToastMessage, LanguageList, ButtonCSSStyles } from "../Utils/constants/misc";
 import { FormikInput, FormikSelect } from "../Common/FormikInput";
 import Loader from "../Loader/Loader";
 import { showError, showSuccess } from "../Toaster/ToasterFun";
@@ -303,26 +301,16 @@ export default function UpdateProfile() {
                       />
                     </div>
 
-                    <div className="flex justify-end gap-4">
-                      <CancelButton
-                        onMouseDown={() => navigate(appRoutes.DASHBOARD)}
-                        onClick={() => navigate(appRoutes.DASHBOARD)}
-                        type="button"
-                      >
-                        {t("Cancel")}
-                      </CancelButton>
-                      <Button
-                        id="update-profile"
-                        onMouseDown={() => setValidation(true)}
-                        loading={apiloading === true ? "true" : undefined}
-                        type="submit"
-                        className={`btn-primary ${!dirty || !isValid ? "opacity-80" : ""
-                          }`}
-                        disabled={!(dirty && isValid)}
-                      >
-                        {t("Save")}
-                      </Button>
-                    </div>
+                    <Button
+                      id="update-profile"
+                      onMouseDown={() => setValidation(true)}
+                      loading={apiloading === true ? "true" : undefined}
+                      type="submit"
+                      className={`${ButtonCSSStyles.btnPrimary}`}
+                      disabled={!(dirty && isValid)}
+                    >
+                      {t("Save")}
+                    </Button>
                   </Form>
                 </div>
               </main>

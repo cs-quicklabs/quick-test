@@ -6,9 +6,10 @@ import { Formik, Form } from "formik";
 import { appRoutes } from "../Utils/constants/page-routes";
 import axiosService from "../Utils/axios";
 import Button from "../Button";
-import { FormikCheckbox, RenderFormikInputs } from "../Common/FormikInput";
+import { FormikCheckbox, FormikInput } from "../Common/FormikInput";
 import { showError, showSuccess } from "../Toaster/ToasterFun";
 import {
+  ButtonCSSStyles,
   SubscriptionStatus,
   ToastMessage,
   ValidatorMessage,
@@ -122,49 +123,50 @@ const SignIn = () => {
               >
                 {() => {
                   return (
-                    <Form className="space-y-6" noValidate autoComplete="off">
-                      {RenderFormikInputs([
-                        {
-                          type: "email",
-                          name: "email",
-                          label: t("Email Address"),
-                          placeholder: t("name@company.com"),
-                        },
-                        {
-                          type: "password",
-                          name: "password",
-                          label: t("Password"),
-                          placeholder: t("********"),
-                        },
-                      ])}
+                    <Form className="space-y-4 md:space-y-4" noValidate autoComplete="off">
+                      <div>
+                        <FormikInput
+                          type="email"
+                          name="email"
+                          label={t("Your email")}
+                          placeholder={t("name@company.com")}
+                        />
+                      </div>
+
+                      <div>
+                        <FormikInput
+                          type="password"
+                          name="password"
+                          label={t("Password")}
+                          placeholder={t("••••••••")}
+                        />
+                      </div>
 
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                          <FormikCheckbox
-                            type="checkbox"
-                            name="remember_me"
-                            label={t("Remember Me")}
-                          />
+                        <div className="flex items-start">
+                          <div className="flex items-center h-5">
+                            <FormikCheckbox
+                              type="checkbox"
+                              name="remember_me"
+                              label={t("Remember me")}
+                            />
+                          </div>
                         </div>
-                        <div className="text-sm">
-                          <Link
-                            className="link cursor-pointer"
-                            to={appRoutes.FORGOT_PASSWORD}
-                          >
-                            {t("Forgot password?")}
-                          </Link>
-                        </div>
-                      </div>
-                      <div>
-                        <Button
-                          id="login-submit"
-                          type="submit"
-                          loading={loading}
-                          className={`btn-primary w-full mt-4`}
+                        <Link
+                          className="link"
+                          to={appRoutes.FORGOT_PASSWORD}
                         >
-                          {t("Sign in")}
-                        </Button>
+                          {t("Forgot password?")}
+                        </Link>
                       </div>
+                      <Button
+                        id="login-submit"
+                        type="submit"
+                        loading={loading}
+                        className={`${ButtonCSSStyles.btnPrimary} w-full mt-4`}
+                      >
+                        {t("Sign in")}
+                      </Button>
                     </Form>
                   );
                 }}
@@ -175,8 +177,8 @@ const SignIn = () => {
                     <div className="w-full" />
                   </div>
                   <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white text-gray-500">
-                      {t("Don't have an account?")}{" "}
+                    <span className="text-sm font-light text-gray-500 dark:text-gray-400 flex items-center justify-center">
+                      {t("Don’t have an account yet?")}{" "}
                       <Link to={appRoutes.SIGNUP_PAGE}>
                         <span className="link ml-2">{t("Sign up")}</span>
                       </Link>
@@ -187,7 +189,7 @@ const SignIn = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section >
     </>
   );
 };

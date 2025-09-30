@@ -80,23 +80,27 @@ export const FormikCheckbox = ({ ...props }: IProps) => {
 
   return (
     <>
-      <div className="flex items-center">
-        <InputCheckbox touched={touched} error={error} {...field} {...props} />
-        <label
-          htmlFor={props.name}
-          className="form-light ml-3 text-gray-500 dark:text-gray-300"
-          dangerouslySetInnerHTML={{ __html: props.label }}
-        ></label>
+
+      <div className="flex items-start">
+        <div className="flex items-center h-5">
+          <InputCheckbox touched={touched} error={error} {...field} {...props} />
+        </div>
+        <div className="ml-3 text-sm">
+          <label htmlFor={props.name} className="font-light text-gray-500 dark:text-gray-300" dangerouslySetInnerHTML={{ __html: props.label }}></label>
+        </div>
       </div>
-      {props.validation && error ? (
-        <span className="text-red-600 mt-2 text-sm">{error}</span>
-      ) : (
-        <ErrorMessage
-          name={props.name}
-          component="span"
-          className="text-red-600 mt-2 text-sm"
-        />
-      )}
+
+      {
+        props.validation && error ? (
+          <span className="text-red-600 mt-2 text-sm">{error}</span>
+        ) : (
+          <ErrorMessage
+            name={props.name}
+            component="span"
+            className="text-red-600 mt-2 text-sm"
+          />
+        )
+      }
     </>
   );
 };
