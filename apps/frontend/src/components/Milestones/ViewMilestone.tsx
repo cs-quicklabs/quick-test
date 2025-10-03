@@ -84,7 +84,7 @@ export default function ViewMilestone() {
           <div className="xl:flex-1">
             <div className="flow-root">
               <div className="-my-2 overflow-x-auto ">
-                <div className="inline-block min-w-full py-3 align-middle sm:px-6 lg:px-8 2xl:pl-52">
+                <div className="inline-block min-w-full py-3 align-middle sm:px-6 lg:px-8 2xl:pl-12">
                   <div className="overflow-hidden">
                     <TestRunTable
                       RowData={milestoneDetail?.testsuites}
@@ -96,7 +96,7 @@ export default function ViewMilestone() {
             </div>
           </div>
         </div>
-        <div className="shrink-0 border-t border-gray-200 px-4 py-6 sm:px-6 lg:w-96 lg:border-l lg:border-t-0 lg:pr-8 xl:pr-6 h-screen 2xl:pr-52">
+        <div className="shrink-0 border-t border-gray-200 px-4 py-6 sm:px-6 lg:w-96 lg:border-l lg:border-t-0 lg:pr-8 xl:pr-6 h-screen 2xl:pr-12">
           <h3 className="text-base font-semibold leading-6 text-gray-900">
             {milestoneDetail?.name}
           </h3>

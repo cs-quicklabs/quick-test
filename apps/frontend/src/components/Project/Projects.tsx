@@ -214,7 +214,7 @@ export default function Projects() {
                       <table className="min-w-full">
                         <thead className="">
                           <tr className="text-right">
-                            <th className="border-b border-gray-200 bg-gray-50 px-8 py-2 text-left text-sm font-semibold text-gray-900 2xl:pl-52">
+                            <th className="border-b border-gray-200 bg-gray-50 px-8 py-2 text-left text-sm font-semibold text-gray-900 2xl:pl-12">
                               {t("Projects")}
                             </th>
                             <th className="border-b border-gray-200 bg-gray-50 px-6 py-2 text-sm font-semibold text-gray-900 text-center">
@@ -227,7 +227,7 @@ export default function Projects() {
                               {t("Created At")}
                             </th>
 
-                            <th className="border-b border-gray-200 bg-gray-50 px-6 py-2 text-left text-sm font-semibold text-gray-900 2xl:pr-52">
+                            <th className="border-b border-gray-200 bg-gray-50 px-6 py-2 text-left text-sm font-semibold text-gray-900 2xl:pr-12">
                               {t("Options")}
                             </th>
                           </tr>
@@ -236,16 +236,15 @@ export default function Projects() {
                           {data?.data?.data.map(
                             (project: any, index: number) => (
                               <tr key={project.id}>
-                                <td className="w-full max-w-0 whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900 2xl:pl-52">
+                                <td className="w-full max-w-0 whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900 2xl:pl-12">
                                   <div className="flex items-center space-x-3 lg:pl-2 text-[0.875rem] 2xl:pl-0">
                                     {project.favorite ? (
                                       <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className={`h-4 w-4 cursor-pointer hover:text-indigo-100 ${
-                                          project.favorite
-                                            ? "text-indigo-700"
-                                            : "text-indigo-100 hover:text-indigo-700"
-                                        }`}
+                                        className={`h-4 w-4 cursor-pointer hover:text-indigo-100 ${project.favorite
+                                          ? "text-indigo-700"
+                                          : "text-indigo-100 hover:text-indigo-700"
+                                          }`}
                                         data-cy={`add-favorite-${index}`}
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
@@ -264,11 +263,10 @@ export default function Projects() {
                                       >
                                         <svg
                                           xmlns="http://www.w3.org/2000/svg"
-                                          className={`h-4 w-4 cursor-pointer hover:text-indigo-100 ${
-                                            project.favorite
-                                              ? "text-indigo-700"
-                                              : "text-indigo-100 hover:text-indigo-700"
-                                          }`}
+                                          className={`h-4 w-4 cursor-pointer hover:text-indigo-100 ${project.favorite
+                                            ? "text-indigo-700"
+                                            : "text-indigo-100 hover:text-indigo-700"
+                                            }`}
                                           data-cy={`add-favorite-${index}`}
                                           viewBox="0 0 20 20"
                                           fill="currentColor"
@@ -317,7 +315,7 @@ export default function Projects() {
                                   </h1>
                                 </td>
 
-                                <td className="pr-6 2xl:pr-52">
+                                <td className="pr-6 2xl:pr-12">
                                   <Menu
                                     data-cy={`three-dots-menu-${index}`}
                                     as="div"
@@ -326,10 +324,9 @@ export default function Projects() {
                                     {({ open }) => (
                                       <>
                                         <MenuButton
-                                          className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none ${
-                                            open &&
+                                          className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none ${open &&
                                             "ring-2 ring-offset-2 ring-purple-500"
-                                          }`}
+                                            }`}
                                         >
                                           <span className="sr-only">
                                             {t("Open options")}
@@ -354,11 +351,11 @@ export default function Projects() {
                                             style={
                                               data?.data?.length - 1 ===
                                                 index &&
-                                              data?.data?.length !== 1
+                                                data?.data?.length !== 1
                                                 ? {
-                                                    transform:
-                                                      "translateY(-55%)",
-                                                  }
+                                                  transform:
+                                                    "translateY(-55%)",
+                                                }
                                                 : {}
                                             }
                                             className="mx-3 cursor-pointer origin-top-right absolute right-7 top-0 w-48 mt-1 rounded-md shadow-lg z-10 bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"

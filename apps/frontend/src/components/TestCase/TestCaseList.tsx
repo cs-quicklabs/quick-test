@@ -303,7 +303,7 @@ export default function TestCaseList({ projectName }: any) {
         ) : (
           <div className="grid items-start grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2 overflow-hidden">
             <div className=" overflow-x-auto mx-6 sm:mx-0  col-span-1 lg:col-span-2 height-threshold">
-              <div className="py-4 align-middle inline-block min-w-full px-7 2xl:pl-52">
+              <div className="py-4 align-middle inline-block min-w-full px-7 2xl:pl-12">
                 <TestCaseToolbar
                   Row={Row}
                   setRowData={setRowData}

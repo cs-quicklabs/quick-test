@@ -159,25 +159,23 @@ export default function Table({
       <div className="border-t">
         <div className="grid grid-cols-3 min-h-screen">
           <div
-            className={`col-span-2 border-r border-gray-200 min-w-full ${
-              RowData?.length < 1 && "hidden"
-            }`}
+            className={`col-span-2 border-r border-gray-200 min-w-full ${RowData?.length < 1 && "hidden"
+              }`}
           >
             <div className="col-span-2 min-w-full">
               <table
-                className={`min-w-full divide-y divide-gray-200 ${
-                  RowData?.length === 1
-                    ? "mb-24"
-                    : RowData?.length === 0
-                      ? ""
-                      : ""
-                }`}
+                className={`min-w-full divide-y divide-gray-200 ${RowData?.length === 1
+                  ? "mb-24"
+                  : RowData?.length === 0
+                    ? ""
+                    : ""
+                  }`}
               >
                 <thead className="bg-gray-50 border-b  border-gray-200">
                   <tr>
                     <th
                       scope="col"
-                      className="px-8 text-left text-sm font-semibold text-gray-900 w-1/12 2xl:pl-52"
+                      className="px-8 text-left text-sm font-semibold text-gray-900 w-1/12 2xl:pl-12"
                     >
                       {t("Sr.No.")}
                     </th>
@@ -205,7 +203,7 @@ export default function Table({
                   <tbody className="bg-white divide-y divide-gray-200">
                     {RowData.map((value: any, i) => (
                       <tr key={i} className={`rounded`} ref={lastElementRef}>
-                        <td className="px-8 py-2 whitespace-nowrap text-sm font-normal text-gray-900 2xl:pl-52">
+                        <td className="px-8 py-2 whitespace-nowrap text-sm font-normal text-gray-900 2xl:pl-12">
                           <span
                             onClick={() => {
                               seTestCaseNum(1 + i);

@@ -139,7 +139,7 @@ export default function Table({
       <div className="flex flex-col overflow-hidden">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div
-            className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-10"
+            className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-7"
             id="test-run-list"
           >
             <div className="overflow-hidden ">
@@ -182,11 +182,11 @@ export default function Table({
                       <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-500">
                         {value.status === "COMPLETED"
                           ? `Done on ${dayjs(value.endDate).format(
-                              DateFormat.MEDIUM
-                            )}`
+                            DateFormat.MEDIUM
+                          )}`
                           : `${t("Due on")} ${dayjs(value.endDate).format(
-                              DateFormat.MEDIUM
-                            )}`}
+                            DateFormat.MEDIUM
+                          )}`}
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-500">
