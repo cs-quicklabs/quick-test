@@ -3,6 +3,8 @@ import ResetPasswordForm from "../components/ResetPassword/ResetPassword";
 export default function ResetPassword() {
   return (
     <>
+      <title>QuickTest Reset Password</title>
+
       <meta
         name="description"
         content="Password reset link sent to your email."

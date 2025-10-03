@@ -11,6 +11,8 @@ const Dashboard = () => {
 
   return (
     <>
+      <title>QuickTest Dashboard</title>
+
       <meta
         name="description"
         content="Dashboard page or home page of Quick Test. You can see your active and favorite projects, and keep track of the progress you've made in those projects."
