@@ -3,6 +3,7 @@ import Register from "../components/SignUp/SignUp";
 export default function SignUp() {
   return (
     <>
+      <title>QuickTest SignUp</title>
       <meta
         name="description"
         content="New to Buglot! Create an account and Sign Up for the first time, 14 days free trial."

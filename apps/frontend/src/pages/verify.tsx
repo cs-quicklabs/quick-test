@@ -3,6 +3,8 @@ import VerifyEmail from "../components/VerifyEmail/VerifyEmail";
 const Verify = () => {
   return (
     <>
+      <title>QuickTest Verify</title>
+
       <meta
         name="description"
         content="Verify your email, a verification link has been send to your email. After verification please try logging in again."
