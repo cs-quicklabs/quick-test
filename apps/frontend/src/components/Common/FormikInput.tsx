@@ -61,12 +61,12 @@ export const FormikInput = ({ showLabel = true, ...props }: IProps) => {
       />
       {
         props.validation && error ? (
-          <span className="text-red-600 mt-2 text-sm">{error}</span>
+          <span className="text-red-600 text-xs">{error}</span>
         ) : (
           <ErrorMessage
             name={props.name}
             component="span"
-            className="text-red-600 mt-2 text-sm"
+            className="text-red-600 text-xs"
           />
         )
       }
@@ -92,12 +92,12 @@ export const FormikCheckbox = ({ ...props }: IProps) => {
 
       {
         props.validation && error ? (
-          <span className="text-red-600 mt-2 text-sm">{error}</span>
+          <span className="text-red-600 mt-2 text-xs">{error}</span>
         ) : (
           <ErrorMessage
             name={props.name}
             component="span"
-            className="text-red-600 mt-2 text-sm"
+            className="text-red-600 mt-2 text-xs"
           />
         )
       }
@@ -159,12 +159,12 @@ export const FormikTextArea = ({
       </div>
 
       {props.validation && error ? (
-        <span className="text-red-600 mt-2 text-sm">{error}</span>
+        <span className="text-red-600 mt-2 text-xs">{error}</span>
       ) : (
         <ErrorMessage
           name={props.name}
           component="span"
-          className="text-red-600 mt-2 text-sm"
+          className="text-red-600 mt-2 text-xs"
         />
       )}
     </>
@@ -189,12 +189,12 @@ export const FormikSelect = ({ showLabel = true, ...props }: IProps) => {
       </div>
 
       {props.validation && error ? (
-        <span className="text-red-600 mt-2 text-sm">{error}</span>
+        <span className="text-red-600 mt-2 text-xs">{error}</span>
       ) : (
         <ErrorMessage
           name={props.name}
           component="span"
-          className="text-red-600 mt-2 text-sm"
+          className="text-red-600 mt-2 text-xs"
         />
       )}
     </>
@@ -245,12 +245,12 @@ export const FormikInputSearch = ({
         />
       </div>
       {props.validation && error ? (
-        <span className="text-red-600 mt-2 text-sm">{error}</span>
+        <span className="text-red-600 mt-2 text-xs">{error}</span>
       ) : (
         <ErrorMessage
           name={props.name}
           component="span"
-          className="text-red-600 mt-2 text-sm"
+          className="text-red-600 mt-2 text-xs"
         />
       )}
     </>
@@ -291,12 +291,12 @@ export const FormikInputDateField = ({
         />
       </div>
       {props.validation && error ? (
-        <span className="text-red-600 mt-2 text-sm">{error}</span>
+        <span className="text-red-600 mt-2 text-xs">{error}</span>
       ) : (
         <ErrorMessage
           name={props.name}
           component="span"
-          className="text-red-600 mt-2 text-sm"
+          className="text-red-600 mt-2 text-xs"
         />
       )}
     </>

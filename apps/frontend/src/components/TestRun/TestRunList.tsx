@@ -76,7 +76,7 @@ export default function TestRunList({ projectName }: any) {
               <div className="grid grid-cols-1 gap-4 lg:col-span-2">
                 <section aria-labelledby="participants_section">
                   <div className="overflow-hidden bg-white">
-                    <div className="pb-4 pl-7 pr-4 min-h-screen lg:border-r lg:border-gray-200 2xl:pl-52">
+                    <div className="pb-4 pl-7 pr-4 min-h-screen lg:border-r lg:border-gray-200 2xl:pl-12">
                       <Table
                         RowData={testRunData}
                         editTestRun={editTestRun}

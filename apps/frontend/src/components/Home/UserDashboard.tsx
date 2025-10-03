@@ -97,6 +97,7 @@ export default function UserDashboard() {
     freeTrialDays();
   }, [freeTrialDays]);
 
+
   if (isSubscribed === "" && loading) {
     return (
       <div className="flex justify-center items-center content-center my-32">
@@ -104,6 +105,8 @@ export default function UserDashboard() {
       </div>
     );
   } else {
+    console.log(isSubscribed, isFirstLogin, ifOwner);
+
     return (
       <>
         {isSubscribed === SubscriptionStatus.FREE_TRIAL &&

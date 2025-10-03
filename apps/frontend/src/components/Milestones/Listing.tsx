@@ -63,7 +63,7 @@ export default function TestRunList() {
               <div className="grid grid-cols-1 gap-4 lg:col-span-2  ">
                 <section aria-labelledby="participants_section">
                   <div className="overflow-hidden bg-white">
-                    <div className="px-2 2xl:pl-48">
+                    <div className="px-2 2xl:pl-12">
                       {milestoneData?.data && milestoneData?.data.length > 0 ? (
                         <Table
                           RowData={milestoneData?.data}
