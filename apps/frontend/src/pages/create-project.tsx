@@ -3,6 +3,8 @@ import AddProject from "../components/Project/AddProject";
 const CreateProject = () => {
   return (
     <div>
+      <title>QuickTest Create Project</title>
+
       <meta
         name="description"
         content="Create New Project for Quick Test. Here you can make new projects with or without description"

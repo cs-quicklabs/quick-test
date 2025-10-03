@@ -166,13 +166,12 @@ const TestCaseDetail = ({ page, submitStatus, refetch }: any) => {
               <div className="w-24">
                 <div className={`inline-flex justify-between rounded-md  `}>
                   <Badge
-                    className={`mr-2 capitalize flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium ${
-                      data?.status === "PASSED"
-                        ? "bg-green-100 text-green-800"
-                        : data?.status === "FAILED"
-                          ? "bg-red-100 text-red-800"
-                          : "bg-gray-200 text-gray-00"
-                    }`}
+                    className={`mr-2 capitalize flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium ${data?.status === "PASSED"
+                      ? "bg-green-100 text-green-800"
+                      : data?.status === "FAILED"
+                        ? "bg-red-100 text-red-800"
+                        : "bg-gray-200 text-gray-00"
+                      }`}
                   >
                     <Trans>{data?.status.toLowerCase()}</Trans>
                   </Badge>
@@ -192,7 +191,7 @@ const TestCaseDetail = ({ page, submitStatus, refetch }: any) => {
       </div>
 
       <div className="min-h-screen flex flex-col-reverse md:flex-row md:flex-grow border-t border-gray-200">
-        <div className="md:w-8/12 lg:w-9/12 p-4 2xl:pl-52">
+        <div className="md:w-8/12 lg:w-9/12 p-4 2xl:pl-12">
           <div className="">
             <dl>
               <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 2xl:pl-0">

@@ -62,6 +62,8 @@ const Forgotpassword = () => {
 
   return (
     <>
+      <title>QuickTest Forgot Password</title>
+
       <meta
         name="description"
         content="Don't remember the password. Do not worry, we got you covered. We'll email you a link to reset your password"

@@ -227,7 +227,7 @@ export default function UpdateProfile() {
       {(formik) => {
         const { dirty, values, isValid } = formik;
         return (
-          <main className="max-w-7xl mx-auto lg:px-8">
+          <main className="max-w-7xl mx-auto lg:px-0">
             <div className="lg:grid lg:grid-cols-12 lg:gap-x-5">
 
               <main className="max-w-xl pb-12 px-4 lg:col-span-6">

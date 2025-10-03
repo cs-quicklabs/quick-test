@@ -171,7 +171,7 @@ const Todo = () => {
   }
 
   return (
-    <div className="mx-7 mt-4 pb-14 2xl:mx-52">
+    <div className="mx-7 mt-4 pb-14 2xl:mx-12">
       {dataForChart.labels.length !== 0 ? (
         <Chart dataForChart={dataForChart} />
       ) : (
@@ -216,12 +216,12 @@ const Todo = () => {
                     {" "}
                     {testrun?.testreport?.total > 0
                       ? (
-                          (testrun.testreport?.passed /
-                            testrun?.testreport?.total) *
-                          100
-                        )
-                          .toString()
-                          .split(".")[0]
+                        (testrun.testreport?.passed /
+                          testrun?.testreport?.total) *
+                        100
+                      )
+                        .toString()
+                        .split(".")[0]
                       : 0}{" "}
                     %
                   </span>
