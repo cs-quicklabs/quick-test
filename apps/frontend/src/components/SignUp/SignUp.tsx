@@ -93,11 +93,11 @@ const SignUp = () => {
 
   function getTermsAndPrivacyLabel() {
     return `${t("I agree to")} 
-      <a href='${process.env.REACT_APP_DOMAIN_LINK}/terms' class="font-medium text-primary-600 hover:underline dark:text-primary-500" target="_blank" rel="noreferrer">
-        <strong>${t("Terms of Use")}</strong>
+      <a href='${process.env.REACT_APP_DOMAIN_LINK}/terms' class="font-medium text-primary-600 hover:underline" target="_blank" rel="noreferrer">
+        ${t("Terms of Use")}
       </a> & 
-      <a href='${process.env.REACT_APP_DOMAIN_LINK}/privacypolicy' class="font-medium text-primary-600 hover:underline dark:text-primary-500" target="_blank" rel="noreferrer">
-        <strong>${t("Privacy Policy")}</strong>
+      <a href='${process.env.REACT_APP_DOMAIN_LINK}/privacypolicy' class="font-medium text-primary-600 hover:underline" target="_blank" rel="noreferrer">
+        ${t("Privacy Policy")}
       </a>`;
   }
 
