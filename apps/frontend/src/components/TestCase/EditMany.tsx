@@ -96,7 +96,7 @@ const EditManyTestCase = () => {
           val === "expectedResults"
             ? { ...value, expectedResults: values[val] }
             : // @ts-ignore
-              { ...value, [val]: values[val] };
+            { ...value, [val]: values[val] };
       }
     }
 

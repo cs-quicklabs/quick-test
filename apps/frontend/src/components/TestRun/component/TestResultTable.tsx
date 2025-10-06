@@ -7,7 +7,7 @@ import axiosService from "../../Utils/axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Button";
 import i18next from "i18next";
-import { showError, showSuccess } from "../../../components/Toaster/ToasterFun";
+import { showError, showSuccess } from "../../Toaster/ToasterFun";
 import { ToastMessage } from "../../Utils/constants/misc";
 import Loader from "../../Loader/Loader";
 import SidePanel from "../../TestCase/component/SidePanel";

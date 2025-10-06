@@ -100,8 +100,8 @@ export default function ProjectMembers(props: any) {
                   <table className="min-w-full divide-y divide-gray-300 px-2 2xl:pl-48">
                     <tbody className="divide-y divide-gray-200">
                       {members &&
-                      members !== undefined &&
-                      members.length > 0 ? (
+                        members !== undefined &&
+                        members.length > 0 ? (
                         members.map((member: any) => (
                           <tr key={member["fullName"]}>
                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">

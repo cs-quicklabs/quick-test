@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import axiosService from "../Utils/axios";
 import SearchResult from "./components/SearchResult";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/toast";
 interface ISearchResultProps {
   milestones: [];
   testCases: [];
@@ -125,9 +125,8 @@ const SearchBox = ({
       {showDropDown && (
         <div
           style={{ width: `${searchWidth}px` }}
-          className={`absolute top-24 sm:top-11 rounded-md shadow-md border border-gray-300 overflow-x-hidden w-96 bg-white z-10 ${
-            getAllSearchCount() > 8 ? "h-64 overflow-y-auto" : "h-auto"
-          } `}
+          className={`absolute top-24 sm:top-11 rounded-md shadow-md border border-gray-300 overflow-x-hidden w-96 bg-white z-10 ${getAllSearchCount() > 8 ? "h-64 overflow-y-auto" : "h-auto"
+            } `}
         >
           {Object.keys(searchResult).length === 0 ? (
             <div className="px-2 py-1 text-sm">{t("No match found")}</div>

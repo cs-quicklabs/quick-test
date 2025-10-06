@@ -257,12 +257,11 @@ export default function BillingAddress() {
                       onMouseDown={() => setValidation(true)}
                       loading={apiLoading === true ? "true" : undefined}
                       type="submit"
-                      className={`sm:order-1 ${
-                        !dirty || !isValid
-                          ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                          : ""
-                      }`}
-                      // disabled={!(dirty && isValid)}
+                      className={`sm:order-1 ${!dirty || !isValid
+                        ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
+                        : ""
+                        }`}
+                    // disabled={!(dirty && isValid)}
                     >
                       {t("Update")}
                     </Button>

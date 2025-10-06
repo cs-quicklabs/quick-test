@@ -12,7 +12,7 @@ import AccessControl from "../AccessControl";
 import ConfirmModal from "../Common/ConfirmModal";
 import DeleteConfirmationModal from "../Common/DeleteModal";
 import Loader from "../Loader/Loader";
-import { showError, showSuccess } from "../Toaster/ToasterFun";
+import { showError, showSuccess } from "../Toaster/toast";
 import axiosService from "../Utils/axios";
 import { DateFormat } from "../Utils/constants/date-format";
 import { ArchivePermissions } from "../Utils/constants/roles-permission";

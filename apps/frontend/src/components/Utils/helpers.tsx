@@ -1,4 +1,4 @@
-import { showError, showAlert } from "../Toaster/ToasterFun";
+import { showError, showAlert } from "../Toaster/toast";
 import { useNavigate } from "react-router-dom";
 import { appRoutes, settingsRoutes } from "./constants/page-routes";
 import { ToastMessage } from "./constants/misc";
