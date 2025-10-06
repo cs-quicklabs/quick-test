@@ -23,7 +23,7 @@ describe("Login test", function () {
 
   it("should not login with unregistered credentials ", () => {
     cy.loginGUI("abraham345@yopmail.com", "123456789");
-    cy.contains("Email/Password mismatch. Try again");
+    cy.contains("Invalid email or password. Please try again.");
   });
 
   it("verifies the blank field validation", () => {
@@ -36,7 +36,7 @@ describe("Login test", function () {
     cy.get("[name=password]").type("12345678");
     cy.get("input[type=checkbox]").check();
     cy.get("[id=login-submit]").click();
-    cy.contains("Email/Password mismatch. Try again");
+    cy.contains("Invalid email or password. Please try again.");
   });
 
   it("verify to navigate to signup page from login page  ", () => {
