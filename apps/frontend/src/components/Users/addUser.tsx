@@ -9,7 +9,7 @@ import Button from "../Button";
 import { ToastMessage, ValidatorMessage } from "../Utils/constants/misc";
 import { FormikInput, FormikSelect } from "../Common/FormikInput";
 import Loader from "../Loader/Loader";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";

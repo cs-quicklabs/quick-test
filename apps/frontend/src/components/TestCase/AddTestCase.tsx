@@ -5,7 +5,7 @@ import { appRoutes, projectRoutes } from "../Utils/constants/page-routes";
 import axiosService from "../Utils/axios";
 import { ToastMessage } from "../Utils/constants/misc";
 import Loader from "../Loader/Loader";
-import { showError, showSuccess } from "../Toaster/ToasterFun";
+import { showError, showSuccess } from "../Toaster/Toast";
 import TestForm from "./TestForm";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";

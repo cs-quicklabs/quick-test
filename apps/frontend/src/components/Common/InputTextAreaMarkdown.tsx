@@ -5,7 +5,7 @@ import MoonLoader from "react-spinners/MoonLoader";
 import TextareaAutosize from "react-textarea-autosize";
 
 import axiosService from "../Utils/axios";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import { ToastMessage } from "../Utils/constants/misc";
 
 import PreviewMarkdown from "./PreviewMarkdown";

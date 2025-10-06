@@ -1,7 +1,7 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 import { appRoutes } from "./constants/page-routes";
 import { NotifyExpired } from "./helpers";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import i18next from "i18next";
 import { ToastMessage } from "./constants/misc";
 

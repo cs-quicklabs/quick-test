@@ -14,7 +14,7 @@ import {
   validateRequiredOrg,
 } from "../Utils/validators";
 import PopUp from "./Modal";
-import { showError, showSuccess } from "../Toaster/ToasterFun";
+import { showError, showSuccess } from "../Toaster/Toast";
 import { ButtonCSSStyles, ToastMessage } from "../Utils/constants/misc";
 import { useFormSubmitWithLoading } from "../Utils/hooks/useFormSubmitWithLoading";
 import { useTranslation } from "react-i18next";

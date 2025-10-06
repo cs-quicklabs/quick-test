@@ -13,7 +13,7 @@ import { Formik, Form } from "formik";
 import { FormikInput } from "../../Common/FormikInput";
 import { validateJiraConfigurationSchema } from "../../Utils/validators";
 import axiosService from "../../Utils/axios";
-import { showError, showSuccess } from "../../Toaster/ToasterFun";
+import { showError, showSuccess } from "../../Toaster/Toast";
 import { ToastMessage } from "../../Utils/constants/misc";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";

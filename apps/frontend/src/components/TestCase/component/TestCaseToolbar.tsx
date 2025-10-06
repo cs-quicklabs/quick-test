@@ -17,7 +17,7 @@ import { DateFormat } from "../../Utils/constants/date-format";
 
 import FilterComponent from "./testCaseFilter";
 import { Trans, useTranslation } from "react-i18next";
-import { showError } from "../../Toaster/ToasterFun";
+import { showError } from "../../Toaster/Toast";
 import Tooltips from "../../Tooltip/ToolTips";
 
 const TestCaseToolbar = ({

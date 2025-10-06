@@ -22,7 +22,7 @@ import {
 import {
   showError,
   showSuccess,
-} from "../../../../components/Toaster/ToasterFun";
+} from "../../../../components/Toaster/Toast";
 import { ToastMessage } from "../../../../components/Utils/constants/misc";
 import Loader from "../../../../components/Loader/Loader";
 import { useQuery } from "@tanstack/react-query";

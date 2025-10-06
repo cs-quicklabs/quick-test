@@ -11,7 +11,7 @@ import defaultProfilePicture from "../../assets/images/profile.png";
 import { ToastMessage, LanguageList, ButtonCSSStyles } from "../Utils/constants/misc";
 import { FormikInput, FormikSelect } from "../Common/FormikInput";
 import Loader from "../Loader/Loader";
-import { showError, showSuccess } from "../Toaster/ToasterFun";
+import { showError, showSuccess } from "../Toaster/Toast";
 import {
   validateRequiredFirstName,
   validateRequiredLastName,

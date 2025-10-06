@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 import bugplotLogo from "../../assets/images/bugplot-logo.svg";
 import AccessControl from "../AccessControl";
 import { ArchivePermissions } from "../Utils/constants/roles-permission";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import { ChevronDownIcon, LanguageIcon } from "@heroicons/react/24/outline";
 
 export default function UserHeader() {

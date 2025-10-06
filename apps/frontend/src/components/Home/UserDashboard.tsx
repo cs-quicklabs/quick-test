@@ -12,7 +12,7 @@ import { freeTrial, SubscriptionStatus } from "../Utils/constants/misc";
 import dayjs from "dayjs";
 import { RoleType } from "../Utils/constants/roles-permission";
 import { AppContext } from "../Context/mainContext";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 
 export default function UserDashboard() {
   const { t } = useTranslation();

@@ -12,7 +12,7 @@ import DeleteConfirmationModal from "../Common/DeleteModal";
 import { ToastMessage } from "../Utils/constants/misc";
 import Loader from "../Loader/Loader";
 import SectionMain from "../Sections/SectionMain";
-import { showError, showSuccess } from "../Toaster/ToasterFun";
+import { showError, showSuccess } from "../Toaster/Toast";
 import TestCaseListTable from "./component/TestCaseListTable";
 import TestCaseToolbar from "./component/TestCaseToolbar";
 import { useTranslation } from "react-i18next";

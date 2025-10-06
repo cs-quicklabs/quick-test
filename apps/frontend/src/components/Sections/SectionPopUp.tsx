@@ -11,7 +11,7 @@ import Button from "../Button";
 import CancelButton from "../Button/cancelButton";
 import { ToastMessage, ValidatorMessage } from "../Utils/constants/misc";
 import { FormikInput, FormikTextArea } from "../Common/FormikInput";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 

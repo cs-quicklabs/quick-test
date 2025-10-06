@@ -13,7 +13,7 @@ import axiosService from "../../Utils/axios";
 import ConfirmModal from "../../Common/ConfirmModal";
 import { DateFormat } from "../../Utils/constants/date-format";
 import DeleteConfirmationModal from "../../Common/DeleteModal";
-import { showError, showSuccess } from "../../Toaster/ToasterFun";
+import { showError, showSuccess } from "../../Toaster/Toast";
 import { useTranslation } from "react-i18next";
 import AccessControl from "../../AccessControl";
 import { MilestonePermissions } from "../../Utils/constants/roles-permission";

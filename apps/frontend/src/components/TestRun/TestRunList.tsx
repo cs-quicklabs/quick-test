@@ -12,7 +12,7 @@ import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getTestRunDetails } from "../../services/testRunServices";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import Table from "./component/Table";
 
 export default function TestRunList({ projectName }: any) {

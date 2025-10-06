@@ -2,7 +2,7 @@ import JiraCard from "./component/JiraCard";
 import Loader from "../Loader/Loader";
 import { useState, useEffect } from "react";
 import axiosService from "../Utils/axios";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import { useTranslation } from "react-i18next";
 
 const Integration = () => {

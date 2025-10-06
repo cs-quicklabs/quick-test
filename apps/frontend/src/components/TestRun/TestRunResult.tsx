@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import axiosService from "../Utils/axios";
 import { ToastMessage } from "../Utils/constants/misc";
-import { showError, showSuccess } from "../Toaster/ToasterFun";
+import { showError, showSuccess } from "../Toaster/Toast";
 
 import Loader from "../Loader/Loader";
 import Table from "./component/TestResultTable";

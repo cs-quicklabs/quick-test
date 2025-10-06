@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import axiosService from "../Utils/axios";
 import SearchResult from "./components/SearchResult";
-import { showError } from "../Toaster/toast";
+import { showError } from "../Toaster/Toast";
 interface ISearchResultProps {
   milestones: [];
   testCases: [];

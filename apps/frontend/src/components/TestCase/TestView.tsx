@@ -10,7 +10,7 @@ import { DateFormat } from "../Utils/constants/date-format";
 import { ToastMessage } from "../Utils/constants/misc";
 import Loader from "../Loader/Loader";
 import PreviewMarkdown from "../Common/PreviewMarkdown";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import ReferenceMenu from "../Defects/ReferenceMenu";
 import AddReferenceModal from "../Defects/AddReferenceModal";
 import MapReferenceModal from "../Defects/MapReferenceModal";

@@ -14,7 +14,7 @@ import {
 } from "../Common/FormikInput";
 import { FormSubmitPanel } from "../Common/FormSubmitPanel";
 import Loader from "../Loader/Loader";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 

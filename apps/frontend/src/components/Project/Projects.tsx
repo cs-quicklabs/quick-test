@@ -17,7 +17,7 @@ import { Link, useSearchParams } from "react-router-dom";
 
 import DeleteConfirmationModal from "../Common/DeleteModal";
 import Loader from "../Loader/Loader";
-import { showError, showSuccess } from "../Toaster/ToasterFun";
+import { showError, showSuccess } from "../Toaster/Toast";
 import axiosService from "../Utils/axios";
 import { DateFormat } from "../Utils/constants/date-format";
 import { NoOfDaysForGraph } from "../Utils/constants/misc";

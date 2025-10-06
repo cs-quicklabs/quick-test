@@ -15,7 +15,7 @@ import {
   FormikTextArea,
 } from "../Common/FormikInput";
 import axiosService from "../Utils/axios";
-import { showError, showSuccess } from "../Toaster/ToasterFun";
+import { showError, showSuccess } from "../Toaster/Toast";
 import { validateAddDefectSchema } from "../Utils/validators";
 import { useFormSubmitWithLoading } from "../Utils/hooks/useFormSubmitWithLoading";
 import { IssueType, ToastMessage } from "../Utils/constants/misc";

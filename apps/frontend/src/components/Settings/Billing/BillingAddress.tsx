@@ -13,7 +13,7 @@ import { countryList } from "../../SignUp/countries";
 import { ToastMessage } from "../../Utils/constants/misc";
 import { FormikInput, FormikSelect } from "../../Common/FormikInput";
 import Loader from "../../Loader/Loader";
-import { showError, showSuccess } from "../../Toaster/ToasterFun";
+import { showError, showSuccess } from "../../Toaster/Toast";
 import {
   validateRequiredAddress,
   validateRequiredCity,

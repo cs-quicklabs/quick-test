@@ -8,7 +8,7 @@ import {
 } from "../Utils/constants/page-routes";
 import Button from "../Button";
 import Loader from "../Loader/Loader";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import Table from "./Component/Table";
 import { ToastMessage } from "../Utils/constants/misc";
 import { useTranslation } from "react-i18next";

@@ -8,7 +8,7 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import Loader from "../Loader/Loader";
 import axiosService from "../Utils/axios";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import { IssueType } from "../Utils/constants/misc";
 import { useTranslation } from "react-i18next";
 

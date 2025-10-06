@@ -9,7 +9,7 @@ import {
 } from "../Utils/constants/page-routes";
 import { DateFormat } from "../Utils/constants/date-format";
 import { ToastMessage } from "../Utils/constants/misc";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import Heading from "../ProjectDetails/component/Header";
 import TestRunResult from "./TestRunResult";
 import { useTranslation } from "react-i18next";

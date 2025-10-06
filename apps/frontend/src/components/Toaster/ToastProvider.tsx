@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Toast } from "flowbite-react";
-import { bindToastApi } from "./toast";
+import { bindToastApi } from "./Toast";
 
 type ToastVariant = "success" | "error" | "warning" | "info";
 

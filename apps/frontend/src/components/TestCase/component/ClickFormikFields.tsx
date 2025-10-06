@@ -12,7 +12,7 @@ import PreviewMarkdown from "../../Common/PreviewMarkdown";
 import { SerialisedTestCaseType } from "../../../types/testCaseTypes";
 import { useFormikContext } from "formik";
 import { useTranslation } from "react-i18next";
-import { showError } from "../../Toaster/ToasterFun";
+import { showError } from "../../Toaster/Toast";
 
 interface Props {
   currentEditableField: string | null;

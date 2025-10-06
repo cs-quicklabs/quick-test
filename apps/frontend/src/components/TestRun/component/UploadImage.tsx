@@ -5,7 +5,7 @@ import MoonLoader from "react-spinners/MoonLoader";
 import { PaperClipIcon } from "@heroicons/react/24/solid";
 import { useFormikContext } from "formik";
 
-import { showError, showSuccess } from "../../Toaster/ToasterFun";
+import { showError, showSuccess } from "../../Toaster/Toast";
 import { useTranslation } from "react-i18next";
 
 const UploadImage = ({ name }: any) => {

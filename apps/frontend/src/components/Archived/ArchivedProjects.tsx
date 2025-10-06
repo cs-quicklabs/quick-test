@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getArchiveProjects } from "../../services/archivePageServices";
 import AccessControl from "../AccessControl";
 import Loader from "../Loader/Loader";
-import { showError, showSuccess } from "../Toaster/toast";
+import { showError, showSuccess } from "../Toaster/Toast";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import {
