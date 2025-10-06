@@ -4,7 +4,7 @@ import MainContext from "./components/Context/mainContext";
 import AppRoutes from "./routes/AppRoutes";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Toaster } from "react-hot-toast";
+import { ToastProvider } from "./components/Toaster/ToastProvider";
 import { Provider } from "react-redux";
 import store from "./store";
 
@@ -16,10 +16,11 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <MainContext>
-          <BrowserRouter>
-            <AppRoutes />
-          </BrowserRouter>
-          <Toaster position="top-center" />
+          <ToastProvider>
+            <BrowserRouter>
+              <AppRoutes />
+            </BrowserRouter>
+          </ToastProvider>
         </MainContext>
         <ReactQueryDevtools initialIsOpen={false} position="bottom" />
       </Provider>

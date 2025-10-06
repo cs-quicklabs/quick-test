@@ -8,7 +8,7 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import Loader from "../Loader/Loader";
 import axiosService from "../Utils/axios";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import { IssueType } from "../Utils/constants/misc";
 import { useTranslation } from "react-i18next";
 
@@ -113,7 +113,7 @@ export default function DefectDetailsModal({ pluginKey }: any) {
                           </span>
                         </div>
                         {defectData?.issueType.name === IssueType.SUBTASK &&
-                        defectData?.parent ? (
+                          defectData?.parent ? (
                           <div>
                             <span className="block text-sm font-medium text-gray-700">
                               {t("Parent")}
@@ -157,7 +157,7 @@ export default function DefectDetailsModal({ pluginKey }: any) {
                             {t("Sprint")}
                           </span>
                           {defectData?.sprint &&
-                          defectData?.sprint?.length !== 0 ? (
+                            defectData?.sprint?.length !== 0 ? (
                             <span className="block text-sm text-gray-500">
                               {defectData?.sprint?.map(
                                 (item: any) => item.name

@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { ToastMessage } from "../Utils/constants/misc";
-import { showError, showSuccess } from "../../components/Toaster/ToasterFun";
+import { showError, showSuccess } from "../Toaster/Toast";
 import SectionListing from "./SectionListing";
 import Button from "../Button";
 import DeleteConfirmationModal from "../Common/DeleteModal";

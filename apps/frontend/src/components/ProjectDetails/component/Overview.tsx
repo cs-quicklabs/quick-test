@@ -16,7 +16,7 @@ import { DateFormat } from "../../Utils/constants/date-format";
 import { ToastMessage } from "../../Utils/constants/misc";
 import Loader from "../../Loader/Loader";
 import OverviewCharts from "./OverviewChart";
-import { showError } from "../../Toaster/ToasterFun";
+import { showError } from "../../Toaster/Toast";
 import { Trans, useTranslation } from "react-i18next";
 import i18next from "i18next";
 import AccessControl from "../../AccessControl";

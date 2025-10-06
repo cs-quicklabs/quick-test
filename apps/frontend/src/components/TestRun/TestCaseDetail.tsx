@@ -7,7 +7,7 @@ import axiosService from "../Utils/axios";
 import { DateFormat } from "../Utils/constants/date-format";
 import { ToastMessage } from "../Utils/constants/misc";
 import Loader from "../Loader/Loader";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 
 import DropDownMenuButton from "./component/DropDownMenuButton";
 import Pagination from "./component/Pagination";

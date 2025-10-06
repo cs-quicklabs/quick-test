@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 import Loader from "../Loader/Loader";
 import OverviewCharts from "../ProjectDetails/component/OverviewChart";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import axiosService from "../Utils/axios";
 import { DateFormat } from "../Utils/constants/date-format";
 import { NoOfDaysForGraph, ToastMessage } from "../Utils/constants/misc";
@@ -245,8 +245,8 @@ export default function Example() {
                   {data?.data?.data.map((ele: any) => {
                     const activeEle = ele.testsuites.length
                       ? ele.testsuites.filter(
-                          (item: any) => item.status !== "COMPLETED"
-                        )
+                        (item: any) => item.status !== "COMPLETED"
+                      )
                       : [];
                     if (!activeEle.length) return null;
                     return (

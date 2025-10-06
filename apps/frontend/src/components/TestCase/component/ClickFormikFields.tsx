@@ -12,7 +12,7 @@ import PreviewMarkdown from "../../Common/PreviewMarkdown";
 import { SerialisedTestCaseType } from "../../../types/testCaseTypes";
 import { useFormikContext } from "formik";
 import { useTranslation } from "react-i18next";
-import { showError } from "../../Toaster/ToasterFun";
+import { showError } from "../../Toaster/Toast";
 
 interface Props {
   currentEditableField: string | null;
@@ -52,7 +52,7 @@ const ClickFormikFields: FC<Props> = ({
       if (
         currentEditableField &&
         values[currentEditableField] !==
-          testCase[currentEditableField as keyof SerialisedTestCaseType]
+        testCase[currentEditableField as keyof SerialisedTestCaseType]
       ) {
         editTestCasesApi(pid as string, testCase.id, values)
           .then(() => {
@@ -128,9 +128,8 @@ const ClickFormikFields: FC<Props> = ({
         <div ref={panelRef}>
           {inputType === "textArea" && (
             <FormikTextArea
-              placeholder={`${
-                titleData[currentEditableField as keyof typeof titleData]
-              } max size can be 3000`}
+              placeholder={`${titleData[currentEditableField as keyof typeof titleData]
+                } max size can be 3000`}
               type="text"
               name={fieldName}
               label=""
@@ -141,9 +140,8 @@ const ClickFormikFields: FC<Props> = ({
           {inputType === "textBox" && (
             <div className="pl-1 col-span-3">
               <FormikInput
-                placeholder={`${
-                  titleData[currentEditableField as keyof typeof titleData]
-                } max size can be 3000`}
+                placeholder={`${titleData[currentEditableField as keyof typeof titleData]
+                  } max size can be 3000`}
                 type="text"
                 name={fieldName}
                 label=""

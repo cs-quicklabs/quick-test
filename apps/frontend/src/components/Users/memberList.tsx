@@ -8,7 +8,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { getUserProfileDetails } from "../../services/profileServices";
 import Button from "../Button";
 import Loader from "../Loader/Loader";
-import { showError, showSuccess } from "../Toaster/ToasterFun";
+import { showError, showSuccess } from "../Toaster/Toast";
 import axiosService from "../Utils/axios";
 import { ToastMessage } from "../Utils/constants/misc";
 import {

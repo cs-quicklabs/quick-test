@@ -5,7 +5,7 @@ import MoonLoader from "react-spinners/MoonLoader";
 import { PaperClipIcon } from "@heroicons/react/24/solid";
 import { useFormikContext } from "formik";
 
-import { showError, showSuccess } from "../../Toaster/ToasterFun";
+import { showError, showSuccess } from "../../Toaster/Toast";
 import { useTranslation } from "react-i18next";
 
 const UploadImage = ({ name }: any) => {
@@ -110,9 +110,8 @@ const UploadImage = ({ name }: any) => {
         )
       </div>
       <div
-        className={`flex items-center justify-between text-xs text-gray-700 space-x-2 pt-4 ${
-          fileMeta.name ? null : "opacity-0"
-        }`}
+        className={`flex items-center justify-between text-xs text-gray-700 space-x-2 pt-4 ${fileMeta.name ? null : "opacity-0"
+          }`}
       >
         <span>{fileMeta?.name || "filename"}</span>
         {showProgressBar ? (

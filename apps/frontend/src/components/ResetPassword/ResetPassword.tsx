@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 import Loader from "../Loader/Loader";
-import { showError, showSuccess } from "../Toaster/ToasterFun";
+import { showError, showSuccess } from "../Toaster/Toast";
 import { appRoutes } from "../Utils/constants/page-routes";
 import { ButtonCSSStyles, ValidatorMessage } from "../Utils/constants/misc";
 import { useTranslation } from "react-i18next";

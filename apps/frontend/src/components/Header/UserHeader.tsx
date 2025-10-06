@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 import bugplotLogo from "../../assets/images/bugplot-logo.svg";
 import AccessControl from "../AccessControl";
 import { ArchivePermissions } from "../Utils/constants/roles-permission";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import { ChevronDownIcon, LanguageIcon } from "@heroicons/react/24/outline";
 
 export default function UserHeader() {
@@ -212,11 +212,10 @@ export default function UserHeader() {
                         <button
                           key={language.code}
                           onClick={() => handleLanguageChange(language.code)}
-                          className={`flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100 ${
-                            getCurrentLanguage().code === language.code
-                              ? "bg-gray-50 text-gray-900 font-medium"
-                              : "text-gray-700"
-                          }`}
+                          className={`flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-100 ${getCurrentLanguage().code === language.code
+                            ? "bg-gray-50 text-gray-900 font-medium"
+                            : "text-gray-700"
+                            }`}
                         >
                           <span className="mr-2">{language.flag}</span>
                           {t(language.nameKey)}

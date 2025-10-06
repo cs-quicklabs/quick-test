@@ -16,7 +16,7 @@ import {
   FormikTextArea,
   FormikInputSearch,
 } from "../Common/FormikInput";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import { FormSubmitPanel } from "../Common/FormSubmitPanel";
 import Loader from "../Loader/Loader";
 
