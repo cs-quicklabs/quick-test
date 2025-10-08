@@ -80,6 +80,7 @@
   "No active test runs.": "No hay ejecuciones activas.",
   "Passed": "Pasó",
   "Untested": "No probado",
+  "Blocked": "Obstruida",
   "Failed": "Ha fallado",
   "Unassigned": "No asignado",
   "Are you sure you want to mark": "¿Estás seguro de que quieres marcar?",
@@ -177,6 +178,7 @@
   "Current Plan": "Plan actual",
   "Expired": "Venció",
   "month": "mes",
+  "year": "año",
   "Re-activate Paid Plan": "Reactivar el plan pagado",
   "Upgrade": "Mejora",
   "Cancel Plan": "Plan de cancelación",
@@ -586,6 +588,10 @@
   "High": "Alto",
   "Medium": "Medio",
   "Low": "Bajo",
+  "CRITICAL": "Crítico",
+  "HIGH": "Alto",
+  "MEDIUM": "Medio",
+  "LOW": "Bajo",
   "priority": "prioridad",
   "ID": "IDENTIFICACIÓN",
   "Title": "Título",
@@ -890,5 +896,6 @@
   "Sr. No.": "núm",
   "Request Password Reset Instructions": "Solicitar instrucciones para restablecer contraseña",
   "Return Back to Login": "Regresar a Iniciar sesión",
-  "Set a new password": "Establecer una nueva contraseña"
+  "Set a new password": "Establecer una nueva contraseña",
+  "Save": "Ahorrar"
 }

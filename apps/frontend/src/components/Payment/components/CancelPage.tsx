@@ -18,7 +18,7 @@ export default function CancelPage() {
     try {
       const resp = await axiosService.get("payments/price", {});
       if (resp.data.data) {
-        setCurrency(resp.data.data.price.currency);
+        setCurrency(Currency[resp.data.data.price.currency as keyof typeof Currency]);
         setPaymentDuration(resp.data.data.price.recurring.interval);
         const tempAmount = resp.data.data.price.unit_amount;
         const newAmount = String(tempAmount).split("", 2).join("");
@@ -73,8 +73,8 @@ export default function CancelPage() {
                         to="/settings/payments"
                         className="w-full capitalize inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none sm:col-start-2 sm:text-sm"
                       >
-                        {t("Subscribe for")} {currency === Currency.USD && "$"}
-                        {amount}/{paymentDuration}
+                        {t("Subscribe for")} {currency}
+                        {amount}/{t(paymentDuration)}
                       </Link>
                     </div>
                   </div>

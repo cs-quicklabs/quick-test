@@ -12,8 +12,9 @@ import { useTranslation } from "react-i18next";
 import bugplotLogo from "../../assets/images/bugplot-logo.svg";
 import AccessControl from "../AccessControl";
 import { ArchivePermissions } from "../Utils/constants/roles-permission";
-import { showError } from "../Toaster/Toast";
+import { showError, showSuccess } from "../Toaster/Toast";
 import { ChevronDownIcon, LanguageIcon } from "@heroicons/react/24/outline";
+import axiosService from "../Utils/axios";
 
 export default function UserHeader() {
   const { t, i18n } = useTranslation();
@@ -37,7 +38,13 @@ export default function UserHeader() {
     return languages.find(lang => lang.code === currentLang) || languages[0];
   };
 
-  const handleLanguageChange = (languageCode: string) => {
+  const handleLanguageChange = async (languageCode: string) => {
+    const response = await axiosService.put(`/users/${state?.userDetails?.id}`, { language: languageCode });
+    dispatch({
+      type: "UPDATE_PROFILE_DATA",
+      data: { ...state?.userDetails, ...{ language: languageCode } },
+    });
+    showSuccess(response.data.message);
     i18n.changeLanguage(languageCode);
     localStorage.setItem("i18nextLng", languageCode);
     setShowLanguageDropdown(false);

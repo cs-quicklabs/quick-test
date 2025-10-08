@@ -8,7 +8,7 @@ import {
 } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
-import { Currency, freeTrial } from "../../Utils/constants/misc";
+import { freeTrial } from "../../Utils/constants/misc";
 import { useTranslation } from "react-i18next";
 import Button from "../../Button";
 
@@ -113,8 +113,8 @@ export default function FreeTrialPopup({
                     onClick={redirectToPayment}
                     loading={apiLoading}
                   >
-                    {t("Subscribe for")} {currency === Currency.USD && "$"}
-                    {amount}/{paymentDuration}
+                    {t("Subscribe for")} {currency}
+                    {amount}/{t(paymentDuration)}
                   </Button>
                   <button
                     type="button"

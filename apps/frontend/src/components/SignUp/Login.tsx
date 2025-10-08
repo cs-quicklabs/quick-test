@@ -147,7 +147,7 @@ const SignIn = () => {
                           <div className="flex items-center h-5">
                             <FormikCheckbox
                               type="checkbox"
-                              name="remember"
+                              name="remember_me"
                               label={t("Remember me")}
                             />
                           </div>

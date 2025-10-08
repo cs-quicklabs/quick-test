@@ -324,7 +324,7 @@ export default function TestCaseList({ projectName }: any) {
                 >
                   <div
                     id="pdf-header"
-                    className="flex item-center justify-center font-medium text-gray-900 py-3 hidden"
+                    className="flex item-center justify-center font-medium text-gray-900 py-3"
                   >
                     {projectName}&nbsp;{t("Project Test Case Report")}
                   </div>

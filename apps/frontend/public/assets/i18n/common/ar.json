@@ -80,6 +80,7 @@
   "No active test runs.": "لا يوجد اختبار نشط.",
   "Passed": "تم الاجتياز بنجاح",
   "Untested": "لم يخبر",
+  "Blocked": "محظور",
   "Failed": "باءت بالفشل",
   "Unassigned": "غير معروف",
   "Are you sure you want to mark": "هل أنت متأكد أنك تريد وضع علامة",
@@ -177,6 +178,7 @@
   "Current Plan": "الخطة الحالية",
   "Expired": "منتهي الصلاحية",
   "month": "شهر",
+  "year": "سنة",
   "Re-activate Paid Plan": "إعادة تنشيط الخطة المدفوعة",
   "Upgrade": "رفع مستوى",
   "Cancel Plan": "إلغاء الخطة",
@@ -586,6 +588,10 @@
   "High": "عالٍ",
   "Medium": "متوسط",
   "Low": "قليل",
+  "CRITICAL": "حرج",
+  "HIGH": "عالٍ",
+  "MEDIUM": "متوسط",
+  "LOW": "قليل",
   "priority": "أولوية",
   "ID": "بطاقة تعريف",
   "Title": "عنوان",
@@ -890,5 +896,6 @@
   "Sr. No.": "ر.ت.",
   "Request Password Reset Instructions": "طلب تعليمات إعادة تعيين كلمة المرور",
   "Return Back to Login": "العودة إلى تسجيل الدخول",
-  "Set a new password": "قم بتعيين كلمة مرور جديدة"
+  "Set a new password": "قم بتعيين كلمة مرور جديدة",
+  "Save": "يحفظ"
 }

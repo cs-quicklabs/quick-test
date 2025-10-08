@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import FreeTrialPopup from "../Payment/components/FreeTrialPopup";
 import Loader from "../Loader/Loader";
-import { freeTrial, SubscriptionStatus } from "../Utils/constants/misc";
+import { Currency, freeTrial, SubscriptionStatus } from "../Utils/constants/misc";
 import dayjs from "dayjs";
 import { RoleType } from "../Utils/constants/roles-permission";
 import { AppContext } from "../Context/mainContext";
@@ -63,7 +63,7 @@ export default function UserDashboard() {
       const resp = await axiosService.get("payments/price", {});
       const price = resp?.data?.data?.price;
       if (price) {
-        setCurrency(price?.currency);
+        setCurrency(Currency[price?.currency as keyof typeof Currency]);
         setPaymentDuration(price?.recurring.interval);
         setAmount(String(price?.unit_amount).split("", 2).join(""));
         setApiLoading(false);

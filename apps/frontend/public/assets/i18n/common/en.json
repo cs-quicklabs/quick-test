@@ -177,6 +177,7 @@
   "Current Plan": "Current Plan",
   "Expired": "Expired",
   "month": "month",
+  "year": "year",
   "Re-activate Paid Plan": "Re-activate Paid Plan",
   "Upgrade": "Upgrade",
   "Cancel Plan": "Cancel Plan",
@@ -586,6 +587,10 @@
   "High": "High",
   "Medium": "Medium",
   "Low": "Low",
+  "CRITICAL": "CRITICAL",
+  "HIGH": "HIGH",
+  "MEDIUM": "MEDIUM",
+  "LOW": "LOW",
   "priority": "priority",
   "ID": "ID",
   "Title": "Title",
@@ -824,6 +829,7 @@
   "passed": "passed",
   "failed": "failed",
   "untested": "untested",
+  "Blocked": "Blocked",
   "Priority": "Priority",
   "Created on": "Created on",
   "Updated on": "Updated on",
@@ -890,5 +896,6 @@
   "Sr. No.": "Sr. No.",
   "Request Password Reset Instructions": "Request Password Reset Instructions",
   "Return Back to Login": "Return Back to Login",
-  "Set a new password": "Set a new password"
+  "Set a new password": "Set a new password",
+  "Save": "Save"
 }

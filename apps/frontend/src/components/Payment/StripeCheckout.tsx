@@ -70,11 +70,13 @@ export default function StripeCheckout() {
         setIsSubscribed(subscriptionResp.subscriptionStatus);
       }
       if (priceResp.data.data) {
-        setCurrency(priceResp.data.data.price.currency);
+        const currencyTemp = priceResp?.data?.data?.price?.currency;
+        setCurrency(Currency[currencyTemp as keyof typeof Currency]);
         setPaymentDuration(priceResp.data.data.price.recurring.interval);
         const tempAmount = priceResp.data.data.price.unit_amount;
         const newAmount = String(tempAmount).split("", 2).join("");
         setAmount(newAmount);
+        console.log("priceResp", priceResp);
       }
     } catch (err) {
       // console.error(err?.message)
@@ -101,7 +103,7 @@ export default function StripeCheckout() {
           ) : (
             <div className="">
               {isSubscribed === SubscriptionStatus.CANCELLED ||
-              isSubscribed === SubscriptionStatus.FREE_TRIAL ? (
+                isSubscribed === SubscriptionStatus.FREE_TRIAL ? (
                 <>
                   <p>
                     {t(
@@ -118,17 +120,15 @@ export default function StripeCheckout() {
                       className="mt-4"
                       loading={apiLoading}
                     >
-                      {t("Subscribe for")} {currency === Currency.USD && "$"}
-                      {amount}/{paymentDuration}
+                      {t("Subscribe for")} {currency}
+                      {amount}/{t(paymentDuration)}
                     </Button>
                   </AccessControl>
                 </>
               ) : (
                 <>
                   <p>
-                    {t("You have an active subscription for our plan of")}{" "}
-                    {currency === Currency.USD && <span>&#36;</span>}
-                    {amount}/{paymentDuration}.
+                    {`${t("You have an active subscription for our plan of")} ${currency}${amount}/${t(paymentDuration)}.`}
                   </p>
                   <AccessControl
                     permission={PaymentPermissions.CREATE_PORTAL_SESSION}
@@ -138,7 +138,7 @@ export default function StripeCheckout() {
                       data-cy="stripe-manage-button"
                       onClick={getManageId}
                       loading={apiLoading}
-                      className="mt-4 inline-flex justify-center items-center capitalize px-2.5 py-1.5 border border-transparent rounded-md text-sm font-medium rounded shadow-sm text-white focus:outline-none bg-indigo-600 hover:bg-inidgo-700"
+                      className="mt-4 inline-flex justify-center items-center capitalize px-2.5 py-1.5 border border-transparent rounded-md text-sm font-medium shadow-sm text-white focus:outline-none bg-indigo-600 hover:bg-inidgo-700"
                     >
                       {t("Manage Subscription")}
                     </Button>
