@@ -234,7 +234,7 @@ export default function Table({
                             <button
                               data-tooltip-id="table-tooltip-id"
                               data-tooltip-content={
-                                NO_PERMISSION_TOOLTIP_MESSAGE
+                                t(NO_PERMISSION_TOOLTIP_MESSAGE)
                               }
                               onClick={(e) => {
                                 e.stopPropagation();

@@ -109,7 +109,7 @@ export default function ResetPasswordForm() {
                           <FormikInput
                             type="password"
                             name="cnfpassword"
-                            label={t("Confirm password")}
+                            label={t("Confirm Password")}
                             placeholder={t("••••••••")}
                           />
                         </div>

@@ -93,7 +93,7 @@ export const LanguageList = [
 ];
 
 export const Currency = {
-  USD: "usd",
+  usd: "$",
 };
 
 export enum freeTrial {

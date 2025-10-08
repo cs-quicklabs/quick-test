@@ -2,6 +2,7 @@ import criticalPriorityIcon from "./../../../assets/images/priority-icons/critic
 import lowPriorityIcon from "./../../../assets/images/priority-icons/low.svg";
 import highPriorityIcon from "./../../../assets/images/priority-icons/high.svg";
 import mediumPriorityIcon from "./../../../assets/images/priority-icons/medium.svg";
+import { t } from "i18next";
 
 export default function ShowPriorityTextIcon({ value }: { value: string }) {
   const priorityText = value?.toUpperCase();
@@ -15,7 +16,7 @@ export default function ShowPriorityTextIcon({ value }: { value: string }) {
   return (
     <span className="flex items-center gap-3">
       <img className=" h-4 w-4" alt={selected?.text} src={selected?.icon}></img>
-      <p className="text-sm font-normal">{priorityText}</p>
+      <p className="text-sm font-normal"> {t(priorityText)}</p>
     </span>
   );
 }
