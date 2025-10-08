@@ -60,7 +60,7 @@ export default function CancelPage() {
                   <p>
                     {t("Your")} {freeTrial.TRIAL_DAYS}{" "}
                     {t(
-                      " days trial period is over. Please pay further to continue our services."
+                      "days trial period is over. Please pay further to continue our services."
                     )}
                   </p>
                 </div>
