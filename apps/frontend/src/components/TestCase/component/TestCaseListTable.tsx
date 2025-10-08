@@ -264,7 +264,7 @@ export default function TestCaseListTable({
                     data-cy={dataAttr + index + "-delete"}
                     onClick={(e: any) => {
                       e.stopPropagation();
-                      openDeleteModal(test);
+                      openDeleteModal(test, index);
                     }}
                   >
                     <TrashIcon className="text-red-400 h-4 w-4 cursor-pointer" />

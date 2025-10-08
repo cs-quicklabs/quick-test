@@ -90,11 +90,12 @@ export default function TestCaseList({ projectName }: any) {
     appDispatch(getTestCasesData(pid as string));
   }, [appDispatch, pid]);
 
-  const openDeleteModal = (value: any) => {
+  const openDeleteModal = (value: any, index: number) => {
+    console.log("index", index);
     const msg = (
       <>
         {t("Are you sure want to delete the test case")}{" "}
-        <span className="font-semibold text-red-500">{`"${value?.serialNumber}"`}</span>
+        <span className="font-semibold text-red-500">{`"${index + 1}"`}</span>
         ?
       </>
     );
