@@ -10,7 +10,7 @@ import { appRoutes } from "../../Utils/constants/page-routes";
 import Button from "../../Button";
 import CancelButton from "../../Button/cancelButton";
 import { countryList } from "../../SignUp/countries";
-import { ToastMessage } from "../../Utils/constants/misc";
+import { ButtonCSSStyles, ToastMessage } from "../../Utils/constants/misc";
 import { FormikInput, FormikSelect } from "../../Common/FormikInput";
 import Loader from "../../Loader/Loader";
 import { showError, showSuccess } from "../../Toaster/Toast";
@@ -248,6 +248,7 @@ export default function BillingAddress() {
                       onMouseDown={() => navigate(appRoutes.DASHBOARD)}
                       onClick={() => navigate(appRoutes.DASHBOARD)}
                       type="button"
+                      className={ButtonCSSStyles.btnSecondary}
                     >
                       {t("Cancel")}
                     </CancelButton>
@@ -257,9 +258,9 @@ export default function BillingAddress() {
                       onMouseDown={() => setValidation(true)}
                       loading={apiLoading === true ? "true" : undefined}
                       type="submit"
-                      className={`sm:order-1 ${!dirty || !isValid
-                        ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                        : ""
+                      className={`${!dirty || !isValid
+                        ? ButtonCSSStyles.btnPrimary + " cursor-not-allowed"
+                        : ButtonCSSStyles.btnPrimary
                         }`}
                     // disabled={!(dirty && isValid)}
                     >

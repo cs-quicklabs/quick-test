@@ -10,7 +10,7 @@ import Button from "../Button";
 import Loader from "../Loader/Loader";
 import { showError, showSuccess } from "../Toaster/Toast";
 import axiosService from "../Utils/axios";
-import { ToastMessage } from "../Utils/constants/misc";
+import { ButtonCSSStyles, ToastMessage } from "../Utils/constants/misc";
 import {
   appRoutes,
   settingsRoutes,
@@ -137,7 +137,7 @@ const MemberList = () => {
                   permission={UserManagementPermissions.ADD_MEMBERS}
                 >
                   <Button
-                    className="ml-0"
+                    className={ButtonCSSStyles.btnPrimary}
                     id="add-new-member"
                     data-cy="add-user"
                     onClick={() =>
@@ -162,6 +162,7 @@ const MemberList = () => {
                       )
                     }
                     type="button"
+                    className={ButtonCSSStyles.btnPrimary}
                   >
                     {t("Add Multiple Users")}
                   </Button>
