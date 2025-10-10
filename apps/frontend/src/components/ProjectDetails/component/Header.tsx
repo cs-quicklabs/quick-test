@@ -7,6 +7,7 @@ import AccessControl from "../../AccessControl";
 import { JSX, useState } from "react";
 import { ProjectPermissions } from "../../Utils/constants/roles-permission";
 import Button from "../../Button";
+import { ButtonCSSStyles } from "../../Utils/constants/misc";
 interface PropsData {
   title?: string | JSX.Element;
   redirectToPage?: { url: string; text: string };
@@ -131,7 +132,7 @@ export default function TestCaseHeading({
                     });
                     navigate(redirectToPage.url);
                   }}
-                  className="sm:order-1 "
+                  className={ButtonCSSStyles.btnPrimary}
                 >
                   {redirectToPage?.text}
                 </Button>

@@ -6,6 +6,7 @@ import Button from "../../Button";
 import CancelButton from "../../Button/cancelButton";
 import UploadImage from "./UploadImage";
 import { useTranslation } from "react-i18next";
+import { ButtonCSSStyles } from "../../Utils/constants/misc";
 
 interface Props {
   open: boolean;
@@ -115,7 +116,7 @@ export default function PopUp({
                           <div className="flex justify-end pt-0.5">
                             <button
                               type="button"
-                              className="inline-flex justify-center items-center px-2.5 py-1.5 border border-gray-300 text-xs font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none undefined my-submit-button mr-3"
+                              className={ButtonCSSStyles.btnSecondary + " mr-3"}
                               onClick={handleClose}
                               data-cy="close-modal-overlay"
                             >
@@ -125,6 +126,7 @@ export default function PopUp({
                               data-cy="skip-and-submit"
                               onMouseDown={() => submitData("", "", false)}
                               type="button"
+                              className={ButtonCSSStyles.btnPrimary + " mr-3"}
                               onClick={() => refetch()}
                             >
                               {t("Skip & Submit")}
@@ -132,11 +134,7 @@ export default function PopUp({
                             <Button
                               id="submit-inside-popup"
                               type="submit"
-                              className={`ml-3 w-12${
-                                !(dirty && isValid)
-                                  ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                                  : ""
-                              }`}
+                              className={!(dirty && isValid) ? ButtonCSSStyles.btnPrimary + " cursor-not-allowed" : ButtonCSSStyles.btnPrimary}
                               disabled={!(dirty && isValid)}
                             >
                               {t("Add")}

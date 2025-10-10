@@ -9,7 +9,7 @@ import { AppContext } from "../Context/mainContext";
 import axiosService from "../Utils/axios";
 import Button from "../Button";
 import CancelButton from "../Button/cancelButton";
-import { ToastMessage, ValidatorMessage } from "../Utils/constants/misc";
+import { ButtonCSSStyles, ToastMessage, ValidatorMessage } from "../Utils/constants/misc";
 import { FormikInput, FormikTextArea } from "../Common/FormikInput";
 import { showError } from "../Toaster/Toast";
 import { useTranslation } from "react-i18next";
@@ -180,7 +180,7 @@ export default function Example({ ...props }: Iprops) {
                             onMouseDown={() => props.hidePopUp()}
                             type="button"
                             data-cy="cancel-section-button"
-                            className="inline-flex items-center rounded border border-gray-300 bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none"
+                            className={ButtonCSSStyles.btnSecondary}
                           >
                             {t("Cancel")}
                           </CancelButton>
@@ -188,13 +188,7 @@ export default function Example({ ...props }: Iprops) {
                             onMouseDown={() => setValidation(true)}
                             loading={apiloading}
                             type="submit"
-                            className={
-                              props?.editValue?.id && !dirty
-                                ? t(
-                                  "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                                )
-                                : ""
-                            }
+                            className={ButtonCSSStyles.btnPrimary}
                             disabled={
                               props?.editValue?.id && !dirty ? true : false
                             }

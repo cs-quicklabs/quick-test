@@ -3,7 +3,7 @@ import bugplotLogo from "../../../assets/images/bugplot-logo.svg";
 import { Link } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import axiosService from "../../Utils/axios";
-import { Currency, freeTrial } from "../../Utils/constants/misc";
+import { ButtonCSSStyles, Currency, freeTrial } from "../../Utils/constants/misc";
 import Loader from "../../Loader/Loader";
 
 export default function CancelPage() {
@@ -71,7 +71,7 @@ export default function CancelPage() {
                       <Link
                         data-cy="cancel-page-button"
                         to="/settings/payments"
-                        className="w-full capitalize inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none sm:col-start-2 sm:text-sm"
+                        className={ButtonCSSStyles.btnPrimary}
                       >
                         {t("Subscribe for")} {currency}
                         {amount}/{t(paymentDuration)}

@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import Button from "../Button";
 import Loader from "../Loader/Loader";
 import axiosService from "../Utils/axios";
-import { Currency, SubscriptionStatus } from "../Utils/constants/misc";
+import { ButtonCSSStyles, Currency, SubscriptionStatus } from "../Utils/constants/misc";
 import { useTranslation } from "react-i18next";
 import AccessControl from "../AccessControl";
 import { PaymentPermissions } from "../Utils/constants/roles-permission";
@@ -117,7 +117,7 @@ export default function StripeCheckout() {
                       data-cy="stripe-checkout-button"
                       id="stripe-checkout-button"
                       onClick={getCheckoutId}
-                      className="mt-4"
+                      className={`mt-4 ${ButtonCSSStyles.btnPrimary}`}
                       loading={apiLoading}
                     >
                       {t("Subscribe for")} {currency}
@@ -138,7 +138,7 @@ export default function StripeCheckout() {
                       data-cy="stripe-manage-button"
                       onClick={getManageId}
                       loading={apiLoading}
-                      className="mt-4 inline-flex justify-center items-center capitalize px-2.5 py-1.5 border border-transparent rounded-md text-sm font-medium shadow-sm text-white focus:outline-none bg-indigo-600 hover:bg-inidgo-700"
+                      className={`mt-4 ${ButtonCSSStyles.btnPrimary}`}
                     >
                       {t("Manage Subscription")}
                     </Button>
