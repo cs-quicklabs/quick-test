@@ -8,7 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Button";
 import i18next from "i18next";
 import { showError, showSuccess } from "../../Toaster/Toast";
-import { ToastMessage } from "../../Utils/constants/misc";
+import { ButtonCSSStyles, ToastMessage } from "../../Utils/constants/misc";
 import Loader from "../../Loader/Loader";
 import SidePanel from "../../TestCase/component/SidePanel";
 import SidePanelData from "../../TestCase/component/SidePanelTestCaseData";
@@ -312,6 +312,7 @@ export default function Table({
                 }}
                 loading={buttonLoader}
                 type="button"
+                className={ButtonCSSStyles.btnPrimary}
               >
                 {t("Generate Report")}
               </Button>

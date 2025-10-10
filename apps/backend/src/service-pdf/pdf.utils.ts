@@ -132,6 +132,7 @@ export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResult
         yPos += 6;
 
         // Table data
+        let rowNumber = 1; // start numbering from 1 per section
         for (const result of testCaseResults) {
             // Check if we need a new page
             if (yPos > 270) {
@@ -167,7 +168,7 @@ export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResult
             
             // ID
             doc.rect(currentX, yPos, columnWidths[0], rowHeight);
-            const resultIdText = result.testCaseId.toString();
+            const resultIdText = rowNumber.toString();
             const resultIdTextWidth = doc.getTextWidth(resultIdText);
             const resultIdCenterX = currentX + (columnWidths[0] - resultIdTextWidth) / 2;
             doc.text(resultIdText, resultIdCenterX, yPos + 4);
@@ -183,6 +184,7 @@ export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResult
             doc.text(result.status, currentX + 2, yPos + 4);
             
             yPos += rowHeight;
+            rowNumber++;
         }
         
         yPos += 6;
