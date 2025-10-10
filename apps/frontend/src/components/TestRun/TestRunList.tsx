@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../Button";
 import Loader from "../Loader/Loader";
-import { ToastMessage } from "../Utils/constants/misc";
+import { ButtonCSSStyles, ToastMessage } from "../Utils/constants/misc";
 import {
   appRoutes,
   projectRoutes,
@@ -119,6 +119,7 @@ export default function TestRunList({ projectName }: any) {
                               }}
                               loading={buttonLoader}
                               type="button"
+                              className={ButtonCSSStyles.btnPrimary}
                             >
                               {t("Start Another Test Run")}
                             </Button>

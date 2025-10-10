@@ -23,7 +23,7 @@ import {
   showError,
   showSuccess,
 } from "../../../../components/Toaster/Toast";
-import { ToastMessage } from "../../../../components/Utils/constants/misc";
+import { ButtonCSSStyles, ToastMessage } from "../../../../components/Utils/constants/misc";
 import Loader from "../../../../components/Loader/Loader";
 import { useQuery } from "@tanstack/react-query";
 import Tooltips from "../../../../components/Tooltip/ToolTips";
@@ -155,6 +155,7 @@ export default function ProjectMembers(props: any) {
                         id="new member"
                         onClick={() => setShare(true)}
                         type="button"
+                        className={ButtonCSSStyles.btnPrimary}
                       >
                         {t("Add Member")}
                       </Button>

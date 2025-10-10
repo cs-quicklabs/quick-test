@@ -6,6 +6,7 @@ import JiraModal from "./JiraModal";
 import { useTranslation } from "react-i18next";
 import AccessControl from "../../AccessControl";
 import { JiraPluginPermissions } from "../../Utils/constants/roles-permission";
+import { ButtonCSSStyles } from "../../Utils/constants/misc";
 
 const JiraCard = ({ pluginConfig, getPluginConfig }: any) => {
   const { t } = useTranslation();
@@ -37,9 +38,10 @@ const JiraCard = ({ pluginConfig, getPluginConfig }: any) => {
           ]}
         >
           <Button
-            className="ml-1"
+            className={ButtonCSSStyles.btnPrimary}
             data-cy="jira-configure-btn"
             onClick={() => setShowPopup(true)}
+
           >
             {pluginConfig.isIntegrated
               ? t("Re-configure Jira Integration")

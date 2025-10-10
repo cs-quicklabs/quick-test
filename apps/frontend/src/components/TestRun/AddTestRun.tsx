@@ -118,6 +118,7 @@ const AddTestRun = () => {
 
 
   const getMilestoneOptions = useCallback(async () => {
+
     try {
       const milestoneResponse = await axiosService.get(
         `projects/${params.pid}/open/milestones`

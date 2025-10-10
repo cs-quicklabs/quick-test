@@ -13,7 +13,7 @@ import {
 import axiosService from "../../Utils/axios";
 import Button from "../../Button/index";
 import { DateFormat } from "../../Utils/constants/date-format";
-import { ToastMessage } from "../../Utils/constants/misc";
+import { ButtonCSSStyles, ToastMessage } from "../../Utils/constants/misc";
 import Loader from "../../Loader/Loader";
 import OverviewCharts from "./OverviewChart";
 import { showError } from "../../Toaster/Toast";
@@ -365,7 +365,7 @@ export default function Overview() {
                         data-cy="add-milestone"
                         type="button"
                         onClick={() => navigateAdd("Milestone")}
-                      // className="mt-2"
+                        className={ButtonCSSStyles.btnPrimary}
                       >
                         {t("Add Milestones")}
                       </Button>
@@ -439,6 +439,7 @@ export default function Overview() {
                       data-cy="add-test-run"
                       id="show-pop-up"
                       type="button"
+                      className={ButtonCSSStyles.btnPrimary}
                     >
                       {t("Add Test Run")}
                     </Button>

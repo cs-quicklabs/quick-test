@@ -10,7 +10,7 @@ import Button from "../Button";
 import Loader from "../Loader/Loader";
 import { showError } from "../Toaster/Toast";
 import Table from "./Component/Table";
-import { ToastMessage } from "../Utils/constants/misc";
+import { ButtonCSSStyles, ToastMessage } from "../Utils/constants/misc";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import AccessControl from "../AccessControl";
@@ -110,6 +110,7 @@ export default function TestRunList() {
                                 }}
                                 loading={buttonLoader}
                                 type="button"
+                                className={ButtonCSSStyles.btnPrimary}
                               >
                                 {t("Add Milestone")}
                               </Button>
