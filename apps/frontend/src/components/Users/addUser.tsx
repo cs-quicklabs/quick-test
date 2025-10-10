@@ -6,10 +6,10 @@ import * as Yup from "yup";
 import { appRoutes, settingsRoutes } from "../Utils/constants/page-routes";
 import axiosService from "../Utils/axios";
 import Button from "../Button";
-import { ToastMessage, ValidatorMessage } from "../Utils/constants/misc";
+import { ButtonCSSStyles, ToastMessage, ValidatorMessage } from "../Utils/constants/misc";
 import { FormikInput, FormikSelect } from "../Common/FormikInput";
 import Loader from "../Loader/Loader";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
@@ -248,21 +248,21 @@ const AddUser = () => {
                   (userRoleId === RoleId.OWNER ||
                     userRoleId === RoleId.SUPERADMIN)) ||
                   !params?.id) && (
-                  <div>
-                    <FormikSelect
-                      name="roleId"
-                      label={t("Role")}
-                      validation={validation}
-                      sendIdAsValue={true}
-                      optionsForSelect={roleList}
-                    />
-                  </div>
-                )}
+                    <div>
+                      <FormikSelect
+                        name="roleId"
+                        label={t("Role")}
+                        validation={validation}
+                        sendIdAsValue={true}
+                        optionsForSelect={roleList}
+                      />
+                    </div>
+                  )}
                 <div className="flex justify-end gap-4">
                   <button
                     onMouseUp={() => navigate(-1)}
                     type="button"
-                    className="inline-flex items-center rounded border border-gray-300 bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none"
+                    className={ButtonCSSStyles.btnSecondary}
                   >
                     {t("Cancel")}
                   </button>
@@ -271,11 +271,9 @@ const AddUser = () => {
                     onMouseDown={() => setValidation(true)}
                     loading={apiloading}
                     type="submit"
-                    className={`sm:order-1  ${
-                      params?.id && !dirty
-                        ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-                        : ""
-                    }`}
+                    className={`${params?.id && !dirty
+                      ? ButtonCSSStyles.btnPrimary + "cursor-not-allowe"
+                      : ButtonCSSStyles.btnPrimary}`}
                     disabled={params?.id && !dirty ? true : false}
                   >
                     {t("Confirm")}

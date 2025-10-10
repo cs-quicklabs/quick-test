@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { showError, showSuccess } from "../Toaster/ToasterFun";
+import { showError, showSuccess } from "../Toaster/Toast";
 import axiosService from "../Utils/axios";
 import Loader from "../Loader/Loader";
 import { appRoutes } from "../Utils/constants/page-routes";

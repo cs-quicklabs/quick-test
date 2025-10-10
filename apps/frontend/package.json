@@ -5,8 +5,10 @@
   "sourceRoot": "apps/quick-test-frontend",
   "projectType": "application",
   "taget": {},
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "flowbite": "^3.1.2",
+    "flowbite-react": "^0.12.9"
+  },
   "scripts": {
     "dev": "set BROWSER=none && set PORT=3000 && env-cmd -f .env react-scripts start",
     "build": "react-scripts build && npm run sitemap",

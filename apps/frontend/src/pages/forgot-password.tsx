@@ -7,7 +7,7 @@ import Button from "../components/Button";
 import { useFormSubmitWithLoading } from "../components/Utils/hooks/useFormSubmitWithLoading";
 import PopUP from "../components/SignUp/Modal";
 import axiosService from "../components/Utils/axios";
-import { showError, showSuccess } from "../components/Toaster/ToasterFun";
+import { showError, showSuccess } from "../components/Toaster/Toast";
 import { validateRequiredEmail } from "../components/Utils/validators";
 import { useNavigate } from "react-router-dom";
 import { appRoutes } from "../components/Utils/constants/page-routes";

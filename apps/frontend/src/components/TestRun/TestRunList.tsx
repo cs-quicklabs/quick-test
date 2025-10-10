@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../Button";
 import Loader from "../Loader/Loader";
-import { ToastMessage } from "../Utils/constants/misc";
+import { ButtonCSSStyles, ToastMessage } from "../Utils/constants/misc";
 import {
   appRoutes,
   projectRoutes,
@@ -12,7 +12,7 @@ import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getTestRunDetails } from "../../services/testRunServices";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import Table from "./component/Table";
 
 export default function TestRunList({ projectName }: any) {
@@ -119,6 +119,7 @@ export default function TestRunList({ projectName }: any) {
                               }}
                               loading={buttonLoader}
                               type="button"
+                              className={ButtonCSSStyles.btnPrimary}
                             >
                               {t("Start Another Test Run")}
                             </Button>

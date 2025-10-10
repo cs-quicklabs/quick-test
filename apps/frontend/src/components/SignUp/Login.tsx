@@ -7,7 +7,7 @@ import { appRoutes } from "../Utils/constants/page-routes";
 import axiosService from "../Utils/axios";
 import Button from "../Button";
 import { FormikCheckbox, FormikInput } from "../Common/FormikInput";
-import { showError, showSuccess } from "../Toaster/ToasterFun";
+import { showError, showSuccess } from "../Toaster/Toast";
 import {
   ButtonCSSStyles,
   SubscriptionStatus,
@@ -147,7 +147,7 @@ const SignIn = () => {
                           <div className="flex items-center h-5">
                             <FormikCheckbox
                               type="checkbox"
-                              name="remember"
+                              name="remember_me"
                               label={t("Remember me")}
                             />
                           </div>

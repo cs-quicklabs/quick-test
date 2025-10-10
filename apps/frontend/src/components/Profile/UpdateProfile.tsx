@@ -11,7 +11,7 @@ import defaultProfilePicture from "../../assets/images/profile.png";
 import { ToastMessage, LanguageList, ButtonCSSStyles } from "../Utils/constants/misc";
 import { FormikInput, FormikSelect } from "../Common/FormikInput";
 import Loader from "../Loader/Loader";
-import { showError, showSuccess } from "../Toaster/ToasterFun";
+import { showError, showSuccess } from "../Toaster/Toast";
 import {
   validateRequiredFirstName,
   validateRequiredLastName,
@@ -180,7 +180,6 @@ export default function UpdateProfile() {
     }
 
     try {
-      localStorage.setItem("i18nextLng", value.language);
       const response = await axiosService.put(`/users/${value.id}`, userData);
       dispatch({
         type: "UPDATE_PROFILE_DATA",
@@ -189,6 +188,7 @@ export default function UpdateProfile() {
       showSuccess(response.data.message);
       setApiLoading(false);
       await getProfileData();
+      localStorage.setItem("i18nextLng", value.language);
       i18n.changeLanguage(value.language);
     } catch (err: any) {
       if (err.response && err.response.data) {

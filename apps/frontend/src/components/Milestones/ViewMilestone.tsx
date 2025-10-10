@@ -13,7 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getProjectsDetails } from "../../services/headerServices";
 import { getSingleMilestoneDataDetails } from "../../services/milestoneServices";
 import BreadCrumb from "../BreadCrumb/BreadCrumb";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import { ToastMessage } from "../Utils/constants/misc";
 import TestRunTable from "./Component/TestRunTable";
 

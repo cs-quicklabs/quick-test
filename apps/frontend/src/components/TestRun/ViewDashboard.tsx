@@ -9,7 +9,7 @@ import {
 } from "../Utils/constants/page-routes";
 import { DateFormat } from "../Utils/constants/date-format";
 import { ToastMessage } from "../Utils/constants/misc";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import Heading from "../ProjectDetails/component/Header";
 import TestRunResult from "./TestRunResult";
 import { useTranslation } from "react-i18next";
@@ -45,13 +45,12 @@ export default function Dashboard() {
               ? "In Progress"
               : response.data.data.status.toLowerCase(),
 
-          description: `${t("Created by")} ${
-            response.data.data.user.firstName +
+          description: `${t("Created by")} ${response.data.data.user.firstName +
             " " +
             response.data.data.user.lastName
-          } ${t("on")} ${dayjs(new Date(response.data.data.createdAt)).format(
-            DateFormat.LONG
-          )}`,
+            } ${t("on")} ${dayjs(new Date(response.data.data.createdAt)).format(
+              DateFormat.LONG
+            )}`,
         });
       } else {
         setuserData({

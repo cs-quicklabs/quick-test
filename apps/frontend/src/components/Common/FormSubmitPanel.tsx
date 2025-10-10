@@ -1,6 +1,7 @@
 import CancelButton from "../Button/cancelButton";
 import Button from "../Button";
 import { Trans, useTranslation } from "react-i18next";
+import { ButtonCSSStyles } from "../Utils/constants/misc";
 
 interface IProps {
   submitTitle: string;
@@ -31,6 +32,7 @@ export const FormSubmitPanel = ({
           data-cy="cancel-form-submit"
           onMouseDown={onCancel}
           type="button"
+          className={ButtonCSSStyles.btnSecondary}
         >
           {t("Cancel")}
         </CancelButton>
@@ -42,11 +44,7 @@ export const FormSubmitPanel = ({
         onMouseDown={validateFunc && validateFunc}
         loading={loading}
         type="submit"
-        className={
-          validSubmit
-            ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
-            : ""
-        }
+        className={ButtonCSSStyles.btnPrimary}
       >
         <Trans>{submitTitle}</Trans>
       </Button>

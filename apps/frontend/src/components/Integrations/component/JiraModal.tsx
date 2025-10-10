@@ -13,8 +13,8 @@ import { Formik, Form } from "formik";
 import { FormikInput } from "../../Common/FormikInput";
 import { validateJiraConfigurationSchema } from "../../Utils/validators";
 import axiosService from "../../Utils/axios";
-import { showError, showSuccess } from "../../Toaster/ToasterFun";
-import { ToastMessage } from "../../Utils/constants/misc";
+import { showError, showSuccess } from "../../Toaster/Toast";
+import { ButtonCSSStyles, ToastMessage } from "../../Utils/constants/misc";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
@@ -216,7 +216,7 @@ export default function JiraModal(props: any) {
                               type="submit"
                               className={
                                 !dirty
-                                  ? "cursor-not-allowed bg-indigo-600/50 hover:bg-indigo-600/50"
+                                  ? ButtonCSSStyles.btnPrimary
                                   : ""
                               }
                               disabled={!dirty}
@@ -228,6 +228,7 @@ export default function JiraModal(props: any) {
                             <CancelButton
                               type="button"
                               onMouseDown={() => setOpen(false)}
+                              className={ButtonCSSStyles.btnSecondary}
                             >
                               {t("Cancel")}
                             </CancelButton>

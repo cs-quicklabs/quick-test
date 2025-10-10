@@ -3,6 +3,7 @@ import React from "react";
 import { NO_PERMISSION_TOOLTIP_MESSAGE } from "../Utils/constants/misc";
 
 import Tooltips from "../Tooltip/ToolTips";
+import { t } from "i18next";
 
 interface AccessControlProps {
   permission: string | string[];
@@ -43,7 +44,7 @@ const AccessControl = (props: AccessControlProps) => {
       <>
         <span
           data-tooltip-id="no-permission-tooltip"
-          data-tooltip-content={NO_PERMISSION_TOOLTIP_MESSAGE}
+          data-tooltip-content={t(NO_PERMISSION_TOOLTIP_MESSAGE)}
           data-tooltip-place="top"
           data-tooltip-trigger="mouseenter"
           data-tooltip-hideonclick="false"

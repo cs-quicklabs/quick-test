@@ -11,7 +11,7 @@ import {
 import axiosService from "../Utils/axios";
 import { ToastMessage } from "../Utils/constants/misc";
 import Loader from "../Loader/Loader";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 import TestForm from "./TestForm";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
@@ -96,7 +96,7 @@ const EditManyTestCase = () => {
           val === "expectedResults"
             ? { ...value, expectedResults: values[val] }
             : // @ts-ignore
-              { ...value, [val]: values[val] };
+            { ...value, [val]: values[val] };
       }
     }
 

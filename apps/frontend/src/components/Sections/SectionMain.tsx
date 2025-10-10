@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import { ToastMessage } from "../Utils/constants/misc";
-import { showError, showSuccess } from "../../components/Toaster/ToasterFun";
+import { ButtonCSSStyles, ToastMessage } from "../Utils/constants/misc";
+import { showError, showSuccess } from "../Toaster/Toast";
 import SectionListing from "./SectionListing";
 import Button from "../Button";
 import DeleteConfirmationModal from "../Common/DeleteModal";
@@ -107,6 +107,7 @@ const SectionMain = (props: any) => {
                 data-cy="add-section"
                 type="button"
                 onClick={() => showPopUp()}
+                className={ButtonCSSStyles.btnPrimary}
               >
                 {t("Add Section")}
               </Button>
@@ -118,7 +119,7 @@ const SectionMain = (props: any) => {
                 onClick={() => {
                   props.addTestCase();
                 }}
-                className="sm:order-1 "
+                className={ButtonCSSStyles.btnPrimary}
               >
                 {t("Add Test Case")}
               </Button>

@@ -14,7 +14,7 @@ import Button from "../../Button";
 import SectionList from "./ModalSectionList";
 import { useFormikContext } from "formik";
 import { useTranslation } from "react-i18next";
-import { showError } from "../../Toaster/ToasterFun";
+import { showError } from "../../Toaster/Toast";
 
 const SelectionModal = ({
   showModal,

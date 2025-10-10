@@ -204,9 +204,9 @@ export default function TestCaseListTable({
                         orderTestCases.map((val) =>
                           val.id === test.id
                             ? {
-                                ...val,
-                                checked: e.target.checked,
-                              }
+                              ...val,
+                              checked: e.target.checked,
+                            }
                             : { ...val }
                         )
                       )

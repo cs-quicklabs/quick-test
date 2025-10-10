@@ -10,7 +10,7 @@ import axiosService from "../Utils/axios";
 import BackButton from "../Button/cancelButton";
 import Button from "../Button";
 import { ToastMessage } from "../Utils/constants/misc";
-import { showError } from "../Toaster/ToasterFun";
+import { showError } from "../Toaster/Toast";
 
 import MultipleMemberList from "./multipleMemberList";
 import { useTranslation } from "react-i18next";

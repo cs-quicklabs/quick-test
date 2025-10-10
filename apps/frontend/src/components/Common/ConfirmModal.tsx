@@ -4,6 +4,7 @@ import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import CancelButton from "../Button/cancelButton";
 import Button from "../Button/index";
 import { useTranslation } from "react-i18next";
+import { ButtonCSSStyles } from "../Utils/constants/misc";
 
 interface PropsType {
   open: boolean;
@@ -74,7 +75,7 @@ export default function ConfirmModal({
                 </div>
               </div>
               <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse gap-4">
-                <Button onClick={handleConfirm} data-cy="confirm-button">
+                <Button onClick={handleConfirm} data-cy="confirm-button" className={ButtonCSSStyles.btnPrimary}>
                   {buttonText ? buttonText : t("Confirm")}
                 </Button>
 
@@ -82,6 +83,7 @@ export default function ConfirmModal({
                   type="button"
                   onClick={handleCancel}
                   innerref={cancelButtonRef}
+                  className={ButtonCSSStyles.btnSecondary}
                 >
                   {t("Cancel")}
                 </CancelButton>

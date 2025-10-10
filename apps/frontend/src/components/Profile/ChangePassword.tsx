@@ -6,9 +6,9 @@ import * as Yup from "yup";
 
 import axiosService from "../Utils/axios";
 import Button from "../Button";
-import { ToastMessage, ValidatorMessage } from "../Utils/constants/misc";
+import { ButtonCSSStyles, ToastMessage, ValidatorMessage } from "../Utils/constants/misc";
 import { FormikInput } from "../Common/FormikInput";
-import { showError, showSuccess } from "../Toaster/ToasterFun";
+import { showError, showSuccess } from "../Toaster/Toast";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
@@ -119,7 +119,7 @@ export default function UpdateProfile() {
                   onMouseDown={() => setValidation(true)}
                   loading={apiloading === true ? "true" : undefined}
                   type="submit"
-                  className="btn-primary"
+                  className={ButtonCSSStyles.btnPrimary}
                   disabled={!dirty}
                 >
                   {t("Save")}

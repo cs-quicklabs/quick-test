@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Badge from "../../Badge";
 import DeleteConfirmationModal from "../../Common/DeleteModal";
-import { showError, showSuccess } from "../../Toaster/ToasterFun";
+import { showError, showSuccess } from "../../Toaster/Toast";
 import axiosService from "../../Utils/axios";
 import {
   appRoutes,
