@@ -39,6 +39,7 @@ const SearchBox = ({
   const [showDropDown, setShowDropDown] = useState(false);
   const [searchResult, setSearchResult] = useState(initialSearchResultState);
   const [searchWidth, setSearchWidth] = useState(0);
+  const [searchStatus, setSearchStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   
   const searchWidthRef = useRef<HTMLInputElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -52,6 +53,7 @@ const SearchBox = ({
   useEffect(() => {
     if (inputValue === "") {
       setSearchResult(initialSearchResultState);
+      setSearchStatus("idle");
     }
   }, [inputValue]);
 
@@ -77,15 +79,20 @@ const SearchBox = ({
     
           const controller = new AbortController();
           abortControllerRef.current = controller;
+          setSearchStatus("loading");
+          
           try {
-            console.log('===> ',_value.trim());
             const response = await axiosService.get(
               `/organizations/search?query=${_value.trim()}`,
               { signal: controller.signal }
             );
             setSearchResult(response?.data?.data);
-          } catch (err) {
-            showError(err?.response?.data?.message);
+            setSearchStatus("success");
+          } catch (err: any) {
+            if (err.name !== 'CanceledError' && err.name !== 'AbortError') {
+              showError(err?.response?.data?.message);
+              setSearchStatus("error");
+            }
           }
         }
       }, 300),
@@ -132,13 +139,13 @@ const SearchBox = ({
         </div>
       </div>
 
-      {showDropDown && (
+      {showDropDown && (searchStatus === "success" || searchStatus === "error") && (
         <div
           style={{ width: `${searchWidth}px` }}
           className={`absolute top-24 sm:top-11 rounded-md shadow-md border border-gray-300 overflow-x-hidden w-96 bg-white z-10 ${getAllSearchCount() > 8 ? "h-64 overflow-y-auto" : "h-auto"
             } `}
         >
-          {Object.keys(searchResult).length === 0 ? (
+          {getAllSearchCount() === 0 ? (
             <div className="px-2 py-1 text-sm">{t("No match found")}</div>
           ) : (
             <SearchResult
