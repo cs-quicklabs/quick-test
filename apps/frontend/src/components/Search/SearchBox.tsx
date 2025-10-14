@@ -39,7 +39,9 @@ const SearchBox = ({
   const [showDropDown, setShowDropDown] = useState(false);
   const [searchResult, setSearchResult] = useState(initialSearchResultState);
   const [searchWidth, setSearchWidth] = useState(0);
+  
   const searchWidthRef = useRef<HTMLInputElement>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     const getSearchWidth = searchWidthRef.current?.clientWidth || 0;
@@ -68,10 +70,18 @@ const SearchBox = ({
     () =>
       debounce(async (e: any) => {
         const _value = e.target.value;
-        if (_value.length > 0) {
+        if (_value.length > 0 && _value.trim() !== "") {      
+          if (abortControllerRef.current) {
+            abortControllerRef.current.abort();
+          }
+    
+          const controller = new AbortController();
+          abortControllerRef.current = controller;
           try {
+            console.log('===> ',_value.trim());
             const response = await axiosService.get(
-              `/organizations/search?query=${_value}`
+              `/organizations/search?query=${_value.trim()}`,
+              { signal: controller.signal }
             );
             setSearchResult(response?.data?.data);
           } catch (err) {
@@ -92,8 +102,8 @@ const SearchBox = ({
   return (
     <>
       <div className="w-full max-w-xl">
-        <div className="relative">
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 z-10">
+        <div className="flex flex-row items-center rounded-md bg-gray-700 h-9 sm:w-96 focus-within:bg-white focus-within:ring-1 focus-within:ring-white">
+          <div className="pointer-events-none flex items-center pl-3">
             <svg
               className="h-5 w-5 text-gray-400"
               viewBox="0 0 20 20"
@@ -108,7 +118,7 @@ const SearchBox = ({
             </svg>
           </div>
           <input
-            className="pl-10 pr-3 py-1 h-9 rounded-md text-sm font-medium text-gray-500 bg-gray-700 sm:w-96 grow sm:grow-0 sm:justify-self-end relative focus:border-white focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-white"
+            className="flex-1 pl-2 pr-3 py-1 text-sm font-medium text-gray-500 bg-transparent border-none focus:text-gray-900 focus:outline-none"
             ref={searchWidthRef}
             type="search"
             id={inputFieldId}
