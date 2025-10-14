@@ -9,7 +9,7 @@ import { appRoutes, settingsRoutes } from "../Utils/constants/page-routes";
 import axiosService from "../Utils/axios";
 import BackButton from "../Button/cancelButton";
 import Button from "../Button";
-import { ToastMessage } from "../Utils/constants/misc";
+import { ButtonCSSStyles, ToastMessage } from "../Utils/constants/misc";
 import { showError } from "../Toaster/Toast";
 
 import MultipleMemberList from "./multipleMemberList";
@@ -148,7 +148,7 @@ const AddMultiUser = () => {
           <div className="flex items-center">
             <BackButton
               onMouseDown={() => navigate(-1)}
-              className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none"
+              className={ButtonCSSStyles.btnSecondary}
               type="button"
             >
               {t("Back")}
@@ -237,7 +237,7 @@ const AddMultiUser = () => {
             <BackButton
               onMouseDown={() => navigate(-1)}
               type="button"
-              className="inline-flex items-center rounded border border-gray-300 bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none"
+              className={ButtonCSSStyles.btnSecondary}
             >
               {t("Cancel")}
             </BackButton>
@@ -249,6 +249,7 @@ const AddMultiUser = () => {
               disabled={
                 data?.length === 0 || data?.find((obj: any) => !obj?.valid)
               }
+              className={ButtonCSSStyles.btnPrimary}
             >
               {t("Submit")}
             </Button>

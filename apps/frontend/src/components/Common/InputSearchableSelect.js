@@ -34,7 +34,7 @@ const InputSearchableSelect = ({ ...props }) => {
       const selectedOption = optionsForSelect.find(
         (opt) => opt.value === selectedValue.id || opt.value === selectedValue
       );
-      
+
       if (selectedOption) {
         setValue(selectedOption.label);
         setFieldValue(name, selectedOption.value);
@@ -92,7 +92,7 @@ const InputSearchableSelect = ({ ...props }) => {
     <>
       <input
         id={rest.name}
-        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-indigo-500 sm:text-sm pr-10 border-gray-300 cursor-default ${
+        className={`form-input-field ${
           (error && touched) || (validation && error)
             ? " border-red-300"
             : " border-gray-300"

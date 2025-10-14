@@ -122,7 +122,7 @@ export const FormikTextArea = ({
         {showLabel && (
           <label
             htmlFor={props.name}
-            className="flex-1 text-sm font-medium text-gray-700 space-x-3 flex items-center justify-between"
+            className="form-input-label"
           >
             <span>{props.label}</span>
             {markdownPreview ? (
@@ -180,7 +180,7 @@ export const FormikSelect = ({ showLabel = true, ...props }: IProps) => {
       {showLabel && (
         <label
           htmlFor={props.name}
-          className="block text-sm font-medium text-gray-700"
+          className="form-input-label"
         >
           {props.label}
         </label>
@@ -216,7 +216,7 @@ export const FormikInputSearch = ({
       <div className="flex justify-between">
         <label
           htmlFor={props.name}
-          className="block text-sm font-medium text-gray-700 space-x-2"
+          className="form-input-label"
         >
           <span>{props.label}</span>
           {loading ? (
@@ -278,7 +278,7 @@ export const FormikInputDateField = ({
     <>
       <label
         htmlFor={props.name}
-        className="block text-sm font-medium text-gray-700"
+        className="form-input-label"
       >
         {props.label}
       </label>
