@@ -100,7 +100,7 @@ const InputField: FC<Iprops> = ({ ...props }: Iprops) => {
             disabled={loading}
             maxRows={4}
             name={name}
-            className={`resize-y  w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none  focus:border-indigo-500 sm:text-sm 
+            className={` form-input-field
             ${fileOverElement ? "ring-2 ring-indigo-500" : "ring-0"} 
             ${manageHeight ? "min-h-48" : "min-h-48"}
             ${(error && touched) || (validation && error)
