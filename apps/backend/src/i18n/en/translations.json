@@ -4,6 +4,7 @@
   "INTERNAL_SERVER": "Internal server error. Try again.",
 
   "RECORD_NOT_FOUND": "Record was not found. Try again.",
+  "INVALID_EMAIL": "Invalid email address !",
   "RECORD_UPDATE_FAILED": "Updating this record failed. Try again.",
   "RECORD_DELETE_FAILED": "Deleting this record failed. Try again.",
   "OPERATION_FAILED": "This operation failed. Try again.",

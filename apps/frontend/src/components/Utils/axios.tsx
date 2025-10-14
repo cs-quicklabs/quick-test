@@ -1,9 +1,6 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 import { appRoutes } from "./constants/page-routes";
 import { NotifyExpired } from "./helpers";
-import { showError } from "../Toaster/Toast";
-import i18next from "i18next";
-import { ToastMessage } from "./constants/misc";
 
 const serverUrl: string | undefined = process.env.REACT_APP_API_URL;
 const instance = axios.create({
@@ -43,8 +40,7 @@ instance.interceptors.response.use(
         } else if (errorResponse?.response?.status === 403) {
           //403=Plan expired
           NotifyExpired();
-        } else if (errorResponse?.response?.status === 404)
-          showError(i18next.t(ToastMessage.NO_TEST_CASE_PROJECT));
+        }
       }
       return Promise.reject(errorResponse);
     }

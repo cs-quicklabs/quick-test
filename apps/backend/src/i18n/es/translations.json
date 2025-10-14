@@ -4,6 +4,7 @@
   "INTERNAL_SERVER": "Error de servidor interno. Intentar otra vez.",
 
   "RECORD_NOT_FOUND": "No se encontró el registro. Intentar otra vez.",
+  "INVALID_EMAIL": "Correo electrónico no válido.",
   "RECORD_UPDATE_FAILED": "Error al actualizar este registro. Intentar otra vez.",
   "RECORD_DELETE_FAILED": "Error al eliminar este registro. Intentar otra vez.",
   "OPERATION_FAILED": "Esta operación falló. Intentar otra vez.",

@@ -212,7 +212,7 @@ export class AuthService {
     const user = await this.userReadService.findOne({
       email: userForgotPasswordDto.email,
     });
-    if (!user) throw new NotFoundException("translations.RECORD_NOT_FOUND");
+    if (!user) throw new NotFoundException("translations.INVALID_EMAIL");
     const tokenModel = await this.userCreateService.createVerificationToken(
       user.email,
     );
