@@ -86,16 +86,16 @@ export default function UserDashboard() {
   }, []);
 
   useEffect(() => {
-    paymentAmount();
-  }, [paymentAmount]);
-
-  useEffect(() => {
-    fetchPluginConfig();
-  }, []);
-
-  useEffect(() => {
-    freeTrialDays();
-  }, [freeTrialDays]);
+    const fetchAllData = async () => {
+      await Promise.all([
+        paymentAmount(),
+        fetchPluginConfig(),
+      ]);
+      freeTrialDays();
+    };
+    
+    fetchAllData();
+  }, [paymentAmount, freeTrialDays]);
 
 
   if (isSubscribed === "" && loading) {

@@ -19,7 +19,7 @@ const Forgotpassword = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (sessionStorage.getItem("token") || localStorage.getItem("token")) {
       showSuccess(ToastMessage.ALREADY_LOGGED_IN);
       navigate(appRoutes.DASHBOARD);
     }

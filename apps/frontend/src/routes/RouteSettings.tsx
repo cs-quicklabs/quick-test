@@ -96,7 +96,7 @@ export function PrivateRoute({ children, permission }: PrivateRouteProps) {
     : true;
 
   const isAuthenticated = useCallback(() => {
-    return localStorage.getItem("token") || hasLoggedIn;
+    return sessionStorage.getItem("token") || localStorage.getItem("token") || hasLoggedIn;
   }, [hasLoggedIn]);
 
   const auth = useMemo(() => isAuthenticated(), [isAuthenticated]);
@@ -151,7 +151,7 @@ export function PublicRoute({ children }: any) {
 
   const isAuthenticated = useCallback(() => {
     return (
-      localStorage.getItem("token") ||
+      sessionStorage.getItem("token") ||
       localStorage.getItem("token") ||
       hasLoggedIn
     );
