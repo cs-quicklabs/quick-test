@@ -141,7 +141,7 @@
   }
 
   .selected-sidebar-nav {
-    @apply bg-gray-200 text-gray-900 hover:bg-gray-200 rounded-sm px-3 py-2 flex items-center text-sm font-medium;
+    @apply bg-gray-200 text-gray-900 hover:bg-gray-200 rounded-sm px-2 py-2 flex items-center text-sm font-medium;
   }
 
   .sidebar-nav {

@@ -130,7 +130,6 @@ const SignIn = () => {
                           name="email"
                           label={t("Your email")}
                           placeholder={t("name@company.com")}
-                          labelClassName="form-input-label-white"
                         />
                       </div>
 
@@ -140,7 +139,6 @@ const SignIn = () => {
                           name="password"
                           label={t("Password")}
                           placeholder={t("••••••••")}
-                          labelClassName="form-input-label-white"
                         />
                       </div>
 
