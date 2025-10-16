@@ -107,10 +107,13 @@ const ArchivedProjects = () => {
     <main className="pb-12 lg:col-span-9">
       <div className="overflow-x-auto">
         <div className="flex flex-col px-2 lg:px-0 space-y-4">
-          <div className=" pb-2 sm:pb-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
+          <div className="pb-2 sm:pb-4 border-b border-gray-200">
             <h3 className="text-lg leading-6 font-medium text-gray-900">
               {t("Archived Projects")}
             </h3>
+            <h6 className="text-sm text-gray-500">
+              Following projects have been archived.
+            </h6>
           </div>
           {isLoading ? (
             <div className="flex justify-center items-center content-center my-32">
@@ -119,10 +122,10 @@ const ArchivedProjects = () => {
           ) : (
             <table className="w-3/4">
               <tbody className="bg-white divide-y divide-gray-200">
-                {archiveProjects?.data?.data.map((project: any) => (
+                {archiveProjects?.data?.data.map((project: any, idx: number) => (
                   <tr
                     key={project.id}
-                    className="flex justify-between py-2 sm:py-3 whitespace-nowrap font-normal text-gray-600"
+                    className={`flex justify-between ${idx === 0 ? 'pb-2 sm:pb-3' : 'py-2 sm:py-3'} whitespace-nowrap font-normal text-gray-600`}
                   >
                     <td className="flex flex-col gap-2">
                       <div className="text-sm font-medium text-gray-900 tracking-wide">
