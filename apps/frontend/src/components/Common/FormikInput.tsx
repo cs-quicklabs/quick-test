@@ -33,6 +33,7 @@ interface IProps {
   loading?: boolean;
   manageHeight?: boolean;
   defaultValue?: string;
+  labelClassName?: string;
 }
 
 export const FormikInput = ({ showLabel = true, ...props }: IProps) => {
@@ -44,7 +45,7 @@ export const FormikInput = ({ showLabel = true, ...props }: IProps) => {
       {showLabel && (
         <label
           htmlFor={props.name}
-          className="form-input-label"
+          className={props.labelClassName || "form-input-label"}
         >
           {props.label}
           {!props.isOptional && <span className="text-red-600 ml-1">*</span>}

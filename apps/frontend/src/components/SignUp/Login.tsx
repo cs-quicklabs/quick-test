@@ -30,7 +30,7 @@ const SignIn = () => {
   const { dispatch } = useContext(AppContext);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (sessionStorage.getItem("token") || localStorage.getItem("token")) {
       showSuccess(ToastMessage.ALREADY_LOGGED_IN);
       navigate(appRoutes.DASHBOARD);
     }
@@ -130,6 +130,7 @@ const SignIn = () => {
                           name="email"
                           label={t("Your email")}
                           placeholder={t("name@company.com")}
+                          labelClassName="form-input-label-white"
                         />
                       </div>
 
@@ -139,6 +140,7 @@ const SignIn = () => {
                           name="password"
                           label={t("Password")}
                           placeholder={t("••••••••")}
+                          labelClassName="form-input-label-white"
                         />
                       </div>
 
