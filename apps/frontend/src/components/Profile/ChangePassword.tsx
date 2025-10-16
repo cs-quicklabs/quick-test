@@ -78,56 +78,53 @@ export default function UpdateProfile() {
       {(formik) => {
         const { dirty } = formik;
         return (
-          <main className="max-w-xl pb-12 px-4 lg:col-span-6">
-            <div>
-              <h1 className="form-title">{t("Change Password")}</h1>
-              <p className="form-subtitle">{t("Setup a new password for your account")}</p>
+          <div className="max-w-xl">
+            <h1 className="form-title">{t("Change Password")}</h1>
+            <p className="form-subtitle">{t("Setup a new password for your account")}</p>
 
-              <Form
-                className="w-full mt-6 space-y-4"
-                autoComplete="off"
+            <Form
+              className="w-full mt-6 space-y-4"
+              autoComplete="off"
+            >
+              <div>
+                <FormikInput
+                  type="password"
+                  name="oldPassword"
+                  label={t("Old Password")}
+                  validation={validation}
+                  placeholder="••••••••"
+                />
+              </div>
+              <div>
+                <FormikInput
+                  type="password"
+                  name="newPassword"
+                  label={t("New Password")}
+                  validation={validation}
+                  placeholder="••••••••"
+                />
+              </div>
+              <div>
+                <FormikInput
+                  type="password"
+                  name="confirmPassword"
+                  label={t("Confirm Password")}
+                  validation={validation}
+                  placeholder="••••••••"
+                />
+              </div>
+              <Button
+                id="change-password"
+                onMouseDown={() => setValidation(true)}
+                loading={apiloading === true ? "true" : undefined}
+                type="submit"
+                className={ButtonCSSStyles.btnPrimary}
+                disabled={!dirty}
               >
-                <div>
-                  <FormikInput
-                    type="password"
-                    name="oldPassword"
-                    label={t("Old Password")}
-                    validation={validation}
-                    placeholder="••••••••"
-                  />
-                </div>
-                <div>
-                  <FormikInput
-                    type="password"
-                    name="newPassword"
-                    label={t("New Password")}
-                    validation={validation}
-                    placeholder="••••••••"
-                  />
-                </div>
-                <div>
-                  <FormikInput
-                    type="password"
-                    name="confirmPassword"
-                    label={t("Confirm Password")}
-                    validation={validation}
-                    placeholder="••••••••"
-                  />
-                </div>
-                <Button
-                  id="change-password"
-                  onMouseDown={() => setValidation(true)}
-                  loading={apiloading === true ? "true" : undefined}
-                  type="submit"
-                  className={ButtonCSSStyles.btnPrimary}
-                  disabled={!dirty}
-                >
-                  {t("Save")}
-                </Button>
-              </Form>
-            </div>
-
-          </main>
+                {t("Save")}
+              </Button>
+            </Form>
+          </div>
         );
       }}
     </Formik >

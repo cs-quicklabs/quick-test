@@ -127,7 +127,7 @@ const MemberList = () => {
     <main className="pb-12 lg:col-span-9">
       <div className="overflow-x-contain">
         <div className="flex flex-col px-2 lg:px-0 space-y-6">
-          <div className=" pb-2 border-gray-200 sm:flex sm:items-start sm:justify-between">
+          <div className=" pb-2 border-gray-200 sm:flex sm:items-start sm:justify-between pl-6">
             <h3 className="text-lg leading-6 font-medium text-gray-900">
               {t("Users")}
             </h3>
