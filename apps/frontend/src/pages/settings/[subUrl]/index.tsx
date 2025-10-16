@@ -65,7 +65,7 @@ const Members = () => {
       <div className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12">
           <div className="flex flex-col lg:flex-row gap-6">
-            
+
             {/* Sidebar Navigation - 25% width on left */}
             <aside className="lg:w-[25%] flex-shrink-0">
               <nav className="space-y-1">
@@ -74,11 +74,10 @@ const Members = () => {
                     <button
                       key={i}
                       onClick={() => navigate(val.link)}
-                      className={`${
-                        location?.pathname === val.link
-                          ? "selected-sidebar-nav"
-                          : "sidebar-nav"
-                      } w-full`}
+                      className={`${location?.pathname === val.link
+                        ? "selected-sidebar-nav"
+                        : "sidebar-nav"
+                        } w-full`}
                       aria-current="page"
                     >
                       <svg
@@ -105,7 +104,7 @@ const Members = () => {
 
             {/* Right Side Container - 75% width */}
             <div className="lg:w-[75%] flex flex-col lg:flex-row gap-6">
-              
+
               {/* Middle Section - 45% of total screen (60% of this container) */}
               <main className="lg:w-[90%]">
                 {params?.subURL === settingsRoutes.USERS && <MemberList />}
@@ -116,7 +115,7 @@ const Members = () => {
               </main>
 
             </div>
-            
+
           </div>
         </div>
       </div>

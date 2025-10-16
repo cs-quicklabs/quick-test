@@ -64,7 +64,6 @@ export default function AddProjectUser(props: any) {
 
   useEffect(() => {
     if (props?.pid) {
-      console.log("props?.project?.name", props);
       refetch();
     }
   }, [props?.pid, refetch]);

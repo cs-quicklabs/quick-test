@@ -85,16 +85,16 @@ const SectionMain = (props: any) => {
 
   return (
     <div
-      className="h-screen lg:border-l lg:border-gray-200 lg:grid-cols-1 lg:gap-2 xl:w-96"
+      className="h-screen lg:border-l lg:border-gray-200 grid-cols-1 lg:gap-2 xl:w-96"
       data-cy="section-area"
     >
       <div className="px-6">
         <div className="bg-white">
           <div className="py-4 ">
-            <h3 className="text-base leading-6 font-medium text-gray-900">
+            <h3 className="form-title">
               {t("Add New Section/Test Case")}
             </h3>
-            <div className="mt-2 max-w-xl text-sm text-gray-500 font-normal">
+            <div className="form-subtitle">
               <p>
                 {t(
                   "Create new test cases and assign them to different sections or create a new section to group your test cases."

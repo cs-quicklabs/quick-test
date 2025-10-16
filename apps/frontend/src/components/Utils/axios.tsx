@@ -33,8 +33,6 @@ instance.interceptors.response.use(
   async (errorResponse) => {
     if (errorResponse) {
       //401=unauthorised access possibly due to being archived
-      console.log("errorResponse", errorResponse);
-
       if (errorResponse) {
         if (errorResponse?.response?.status === 401) {
           localStorage.clear();
