@@ -101,7 +101,7 @@ const ArchivedUsers = () => {
     <main className="pb-12 lg:col-span-9">
       <div className="overflow-x-auto">
         <div className="flex flex-col px-2 lg:px-0 space-y-4">
-          <div className="pb-2 sm:pb-4 border-b border-gray-200">
+          <div className="pb-2 sm:pb-4 border-b border-gray-200 w-3/4">
             <h3 className="text-lg leading-6 font-medium text-gray-900">
               {t("Archived Users")}
             </h3>

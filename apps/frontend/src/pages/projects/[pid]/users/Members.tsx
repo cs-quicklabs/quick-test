@@ -92,8 +92,8 @@ export default function ProjectMembers(props: any) {
       <main>
         <h1 className="sr-only">{t("Page title")}</h1>
 
-        <div className="grid items-start grid-cols-2 lg:grid-cols-3">
-          <div className="grid grid-cols-1 gap-4 lg:col-span-2  ">
+        <div className="grid items-start grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 col-span-2 lg:col-span-3">
             <section aria-labelledby="participants_section">
               <div className="overflow-hidden bg-white">
                 <div className="px-5 2xl:pl-48">
@@ -141,10 +141,10 @@ export default function ProjectMembers(props: any) {
                 <div>
                   <div className="bg-white">
                     <div className="px-2 md:px-4 py-5 sm:p-6 2xl:pr-52">
-                      <h3 className="text-base font-semibold leading-6 text-gray-900">
+                      <h3 className="form-title">
                         {t("Manage Members")}
                       </h3>
-                      <div className="mt-2 mb-3 max-w-xl text-sm text-gray-500">
+                      <div className="form-subtitle">
                         <p>
                           {t(
                             "A project member can create milestones, test cases and test runs including other things."
@@ -155,7 +155,7 @@ export default function ProjectMembers(props: any) {
                         id="new member"
                         onClick={() => setShare(true)}
                         type="button"
-                        className={ButtonCSSStyles.btnPrimary}
+                        className={`${ButtonCSSStyles.btnPrimary} mt-5`}
                       >
                         {t("Add Member")}
                       </Button>

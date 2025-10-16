@@ -93,7 +93,7 @@ export default function UserDashboard() {
       ]);
       freeTrialDays();
     };
-    
+
     fetchAllData();
   }, [paymentAmount, freeTrialDays]);
 
@@ -105,8 +105,6 @@ export default function UserDashboard() {
       </div>
     );
   } else {
-    console.log(isSubscribed, isFirstLogin, ifOwner);
-
     return (
       <>
         {isSubscribed === SubscriptionStatus.FREE_TRIAL &&

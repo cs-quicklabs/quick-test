@@ -72,8 +72,8 @@ export default function TestRunList({ projectName }: any) {
         <>
           <main>
             <h1 className="sr-only">Page title</h1>
-            <div className="grid items-start grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2">
-              <div className="grid grid-cols-1 gap-4 lg:col-span-2">
+            <div className="grid items-start grid-cols-3 gap-2 lg:grid-cols-4 lg:gap-2">
+              <div className="grid grid-cols-1 gap-4 col-span-2 lg:col-span-3">
                 <section aria-labelledby="participants_section">
                   <div className="overflow-hidden bg-white">
                     <div className="pb-4 pl-7 pr-4 min-h-screen lg:border-r lg:border-gray-200 2xl:pl-12">
@@ -97,10 +97,10 @@ export default function TestRunList({ projectName }: any) {
                     <div>
                       <div className="bg-white">
                         <div className="px-2 py-4 2xl:pr-52">
-                          <h3 className="text-base leading-6 font-medium text-gray-900">
+                          <h3 className="form-title">
                             {t("Test Runs")}
                           </h3>
-                          <div className="mt-2 max-w-xl text-sm text-gray-500 font-normal">
+                          <div className="form-subtitle">
                             <p>
                               {t(
                                 "Test run is a collection of test cases which are tested to create a report about passing and failing tests."
