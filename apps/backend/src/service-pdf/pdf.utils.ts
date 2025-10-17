@@ -32,28 +32,32 @@ const formatTestSuiteStatus = (status: TestSuiteStatus): string => {
 
 export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResultsObject: Record<string, TestCaseResult[]>): Buffer => {
     const doc = initializePDF();
-    let yPos = 20;
+    let yPos = 12;
 
     // Title
     doc.setFontSize(18);
     doc.text(testSuite.name, 20, yPos);
-    yPos += 10;
+    // tighter bottom margin for title
+    yPos += 3;
 
     // Horizontal line
     doc.line(20, yPos, 190, yPos);
-    yPos += 6;
+    // tighter spacing after the divider
+    yPos += 5;
 
     // Created On
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     doc.setFontSize(12);
     doc.text(`Created On: ${month[testSuite.createdAt.getMonth()]} ${testSuite.createdAt.getDate()}, ${testSuite.createdAt.getFullYear()}`, 20, yPos);
-    yPos += 8;
+    // tighter spacing after created on
+    yPos += 5;
 
     // Status
     const statusText = formatTestSuiteStatus(testSuite.status);
     
     doc.text(`Status: ${statusText}`, 20, yPos);
-    yPos += 15;
+    // tighter spacing under status line
+    yPos += 5;
 
     // Summary table
     const { passed, failed, untested, blocked, total } = testSuite.testreport;
@@ -107,7 +111,8 @@ export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResult
         doc.setFontSize(12);
         doc.setFont('helvetica', 'bold');
         doc.text(`${sectionCount}. ${sectionName}`, 20, yPos);
-        yPos += 6;
+        // tighter bottom margin for section title
+        yPos += 3;
 
         // Table headers
         doc.setFontSize(9);
@@ -179,15 +184,32 @@ export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResult
             doc.text(titleLines, currentX + 2, yPos + 4);
             currentX += columnWidths[1];
             
-            // Status
+            // Status (color-coded similar to Tailwind 700 shades)
             doc.rect(currentX, yPos, columnWidths[2], rowHeight);
+            // map enum/string to rgb for four statuses only
+            const toLower = String(result.status).toLowerCase();
+            if (toLower === 'passed') {
+                // text-green-700 #15803d
+                doc.setTextColor(21, 128, 61);
+            } else if (toLower === 'failed') {
+                // text-red-700 #b91c1c
+                doc.setTextColor(185, 28, 28);
+            } else if (toLower === 'blocked') {
+                // text-yellow-700 #a16207
+                doc.setTextColor(161, 98, 7);
+            } else if (toLower === 'untested') {
+                // text-gray-700 #374151 for visibility
+                doc.setTextColor(55, 65, 81);
+            }
             doc.text(result.status, currentX + 2, yPos + 4);
+            // reset to black for subsequent cells
+            doc.setTextColor(0, 0, 0);
             
             yPos += rowHeight;
             rowNumber++;
         }
         
-        yPos += 6;
+        yPos += 7;
         sectionCount++;
     }
 
@@ -196,7 +218,7 @@ export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResult
 
 export const generateTestCasesPdf = (testCasesObject: Record<string, TestCase[]>, project: ProjectEntity): Buffer => {
     const doc = initializePDF();
-    let yPos = 20;
+    let yPos = 12;
     let testCasesCount = 0;
 
     const testCaseName = project?.name ?? 'Test Cases';
@@ -214,7 +236,7 @@ export const generateTestCasesPdf = (testCasesObject: Record<string, TestCase[]>
     // Add test case count on same line, but ensure no overlap
     doc.setFontSize(10);
     doc.text(`( ${testCasesCount} test cases )`, 25 + titleWidth, yPos);
-    yPos += 10;
+    yPos += 3;
 
     // Horizontal line
     doc.line(20, yPos, 190, yPos);
@@ -233,7 +255,7 @@ export const generateTestCasesPdf = (testCasesObject: Record<string, TestCase[]>
         // Section header
         doc.setFontSize(12);
         doc.text(`${sectionCount}. ${sectionName}`, 20, yPos);
-        yPos += 6;
+        yPos +=2;
 
         // Table headers
         doc.setFontSize(9);
@@ -314,7 +336,7 @@ export const generateTestCasesPdf = (testCasesObject: Record<string, TestCase[]>
             yPos += rowHeight;
         }
         
-        yPos += 6;
+        yPos += 7;
         sectionCount++;
     }
 
@@ -379,7 +401,7 @@ export const generateTestSuitesPdf = (testSuites: TestSuiteEntity[]): Buffer => 
             currentX += columnWidths[j];
         }
         
-        yPos += 6;
+        yPos += 7;
     }
 
     return Buffer.from(doc.output('arraybuffer'));
