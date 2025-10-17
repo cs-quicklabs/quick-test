@@ -17,7 +17,7 @@ const InputField: FC<Iprops> = ({ ...props }: Iprops) => {
     <>
       <input
         id={name}
-        className="form-input-field"
+        className={`form-input-field ${error && touched ? "border-red-300" : "border-gray-300"}`}
         {...rest}
         type={type}
         placeholder={placeholder}

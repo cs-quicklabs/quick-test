@@ -62,53 +62,60 @@ const Members = () => {
         href={`${process.env.REACT_APP_DOMAIN_LINK}/users/edit/:id`}
       />
 
-      <div className="pb-10 lg:py-12 px-2 sm:px-7 2xl:px-52">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-5">
-          <aside className="py-6 lg:py-0 lg:px-0 lg:col-span-3">
-            <nav className="space-y-1 sm:space-y-0 lg:space-y-1 sm:space-x-1 lg:space-x-0 flex flex-col sm:flex-row justify-between lg:block">
-              {newTapNavData.map((val, i) => {
-                return (
-                  <button
-                    key={i}
-                    onClick={() => navigate(val.link)}
-                    className={`group rounded-md px-3 py-2 flex items-center text-sm font-medium cursor-pointer w-full h-10 ${
-                      location?.pathname === val.link
-                        ? "bg-gray-50 text-indigo-600"
-                        : "bg-white hover:bg-gray-50 hover:text-indigo-600"
-                    }`}
-                    aria-current="page"
-                  >
-                    <svg
-                      className={`text-gray-400 group-hover:text-indigo-600 flex-shrink-0 -ml-1 mr-3 h-6 w-6 ${
-                        location?.pathname === val.link
-                          ? "text-indigo-600"
-                          : "hover:text-indigo-600"
-                      }`}
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      aria-hidden="true"
+      <div className="min-h-screen bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12">
+          <div className="flex flex-col lg:flex-row gap-6">
+
+            {/* Sidebar Navigation - 25% width on left */}
+            <aside className="lg:w-[25%] flex-shrink-0">
+              <nav className="space-y-1">
+                {newTapNavData.map((val, i) => {
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => navigate(val.link)}
+                      className={`${location?.pathname === val.link
+                        ? "selected-sidebar-nav"
+                        : "sidebar-nav"
+                        } w-full`}
+                      aria-current="page"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d={val.d}
-                      />
-                    </svg>
-                    <span className="truncate">{t(val.text)}</span>
-                  </button>
-                );
-              })}
-            </nav>
-          </aside>
-          <div className="pb-12 lg:col-span-9">
-            {params?.subURL === settingsRoutes.USERS && <MemberList />}
-            {params?.subURL === settingsRoutes.INTEGRATIONS && <Integration />}
-            {params?.subURL === settingsRoutes.PAYMENTS && <StripeCheckout />}
-            {params?.subURL === settingsRoutes.BILLING &&
-              state?.userDetails?.roleId === RoleId.OWNER && <BillingAddress />}
+                      <svg
+                        className="w-6 h-6 text-gray-800 dark:text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d={val.d}
+                        />
+                      </svg>
+                      <span className="truncate ml-2">{t(val.text)}</span>
+                    </button>
+                  );
+                })}
+              </nav>
+            </aside>
+
+            {/* Right Side Container - 75% width */}
+            <div className="lg:w-[75%] flex flex-col lg:flex-row gap-6">
+
+              {/* Middle Section - 45% of total screen (60% of this container) */}
+              <main className="lg:w-[90%]">
+                {params?.subURL === settingsRoutes.USERS && <MemberList />}
+                {params?.subURL === settingsRoutes.INTEGRATIONS && <Integration />}
+                {params?.subURL === settingsRoutes.PAYMENTS && <StripeCheckout />}
+                {params?.subURL === settingsRoutes.BILLING &&
+                  state?.userDetails?.roleId === RoleId.OWNER && <BillingAddress />}
+              </main>
+
+            </div>
+
           </div>
         </div>
       </div>

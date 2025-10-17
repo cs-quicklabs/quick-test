@@ -30,7 +30,7 @@ const SignIn = () => {
   const { dispatch } = useContext(AppContext);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (sessionStorage.getItem("token") || localStorage.getItem("token")) {
       showSuccess(ToastMessage.ALREADY_LOGGED_IN);
       navigate(appRoutes.DASHBOARD);
     }

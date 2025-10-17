@@ -4,11 +4,12 @@
   "INTERNAL_SERVER": "Internal server error. Try again.",
 
   "RECORD_NOT_FOUND": "Record was not found. Try again.",
+  "INVALID_EMAIL": "Invalid email address !",
   "RECORD_UPDATE_FAILED": "Updating this record failed. Try again.",
   "RECORD_DELETE_FAILED": "Deleting this record failed. Try again.",
   "OPERATION_FAILED": "This operation failed. Try again.",
   "ACTION_FAILED": "This action cannot be completed.",
-  "DUPLICATE_RECORD": "This record already exists",
+  "DUPLICATE_RECORD": "Record with this name already exists",
   "ACCESS_DENIED": "User access denied",
   "ISSUE_NOT_FOUND": "Issue was not found. Try again.",
 

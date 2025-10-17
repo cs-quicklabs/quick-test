@@ -39,7 +39,11 @@
   }
 
   .form-input-label {
-    @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
+    @apply block mb-2 text-sm font-medium text-gray-900;
+  }
+
+  .form-input-label-white {
+    @apply block mb-2 text-sm font-medium text-white;
   }
 
   .form-input-description {
@@ -57,6 +61,7 @@
   .form-text-normal {
     @apply text-gray-700 dark:text-gray-400 text-sm font-normal;
   }
+
   /** form components end  */
 
   .btn-primary {
@@ -136,7 +141,7 @@
   }
 
   .selected-sidebar-nav {
-    @apply bg-gray-200 text-gray-900 hover:bg-gray-200 rounded-sm px-3 py-2 flex items-center text-sm font-medium;
+    @apply bg-gray-200 text-gray-900 hover:bg-gray-200 rounded-sm px-2 py-2 flex items-center text-sm font-medium;
   }
 
   .sidebar-nav {

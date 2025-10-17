@@ -4,7 +4,7 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { Fragment, useState, useEffect } from "react";
 import SectionTable from "./ModalSectionTable";
 import { useParams } from "react-router-dom";
@@ -22,8 +22,10 @@ const SelectionModal = ({
   setTotalTestcases,
   initialValues,
 }: any) => {
-  const defaultTestCasesIds =
-    Object.values(initialValues).map((item: any) => item.testCaseId) || [];
+  const defaultTestCasesIds = useMemo(
+    () => Object.values(initialValues).map((item: any) => item.testCaseId) || [],
+    [initialValues]
+  );
   const { t } = useTranslation();
   const params = useParams();
 

@@ -47,10 +47,11 @@ export const FormikInput = ({ showLabel = true, ...props }: IProps) => {
           className="form-input-label"
         >
           {props.label}
+          {!props.isOptional && <span className="text-red-600 ml-1">*</span>}
         </label>
       )}
       {props.isOptional && (
-        <span className="text-sm text-gray-500">{t("Optional")}</span>
+        <span className="text-sm text-gray-500 ml-2">{t("Optional")}</span>
       )}
       <InputField
         touched={touched}
@@ -122,9 +123,12 @@ export const FormikTextArea = ({
         {showLabel && (
           <label
             htmlFor={props.name}
-            className="flex-1 text-sm font-medium text-gray-700 space-x-3 flex items-center justify-between"
+            className="form-input-label"
           >
-            <span>{props.label}</span>
+            <span>
+              {props.label}
+              {!isOptional && <span className="text-red-600 ml-1">*</span>}
+            </span>
             {markdownPreview ? (
               <button
                 type="button"
@@ -180,9 +184,10 @@ export const FormikSelect = ({ showLabel = true, ...props }: IProps) => {
       {showLabel && (
         <label
           htmlFor={props.name}
-          className="block text-sm font-medium text-gray-700"
+          className="form-input-label"
         >
           {props.label}
+          {!props.isOptional && <span className="text-red-600 ml-1">*</span>}
         </label>
       )}
       <div className="mt-1 relative">
@@ -216,9 +221,12 @@ export const FormikInputSearch = ({
       <div className="flex justify-between">
         <label
           htmlFor={props.name}
-          className="block text-sm font-medium text-gray-700 space-x-2"
+          className="form-input-label"
         >
-          <span>{props.label}</span>
+          <span>
+            {props.label}
+            {!isOptional && <span className="text-red-600 ml-1">*</span>}
+          </span>
           {loading ? (
             <ScaleLoader
               color="#130A88"
@@ -267,6 +275,7 @@ interface FormikInputDateFieldProps {
   validation?: boolean;
   minDate?: Date;
   maxDate?: Date;
+  isOptional?: boolean;
 }
 
 export const FormikInputDateField = ({
@@ -278,9 +287,10 @@ export const FormikInputDateField = ({
     <>
       <label
         htmlFor={props.name}
-        className="block text-sm font-medium text-gray-700"
+        className="form-input-label"
       >
         {props.label}
+        {!props.isOptional && <span className="text-red-600 ml-1">*</span>}
       </label>
       <div className="mt-1 relative">
         <InputDateField

@@ -291,10 +291,10 @@ export default function Table({
             </div>
           )}
           <div className="col-span-1 mx-4 my-4 2xl:pr-52">
-            <h3 className="text-base leading-6 font-medium text-gray-900">
+            <h3 className="form-title">
               {t("Test Run")}
             </h3>
-            <div className="mt-2 max-w-xl text-sm text-gray-500 font-normal">
+            <div className="form-subtitle">
               <p>
                 {t(
                   "Test run is a collection of test cases which are tested to create a report about passing and failing tests."

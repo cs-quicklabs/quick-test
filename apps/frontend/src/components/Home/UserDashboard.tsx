@@ -86,16 +86,16 @@ export default function UserDashboard() {
   }, []);
 
   useEffect(() => {
-    paymentAmount();
-  }, [paymentAmount]);
+    const fetchAllData = async () => {
+      await Promise.all([
+        paymentAmount(),
+        fetchPluginConfig(),
+      ]);
+      freeTrialDays();
+    };
 
-  useEffect(() => {
-    fetchPluginConfig();
-  }, []);
-
-  useEffect(() => {
-    freeTrialDays();
-  }, [freeTrialDays]);
+    fetchAllData();
+  }, [paymentAmount, freeTrialDays]);
 
 
   if (isSubscribed === "" && loading) {
@@ -105,8 +105,6 @@ export default function UserDashboard() {
       </div>
     );
   } else {
-    console.log(isSubscribed, isFirstLogin, ifOwner);
-
     return (
       <>
         {isSubscribed === SubscriptionStatus.FREE_TRIAL &&

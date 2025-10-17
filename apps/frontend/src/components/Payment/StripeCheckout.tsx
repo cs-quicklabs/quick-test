@@ -76,7 +76,6 @@ export default function StripeCheckout() {
         const tempAmount = priceResp.data.data.price.unit_amount;
         const newAmount = String(tempAmount).split("", 2).join("");
         setAmount(newAmount);
-        console.log("priceResp", priceResp);
       }
     } catch (err) {
       // console.error(err?.message)

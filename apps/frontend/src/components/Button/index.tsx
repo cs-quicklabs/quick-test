@@ -20,7 +20,7 @@ export default function Button(props: any) {
       <button
         type="submit"
         {...propsNew}
-        className={`${props?.className}`}
+        className={`${props?.className} inline-flex items-center justify-center`}
         disabled={props?.loading || props?.disabled ? true : false}
         style={renderStyle}
       >
