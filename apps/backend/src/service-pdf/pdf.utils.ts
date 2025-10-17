@@ -34,7 +34,7 @@ export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResult
     const doc = initializePDF();
     let yPos = 12;
 
-    // Title
+    // Title (consistent font size)
     doc.setFontSize(18);
     doc.text(testSuite.name, 20, yPos);
     // tighter bottom margin for title
@@ -66,8 +66,8 @@ export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResult
     const blockedPercentage = Math.ceil((blocked * 100) / total);
     const untestedPercentage = Math.ceil((untested * 100) / total);
 
-    // Summary table headers
-    doc.setFontSize(10);
+    // Summary table headers (align size with other table headers)
+    doc.setFontSize(9);
     const summaryHeaders = ['Passed', 'Failed', 'Untested', 'Blocked'];
     const summaryData = [
         `${passedPercentage}% (${passed}/${total})`,
@@ -94,7 +94,7 @@ export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResult
         doc.rect(x, yPos, cellWidth, 8);
         doc.text(summaryData[i], x + 2, yPos + 6);
     }
-    yPos += 20;
+    yPos += 18;
 
     // Test case results by section
     let sectionCount = 1;
@@ -107,14 +107,14 @@ export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResult
             yPos = 20;
         }
 
-        // Section header
+        // Section header (consistent section header size)
         doc.setFontSize(12);
         doc.setFont('helvetica', 'bold');
         doc.text(`${sectionCount}. ${sectionName}`, 20, yPos);
         // tighter bottom margin for section title
         yPos += 3;
 
-        // Table headers
+        // Table headers (consistent size)
         doc.setFontSize(9);
         doc.setFont('helvetica', 'bold');
         doc.setDrawColor(128, 128, 128); // Set border color to gray
@@ -133,6 +133,7 @@ export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResult
             }
             currentX += columnWidths[i];
         }
+        // Table row text (consistent size and weight)
         doc.setFont('helvetica', 'normal');
         yPos += 6;
 
@@ -144,7 +145,7 @@ export const generateTestResultPdf = (testSuite: TestSuiteEntity, testCaseResult
                 doc.addPage();
                 yPos = 20;
                 
-                // Re-add table headers on new page
+                // Re-add table headers on new page (consistent size)
                 doc.setFontSize(9);
                 doc.setFont('helvetica', 'bold');
                 doc.setDrawColor(128, 128, 128); // Set border color to gray
@@ -252,8 +253,9 @@ export const generateTestCasesPdf = (testCasesObject: Record<string, TestCase[]>
             yPos = 20;
         }
 
-        // Section header
+        // Section header (12pt, bold for consistency)
         doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
         doc.text(`${sectionCount}. ${sectionName}`, 20, yPos);
         yPos +=2;
 
@@ -365,8 +367,9 @@ export const generateTestSuitesPdf = (testSuites: TestSuiteEntity[]): Buffer => 
             yPos = 20;
         }
 
-        // Test suite name
+        // Test suite name (12pt, bold for consistency)
         doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
         doc.text(`${i + 1}. ${testSuite.name}`, 20, yPos);
         yPos += 6;
 
