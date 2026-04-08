@@ -62,7 +62,7 @@
     "i18next-http-backend": "3.0.2",
     "jsonwebtoken": "9.0.2",
     "jspdf": "^3.0.1",
-    "lodash": "4.17.21",
+    "lodash": "4.18.1",
     "marked": "12.0.2",
     "mime-types": "2.1.35",
     "morgan": "1.10.0",
