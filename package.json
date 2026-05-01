@@ -95,7 +95,7 @@
     "typeorm": "0.3.20",
     "typeorm-transactional-cls-hooked": "0.1.21",
     "typescript": "5.4.5",
-    "uuid": "11.1.0",
+    "uuid": "14.0.0",
     "yup": "1.6.1"
   },
   "devDependencies": {
